@@ -1,0 +1,14 @@
+@import "variables";
+
+main {
+  background-color: $bodyBackgroundColor;
+
+  .button-register {
+    color: #1b1b1b;
+  }
+
+  .map-holder {
+    max-width: 360px;
+    height: auto;
+  }
+}
