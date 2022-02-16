@@ -8,7 +8,7 @@ export default function TextField({ label, ...rest }) {
     >
       <input
         {...rest}
-        className="block w-full text-lg appearance-none focus:outline-none bg-transparent default-title-color text-sm"
+        className="block w-full appearance-none focus:outline-none bg-transparent default-title-color text-sm"
       />
       <label
         htmlFor={rest.name}
