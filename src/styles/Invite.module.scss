@@ -1,0 +1,67 @@
+main {
+  .invitees-holder {
+    height: calc(100vh - 270px);
+
+    .invitees-item {
+      border-radius: 10px;
+      background-color: #f9f9f9;
+
+      span {
+        line-height: 1.81;
+      }
+
+      .score {
+        font-size: 14px;
+
+        span {
+          font-size: 10px;
+          margin-left: 3px;
+        }
+      }
+    }
+  }
+
+  .invite-action {
+    .info {
+      border-radius: 10px;
+      border: solid 1px #bbb;
+
+      p {
+        line-height: 2.07;
+      }
+    }
+
+    button {
+      padding: 8px 14px;
+      border-radius: 10px;
+      line-height: 1.8;
+      background-color: #7c7c7c;
+      color: #fff;
+    }
+  }
+
+  .invite-info-text {
+    line-height: 2;
+    color: #4c4c4c;
+  }
+
+  .custom-flex {
+    flex: 1 1 140px;
+    gap: 7px;
+  }
+
+  .bottom-sheet-buttons {
+    border-radius: 10px;
+    line-height: 1.8;
+  }
+
+  .bottom-sheet-buttons.outlined {
+    border: solid 1px #bbb;
+    color: #979797;
+  }
+
+  .bottom-sheet-buttons.fill {
+    color: #fff;
+    background-color: #7c7c7c;
+  }
+}

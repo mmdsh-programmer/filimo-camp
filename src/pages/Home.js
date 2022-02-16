@@ -1,9 +1,11 @@
 import { React, useState } from "react";
 import styles from "styles/Home.module.scss";
 import Menu from "Components/Menu";
+import BottomSheet from "Components/BottomSheet";
 
 export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
 
   return (
     <main className="min-h-screen">
@@ -34,6 +36,10 @@ export default function Home() {
       </section>
 
       <Menu isOpen={isOpen} setIsOpen={setIsOpen} />
+      <BottomSheet
+        isOpen={isBottomSheetOpen}
+        setIsOpen={setIsBottomSheetOpen}
+      />
     </main>
   );
 }

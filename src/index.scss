@@ -2,6 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
-.container{
-    margin: 0 auto;
+.container {
+  margin: 0 auto;
+}
+
+.default-title-color {
+  color: #1b1b1b;
+}
+
+.custom-outline input:focus-within ~ label,
+.custom-outline input:not(:placeholder-shown) ~ label {
+  @apply transform scale-100 -translate-y-6;
+}
+
+.custom-outline input:focus-within ~ label,
+.custom-outline input:not(:placeholder-shown) ~ label {
+  @apply transform scale-100 z-0 ml-3 px-1 py-0;
+  transform: translateY(-23px);
 }
