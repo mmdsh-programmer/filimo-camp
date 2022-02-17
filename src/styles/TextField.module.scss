@@ -5,5 +5,17 @@
   .custom-label {
     color: #bbb;
     line-height: 2;
+    top: 5px;
   }
+}
+
+.custom-outline input:focus-within ~ label,
+.custom-outline input:not(:placeholder-shown) ~ label {
+  @apply transform scale-100 -translate-y-6;
+}
+
+.custom-outline input:focus-within ~ label,
+.custom-outline input:not(:placeholder-shown) ~ label {
+  @apply transform scale-100 z-0 ml-3 px-1 py-0;
+  transform: translateY(-20px);
 }

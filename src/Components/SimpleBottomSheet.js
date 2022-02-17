@@ -1,9 +1,9 @@
 import { React, Fragment } from "react";
 import styles from "styles/SimpleBottomSheet.module.scss";
 
-export default function SimpleBottomSheet({ children, isOpen, setIsOpen }) {
+export default function SimpleBottomSheet({ children, isOpen, callBack }) {
   const handleClose = () => {
-    setIsOpen(false);
+    callBack();
   };
 
   return (

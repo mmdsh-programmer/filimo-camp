@@ -10,13 +10,30 @@
   color: #1b1b1b;
 }
 
-.custom-outline input:focus-within ~ label,
-.custom-outline input:not(:placeholder-shown) ~ label {
-  @apply transform scale-100 -translate-y-6;
+.custom-list-item {
+  border-radius: 10px;
+  background-color: #f9f9f9;
 }
 
-.custom-outline input:focus-within ~ label,
-.custom-outline input:not(:placeholder-shown) ~ label {
-  @apply transform scale-100 z-0 ml-3 px-1 py-0;
-  transform: translateY(-23px);
+.score-title {
+  font-size: 10px;
+}
+
+.fill-button {
+  background-color: #7c7c7c;
+  color: #fff;
+  line-height: 1.8;
+}
+
+.outlined-button {
+  background-color: transparent;
+  color: #979797;
+  line-height: 1.8;
+  border: solid 1px #bbb;
+  border-radius: 10px;
+}
+
+.sub-title {
+  font-size: 12px;
+  color: #7c7c7c;
 }

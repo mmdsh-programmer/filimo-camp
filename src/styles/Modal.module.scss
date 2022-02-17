@@ -1,0 +1,35 @@
+.modal-container {
+  border-radius: 10px;
+  min-width: 320px;
+  max-width: 328px;
+  max-height: 520px;
+  .profile-image {
+    background-color: #d8d8d8;
+    width: 248px;
+    height: 248px;
+  }
+
+  .notification {
+    color: #333;
+    line-height: 2;
+  }
+
+  .score-box {
+    border-radius: 5px;
+    border: solid 1px #f1f1f1;
+
+    span {
+      line-height: 2;
+    }
+  }
+  .score-text {
+    color: #858585;
+  }
+
+  .social-media-holder {
+    a {
+      width: 25px;
+      height: 25px;
+    }
+  }
+}

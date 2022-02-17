@@ -12,3 +12,32 @@ main {
     height: auto;
   }
 }
+
+.challenge-items-holder {
+  .challenge-item {
+    .item-title {
+      line-height: 1.81;
+    }
+  }
+}
+
+.video-suggestion {
+  .video-box {
+    border-radius: 10px;
+    border: solid 1px #dadada;
+    .video-item{
+      .video-info{
+        max-width: 88px;
+      }
+      .video-image{
+        max-width: 48px;
+        height: auto;
+      }
+    }
+  }
+}
+
+.sub-title {
+  font-size: 12px;
+  color: #7c7c7c;
+}

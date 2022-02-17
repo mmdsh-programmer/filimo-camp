@@ -8,6 +8,9 @@ module.exports = {
       zIndex: {
         "-1": "-1",
       },
+      borderRadius: {
+        "2lg": "10px",
+      },
     },
   },
   plugins: [],

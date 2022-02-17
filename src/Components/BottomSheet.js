@@ -3,13 +3,22 @@ import styles from "styles/BottomSheet.module.scss";
 import ArrowDown from "icons/bottom-sheet/arrow-down.svg";
 import { Link } from "react-router-dom";
 
-export default function BottomSheet({ isOpen, setIsOpen }) {
+export default function BottomSheet({
+  isOpen,
+  setIsOpen,
+  isFullyClosed,
+  callBack,
+}) {
   const handleClose = () => {
     setIsOpen(false);
   };
 
   const handleChange = () => {
     setIsOpen(!isOpen);
+  };
+
+  const handleChallengeClick = () => {
+    callBack();
   };
 
   return (
@@ -25,14 +34,22 @@ export default function BottomSheet({ isOpen, setIsOpen }) {
         onClick={handleClose}
       ></div>
       <div
-        className={`${styles["bottom-sheet-holder"]} bg-white z-20 w-full fixed bottom-0 left-0`}
+        className={`${
+          styles["bottom-sheet-holder"]
+        } bg-white z-20 w-full fixed bottom-0 left-0 transform ease-out transition-transform duration-500 ${
+          isFullyClosed ? "translate-y-full" : "translate-y-0"
+        }`}
       >
         <div className={`${styles["expandable-panel"]} relative`}>
           <div className="container px-4 pt-4">
             <div className="flex flex-col">
               <div className={`${styles["panel-header"]} flex`}>
                 <button
-                  className={`${styles["panel-arrow-holder"]} w-8 h-8 p-1 rounded-full absolute left-2/4 -translate-x-1/2`}
+                  className={`${
+                    styles["panel-arrow-holder"]
+                  } w-8 h-8 p-1 rounded-full absolute left-2/4 -translate-x-1/2 transform ease-out duration-150 ${
+                    isFullyClosed ? "scale-0" : "scale-100"
+                  }`}
                   onClick={handleChange}
                 >
                   <img
@@ -74,7 +91,9 @@ export default function BottomSheet({ isOpen, setIsOpen }) {
               className={`${
                 styles["details-panel"]
               } ease-out transition-all duration-700 ${
-                isOpen ? "max-h-44 overflow-y-hidden" : "max-h-0 overflow-hidden"
+                isOpen
+                  ? "max-h-44 overflow-y-hidden"
+                  : "max-h-0 overflow-hidden"
               }`}
             >
               <ul className="list-none">
@@ -143,22 +162,22 @@ export default function BottomSheet({ isOpen, setIsOpen }) {
             <div className="flex flex-wrap gap-2">
               <Link
                 className={`${styles["button"]} ${styles["disable"]} text-base text-center`}
-                to="/"
+                to="/invite"
               >
                 دعوت از دوستان
               </Link>
               <Link
                 className={`${styles["button"]} ${styles["disable"]} text-base text-center`}
-                to="/"
+                to="/team"
               >
                 ایجاد تیم
               </Link>
-              <Link
+              <button
                 className={`${styles["button"]} ${styles["main"]} ${styles["disable"]} text-base text-center`}
-                to="/"
+                onClick={handleChallengeClick}
               >
                 چالش
-              </Link>
+              </button>
             </div>
           </div>
         </div>

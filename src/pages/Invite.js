@@ -1,13 +1,17 @@
 import { React, useState } from "react";
 import styles from "styles/Invite.module.scss";
-import SimpleBottomSheet from "Components/SimpleBottomSheet";
-import TextField from "Components/TextField";
+import SimpleBottomSheet from "components/SimpleBottomSheet";
+import TextField from "components/TextField";
 
 export default function Invite() {
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
 
   const handleBottomSheetOpen = () => {
     setOpenBottomSheet(true);
+  };
+
+  const handleBottomSheetClose = () => {
+    setOpenBottomSheet(false);
   };
 
   return (
@@ -114,7 +118,7 @@ export default function Invite() {
 
       <SimpleBottomSheet
         isOpen={openBottomSheet}
-        setIsOpen={setOpenBottomSheet}
+        callBack={handleBottomSheetClose}
       >
         <div className="container px-6 py-4">
           <h2 className="text-right text-base mb-6 default-title-color">
