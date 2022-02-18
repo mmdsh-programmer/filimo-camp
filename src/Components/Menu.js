@@ -59,7 +59,7 @@ export default function Menu({ isOpen, setIsOpen }) {
                 </span>
               </li>
               <li className="flex mt-4">
-                <Link className="text-base" to="/">
+                <Link className="text-base" to="/team/1">
                   مشاهده جدول امتیازات (فردی)
                 </Link>
               </li>
