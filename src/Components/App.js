@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 
 const Home = lazy(() => import("pages/Home"));
 const Team = lazy(() => import("pages/Team"));
+const TeamInfo = lazy(() => import("pages/TeamInfo"));
 const NotFound = lazy(() => import("pages/NotFound"));
 const Invite = lazy(() => import("pages/Invite"));
 const Test = lazy(() => import("pages/Test"));
@@ -14,6 +15,7 @@ export default function App() {
         <Route path="*" element={<NotFound />} />
         <Route path="/" element={<Home />} />
         <Route path="team" element={<Team />} />
+        <Route path="team/:id" element={<TeamInfo />} />
         <Route path="invite" element={<Invite />} />
         <Route path="test" element={<Test />} />
       </Routes>
