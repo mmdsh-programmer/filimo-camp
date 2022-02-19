@@ -125,7 +125,12 @@ export default function Invite() {
             دعوت از دوستان
           </h2>
 
-          <TextField type="text" name="phone" placeholder=" " label="موبایل" />
+          <TextField
+            type="text"
+            name="phone"
+            placeholder=" "
+            label="موبایل"
+          />
 
           <p className={`${styles["invite-info-text"]} mt-2 text-xs`}>
             شماره دوست خود را وارد کنید تا از این کمپین مطلع شود. لینک از طریق

@@ -1,5 +1,4 @@
 .field-holder {
-  border: solid 1px #bbb !important;
   border-radius: 10px;
 
   .custom-label {
@@ -7,6 +6,10 @@
     line-height: 2;
     top: 5px;
   }
+}
+
+.field-color {
+  border: solid 1px #bbb !important;
 }
 
 .custom-outline input:focus-within ~ label,
