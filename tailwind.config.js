@@ -11,6 +11,20 @@ module.exports = {
       borderRadius: {
         "2lg": "10px",
       },
+      backgroundImage: {
+        "bg-gradient-to-custom": "linear-gradient(to bottom, #1c1161, #110942)",
+      },
+      width: {
+        "w-10/5": "42px",
+      },
+      height: {
+        "h-10/5": "42px",
+      },
+    },
+    fontFamily: {
+      "dana-regular": "dana-regular",
+      "dana-medium": "dana-medium",
+      "dana-demibold": "dana-demibold",
     },
   },
   plugins: [],

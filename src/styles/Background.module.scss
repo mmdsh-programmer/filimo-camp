@@ -1,0 +1,22 @@
+.background {
+  .oval {
+    filter: blur(50px);
+    opacity: 0.25;
+  }
+
+  .top-oval {
+    width: 312px;
+    height: 274px;
+    background-color: #cc304b;
+    left: -100px;
+    top: -40px;
+  }
+
+  .bottom-oval {
+    width: 340px;
+    height: 274px;
+    background-color: #ffc23a;
+    right: -150px;
+    bottom: -100px;
+  }
+}

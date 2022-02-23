@@ -19,11 +19,11 @@ export default function TextField({
       >
         <input
           {...input}
-          className="block w-full appearance-none focus:outline-none bg-transparent default-title-color text-sm"
+          className="block w-full font-dana-regular text-[#1b1b1b] appearance-none focus:outline-none bg-transparent default-title-color text-sm"
         />
         <label
           htmlFor={input.name}
-          className={`${styles["custom-label"]} absolute right-3 bg-white -z-1 duration-300 origin-0 text-xs`}
+          className={`${styles["custom-label"]} font-dana-regular absolute mt-[2px] right-3 bg-white -z-1 duration-300 origin-0 text-xs`}
         >
           {label}
         </label>

@@ -1,9 +1,14 @@
 import { React, Fragment } from "react";
 import styles from "styles/SimpleBottomSheet.module.scss";
 
-export default function SimpleBottomSheet({ children, isOpen, callBack }) {
+export default function SimpleBottomSheet({
+  children,
+  isOpen,
+  setIsOpen,
+  style,
+}) {
   const handleClose = () => {
-    callBack();
+    setIsOpen(false);
   };
 
   return (
@@ -21,7 +26,7 @@ export default function SimpleBottomSheet({ children, isOpen, callBack }) {
       <div
         className={`${
           styles["bottom-sheet-holder"]
-        } bg-white z-20 w-full fixed bottom-0 left-0 transform ease-out transition-all ${
+        } ${style} z-20 w-full fixed bottom-0 left-0 transform ease-out transition-all ${
           isOpen
             ? "duration-500 -translate-y-0"
             : "duration-500 translate-y-full"

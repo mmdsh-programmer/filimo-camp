@@ -1,3 +1,28 @@
+@font-face {
+  font-family: dana-regular;
+  src: url("fonts/DanaFaNum-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: dana-medium;
+  src: url("fonts/DanaFaNum-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: dana-demibold;
+  src: url("fonts/DanaFaNum-DemiBold.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  font-display: swap;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -15,11 +40,11 @@
   background-color: #f9f9f9;
 }
 
-.custom-list-item.active{
+.custom-list-item.active {
   background-color: #7c7c7c;
   @apply my-4;
-  span{
-    @apply text-white
+  span {
+    @apply text-white;
   }
 }
 
@@ -44,4 +69,71 @@
 .sub-title {
   font-size: 12px;
   color: #7c7c7c;
+}
+
+.light-text {
+  color: #7c7c7c;
+}
+
+.button-primary {
+  @apply cursor-pointer;
+  box-shadow: 0 2px 4px 0 rgba(247, 142, 50, 0.2);
+  background-color: #f78e32;
+  border-radius: 10px;
+
+  button {
+    background-image: linear-gradient(to bottom, #ffc23a 50%, #fcad2e);
+    color: #000;
+  }
+}
+
+.button-secondary {
+  @apply cursor-pointer;
+  border-radius: 10px;
+  background-color: #5fbfd8;
+
+  button {
+    background-color: rgba(104, 204, 216, 0.85);
+    color: #fff;
+  }
+}
+
+.gold-badge {
+  &::before {
+    content: url("icons/home/gold-badge.svg");
+    width: 18px;
+    height: 25px;
+    object-fit: contain;
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+  }
+}
+
+.silver-badge {
+  &::before {
+    content: url("icons/home/silver-badge.svg");
+    width: 18px;
+    height: 25px;
+    object-fit: contain;
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+  }
+}
+
+.bronze-badge {
+  &::before {
+    content: url("icons/home/bronze-badge.svg");
+    width: 18px;
+    height: 25px;
+    object-fit: contain;
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+  }
+}
+
+.you {
+  box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.1);
 }

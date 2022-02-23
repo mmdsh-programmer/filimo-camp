@@ -2,6 +2,9 @@ import { React, useState } from "react";
 import styles from "styles/Invite.module.scss";
 import SimpleBottomSheet from "components/SimpleBottomSheet";
 import TextField from "components/TextField";
+import Background from "components/Background";
+import Back from "components/Back";
+import Button from "components/Button";
 
 export default function Invite() {
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
@@ -15,141 +18,144 @@ export default function Invite() {
   };
 
   return (
-    <main className="bg-white">
-      <section className="mb-2">
-        <div className="container px-6 py-4">
-          <h1 className="text-base default-title-color">معرفی دوستان</h1>
-        </div>
-      </section>
+    <main>
+      <Background />
+      <Back style="mb-6" />
       <section className={`${styles["invitees-holder"]} overflow-y-auto`}>
-        <div className="container px-6">
-          <ul className="flex flex-col list-none gap-y-2">
-            <li className={`${styles["invitees-item"]} flex p-2`}>
-              <span
-                className={`${styles["invitee-phone"]} default-title-color text-base ml-2`}
-              >
-                ۰۹۱۲۳۴۵۷۶۸۹
+        <div className="container px-4">
+          <dl className="list-none flex flex-col gap-y-2 mt-4">
+            <dt className="font-dana-regular text-sm text-[#aa59c0]">
+              معرفی شده‌های فعال
+            </dt>
+            <dd className="p-2 flex items-center rounded-[10px] relative overflow-hidden">
+              <div className="opacity-10 bg-[#f9f9f9] absolute left-0 top-0 -z-1 w-full h-full"></div>
+              <span className="text-base text-white text-right font-dana-medium ml-6 leading-[1.81] block mt-1">
+                09123457689
               </span>
-              <span className="default-title-color text-sm ml-auto">
+
+              <span className="text-xs text-white font-dana-regular ml-auto mt-1">
                 به مسابقه وارد شد
               </span>
-              <span className={`${styles["score"]} default-title-color`}>
-                <span>امتیاز</span>۵+
-              </span>
-            </li>
 
-            <li className={`${styles["invitees-item"]} flex p-2`}>
-              <span
-                className={`${styles["invitee-phone"]} default-title-color text-base ml-2`}
-              >
-                ۰۹۱۲۳۴۵۷۶۸۹
+              <span className="flex font-dana-regular text-white items-center mt-1">
+                <span className="text-[10px] ml-[6px]">امتیاز</span>
+                <span className="text-sm">5+</span>
               </span>
-              <span className="default-title-color text-sm ml-auto">
+            </dd>
+            <dd className="p-2 flex items-center rounded-[10px] relative overflow-hidden">
+              <div className="opacity-10 bg-[#f9f9f9] absolute left-0 top-0 -z-1 w-full h-full"></div>
+              <span className="text-base text-white text-right font-dana-medium ml-6 leading-[1.81] block mt-1">
+                09123457689
+              </span>
+
+              <span className="text-xs text-white font-dana-regular ml-auto mt-1">
                 به مسابقه وارد شد
               </span>
-              <span className={`${styles["score"]} default-title-color`}>
-                <span>امتیاز</span>۵+
-              </span>
-            </li>
 
-            <li className={`${styles["invitees-item"]} flex p-2`}>
-              <span
-                className={`${styles["invitee-phone"]} default-title-color text-base ml-2`}
-              >
-                ۰۹۱۲۳۴۵۷۶۸۹
+              <span className="flex font-dana-regular text-white items-center mt-1">
+                <span className="text-[10px] ml-[6px]">امتیاز</span>
+                <span className="text-sm">5+</span>
               </span>
-              <span className="default-title-color text-sm ml-auto">
+            </dd>
+            <dd className="p-2 flex items-center rounded-[10px] relative overflow-hidden">
+              <div className="opacity-10 bg-[#f9f9f9] absolute left-0 top-0 -z-1 w-full h-full"></div>
+              <span className="text-base text-white text-right font-dana-medium ml-6 leading-[1.81] block mt-1">
+                09123457689
+              </span>
+
+              <span className="text-xs text-white font-dana-regular ml-auto mt-1">
                 به مسابقه وارد شد
               </span>
-              <span className={`${styles["score"]} default-title-color`}>
-                <span>امتیاز</span>۵+
-              </span>
-            </li>
 
-            <li className={`${styles["invitees-item"]} flex p-2`}>
-              <span
-                className={`${styles["invitee-phone"]} default-title-color text-base ml-2`}
-              >
-                ۰۹۱۲۳۴۵۷۶۸۹
+              <span className="flex font-dana-regular text-white items-center mt-1">
+                <span className="text-[10px] ml-[6px]">امتیاز</span>
+                <span className="text-sm">5+</span>
               </span>
-              <span className="default-title-color text-sm ml-auto">
-                ثبت انجام شد
-              </span>
-              <span className={`${styles["score"]} default-title-color`}>
-                -
-              </span>
-            </li>
+            </dd>
+          </dl>
 
-            <li className={`${styles["invitees-item"]} flex p-2`}>
-              <span
-                className={`${styles["invitee-phone"]} default-title-color text-base ml-2`}
-              >
-                ۰۹۱۲۳۴۵۷۶۸۹
+          <dl className="list-none flex flex-col gap-y-2 mt-4">
+            <dt className="font-dana-regular text-sm text-[#aa59c0]">
+              دوستان دعوت شده
+            </dt>
+            <dd className="p-2 flex items-center rounded-[10px] relative overflow-hidden">
+              <div className="opacity-10 bg-[#f9f9f9] absolute left-0 top-0 -z-1 w-full h-full"></div>
+              <span className="text-base text-white text-right font-dana-medium ml-6 leading-[1.81] block mt-1">
+                09123457689
               </span>
-              <span className="default-title-color text-sm ml-auto">
-                پیامک ارسال شد
+
+              <span className="text-xs text-white font-dana-regular ml-auto mt-1">
+                ثبت نام انجام شد
               </span>
-              <span className={`${styles["score"]} default-title-color`}>
-                -
+
+              <span className="text-white mt-1">-</span>
+            </dd>
+            <dd className="p-2 flex items-center rounded-[10px] relative overflow-hidden">
+              <div className="opacity-10 bg-[#f9f9f9] absolute left-0 top-0 -z-1 w-full h-full"></div>
+              <span className="text-base text-white text-right font-dana-medium ml-6 leading-[1.81] block mt-1">
+                09123457689
               </span>
-            </li>
-          </ul>
+
+              <span className="text-xs text-white font-dana-regular ml-auto mt-1">
+                ثبت نام انجام شد
+              </span>
+
+              <span className="text-white mt-1">-</span>
+            </dd>
+          </dl>
         </div>
       </section>
+
       <section
-        className={`${styles["invite-action"]} fixed bottom-6 left-0 right-0 bg-white`}
+        className={`${styles["invite-action"]} fixed bottom-0 left-0 right-0`}
       >
-        <div className="container px-6">
-          <div className={`${styles["info"]} p-2 mt-4`}>
-            <p className="text-sm default-title-color">
+        <div className="container px-4 pb-6">
+          <div className="p-4 my-4 border-[1px] border-opacity-10 border-white rounded-[10px] bg-white bg-opacity-5">
+            <p className="text-sm text-white font-dana-regular text-opacity-50">
               شما می‌توانید دوستان خود را به کمپین معرفی کنید و برای معرفی هر
               دوست وارد شده به کمپین ۵ امتیاز دریافت کنید.
             </p>
           </div>
 
-          <button
-            className={`text-base ${styles["disable"]} w-full mt-4`}
-            onClick={handleBottomSheetOpen}
-          >
+          <Button type="primary" onClick={handleBottomSheetOpen}>
             معرفی به دوستان
-          </button>
+          </Button>
         </div>
       </section>
 
       <SimpleBottomSheet
         isOpen={openBottomSheet}
-        callBack={handleBottomSheetClose}
+        setIsOpen={setOpenBottomSheet}
+        style="bg-white"
       >
         <div className="container px-6 py-4">
-          <h2 className="text-right text-base mb-6 default-title-color">
+          <h2 className="text-right text-base mb-6 font-dana-regular text-[#1d1d1d]">
             دعوت از دوستان
           </h2>
 
-          <TextField
-            type="text"
-            name="phone"
-            placeholder=" "
-            label="موبایل"
-          />
+          <TextField type="text" name="phone" placeholder=" " label="موبایل" />
 
-          <p className={`${styles["invite-info-text"]} mt-2 text-xs`}>
+          <p
+            className={`${styles["invite-info-text"]} mt-2 text-xs font-dana-regular`}
+          >
             شماره دوست خود را وارد کنید تا از این کمپین مطلع شود. لینک از طریق
             sms برای او ارسال شود. به ازای هر یک از دوستان که اولین بازی را
             انجام دهند ۵ امتیاز برای شما ثبت می‌شود.
           </p>
 
-          <div className={`${styles["custom-flex"]} flex mt-6`}>
-            <button
-              className={`${styles["bottom-sheet-buttons"]} ${styles["outlined"]} text-base p-2 text-center w-full`}
-            >
-              کپی لینک دعوت
-            </button>
-            <button
-              className={`${styles["bottom-sheet-buttons"]} ${styles["fill"]} ${styles["main"]} text-base p-2 text-center w-full`}
-            >
-              ارسال پیامک
+          <div className="flex items-center bg-[#ddd] rounded-[10px] bg-opacity-30 mt-4 p-[3px]">
+            <span className="block font-dana-regular text-[#4c4c4c] text-xs leading-[1.8] ml-auto mr-2 mt-1">
+              camp.filimo.com/eyd1400/team
+            </span>
+
+            <button className="font-dana-medium text-sm text-[#f78e32] py-3 px-2 bg-white rounded-[10px]">
+              کپی لینک
             </button>
           </div>
+
+          <Button type="primary" style="mt-4">
+            ارسال پیامک
+          </Button>
         </div>
       </SimpleBottomSheet>
     </main>
