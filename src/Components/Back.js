@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import BackIcon from "icons/common/back.svg";
 
-export default function Back({ style }) {
+export default function Back({ style, children }) {
   return (
     <section className={`${style} mb-2`}>
       <div className="container px-2 pt-4">
@@ -14,9 +14,7 @@ export default function Back({ style }) {
               alt="back icon"
             />
           </Link>
-          <h1 className="text-base text-white font-dana-regular">
-            معرفی دوستان
-          </h1>
+          <h1 className="text-base text-white font-dana-regular">{children}</h1>
         </div>
       </div>
     </section>

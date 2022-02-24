@@ -101,7 +101,7 @@ export default function Home() {
             <div className={`${styles["button"]}`}>
               <div className={styles["button-background"]}></div>
               <Link
-                to="/team"
+                to="/leader-board/teams/create"
                 className="text-center block w-full h-full text-white font-dana-medium leading-8 p-2"
               >
                 ایجاد تیم
@@ -113,7 +113,7 @@ export default function Home() {
               type="primary"
               onClick={handleOpenSimpleModal}
             >
-              چالش
+              <span className="my-1 block">چالش</span>
             </Button>
           </div>
         </div>
@@ -199,7 +199,7 @@ export default function Home() {
             <li className="flex rounded-[10px] bg-[#f8f8f8] p-2">
               <Link
                 className="text-base font-dana-regular text-[#1d1d1d] leading-[1.81] w-full"
-                to="/team/1"
+                to="/leader-board/teams"
               >
                 مشاهده جدول امتیازات
               </Link>
@@ -208,7 +208,7 @@ export default function Home() {
             <li className="flex rounded-[10px] bg-[#f8f8f8] p-2">
               <Link
                 className="text-base font-dana-regular text-[#1d1d1d] leading-[1.81] w-full"
-                to="/team"
+                to="/leader-board/teams/create"
               >
                 ایجاد تیم
               </Link>
@@ -384,7 +384,7 @@ export default function Home() {
                 <span className="w-1 h-1 opacity-40 bg-[#333] mb-2 rounded-full"></span>
               </div>
               <Link
-                to="/team/1"
+                to="/leader-board/teams/my-team"
                 className="flex items-center p-2 rounded-[10px] bg-[#acffd2] relative you"
               >
                 <div className="ml-2">
@@ -472,7 +472,7 @@ export default function Home() {
                 <span className="score-title ml-1">امتیاز</span>
                 <span>230+</span>
               </span>
-              <Link to="/test" className={`${styles["item-link"]} w-6 h-6`}>
+              <Link to="/" className={`${styles["item-link"]} w-6 h-6`}>
                 <img
                   className="w-full h-full object-contain"
                   src={ArrowLeftIcon}
@@ -493,7 +493,10 @@ export default function Home() {
                 <span className="score-title ml-1">امتیاز</span>
                 <span>230+</span>
               </span>
-              <Link to="/" className={`${styles["item-link"]} w-6 h-6`}>
+              <Link
+                to="/challenge"
+                className={`${styles["item-link"]} w-6 h-6`}
+              >
                 <img
                   className="w-full h-full object-contain"
                   src={TickIcon}

@@ -1,9 +1,10 @@
 {
   "name": "filimo-camp",
-  "homepage":"https://filimo.deniz-mattress.com",
+  "homepage": "https://filimo.deniz-mattress.com",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@headlessui/react": "^1.5.0",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",

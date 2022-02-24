@@ -76,7 +76,7 @@
 }
 
 .button-primary {
-  @apply cursor-pointer;
+  @apply cursor-pointer transition-colors duration-300;
   box-shadow: 0 2px 4px 0 rgba(247, 142, 50, 0.2);
   background-color: #f78e32;
   border-radius: 10px;
@@ -84,17 +84,34 @@
   button {
     background-image: linear-gradient(to bottom, #ffc23a 50%, #fcad2e);
     color: #000;
+    border-radius: 10px;
+    @apply transition-colors duration-300;
   }
 }
 
 .button-secondary {
-  @apply cursor-pointer;
+  @apply cursor-pointer transition-colors duration-300;
   border-radius: 10px;
   background-color: #5fbfd8;
 
   button {
     background-color: rgba(104, 204, 216, 0.85);
     color: #fff;
+    border-radius: 10px;
+    @apply transition-colors duration-300;
+  }
+}
+
+.button-disabled {
+  @apply cursor-pointer transition-colors duration-300;
+  border-radius: 10px;
+  background-color: #5d567a;
+
+  button {
+    background-color: #8b87a1;
+    color: #fff;
+    border-radius: 10px;
+    @apply transition-colors duration-300;
   }
 }
 

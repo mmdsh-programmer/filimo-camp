@@ -20,7 +20,7 @@ export default function Invite() {
   return (
     <main>
       <Background />
-      <Back style="mb-6" />
+      <Back style="mb-6">معرفی دوستان</Back>
       <section className={`${styles["invitees-holder"]} overflow-y-auto`}>
         <div className="container px-4">
           <dl className="list-none flex flex-col gap-y-2 mt-4">

@@ -1,0 +1,19 @@
+<svg width="176" height="176" viewBox="0 0 176 176" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <filter id="qzqg2ueoeb">
+            <feColorMatrix in="SourceGraphic" values="0 0 0 0 1.000000 0 0 0 0 1.000000 0 0 0 0 1.000000 0 0 0 1.000000 0"/>
+        </filter>
+        <circle id="zmixnilbla" cx="88" cy="88" r="88"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <mask id="ml0nse8k4c" fill="#fff">
+            <use xlink:href="#zmixnilbla"/>
+        </mask>
+        <use fill="#FFF" opacity=".2" xlink:href="#zmixnilbla"/>
+        <g filter="url(#qzqg2ueoeb)">
+            <g mask="url(#ml0nse8k4c)">
+                <path d="M101.076 58C111.25 58 118 65.25 118 75.68v24.64c0 10.43-6.75 17.68-16.924 17.68H74.924C64.75 118 58 110.75 58 100.32V75.68C58 65.26 64.768 58 74.924 58zm0 4.186H74.924c-7.776 0-12.738 5.322-12.738 13.494v24.64c0 8.182 4.945 13.494 12.738 13.494h26.152c7.793 0 12.738-5.312 12.738-13.494V75.68c0-8.182-4.945-13.494-12.738-13.494zM88 75.658c1.06 0 1.935.787 2.074 1.809l.019.284v8.129h8.14a2.093 2.093 0 0 1 .284 4.167l-.284.02-8.14-.001v8.13a2.093 2.093 0 0 1-4.167.284l-.019-.284-.001-8.13h-8.139a2.093 2.093 0 0 1-.284-4.166l.284-.02h8.139l.001-8.13c0-1.155.937-2.092 2.093-2.092z" fill="#200E32" fill-rule="nonzero"/>
+            </g>
+        </g>
+    </g>
+</svg>

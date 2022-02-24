@@ -2,11 +2,14 @@ import { React, lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 
 const Home = lazy(() => import("pages/Home"));
-const Team = lazy(() => import("pages/Team"));
-const TeamInfo = lazy(() => import("pages/TeamInfo"));
+const TeamLeaderBoard = lazy(() => import("pages/TeamLeaderBoard"));
+const MyTeamLeaderBoard = lazy(() => import("pages/MyTeamLeaderBoard"));
+const PersonalLeaderBoard = lazy(() => import("pages/PersonalLeaderBoard"));
+const CreateTeam = lazy(() => import("pages/CreateTeam"));
+const AddTeamMate = lazy(() => import("pages/AddTeamMate"));
 const NotFound = lazy(() => import("pages/NotFound"));
 const Invite = lazy(() => import("pages/Invite"));
-const Test = lazy(() => import("pages/Test"));
+const Challenge = lazy(() => import("pages/Challenge"));
 
 export default function App() {
   return (
@@ -14,10 +17,13 @@ export default function App() {
       <Routes>
         <Route path="*" element={<NotFound />} />
         <Route path="/" element={<Home />} />
-        <Route path="team" element={<Team />} />
-        <Route path="team/:id" element={<TeamInfo />} />
+        <Route path="leader-board/individual" element={<PersonalLeaderBoard />} />
+        <Route path="leader-board/teams" element={<TeamLeaderBoard />} />
+        <Route path="leader-board/teams/my-team" element={<MyTeamLeaderBoard />} />
+        <Route path="leader-board/teams/create" element={<CreateTeam />} />
+        <Route path="leader-board/teams/add-teammate" element={<AddTeamMate />} />
         <Route path="invite" element={<Invite />} />
-        <Route path="test" element={<Test />} />
+        <Route path="challenge" element={<Challenge />} />
       </Routes>
     </Suspense>
   );
