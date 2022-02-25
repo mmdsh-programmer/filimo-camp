@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import styles from "styles/Challenge.module.scss";
 import Background from "components/Background";
 import Button from "components/Button";
 import Modal from "components/Modal";

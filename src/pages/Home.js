@@ -1,5 +1,4 @@
 import { React, useEffect, useState } from "react";
-import styles from "styles/Home.module.scss";
 import { Link } from "react-router-dom";
 import Menu from "components/Menu";
 import SimpleBottomSheet from "components/SimpleBottomSheet";
@@ -50,11 +49,11 @@ export default function Home() {
   return (
     <main className="min-h-screen">
       <Background />
-      <section className={`${styles["top-menu-holder"]} sticky top-0`}>
+      <section className="sticky top-0">
         <div className="container p-6">
-          <div className={`${styles["top-menu"]} flex bg-white items-center`}>
+          <div className="p-[3px] rounded-[28.5px] shadow-[0_2px_7px_0_rgba(0,0,0,0.26)] flex bg-white items-center">
             <figure
-              className={`${styles["avatar"]} overflow-hidden cursor-pointer`}
+              className="w-[42px] h-[42px] ml-[6px] overflow-hidden cursor-pointer"
               onClick={handleOpenProfileMenu}
             >
               <img
@@ -72,10 +71,10 @@ export default function Home() {
             </span>
 
             <div
-              className={`${styles["score-holder"]} flex items-center cursor-pointer p-2`}
+              className="rounded-[29px] bg-[rgba(255,194,58,0.22)] flex items-center cursor-pointer p-2"
               onClick={handleOpenLeaderBoardMenu}
             >
-              <span className="text-xs font-dana-regular ml-3 block mt-1">
+              <span className="leading-[2] text-[#d1752e] text-xs font-dana-regular ml-3 block mt-1">
                 امتیاز
               </span>
               <span className="text-base font-dana-medium font-medium text-black ml-2 block mt-1">
@@ -89,7 +88,7 @@ export default function Home() {
 
       <section className="map-holder mt-6">
         <div className="container">
-          <figure className={`${styles["map-holder"]} mx-auto`}>
+          <figure className="max-w-[360px] h-auto mx-auto">
             <img
               src={FilimoMap}
               alt="game map"
@@ -100,11 +99,11 @@ export default function Home() {
         </div>
       </section>
 
-      <section className={`${styles["button-holder"]} w-full fixed bottom-0`}>
+      <section className="w-full fixed bottom-0">
         <div className="container p-6">
-          <div className={`${styles["button-row"]} flex gap-2 flex-wrap`}>
-            <div className={`${styles["button"]}`}>
-              <div className={styles["button-background"]}></div>
+          <div className="flex gap-2 flex-wrap">
+            <div className="flex-[1_1_152px] relative">
+              <div className="w-full h-full absolute left-0 top-0 opacity-75 rounded-[10px] bg-[#68ccd8] -z-1"></div>
               <Link
                 to="/invite"
                 className="text-center block w-full h-full text-white font-dana-medium leading-8 p-2"
@@ -112,8 +111,8 @@ export default function Home() {
                 دعوت از دوستان
               </Link>
             </div>
-            <div className={`${styles["button"]}`}>
-              <div className={styles["button-background"]}></div>
+            <div className="flex-[1_1_152px] relative">
+              <div className="w-full h-full absolute left-0 top-0 opacity-75 rounded-[10px] bg-[#68ccd8] -z-1"></div>
               <Link
                 to="/leader-board/teams/create"
                 className="text-center block w-full h-full text-white font-dana-medium leading-8 p-2"
@@ -123,7 +122,7 @@ export default function Home() {
             </div>
 
             <Button
-              style={styles["button"]}
+              style={"flex-[1_1_152px] relative"}
               type="primary"
               onClick={handleOpenSimpleModal}
             >
@@ -471,22 +470,16 @@ export default function Home() {
             چالش 5
           </h3>
 
-          <div
-            className={`${styles["challenge-items-holder"]} flex flex-col gap-y-2 my-4`}
-          >
-            <div
-              className={`${styles["challenge-item"]} flex custom-list-item p-2 items-center`}
-            >
-              <h4
-                className={`${styles["item-title"]} text-base text-right ml-auto default-title-color font-dana-regular`}
-              >
+          <div className="flex flex-col gap-y-2 my-4">
+            <div className="flex custom-list-item p-2 items-center">
+              <h4 className="leading-[1.81] text-base text-right ml-auto default-title-color font-dana-regular">
                 بازی
               </h4>
               <span className="text-sm default-title-color ml-2 font-dana-regular flex items-center">
                 <span className="score-title ml-1">امتیاز</span>
                 <span>230+</span>
               </span>
-              <Link to="/" className={`${styles["item-link"]} w-6 h-6`}>
+              <Link to="/" className="w-6 h-6">
                 <img
                   className="w-full h-full object-contain"
                   src={ArrowLeftIcon}
@@ -495,22 +488,15 @@ export default function Home() {
               </Link>
             </div>
 
-            <div
-              className={`${styles["challenge-item"]} flex custom-list-item p-2 items-center`}
-            >
-              <h4
-                className={`${styles["item-title"]} text-base text-right ml-auto default-title-color font-dana-regular`}
-              >
+            <div className="flex custom-list-item p-2 items-center">
+              <h4 className="leading-[1.81] text-base text-right ml-auto default-title-color font-dana-regular">
                 ماموریت
               </h4>
               <span className="text-sm default-title-color ml-2 font-dana-regular flex items-center">
                 <span className="score-title ml-1">امتیاز</span>
                 <span>230+</span>
               </span>
-              <Link
-                to="/challenge"
-                className={`${styles["item-link"]} w-6 h-6`}
-              >
+              <Link to="/challenge" className="w-6 h-6">
                 <img
                   className="w-full h-full object-contain"
                   src={TickIcon}
@@ -520,58 +506,44 @@ export default function Home() {
             </div>
           </div>
 
-          <div
-            className={`${styles["video-suggestion"]} flex flex-col bg-white`}
-          >
+          <div className="rounded-[10px] flex flex-col bg-white">
             <div className="p-4">
               <h4 className="text-base font-dana-regular light-text mb-3">
                 تماشا{" "}
-                <span className={styles["sub-title"]}>
+                <span className="text-xs text-[#7c7c7c]">
                   (با دیدن هر ساعت فیلم ۵ امتیاز بگیر)
                 </span>
               </h4>
-              <div className={`${styles["video-box"]} flex gap-x-2`}>
+              <div className="flex gap-x-2">
                 <a href="https://filimo.com" rel="noreferrer">
-                  <div className={`${styles["video-item"]} flex items-center`}>
+                  <div className="flex items-center">
                     <img
-                      className={`${styles["video-image"]} object-cover`}
+                      className="max-w-[48px] h-auto object-cover"
                       src={require("images/home/video.png")}
                       alt="video"
                     />
-                    <div
-                      className={`${styles["video-info"]} flex flex-col mr-2`}
-                    >
-                      <span
-                        className={`${styles["sub-title"]} block font-dana-regular`}
-                      >
+                    <div className="max-w-[88px] flex flex-col mr-2">
+                      <span className="text-xs text-[#7c7c7c] block font-dana-regular">
                         پیشنهاد فیلیمو
                       </span>
-                      <h6
-                        className={`${styles["video-title"]} text-base text-right default-title-color text-ellipsis overflow-hidden font-dana-regular`}
-                      >
+                      <h6 className="text-base text-right default-title-color text-ellipsis overflow-hidden font-dana-regular">
                         سریال جیران
                       </h6>
                     </div>
                   </div>
                 </a>
                 <a href="https://filimo.com" rel="noreferrer">
-                  <div className={`${styles["video-item"]} flex items-center`}>
+                  <div className="flex items-center">
                     <img
-                      className={`${styles["video-image"]} object-cover`}
+                      className="max-w-[48px] h-auto object-cover"
                       src={require("images/home/video.png")}
                       alt="video"
                     />
-                    <div
-                      className={`${styles["video-info"]} flex flex-col mr-2`}
-                    >
-                      <span
-                        className={`${styles["sub-title"]} block font-dana-regular`}
-                      >
+                    <div className="max-w-[88px] flex flex-col mr-2">
+                      <span className="text-xs text-[#7c7c7c] block font-dana-regular">
                         پیشنهاد فیلیمو
                       </span>
-                      <h6
-                        className={`${styles["video-title"]} text-base text-right default-title-color font-dana-regular`}
-                      >
+                      <h6 className="text-base text-right default-title-color font-dana-regular">
                         سریال جیران
                       </h6>
                     </div>

@@ -1,5 +1,4 @@
 import { React, useState } from "react";
-import styles from "styles/Invite.module.scss";
 import SimpleBottomSheet from "components/SimpleBottomSheet";
 import TextField from "components/TextField";
 import Background from "components/Background";
@@ -21,7 +20,7 @@ export default function Invite() {
     <main>
       <Background />
       <Back style="mb-6">معرفی دوستان</Back>
-      <section className={`${styles["invitees-holder"]} overflow-y-auto`}>
+      <section className="h-[calc(100vh-270px)] overflow-y-auto">
         <div className="container px-4">
           <dl className="list-none flex flex-col gap-y-2 mt-4">
             <dt className="font-dana-regular text-sm text-[#aa59c0]">
@@ -106,12 +105,10 @@ export default function Invite() {
         </div>
       </section>
 
-      <section
-        className={`${styles["invite-action"]} fixed bottom-0 left-0 right-0`}
-      >
+      <section className="fixed bottom-0 left-0 right-0">
         <div className="container px-4 pb-6">
           <div className="p-4 my-4 border-[1px] border-opacity-10 border-white rounded-[10px] bg-white bg-opacity-5">
-            <p className="text-sm text-white font-dana-regular text-opacity-50">
+            <p className="text-sm text-white font-dana-regular text-opacity-50 leading-[2.07]">
               شما می‌توانید دوستان خود را به کمپین معرفی کنید و برای معرفی هر
               دوست وارد شده به کمپین ۵ امتیاز دریافت کنید.
             </p>
@@ -135,9 +132,7 @@ export default function Invite() {
 
           <TextField type="text" name="phone" placeholder=" " label="موبایل" />
 
-          <p
-            className={`${styles["invite-info-text"]} mt-2 text-xs font-dana-regular`}
-          >
+          <p className="leading-[2] text-[#4c4c4c] mt-2 text-xs font-dana-regular">
             شماره دوست خود را وارد کنید تا از این کمپین مطلع شود. لینک از طریق
             sms برای او ارسال شود. به ازای هر یک از دوستان که اولین بازی را
             انجام دهند ۵ امتیاز برای شما ثبت می‌شود.

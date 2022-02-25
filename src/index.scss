@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @font-face {
   font-family: dana-regular;
   src: url("fonts/DanaFaNum-Regular.woff") format("woff");
@@ -22,10 +26,6 @@
   font-stretch: normal;
   font-display: swap;
 }
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 .container {
   margin: 0 auto;
@@ -73,6 +73,12 @@
 
 .light-text {
   color: #7c7c7c;
+}
+
+.custom-outline input:focus-within ~ label,
+.custom-outline input:not(:placeholder-shown) ~ label {
+  @apply transform scale-100 z-0 ml-3 px-1 py-0;
+  transform: translateY(-20px);
 }
 
 .button-primary {
@@ -188,7 +194,7 @@
     .inner-slide {
       box-shadow: 0 10px 10px 0 rgba(251, 216, 180, 0.25);
       @apply -translate-y-[46px] bg-opacity-100;
-      .slider-text{
+      .slider-text {
         @apply opacity-100;
       }
     }

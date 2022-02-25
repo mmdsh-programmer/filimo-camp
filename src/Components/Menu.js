@@ -1,6 +1,4 @@
 import { React, Fragment, useEffect } from "react";
-import styles from "styles/Menu.module.scss";
-import { Link } from "react-router-dom";
 
 export default function Menu({ isOpen, setIsOpen, left = false, children }) {
   const handleClose = () => {
@@ -25,7 +23,7 @@ export default function Menu({ isOpen, setIsOpen, left = false, children }) {
         onClick={handleClose}
       ></div>
       <aside
-        className={`${styles["menu"]} h-full bg-white fixed ${
+        className={`w-[311px] shadow-[0_2px_16px_0_rgba(0,0,0,0.1)] h-full bg-white fixed ${
           left
             ? "left-0 rounded-tr-3xl rounded-br-3xl"
             : "right-0 rounded-tl-3xl rounded-bl-3xl"
