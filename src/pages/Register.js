@@ -23,7 +23,7 @@ export default function Register() {
     setTimeout(() => {
       setLoading(false);
       sessionStorage.setItem("login", true);
-      //   navigator("/");
+        navigator("/");
     }, 3000);
   };
 
