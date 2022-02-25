@@ -634,13 +634,15 @@ export default function Home() {
           قوانین شرکت در مسابقه را خواندم
         </span>
 
-        <Button
-          type="primary"
-          style="mt-2 mx-4 mb-4"
-          onClick={() => navigator("/register")}
-        >
-          تایید و ورود
-        </Button>
+        <div className="flex px-4 pb-4">
+          <Button
+            type="primary"
+            style="mt-2"
+            onClick={() => navigator("/register")}
+          >
+            تایید و ورود
+          </Button>
+        </div>
       </Modal>
     </main>
   );
