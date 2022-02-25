@@ -170,7 +170,7 @@
   .swiper-slide-active {
     @apply opacity-100;
     .inner-slide {
-      @apply -translate-y-[15px];
+      transform: translateY(-15px);
     }
   }
 }
