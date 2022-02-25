@@ -6,6 +6,7 @@ export default function Modal({
   setIsOpen,
   alignCenter = false,
   alignEnd = false,
+  backdropClose = true,
   children,
 }) {
   const cancelButtonRef = useRef(null);
@@ -20,12 +21,12 @@ export default function Modal({
         as="div"
         className="fixed z-10 inset-0 overflow-y-auto"
         initialFocus={cancelButtonRef}
-        onClose={setIsOpen}
+        onClose={backdropClose ? setIsOpen : () => {}}
       >
         <div
           className={`flex ${alignCenter && "items-center"} ${
             alignEnd && "items-end"
-          } justify-center min-h-screen pt-4 px-4 pb-20 text-center`}
+          } justify-center min-h-screen pt-4 px-4 pb-6 text-center`}
         >
           <Transition.Child
             as={Fragment}

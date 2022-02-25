@@ -154,3 +154,43 @@
 .you {
   box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.1);
 }
+
+.register-avatar-selection {
+  @apply w-full h-full;
+  .swiper-slide {
+    @apply w-[131px] h-full flex justify-center items-end opacity-30 transition-all ease-out duration-500;
+  }
+
+  .swiper-slide-active {
+    @apply opacity-100;
+    .inner-slide {
+      @apply -translate-y-[15px];
+    }
+  }
+}
+
+.create-team-avatar-selection {
+  @apply w-full h-full;
+  .swiper-slide {
+    @apply w-[184px] h-full flex justify-center items-end opacity-30 transition-all ease-out duration-500;
+    .inner-slide {
+      @apply transition-all ease-out duration-500 bg-white bg-opacity-0 mb-2;
+      box-shadow: none;
+      border-radius: 97.5px;
+      .slider-text {
+        @apply opacity-0;
+      }
+    }
+  }
+
+  .swiper-slide-active {
+    @apply opacity-100;
+    .inner-slide {
+      box-shadow: 0 10px 10px 0 rgba(251, 216, 180, 0.25);
+      @apply -translate-y-[46px] bg-opacity-100;
+      .slider-text{
+        @apply opacity-100;
+      }
+    }
+  }
+}
