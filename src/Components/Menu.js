@@ -14,7 +14,7 @@ export default function Menu({ isOpen, setIsOpen, left = false, children }) {
   return (
     <Fragment>
       <div
-        className={`w-screen h-screen bg-black bg-opacity-20 fixed left-0 top-0 transform ease-out transition-opacity 
+        className={`2xl:hidden w-screen h-screen bg-black bg-opacity-20 fixed left-0 top-0 transform ease-out transition-opacity 
         ${
           isOpen
             ? "z-40 duration-1000 opacity-100"
@@ -23,7 +23,7 @@ export default function Menu({ isOpen, setIsOpen, left = false, children }) {
         onClick={handleClose}
       ></div>
       <aside
-        className={`w-[311px] shadow-[0_2px_16px_0_rgba(0,0,0,0.1)] h-full bg-white fixed ${
+        className={`2xl:hidden w-[311px] shadow-[0_2px_16px_0_rgba(0,0,0,0.1)] h-full bg-white fixed ${
           left
             ? "left-0 rounded-tr-3xl rounded-br-3xl"
             : "right-0 rounded-tl-3xl rounded-bl-3xl"

@@ -4,9 +4,13 @@ import TextField from "components/TextField";
 import Background from "components/Background";
 import Back from "components/Back";
 import Button from "components/Button";
+import useWindowSize from "hooks/useWindowSize";
+import Modal from "components/Modal";
 
 export default function Invite() {
+  const windowSize = useWindowSize();
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
 
   const handleBottomSheetOpen = () => {
     setOpenBottomSheet(true);
@@ -16,13 +20,17 @@ export default function Invite() {
     setOpenBottomSheet(false);
   };
 
+  const handleModalOpen = () => {
+    setOpenModal(true);
+  };
+
   return (
     <main>
       <Background />
       <Back style="mb-6">معرفی دوستان</Back>
-      <section className="h-[calc(100vh-270px)] overflow-y-auto">
+      <section className="h-[calc(100vh-270px)] overflow-y-auto 2xl:h-fit">
         <div className="container px-4">
-          <dl className="list-none flex flex-col gap-y-2 mt-4">
+          <dl className="list-none flex flex-col gap-y-2 mt-4 2xl:mt-0">
             <dt className="font-dana-regular text-sm text-[#aa59c0]">
               معرفی شده‌های فعال
             </dt>
@@ -105,7 +113,7 @@ export default function Invite() {
         </div>
       </section>
 
-      <section className="fixed bottom-0 left-0 right-0">
+      <section className="fixed bottom-0 left-0 right-0 2xl:relative">
         <div className="container px-4 pb-6">
           <div className="p-4 my-4 border-[1px] border-opacity-10 border-white rounded-[10px] bg-white bg-opacity-5">
             <p className="text-sm text-white font-dana-regular text-opacity-50 leading-[2.07]">
@@ -114,7 +122,7 @@ export default function Invite() {
             </p>
           </div>
 
-          <Button type="primary" onClick={handleBottomSheetOpen}>
+          <Button type="primary" onClick={windowSize > 768 ? handleModalOpen : handleBottomSheetOpen}>
             معرفی به دوستان
           </Button>
         </div>
@@ -153,6 +161,41 @@ export default function Invite() {
           </Button>
         </div>
       </SimpleBottomSheet>
+
+      <Modal
+        alignCenter
+        width={360}
+        isOpen={openModal}
+        setIsOpen={setOpenModal}
+      >
+        <div className="container px-6 py-4">
+          <h2 className="text-right text-base mb-6 font-dana-regular text-[#1d1d1d]">
+            دعوت از دوستان
+          </h2>
+
+          <TextField type="text" name="phone" placeholder=" " label="موبایل" />
+
+          <p className="leading-[2] text-[#4c4c4c] mt-2 text-xs font-dana-regular">
+            شماره دوست خود را وارد کنید تا از این کمپین مطلع شود. لینک از طریق
+            sms برای او ارسال شود. به ازای هر یک از دوستان که اولین بازی را
+            انجام دهند ۵ امتیاز برای شما ثبت می‌شود.
+          </p>
+
+          <div className="flex items-center bg-[#ddd] rounded-[10px] bg-opacity-30 mt-4 p-[3px]">
+            <span className="block font-dana-regular text-[#4c4c4c] text-xs leading-[1.8] ml-auto mr-2 mt-1">
+              camp.filimo.com/eyd1400/team
+            </span>
+
+            <button className="font-dana-medium text-sm text-[#f78e32] py-3 px-2 bg-white rounded-[10px]">
+              کپی لینک
+            </button>
+          </div>
+
+          <Button type="primary" style="mt-4">
+            ارسال پیامک
+          </Button>
+        </div>
+      </Modal>
     </main>
   );
 }

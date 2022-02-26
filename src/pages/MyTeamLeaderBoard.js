@@ -27,7 +27,7 @@ export default function MyTeamLeaderBoard() {
       <Background />
       <Back>جدول امتیازات</Back>
 
-      <section className="mt-6">
+      <section className="mt-6 2xl:mt-0">
         <div className="container px-4">
           <h2 className="text-base text-white font-dana-regular">
             مجموع امتیازات تیم
@@ -39,7 +39,7 @@ export default function MyTeamLeaderBoard() {
         </div>
       </section>
 
-      <section className="my-6 mb-[100px]">
+      <section className="my-6 mb-[100px] 2xl:mb-4">
         <div className="container px-4">
           <ul className="list-none flex flex-col gap-y-2 mt-4">
             {[...Array(5)].map((e, index) => (
@@ -78,7 +78,7 @@ export default function MyTeamLeaderBoard() {
         </div>
       </section>
 
-      <section className="fixed bottom-0 left-0 w-full">
+      <section className="fixed bottom-0 left-0 w-full 2xl:relative">
         <div className="container p-4 pb-8">
           <Button
             type="primary"

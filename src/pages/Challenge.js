@@ -39,118 +39,120 @@ export default function Challenge() {
     <main className="h-screen">
       <Background />
 
-      <section>
-        <div className="container p-6 pb-[100px]">
-          <h1 className="text-base text-white font-dana-regular leading-[1.81]">
-            سوال
-          </h1>
-          <span className="font-dana-regular text-xs text-[#7c7c7c]">
-            مرحله ۱۴
-          </span>
+      <section className="2xl:h-full">
+        <div className="container p-6 pb-[100px] 2xl:h-full">
+          <div className="flex flex-col 2xl:justify-center 2xl:h-full">
+            <h1 className="text-base text-white font-dana-regular leading-[1.81]">
+              سوال
+            </h1>
+            <span className="font-dana-regular text-xs text-[#7c7c7c]">
+              مرحله ۱۴
+            </span>
 
-          <div className="mt-10">
-            <h2 className="text-base text-white font-dana-regular">
-              کلاه شخصیت کلاه‌قرمزی چه رنگی است؟
-            </h2>
-            <div className="flex flex-col">
-              <div className="w-full mt-4 max-h-56 overflow-hidden rounded-[10px]">
-                <img
-                  className="w-full h-full object-cover"
-                  src={require("images/challenge/challenge-image.webp")}
-                  alt="question image"
-                />
-              </div>
-            </div>
-
-            <div className="mt-14">
-              <form>
-                <ul className="flex flex-col gap-y-2">
-                  <li className="relative rounded-[10px] bg-[#f9f9f9] bg-opacity-10 overflow-hidden">
-                    <input
-                      className="sr-only peer"
-                      type="radio"
-                      value="نارنجی"
-                      name="answer"
-                      id="answer_1"
-                      onChange={handleSelection}
-                    />
-                    <label
-                      className="font-dana-regular text-sm text-white flex p-2 pt-[10px] leading-[2.07] cursor-pointer 
-                      peer-checked:bg-white peer-checked:text-black peer-checked:font-dana-medium peer-checked:ring-2 peer-checked:border-transparent"
-                      htmlFor="answer_1"
-                    >
-                      نارنجی
-                    </label>
-                  </li>
-
-                  <li className="relative rounded-[10px] bg-[#f9f9f9] bg-opacity-10 overflow-hidden">
-                    <input
-                      className="sr-only peer"
-                      type="radio"
-                      value="قرمز"
-                      name="answer"
-                      id="answer_2"
-                      onChange={handleSelection}
-                    />
-                    <label
-                      className="font-dana-regular text-sm text-white flex p-2 pt-[10px] leading-[2.07] cursor-pointer 
-                      peer-checked:bg-white peer-checked:text-black peer-checked:font-dana-medium peer-checked:ring-2 peer-checked:border-transparent"
-                      htmlFor="answer_2"
-                    >
-                      قرمز
-                    </label>
-                  </li>
-
-                  <li className="relative rounded-[10px] bg-[#f9f9f9] bg-opacity-10 overflow-hidden">
-                    <input
-                      className="sr-only peer"
-                      type="radio"
-                      value="سبز"
-                      name="answer"
-                      id="answer_3"
-                      onChange={handleSelection}
-                    />
-                    <label
-                      className="font-dana-regular text-sm text-white flex p-2 pt-[10px] leading-[2.07] cursor-pointer 
-                      peer-checked:bg-white peer-checked:text-black peer-checked:font-dana-medium peer-checked:ring-2 peer-checked:border-transparent"
-                      htmlFor="answer_3"
-                    >
-                      سبز
-                    </label>
-                  </li>
-
-                  <li className="relative rounded-[10px] bg-[#f9f9f9] bg-opacity-10 overflow-hidden">
-                    <input
-                      className="sr-only peer"
-                      type="radio"
-                      value="آبی"
-                      name="answer"
-                      id="answer_4"
-                      onChange={handleSelection}
-                    />
-                    <label
-                      className="font-dana-regular text-sm text-white flex p-2 pt-[10px] leading-[2.07] cursor-pointer 
-                      peer-checked:bg-white peer-checked:text-black peer-checked:font-dana-medium peer-checked:ring-2 peer-checked:border-transparent"
-                      htmlFor="answer_4"
-                    >
-                      آبی
-                    </label>
-                  </li>
-                </ul>
-
-                <div className="flex w-full fixed bottom-0 left-0">
-                  <div className="container px-6 pb-6">
-                    <Button
-                      type={`${selectedAnswer ? "primary" : "disabled"}`}
-                      style="w-full mt-8"
-                      disabled={!selectedAnswer}
-                      onClick={handleSubmit}
-                    >
-                      تایید
-                    </Button>
-                  </div>
+            <div className="mt-10">
+              <h2 className="text-base text-white font-dana-regular">
+                کلاه شخصیت کلاه‌قرمزی چه رنگی است؟
+              </h2>
+              <div className="flex flex-col">
+                <div className="w-full mt-4 max-h-56 overflow-hidden rounded-[10px]">
+                  <img
+                    className="w-full h-full object-cover"
+                    src={require("images/challenge/challenge-image.webp")}
+                    alt="question image"
+                  />
                 </div>
-              </form>
+              </div>
+
+              <div className="mt-14">
+                <form>
+                  <ul className="flex flex-col gap-y-2">
+                    <li className="relative rounded-[10px] bg-[#f9f9f9] bg-opacity-10 overflow-hidden">
+                      <input
+                        className="sr-only peer"
+                        type="radio"
+                        value="نارنجی"
+                        name="answer"
+                        id="answer_1"
+                        onChange={handleSelection}
+                      />
+                      <label
+                        className="font-dana-regular text-sm text-white flex p-2 pt-[10px] leading-[2.07] cursor-pointer 
+                      peer-checked:bg-white peer-checked:text-black peer-checked:font-dana-medium peer-checked:ring-2 peer-checked:border-transparent"
+                        htmlFor="answer_1"
+                      >
+                        نارنجی
+                      </label>
+                    </li>
+
+                    <li className="relative rounded-[10px] bg-[#f9f9f9] bg-opacity-10 overflow-hidden">
+                      <input
+                        className="sr-only peer"
+                        type="radio"
+                        value="قرمز"
+                        name="answer"
+                        id="answer_2"
+                        onChange={handleSelection}
+                      />
+                      <label
+                        className="font-dana-regular text-sm text-white flex p-2 pt-[10px] leading-[2.07] cursor-pointer 
+                      peer-checked:bg-white peer-checked:text-black peer-checked:font-dana-medium peer-checked:ring-2 peer-checked:border-transparent"
+                        htmlFor="answer_2"
+                      >
+                        قرمز
+                      </label>
+                    </li>
+
+                    <li className="relative rounded-[10px] bg-[#f9f9f9] bg-opacity-10 overflow-hidden">
+                      <input
+                        className="sr-only peer"
+                        type="radio"
+                        value="سبز"
+                        name="answer"
+                        id="answer_3"
+                        onChange={handleSelection}
+                      />
+                      <label
+                        className="font-dana-regular text-sm text-white flex p-2 pt-[10px] leading-[2.07] cursor-pointer 
+                      peer-checked:bg-white peer-checked:text-black peer-checked:font-dana-medium peer-checked:ring-2 peer-checked:border-transparent"
+                        htmlFor="answer_3"
+                      >
+                        سبز
+                      </label>
+                    </li>
+
+                    <li className="relative rounded-[10px] bg-[#f9f9f9] bg-opacity-10 overflow-hidden">
+                      <input
+                        className="sr-only peer"
+                        type="radio"
+                        value="آبی"
+                        name="answer"
+                        id="answer_4"
+                        onChange={handleSelection}
+                      />
+                      <label
+                        className="font-dana-regular text-sm text-white flex p-2 pt-[10px] leading-[2.07] cursor-pointer 
+                      peer-checked:bg-white peer-checked:text-black peer-checked:font-dana-medium peer-checked:ring-2 peer-checked:border-transparent"
+                        htmlFor="answer_4"
+                      >
+                        آبی
+                      </label>
+                    </li>
+                  </ul>
+
+                  <div className="flex w-full fixed bottom-0 left-0 2xl:relative">
+                    <div className="container px-6 pb-6 2xl:px-0">
+                      <Button
+                        type={`${selectedAnswer ? "primary" : "disabled"}`}
+                        style="w-full mt-8"
+                        disabled={!selectedAnswer}
+                        onClick={handleSubmit}
+                      >
+                        تایید
+                      </Button>
+                    </div>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
         </div>

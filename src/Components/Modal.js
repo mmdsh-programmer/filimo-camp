@@ -7,6 +7,7 @@ export default function Modal({
   alignCenter = false,
   alignEnd = false,
   backdropClose = true,
+  width = 328,
   children,
 }) {
   const cancelButtonRef = useRef(null);
@@ -48,7 +49,9 @@ export default function Modal({
             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
-            <div className="inline-block relative align-bottom bg-white rounded-[20px] overflow-hidden transform transition-all w-[328px]">
+            <div
+              className={`inline-block relative align-bottom bg-white rounded-[20px] overflow-hidden transform transition-all w-[${width}px] `}
+            >
               <div ref={cancelButtonRef}></div>
               {children}
             </div>

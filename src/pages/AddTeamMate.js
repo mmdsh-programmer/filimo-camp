@@ -6,9 +6,13 @@ import Back from "components/Back";
 import Button from "components/Button";
 import EnvelopeIcon from "icons/add-teammate/envelope.svg";
 import AddTeamMateIcon from "icons/add-teammate/add-teammate.svg";
+import useWindowSize from "hooks/useWindowSize";
+import Modal from "components/Modal";
 
 export default function AddTeamMate() {
+  const windowSize = useWindowSize();
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
 
   const handleBottomSheetOpen = () => {
     setOpenBottomSheet(true);
@@ -16,6 +20,10 @@ export default function AddTeamMate() {
 
   const handleBottomSheetClose = () => {
     setOpenBottomSheet(false);
+  };
+
+  const handleModalOpen = () => {
+    setOpenModal(true);
   };
 
   return (
@@ -26,8 +34,8 @@ export default function AddTeamMate() {
         <div className="container px-4">
           <div className="flex flex-col">
             {/* use this when all items are empty */}
-            
-            {/* <div className="min-h-[calc(100vh-200px)] flex flex-col items-center justify-center mb-24">
+
+            {/* <div className="min-h-[calc(100vh-200px)] flex flex-col items-center justify-center mb-24 2xl:mt-10 2xl:min-h-fit 2xl:mb-60">
               <img
                 className="w-44 h-44 object-contain"
                 src={AddTeamMateIcon}
@@ -40,7 +48,7 @@ export default function AddTeamMate() {
               </p>
             </div> */}
 
-            <dl className="list-none flex flex-col gap-y-2 mt-4">
+            <dl className="list-none flex flex-col gap-y-2 mt-4 2xl:mt-0">
               <dt className="font-dana-regular text-sm text-[#3f8dcd] leading-8">
                 هم تیمی ها
               </dt>
@@ -99,9 +107,12 @@ export default function AddTeamMate() {
         </div>
       </section>
 
-      <section className="fixed bottom-0 left-0 right-0">
+      <section className="fixed bottom-0 left-0 right-0 2xl:relative 2xl:mt-4">
         <div className="container px-4 pb-6">
-          <Button type="primary" onClick={handleBottomSheetOpen}>
+          <Button
+            type="primary"
+            onClick={windowSize > 768 ? handleModalOpen : handleBottomSheetOpen}
+          >
             افزودن به تیم
           </Button>
         </div>
@@ -139,6 +150,40 @@ export default function AddTeamMate() {
           </Button>
         </div>
       </SimpleBottomSheet>
+
+      <Modal
+        alignCenter
+        width={360}
+        isOpen={openModal}
+        setIsOpen={setOpenModal}
+      >
+        <div className="container px-6 py-4">
+          <h2 className="text-right text-base mb-6 font-dana-regular text-[#1d1d1d]">
+            افزودن به ترکیب تیم
+          </h2>
+
+          <TextField type="text" name="phone" placeholder=" " label="موبایل" />
+
+          <p className="mt-2 text-xs font-dana-regular leading-6">
+            شماره هم‌تیمی خود را وارد کنید تا لینک از طریق sms برای او ارسال
+            شود.
+          </p>
+
+          <div className="flex items-center bg-[#ddd] rounded-[10px] bg-opacity-30 mt-4 p-[3px]">
+            <span className="block font-dana-regular text-[#4c4c4c] text-xs leading-[1.8] ml-auto mr-2 mt-1">
+              camp.filimo.com/eyd1400/team
+            </span>
+
+            <button className="font-dana-medium text-sm text-[#f78e32] py-3 px-2 bg-white rounded-[10px]">
+              کپی لینک
+            </button>
+          </div>
+
+          <Button type="primary" style="mt-4">
+            ارسال پیامک
+          </Button>
+        </div>
+      </Modal>
     </main>
   );
 }

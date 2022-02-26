@@ -47,9 +47,9 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen 2xl:grid 2xl:grid-cols-[auto_320px_688px_320px_auto] 2xl:grid-rows-[160px_auto]">
       <Background />
-      <section className="sticky top-0">
+      <section className="sticky top-0 2xl:hidden">
         <div className="container p-6">
           <div className="p-[3px] rounded-[28.5px] shadow-[0_2px_7px_0_rgba(0,0,0,0.26)] flex bg-white items-center">
             <figure
@@ -86,20 +86,20 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="map-holder mt-6">
-        <div className="container">
-          <figure className="max-w-[360px] h-auto mx-auto">
+      <section className="map-holder mt-6 2xl:col-start-3 2xl:col-end-4 2xl:row-start-1 row-end-3 2xl:mt-0">
+        <div className="container 2xl:max-w-full">
+          <figure className="max-w-[360px] h-auto mx-auto 2xl:max-w-full 2xl:h-full">
             <img
               src={FilimoMap}
               alt="game map"
               title="نقشه بازی"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-contain"
             />
           </figure>
         </div>
       </section>
 
-      <section className="w-full fixed bottom-0">
+      <section className="w-full fixed bottom-0 2xl:hidden">
         <div className="container p-6">
           <div className="flex gap-2 flex-wrap">
             <div className="flex-[1_1_152px] relative">
@@ -131,6 +131,301 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* desktop layout ⬇️*/}
+      <aside className="hidden col-start-2 col-end-3 row-start-2 row-end-3 2xl:block h-fit sticky top-20">
+        <div className="w-full bg-white rounded-3xl ">
+          <div className="container p-4 pt-[27px]">
+            <div className="flex items-center my-2">
+              <figure className="rounded-full overflow-hidden w-w-10/5 h-h-10/5 ml-[6px] mr-[10px]">
+                <img
+                  src={require("images/home/avatar.webp")}
+                  alt="پروفایل"
+                  className="w-full h-full object-cover"
+                />
+              </figure>
+
+              <div className="flex flex-col">
+                <span className="text-base text-right text-[#333333] font-dana-regular">
+                  UID-34565
+                </span>
+                <span
+                  className="text-[12px] text-right light-text font-dana-regular"
+                  dir="ltr"
+                >
+                  {hidePhoneNumber("09357894560")}
+                </span>
+              </div>
+            </div>
+
+            <div className="bg-[#f8f8f8] rounded-[10px] py-4 px-4 mt-4">
+              <ul className="list-none flex flex-col gap-y-4">
+                <li className="flex font-dana-regular text-[#1d1d1d] mx-[10px]">
+                  <span className="ml-auto text-base">امتیاز من</span>
+                  <span>234</span>
+                </li>
+
+                <li className="w-full h-[1px] bg-[#ececec]"></li>
+
+                <li className="flex">
+                  <span className="inline-block ml-auto text-base font-dana-regular text-[#7c7c7c]">
+                    امتیاز از بازی
+                  </span>
+                  <span className="inline-block font-dana-regular">
+                    <span className="text-[10px] ml-1 text-black">امتیاز</span>
+                    <span className="text-sm text-black">230+</span>
+                  </span>
+                </li>
+
+                <li className="flex">
+                  <span className="inline-block ml-auto text-base font-dana-regular text-[#7c7c7c]">
+                    امتیاز از ماموریت
+                  </span>
+                  <span className="inline-block font-dana-regular">
+                    <span className="text-[10px] ml-1 text-black">امتیاز</span>
+                    <span className="text-sm text-black">230+</span>
+                  </span>
+                </li>
+
+                <li className="flex">
+                  <span className="inline-block ml-auto text-base font-dana-regular text-[#7c7c7c]">
+                    امتیاز از تماشا
+                  </span>
+                  <span className="inline-block font-dana-regular">
+                    <span className="text-[10px] ml-1 text-black">امتیاز</span>
+                    <span className="text-sm text-black">230+</span>
+                  </span>
+                </li>
+
+                <li className="flex">
+                  <span className="inline-block ml-auto text-base font-dana-regular text-[#7c7c7c]">
+                    امتیاز از دعوت
+                  </span>
+                  <span className="inline-block font-dana-regular">
+                    <span className="text-[10px] ml-1 text-black">امتیاز</span>
+                    <span className="text-sm text-black">230+</span>
+                  </span>
+                </li>
+              </ul>
+            </div>
+
+            <div className="flex w-full gap-x-2 mt-2">
+              <Link
+                to="/invite"
+                className="text-center block w-full h-full text-white font-dana-medium leading-8 p-2 rounded-[10px] bg-[#68ccd8] bg-opacity-75"
+              >
+                دعوت از دوستان
+              </Link>
+
+              <Link
+                to="/leader-board/teams/create"
+                className="text-center block w-full h-full text-white font-dana-medium leading-8 p-2 rounded-[10px] bg-[#68ccd8] bg-opacity-75"
+              >
+                ایجاد تیم
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        <div className="w-full bg-white rounded-3xl mt-4">
+          <div className="container p-4">
+            <h3 className="text-base text-[#1d1d1d] mx-2 light-text font-dana-regular">
+              چالش 5
+            </h3>
+
+            <div className="flex flex-col gap-y-2 my-4">
+              <div className="flex custom-list-item p-2 items-center">
+                <h4 className="leading-[1.81] text-base text-right ml-auto default-title-color font-dana-regular">
+                  بازی
+                </h4>
+                <span className="text-sm default-title-color ml-2 font-dana-regular flex items-center">
+                  <span className="score-title ml-1">امتیاز</span>
+                  <span>230+</span>
+                </span>
+                <Link to="/" className="w-6 h-6">
+                  <img
+                    className="w-full h-full object-contain"
+                    src={ArrowLeftIcon}
+                    alt="button icon"
+                  />
+                </Link>
+              </div>
+
+              <div className="flex custom-list-item p-2 items-center">
+                <h4 className="leading-[1.81] text-base text-right ml-auto default-title-color font-dana-regular">
+                  ماموریت
+                </h4>
+                <span className="text-sm default-title-color ml-2 font-dana-regular flex items-center">
+                  <span className="score-title ml-1">امتیاز</span>
+                  <span>230+</span>
+                </span>
+                <Link to="/challenge" className="w-6 h-6">
+                  <img
+                    className="w-full h-full object-contain"
+                    src={TickIcon}
+                    alt="button icon"
+                  />
+                </Link>
+              </div>
+            </div>
+
+            <div className="mt-4">
+              <h4 className="text-base font-dana-regular text-[#1d1d1d] mb-4">
+                تماشا{" "}
+                <span className="text-xs text-[#7c7c7c]">
+                  (با دیدن هر ساعت فیلم ۵ امتیاز بگیر)
+                </span>
+              </h4>
+
+              <div className="flex flex-col gap-y-2">
+                {[...Array(2)].map((e, i) => (
+                  <a
+                    key={i}
+                    className="flex items-center bg-[#f9f9f9] rounded-[10px] overflow-hidden"
+                    href="https://filimo.com"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <figure className="w-12 h-16 overflow-hidden">
+                      <img
+                        className="w-full h-full object-cover"
+                        src={require("images/home/video.png")}
+                        alt="پیشنهاد فیلیمو"
+                      />
+                    </figure>
+
+                    <div className="mr-2">
+                      <span className="block font-dana-regular text-xs text-[#7c7c7c]">
+                        پیشنهاد فیلیمو
+                      </span>
+                      <h6 className="font-dana-regular text-base text-[#1d1d1d]">
+                        سریال جیران
+                      </h6>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <aside className="hidden col-start-4 col-end-5 row-start-2 row-end-3 2xl:block h-fit sticky top-20">
+        <div className="w-full bg-white rounded-3xl max-h-[664px] min-h-[664px] overflow-y-auto">
+          <div className="container py-6 px-4">
+            <h2 className="text-base font-dana-regular text-[#333]">
+              جدول امتیازات
+            </h2>
+
+            <ul className="list-none flex flex-col gap-y-2 mt-4">
+              {[...Array(5)].map((e, i) => (
+                <li
+                  key={i}
+                  className={`${
+                    i + 1 === 1
+                      ? "gold-badge"
+                      : i + 1 === 2
+                      ? "silver-badge"
+                      : i + 1 === 3 && "bronze-badge"
+                  } p-2 flex items-center rounded-[10px] bg-[#f8f8f8] relative`}
+                >
+                  <div className="ml-2">
+                    <div className="w-9 h-9 overflow-hidden rounded-full border-2 border-white">
+                      <img
+                        className="w-full h-full object-cover"
+                        src={require("images/home/board-avatar.webp")}
+                        alt="team-logo"
+                      />
+                    </div>
+                  </div>
+
+                  <span className="text-sm text-[#7c7c7c] text-right font-dana-regular ml-auto mt-1">
+                    تیم شاهین-345
+                  </span>
+
+                  <span className="text-sm text-black font-dana-regular ml-2 mt-1">
+                    234.789
+                  </span>
+
+                  <img
+                    src={TransparentStarIcon}
+                    className="w-4 h-4 object-contain"
+                    alt="star logo"
+                  />
+                </li>
+              ))}
+
+              <li>
+                <div className="w-full h-full flex flex-col px-[22px]">
+                  <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
+                  <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
+                  <span className="w-1 h-1 opacity-40 bg-[#333] mb-2 rounded-full"></span>
+                </div>
+                <Link
+                  to="/leader-board/teams/my-team"
+                  className="flex items-center p-2 rounded-[10px] bg-[#acffd2] relative you"
+                >
+                  <div className="ml-2">
+                    <div className="w-9 h-9 overflow-hidden rounded-full border-2 border-white">
+                      <img
+                        className="w-full h-full object-cover"
+                        src={require("images/home/board-avatar.webp")}
+                        alt="team-logo"
+                      />
+                    </div>
+                  </div>
+
+                  <span className="text-base text-[#170d53] font-semibold text-right font-dana-regular ml-auto mt-1">
+                    تیم شما
+                  </span>
+
+                  <span className="text-sm text-[#170d53] font-semibold font-dana-regular ml-2 mt-1">
+                    234.789
+                  </span>
+
+                  <img
+                    src={BlueStarIcon}
+                    className="w-4 h-4 object-contain"
+                    alt="star logo"
+                  />
+                </Link>
+                <div className="w-full h-full flex flex-col px-[22px]">
+                  <span className="w-1 h-1 opacity-40 bg-[#333] mt-2 mb-[3px] rounded-full"></span>
+                  <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
+                  <span className="w-1 h-1 opacity-40 bg-[#333] rounded-full"></span>
+                </div>
+              </li>
+
+              <li className="p-2 flex items-center rounded-[10px] bg-[#f8f8f8] relative">
+                <div className="ml-2">
+                  <div className="w-9 h-9 overflow-hidden rounded-full border-2 border-white">
+                    <img
+                      className="w-full h-full object-cover"
+                      src={require("images/home/board-avatar.webp")}
+                      alt="team-logo"
+                    />
+                  </div>
+                </div>
+
+                <span className="text-sm text-[#7c7c7c] text-right font-dana-regular ml-auto mt-1">
+                  تیم شاهین-345
+                </span>
+
+                <span className="text-sm text-black font-dana-regular ml-2 mt-1">
+                  234.789
+                </span>
+
+                <img
+                  src={TransparentStarIcon}
+                  className="w-4 h-4 object-contain"
+                  alt="star logo"
+                />
+              </li>
+            </ul>
+          </div>
+        </div>
+      </aside>
+      {/* desktop layout ⬆️*/}
 
       {/* profile drawer */}
       <Menu isOpen={isProfileMenuOpen} setIsOpen={setIsProfileMenuOpen}>
@@ -260,135 +555,42 @@ export default function Home() {
           </h2>
 
           <ul className="list-none flex flex-col gap-y-2 mt-4">
-            <li className="gold-badge p-2 flex items-center rounded-[10px] bg-[#f8f8f8] relative">
-              <div className="ml-2">
-                <div className="w-9 h-9 overflow-hidden rounded-full border-2 border-white">
-                  <img
-                    className="w-full h-full object-cover"
-                    src={require("images/home/board-avatar.webp")}
-                    alt="team-logo"
-                  />
+            {[...Array(5)].map((e, i) => (
+              <li
+                key={i}
+                className={`${
+                  i + 1 === 1
+                    ? "gold-badge"
+                    : i + 1 === 2
+                    ? "silver-badge"
+                    : i + 1 === 3 && "bronze-badge"
+                } p-2 flex items-center rounded-[10px] bg-[#f8f8f8] relative`}
+              >
+                <div className="ml-2">
+                  <div className="w-9 h-9 overflow-hidden rounded-full border-2 border-white">
+                    <img
+                      className="w-full h-full object-cover"
+                      src={require("images/home/board-avatar.webp")}
+                      alt="team-logo"
+                    />
+                  </div>
                 </div>
-              </div>
 
-              <span className="text-sm text-[#7c7c7c] text-right font-dana-regular ml-auto mt-1">
-                تیم شاهین-345
-              </span>
+                <span className="text-sm text-[#7c7c7c] text-right font-dana-regular ml-auto mt-1">
+                  تیم شاهین-345
+                </span>
 
-              <span className="text-sm text-black font-dana-regular ml-2 mt-1">
-                234.789
-              </span>
+                <span className="text-sm text-black font-dana-regular ml-2 mt-1">
+                  234.789
+                </span>
 
-              <img
-                src={TransparentStarIcon}
-                className="w-4 h-4 object-contain"
-                alt="star logo"
-              />
-            </li>
-
-            <li className="silver-badge p-2 flex items-center rounded-[10px] bg-[#f8f8f8] relative">
-              <div className="ml-2">
-                <div className="w-9 h-9 overflow-hidden rounded-full border-2 border-white">
-                  <img
-                    className="w-full h-full object-cover"
-                    src={require("images/home/board-avatar.webp")}
-                    alt="team-logo"
-                  />
-                </div>
-              </div>
-
-              <span className="text-sm text-[#7c7c7c] text-right font-dana-regular ml-auto mt-1">
-                تیم شاهین-345
-              </span>
-
-              <span className="text-sm text-black font-dana-regular ml-2 mt-1">
-                234.789
-              </span>
-
-              <img
-                src={TransparentStarIcon}
-                className="w-4 h-4 object-contain"
-                alt="star logo"
-              />
-            </li>
-
-            <li className="bronze-badge p-2 flex items-center rounded-[10px] bg-[#f8f8f8] relative">
-              <div className="ml-2">
-                <div className="w-9 h-9 overflow-hidden rounded-full border-2 border-white">
-                  <img
-                    className="w-full h-full object-cover"
-                    src={require("images/home/board-avatar.webp")}
-                    alt="team-logo"
-                  />
-                </div>
-              </div>
-
-              <span className="text-sm text-[#7c7c7c] text-right font-dana-regular ml-auto mt-1">
-                تیم شاهین-345
-              </span>
-
-              <span className="text-sm text-black font-dana-regular ml-2 mt-1">
-                234.789
-              </span>
-
-              <img
-                src={TransparentStarIcon}
-                className="w-4 h-4 object-contain"
-                alt="star logo"
-              />
-            </li>
-
-            <li className="p-2 flex items-center rounded-[10px] bg-[#f8f8f8] relative">
-              <div className="ml-2">
-                <div className="w-9 h-9 overflow-hidden rounded-full border-2 border-white">
-                  <img
-                    className="w-full h-full object-cover"
-                    src={require("images/home/board-avatar.webp")}
-                    alt="team-logo"
-                  />
-                </div>
-              </div>
-
-              <span className="text-sm text-[#7c7c7c] text-right font-dana-regular ml-auto mt-1">
-                تیم شاهین-345
-              </span>
-
-              <span className="text-sm text-black font-dana-regular ml-2 mt-1">
-                234.789
-              </span>
-
-              <img
-                src={TransparentStarIcon}
-                className="w-4 h-4 object-contain"
-                alt="star logo"
-              />
-            </li>
-
-            <li className="p-2 flex items-center rounded-[10px] bg-[#f8f8f8] relative">
-              <div className="ml-2">
-                <div className="w-9 h-9 overflow-hidden rounded-full border-2 border-white">
-                  <img
-                    className="w-full h-full object-cover"
-                    src={require("images/home/board-avatar.webp")}
-                    alt="team-logo"
-                  />
-                </div>
-              </div>
-
-              <span className="text-sm text-[#7c7c7c] text-right font-dana-regular ml-auto mt-1">
-                تیم شاهین-345
-              </span>
-
-              <span className="text-sm text-black font-dana-regular ml-2 mt-1">
-                234.789
-              </span>
-
-              <img
-                src={TransparentStarIcon}
-                className="w-4 h-4 object-contain"
-                alt="star logo"
-              />
-            </li>
+                <img
+                  src={TransparentStarIcon}
+                  className="w-4 h-4 object-contain"
+                  alt="star logo"
+                />
+              </li>
+            ))}
 
             <li>
               <div className="w-full h-full flex flex-col px-[22px]">

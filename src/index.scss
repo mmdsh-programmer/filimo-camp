@@ -27,10 +27,6 @@
   font-display: swap;
 }
 
-.container {
-  margin: 0 auto;
-}
-
 .default-title-color {
   color: #1b1b1b;
 }
@@ -165,6 +161,7 @@
   @apply w-full h-full;
   .swiper-slide {
     @apply w-[131px] h-full flex justify-center items-end opacity-30 transition-all ease-out duration-500;
+    
   }
 
   .swiper-slide-active {
@@ -179,6 +176,9 @@
   @apply w-full h-full;
   .swiper-slide {
     @apply w-[184px] h-full flex justify-center items-end opacity-30 transition-all ease-out duration-500;
+    @media (min-width : 1440px){
+      @apply opacity-100;
+    }
     .inner-slide {
       @apply transition-all ease-out duration-500 bg-white bg-opacity-0 mb-2;
       box-shadow: none;
@@ -199,4 +199,15 @@
       }
     }
   }
+}
+
+// responsive queries
+
+.container {
+  margin: 0 auto;
+  max-width: 360px;
+}
+
+.container-fluid {
+  max-width: 1440px;
 }

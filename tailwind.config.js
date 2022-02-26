@@ -20,6 +20,9 @@ module.exports = {
       height: {
         "h-10/5": "42px",
       },
+      screens: {
+        "2xl": "1440px",
+      },
     },
     fontFamily: {
       "dana-regular": "dana-regular",

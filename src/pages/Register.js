@@ -30,31 +30,22 @@ export default function Register() {
   return (
     <main className="min-h-screen">
       <section>
-        <div className="container py-4 px-6">
+        <div className="container py-4 px-6 2xl:pt-16 2xl:pb-14 2xl:max-w-[1440px]">
           <h1 className="text-base text-black font-dana-regular">ثبت نام</h1>
         </div>
       </section>
 
       <section>
-        <div className="container">
-          <h2 className="text-sm text-[#333] font-dana-regular text-center mt-2 leading-7">
+        <div className="container 2xl:max-w-[968px]">
+          <h2 className="text-sm text-[#333] font-dana-regular text-center mt-2 leading-7 2xl:mt-0">
             یه عکس برای خودت انتخاب کن
           </h2>
 
           <div className="w-full h-[146px] mt-10">
             <Swiper
-              slidesPerView={1}
+              slidesPerView={2}
               breakpoints={{
-                320: {
-                  slidesPerView: 2,
-                },
-                480: {
-                  slidesPerView: 3,
-                },
-                768: {
-                  slidesPerView: 4,
-                },
-                1024: {
+                1440: {
                   slidesPerView: 5,
                 },
               }}
@@ -100,7 +91,7 @@ export default function Register() {
         </div>
       </section>
 
-      <section className="mt-[62px] mb-24">
+      <section className="mt-[62px] mb-24 2xl:mb-4">
         <div className="container px-6">
           <TextField
             type="text"
@@ -113,7 +104,7 @@ export default function Register() {
         </div>
       </section>
 
-      <section className="fixed bottom-0 left-0 bg-white w-full">
+      <section className="fixed bottom-0 left-0 bg-white w-full 2xl:relative">
         <div className="container px-6 pb-[27px]">
           <div className="flex justify-center">
             <Button

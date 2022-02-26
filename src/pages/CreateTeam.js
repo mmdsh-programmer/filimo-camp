@@ -13,32 +13,20 @@ export default function CreateTeam() {
       <Background />
       <Back style="mb-6">تیم‌سازی</Back>
 
-      <section className="mt-2">
+      <section className="mt-2 2xl:mt-0">
         <div className="container px-6">
           <h2 className="text-sm text-white font-dana-regular">
             تصویر و عنوان تیم خود را انتخاب کنید
           </h2>
         </div>
 
-        <div className="container md:px-6">
+        <div className="container md:px-6 2xl:max-w-[968px]">
           <div className="w-full h-[334px] mt-[85px]">
             <Swiper
-              slidesPerView={1}
+              slidesPerView={2}
               spaceBetween={10}
               breakpoints={{
-                320: {
-                  slidesPerView: 2,
-                  spaceBetween: 10,
-                },
-                480: {
-                  slidesPerView: 3,
-                  spaceBetween: 10,
-                },
-                768: {
-                  slidesPerView: 4,
-                  spaceBetween: 10,
-                },
-                1024: {
+                1440: {
                   slidesPerView: 5,
                   spaceBetween: 10,
                 },
@@ -112,11 +100,19 @@ export default function CreateTeam() {
         </div>
       </section>
 
-      <section className="fixed bottom-0 left-0 w-full">
-        <div className="container px-6 pb-[27px]">
-          <div className="flex gap-x-2">
-            <Button type="disabled" style="w-[120px]">انصراف</Button>
-            <Button type="primary" style="flex-[1]" onClick={() => navigator("/leader-board/teams/add-teammate")}>ثبت تیم</Button>
+      <section className="fixed bottom-0 left-0 w-full 2xl:relative 2xl:mt-16">
+        <div className="container px-6 pb-[27px] 2xl:px-0">
+          <div className="flex gap-x-2 2xl:flex-wrap 2xl:gap-y-2">
+            <Button type="disabled" style="w-[120px] 2xl:w-full">
+              انصراف
+            </Button>
+            <Button
+              type="primary"
+              style="flex-[1] 2xl:w-full"
+              onClick={() => navigator("/leader-board/teams/add-teammate")}
+            >
+              ثبت تیم
+            </Button>
           </div>
         </div>
       </section>

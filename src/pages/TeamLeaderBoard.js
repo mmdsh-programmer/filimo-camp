@@ -11,7 +11,7 @@ export default function TeamLeaderBoard() {
       <Background />
       <Back>جدول امتیازات</Back>
       <div className="container py-6 px-4">
-        <ul className="list-none flex flex-col gap-y-2 mt-4">
+        <ul className="list-none flex flex-col gap-y-2 mt-4 2xl:mt-0">
           <li className="gold-badge p-2 flex items-center rounded-[10px] bg-[#f9f9f9] bg-opacity-10 relative">
             <div className="ml-2">
               <div className="w-9 h-9 overflow-hidden rounded-full border-2 border-white">
