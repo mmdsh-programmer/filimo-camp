@@ -1,14 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Back from "components/Back";
-import Background from "components/Background";
 import TransparentStarIcon from "icons/home/transparent-star.svg";
 import BlueStarIcon from "icons/home/blue-star.svg";
+import { motion } from "framer-motion";
 
 export default function TeamLeaderBoard() {
   return (
-    <main className="min-h-screen">
-      <Background />
+    <motion.main
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+      className="min-h-screen"
+    >
       <Back>جدول امتیازات</Back>
       <div className="container py-6 px-4">
         <ul className="list-none flex flex-col gap-y-2 mt-4 2xl:mt-0">
@@ -238,6 +243,6 @@ export default function TeamLeaderBoard() {
           </li>
         </ul>
       </div>
-    </main>
+    </motion.main>
   );
 }

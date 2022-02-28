@@ -5,6 +5,7 @@ import TextField from "components/TextField";
 import Button from "components/Button";
 import { useSearchParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 export default function Register() {
   const navigator = useNavigate();
@@ -23,12 +24,18 @@ export default function Register() {
     setTimeout(() => {
       setLoading(false);
       sessionStorage.setItem("login", true);
-        navigator("/");
+      navigator("/");
     }, 3000);
   };
 
   return (
-    <main className="min-h-screen">
+    <motion.main
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+      className="min-h-screen bg-white"
+    >
       <section>
         <div className="container py-4 px-6 2xl:pt-16 2xl:pb-14 2xl:max-w-[1440px]">
           <h1 className="text-base text-black font-dana-regular">ثبت نام</h1>
@@ -119,6 +126,6 @@ export default function Register() {
           </div>
         </div>
       </section>
-    </main>
+    </motion.main>
   );
 }

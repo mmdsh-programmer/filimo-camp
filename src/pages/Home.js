@@ -4,7 +4,6 @@ import Menu from "components/Menu";
 import SimpleBottomSheet from "components/SimpleBottomSheet";
 import ArrowLeftIcon from "icons/home/arrow-left-circle.svg";
 import TickIcon from "icons/home/tick.svg";
-import Background from "components/Background";
 import FilimoMap from "images/home/filimo-map.svg";
 import StarIcon from "icons/home/star.svg";
 import Button from "components/Button";
@@ -12,6 +11,7 @@ import TransparentStarIcon from "icons/home/transparent-star.svg";
 import BlueStarIcon from "icons/home/blue-star.svg";
 import { useNavigate } from "react-router-dom";
 import Modal from "components/Modal";
+import { motion } from "framer-motion";
 
 export default function Home() {
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false); //menu state
@@ -47,8 +47,13 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen 2xl:grid 2xl:grid-cols-[auto_320px_688px_320px_auto] 2xl:grid-rows-[160px_auto]">
-      <Background />
+    <motion.main
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+      className="min-h-screen 2xl:grid 2xl:grid-cols-[auto_320px_688px_320px_auto] 2xl:grid-rows-[160px_auto]"
+    >
       <section className="sticky top-0 2xl:hidden">
         <div className="container p-6">
           <div className="p-[3px] rounded-[28.5px] shadow-[0_2px_7px_0_rgba(0,0,0,0.26)] flex bg-white items-center">
@@ -846,6 +851,6 @@ export default function Home() {
           </Button>
         </div>
       </Modal>
-    </main>
+    </motion.main>
   );
 }

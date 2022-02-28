@@ -1,5 +1,8 @@
-import { React, lazy, Suspense } from "react";
+import { React, lazy, Suspense , Fragment } from "react";
 import { Routes, Route } from "react-router-dom";
+import Background from "components/Background";
+import { AnimatePresence } from "framer-motion";
+import { useLocation } from "react-router-dom";
 
 const Home = lazy(() => import("pages/Home"));
 const TeamLeaderBoard = lazy(() => import("pages/TeamLeaderBoard"));
@@ -13,20 +16,27 @@ const Challenge = lazy(() => import("pages/Challenge"));
 const Register = lazy(() => import("pages/Register"));
 
 export default function App() {
+  const location = useLocation();
+
   return (
-    <Suspense fallback={null}>
-      <Routes>
-        <Route path="*" element={<NotFound />} />
-        <Route path="/" element={<Home />} />
-        <Route path="leader-board/individual" element={<PersonalLeaderBoard />} />
-        <Route path="leader-board/teams" element={<TeamLeaderBoard />} />
-        <Route path="leader-board/teams/my-team" element={<MyTeamLeaderBoard />} />
-        <Route path="leader-board/teams/create" element={<CreateTeam />} />
-        <Route path="leader-board/teams/add-teammate" element={<AddTeamMate />} />
-        <Route path="invite" element={<Invite />} />
-        <Route path="challenge" element={<Challenge />} />
-        <Route path="register" element={<Register />} />
-      </Routes>
-    </Suspense>
+    <Fragment>
+      <Background />
+      <AnimatePresence exitBeforeEnter>
+        <Suspense fallback={null}>
+          <Routes location={location} key={location.pathname}>
+            <Route path="*" element={<NotFound />} />
+            <Route path="/" element={<Home />} />
+            <Route path="leader-board/individual" element={<PersonalLeaderBoard />} />
+            <Route path="leader-board/teams" element={<TeamLeaderBoard />} />
+            <Route path="leader-board/teams/my-team" element={<MyTeamLeaderBoard />} />
+            <Route path="leader-board/teams/create" element={<CreateTeam />} />
+            <Route path="leader-board/teams/add-teammate" element={<AddTeamMate />} />
+            <Route path="invite" element={<Invite />} />
+            <Route path="challenge" element={<Challenge />} />
+            <Route path="register" element={<Register />} />
+          </Routes>
+        </Suspense>
+      </AnimatePresence>
+    </Fragment>
   );
 }

@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import Modal from "components/Modal";
 import AddIcon from "icons/team/add.svg";
 import Back from "components/Back";
-import Background from "components/Background";
 import Button from "components/Button";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 export default function MyTeamLeaderBoard() {
   const [openModal, setOpenModal] = useState(false);
@@ -23,8 +23,13 @@ export default function MyTeamLeaderBoard() {
   };
 
   return (
-    <main className="min-h-screen">
-      <Background />
+    <motion.main
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+      className="min-h-screen"
+    >
       <Back>جدول امتیازات</Back>
 
       <section className="mt-6 2xl:mt-0">
@@ -44,7 +49,7 @@ export default function MyTeamLeaderBoard() {
           <ul className="list-none flex flex-col gap-y-2 mt-4">
             {[...Array(5)].map((e, index) => (
               <li
-                className="p-2 flex items-center rounded-[10px] bg-[#f9f9f9] bg-opacity-10 relative"
+                className="p-2 flex items-center rounded-[10px] bg-[#f9f9f9] bg-opacity-10 relative cursor-pointer"
                 onClick={handleOpenModal}
                 key={index}
               >
@@ -187,6 +192,6 @@ export default function MyTeamLeaderBoard() {
           </button>
         </div>
       </Modal>
-    </main>
+    </motion.main>
   );
 }

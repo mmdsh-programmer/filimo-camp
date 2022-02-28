@@ -1,10 +1,10 @@
-import {React , useState} from "react";
+import { React, useState } from "react";
 import Back from "components/Back";
-import Background from "components/Background";
 import TransparentStarIcon from "icons/home/transparent-star.svg";
 import BlueStarIcon from "icons/home/blue-star.svg";
 import Modal from "components/Modal";
 import Button from "components/Button";
+import { motion } from "framer-motion";
 
 export default function PersonalLeaderBoard() {
   const [openModal, setOpenModal] = useState(false);
@@ -18,144 +18,56 @@ export default function PersonalLeaderBoard() {
   };
 
   return (
-    <main className="min-h-screen">
-      <Background />
+    <motion.main
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+      className="min-h-screen"
+    >
       <Back>جدول امتیازات</Back>
 
       <section>
         <div className="container px-4">
           <ul className="list-none flex flex-col gap-y-2 mt-4 2xl:mt-0">
-            <li className="gold-badge p-2 flex items-center rounded-[10px] bg-[#f9f9f9] bg-opacity-10 relative">
-              <div className="ml-2">
-                <div className="w-9 h-9 overflow-hidden rounded-full border-2 border-white">
-                  <img
-                    className="w-full h-full object-cover"
-                    src={require("images/home/board-avatar.webp")}
-                    alt="team-logo"
-                  />
+            {[...Array(5)].map((e, i) => (
+              <li
+                key={i}
+                className={`${
+                  i + 1 === 1
+                    ? "gold-badge"
+                    : i + 1 === 2
+                    ? "silver-badge"
+                    : i + 1 === 3 && "bronze-badge"
+                } p-2 flex items-center rounded-[10px] bg-[#f9f9f9] bg-opacity-10 relative cursor-pointer`}
+              >
+                <div className="ml-2">
+                  <div className="w-9 h-9 overflow-hidden rounded-full border-2 border-white">
+                    <img
+                      className="w-full h-full object-cover"
+                      src={require("images/home/board-avatar.webp")}
+                      alt="team-logo"
+                    />
+                  </div>
                 </div>
-              </div>
 
-              <span className="text-sm text-white text-right font-dana-regular ml-auto mt-1">
-                09123457689
-              </span>
+                <span className="text-sm text-white text-right font-dana-regular ml-auto mt-1">
+                  09123457689
+                </span>
 
-              <span className="text-sm text-white font-dana-regular ml-2 mt-1">
-                234.789
-              </span>
+                <span className="text-sm text-white font-dana-regular ml-2 mt-1">
+                  234.789
+                </span>
 
-              <img
-                src={TransparentStarIcon}
-                className="w-4 h-4 object-contain"
-                alt="star logo"
-              />
-            </li>
+                <img
+                  src={TransparentStarIcon}
+                  className="w-4 h-4 object-contain"
+                  alt="star logo"
+                />
+              </li>
+            ))}
 
-            <li className="silver-badge p-2 flex items-center rounded-[10px] bg-[#f9f9f9] bg-opacity-10 relative">
-              <div className="ml-2">
-                <div className="w-9 h-9 overflow-hidden rounded-full border-2 border-white">
-                  <img
-                    className="w-full h-full object-cover"
-                    src={require("images/home/board-avatar.webp")}
-                    alt="team-logo"
-                  />
-                </div>
-              </div>
-
-              <span className="text-sm text-white text-right font-dana-regular ml-auto mt-1">
-                09123457689
-              </span>
-
-              <span className="text-sm text-white font-dana-regular ml-2 mt-1">
-                234.789
-              </span>
-
-              <img
-                src={TransparentStarIcon}
-                className="w-4 h-4 object-contain"
-                alt="star logo"
-              />
-            </li>
-
-            <li className="bronze-badge p-2 flex items-center rounded-[10px] bg-[#f9f9f9] bg-opacity-10 relative">
-              <div className="ml-2">
-                <div className="w-9 h-9 overflow-hidden rounded-full border-2 border-white">
-                  <img
-                    className="w-full h-full object-cover"
-                    src={require("images/home/board-avatar.webp")}
-                    alt="team-logo"
-                  />
-                </div>
-              </div>
-
-              <span className="text-sm text-white text-right font-dana-regular ml-auto mt-1">
-                09123457689
-              </span>
-
-              <span className="text-sm text-white font-dana-regular ml-2 mt-1">
-                234.789
-              </span>
-
-              <img
-                src={TransparentStarIcon}
-                className="w-4 h-4 object-contain"
-                alt="star logo"
-              />
-            </li>
-
-            <li className="p-2 flex items-center rounded-[10px] bg-[#f9f9f9] bg-opacity-10 relative">
-              <div className="ml-2">
-                <div className="w-9 h-9 overflow-hidden rounded-full border-2 border-white">
-                  <img
-                    className="w-full h-full object-cover"
-                    src={require("images/home/board-avatar.webp")}
-                    alt="team-logo"
-                  />
-                </div>
-              </div>
-
-              <span className="text-sm text-white text-right font-dana-regular ml-auto mt-1">
-                09123457689
-              </span>
-
-              <span className="text-sm text-white font-dana-regular ml-2 mt-1">
-                234.789
-              </span>
-
-              <img
-                src={TransparentStarIcon}
-                className="w-4 h-4 object-contain"
-                alt="star logo"
-              />
-            </li>
-
-            <li className="p-2 flex items-center rounded-[10px] bg-[#f9f9f9] bg-opacity-10 relative">
-              <div className="ml-2">
-                <div className="w-9 h-9 overflow-hidden rounded-full border-2 border-white">
-                  <img
-                    className="w-full h-full object-cover"
-                    src={require("images/home/board-avatar.webp")}
-                    alt="team-logo"
-                  />
-                </div>
-              </div>
-
-              <span className="text-sm text-white text-right font-dana-regular ml-auto mt-1">
-                09123457689
-              </span>
-
-              <span className="text-sm text-white font-dana-regular ml-2 mt-1">
-                234.789
-              </span>
-
-              <img
-                src={TransparentStarIcon}
-                className="w-4 h-4 object-contain"
-                alt="star logo"
-              />
-            </li>
-
-            <li onClick={handleOpenModal}>
+            <li onClick={handleOpenModal} className="cursor-pointer">
               <div className="w-full h-full flex flex-col px-[22px]">
                 <span className="w-1 h-1 opacity-30 bg-white mb-[3px] rounded-full"></span>
                 <span className="w-1 h-1 opacity-30 bg-white mb-[3px] rounded-full"></span>
@@ -195,7 +107,7 @@ export default function PersonalLeaderBoard() {
               </div>
             </li>
 
-            <li className="p-2 flex items-center rounded-[10px] bg-[#f9f9f9] bg-opacity-10 relative">
+            <li className="p-2 flex items-center rounded-[10px] bg-[#f9f9f9] bg-opacity-10 relative cursor-pointer">
               <div className="ml-2">
                 <div className="w-9 h-9 overflow-hidden rounded-full border-2 border-white">
                   <img
@@ -301,6 +213,6 @@ export default function PersonalLeaderBoard() {
           </Button>
         </div>
       </Modal>
-    </main>
+    </motion.main>
   );
 }

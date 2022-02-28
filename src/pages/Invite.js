@@ -1,11 +1,11 @@
 import { React, useState } from "react";
 import SimpleBottomSheet from "components/SimpleBottomSheet";
 import TextField from "components/TextField";
-import Background from "components/Background";
 import Back from "components/Back";
 import Button from "components/Button";
 import useWindowSize from "hooks/useWindowSize";
 import Modal from "components/Modal";
+import { motion } from "framer-motion";
 
 export default function Invite() {
   const windowSize = useWindowSize();
@@ -25,8 +25,12 @@ export default function Invite() {
   };
 
   return (
-    <main>
-      <Background />
+    <motion.main
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       <Back style="mb-6">معرفی دوستان</Back>
       <section className="h-[calc(100vh-270px)] overflow-y-auto 2xl:h-fit">
         <div className="container px-4">
@@ -122,7 +126,10 @@ export default function Invite() {
             </p>
           </div>
 
-          <Button type="primary" onClick={windowSize > 768 ? handleModalOpen : handleBottomSheetOpen}>
+          <Button
+            type="primary"
+            onClick={windowSize > 768 ? handleModalOpen : handleBottomSheetOpen}
+          >
             معرفی به دوستان
           </Button>
         </div>
@@ -196,6 +203,6 @@ export default function Invite() {
           </Button>
         </div>
       </Modal>
-    </main>
+    </motion.main>
   );
 }

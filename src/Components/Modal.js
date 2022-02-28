@@ -50,7 +50,7 @@ export default function Modal({
             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
             <div
-              className={`inline-block relative align-bottom bg-white rounded-[20px] overflow-hidden transform transition-all w-[${width}px] `}
+              className={`inline-block relative align-bottom bg-white rounded-[20px] overflow-hidden transform transition-all w-[328px] `}
             >
               <div ref={cancelButtonRef}></div>
               {children}

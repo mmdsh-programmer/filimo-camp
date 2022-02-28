@@ -1,0 +1,215 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: dana-regular;
+  src: url("fonts/DanaFaNum-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: dana-medium;
+  src: url("fonts/DanaFaNum-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: dana-demibold;
+  src: url("fonts/DanaFaNum-DemiBold.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  font-display: swap;
+}
+
+.default-title-color {
+  color: #1b1b1b;
+}
+
+.custom-list-item {
+  border-radius: 10px;
+  background-color: #f9f9f9;
+}
+
+.custom-list-item.active {
+  background-color: #7c7c7c;
+  @apply my-4;
+}
+
+.custom-list-item.active span {
+  @apply text-white;
+}
+
+.score-title {
+  font-size: 10px;
+}
+
+.fill-button {
+  background-color: #7c7c7c;
+  color: #fff;
+  line-height: 1.8;
+}
+
+.outlined-button {
+  background-color: transparent;
+  color: #979797;
+  line-height: 1.8;
+  border: solid 1px #bbb;
+  border-radius: 10px;
+}
+
+.sub-title {
+  font-size: 12px;
+  color: #7c7c7c;
+}
+
+.light-text {
+  color: #7c7c7c;
+}
+
+.custom-outline input:focus-within ~ label,
+.custom-outline input:not(:placeholder-shown) ~ label {
+  @apply transform scale-100 z-0 ml-3 px-1 py-0;
+  transform: translateY(-20px);
+}
+
+.button-primary {
+  @apply cursor-pointer transition-colors duration-300;
+  box-shadow: 0 2px 4px 0 rgba(247, 142, 50, 0.2);
+  background-color: #f78e32;
+  border-radius: 10px;
+}
+
+.button-primary button {
+  background-image: linear-gradient(to bottom, #ffc23a 50%, #fcad2e);
+  color: #000;
+  border-radius: 10px;
+  @apply transition-colors duration-300;
+}
+
+.button-secondary {
+  @apply cursor-pointer transition-colors duration-300;
+  border-radius: 10px;
+  background-color: #5fbfd8;
+}
+
+.button-secondary button {
+  background-color: rgba(104, 204, 216, 0.85);
+  color: #fff;
+  border-radius: 10px;
+  @apply transition-colors duration-300;
+}
+
+.button-disabled {
+  @apply cursor-pointer transition-colors duration-300;
+  border-radius: 10px;
+  background-color: #5d567a;
+}
+
+.button-disabled button {
+  background-color: #8b87a1;
+  color: #fff;
+  border-radius: 10px;
+  @apply transition-colors duration-300;
+}
+
+.gold-badge::before {
+  content: url("icons/home/gold-badge.svg");
+  width: 18px;
+  height: 25px;
+  object-fit: contain;
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+}
+
+.silver-badge::before {
+  content: url("icons/home/silver-badge.svg");
+  width: 18px;
+  height: 25px;
+  object-fit: contain;
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+}
+
+.bronze-badge::before {
+  content: url("icons/home/bronze-badge.svg");
+  width: 18px;
+  height: 25px;
+  object-fit: contain;
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+}
+
+.you {
+  box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.1);
+}
+
+.register-avatar-selection {
+  @apply w-full h-full;
+}
+
+.register-avatar-selection .swiper-slide {
+  @apply w-[131px] h-full flex justify-center items-end opacity-30 transition-all ease-out duration-500;
+}
+
+.register-avatar-selection .swiper-slide-active {
+  @apply opacity-100;
+}
+
+.register-avatar-selection .swiper-slide-active .inner-slide {
+  transform: translateY(-15px);
+}
+
+.create-team-avatar-selection {
+  @apply w-full h-full;
+}
+
+.create-team-avatar-selection .swiper-slide {
+  @apply w-[184px] h-full flex justify-center items-end opacity-30 transition-all ease-out duration-500 2xl:opacity-100;
+}
+
+.create-team-avatar-selection .swiper-slide .inner-slide {
+  @apply transition-all ease-out duration-500 bg-white bg-opacity-0 mb-2;
+  box-shadow: none;
+  border-radius: 97.5px;
+}
+
+.create-team-avatar-selection .swiper-slide .inner-slide .slider-text {
+  @apply opacity-0;
+}
+
+.create-team-avatar-selection .swiper-slide-active {
+  @apply opacity-100;
+}
+
+.create-team-avatar-selection .swiper-slide-active .inner-slide {
+  box-shadow: 0 10px 10px 0 rgba(251, 216, 180, 0.25);
+  @apply -translate-y-[46px] bg-opacity-100;
+}
+
+.create-team-avatar-selection .swiper-slide-active .inner-slide .slider-text {
+  @apply opacity-100;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 360px;
+}
+
+.container-fluid {
+  max-width: 1440px;
+}
+
+@media (min-width: 1440px) {
+  .create-team-avatar-selection .swiper-slide {
+    @apply opacity-100;
+  }
+}

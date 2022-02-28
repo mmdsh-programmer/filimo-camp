@@ -1,16 +1,21 @@
 import React from "react";
-import Background from "components/Background";
 import Back from "components/Back";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import Button from "components/Button";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 export default function CreateTeam() {
   const navigator = useNavigate();
   return (
-    <main className="min-h-screen-">
-      <Background />
+    <motion.main
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+      className="min-h-screen"
+    >
       <Back style="mb-6">تیم‌سازی</Back>
 
       <section className="mt-2 2xl:mt-0">
@@ -116,6 +121,6 @@ export default function CreateTeam() {
           </div>
         </div>
       </section>
-    </main>
+    </motion.main>
   );
 }

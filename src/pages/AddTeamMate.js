@@ -1,13 +1,13 @@
 import { React, useState } from "react";
 import SimpleBottomSheet from "components/SimpleBottomSheet";
 import TextField from "components/TextField";
-import Background from "components/Background";
 import Back from "components/Back";
 import Button from "components/Button";
 import EnvelopeIcon from "icons/add-teammate/envelope.svg";
 import AddTeamMateIcon from "icons/add-teammate/add-teammate.svg";
 import useWindowSize from "hooks/useWindowSize";
 import Modal from "components/Modal";
+import { motion } from "framer-motion";
 
 export default function AddTeamMate() {
   const windowSize = useWindowSize();
@@ -27,8 +27,12 @@ export default function AddTeamMate() {
   };
 
   return (
-    <main>
-      <Background />
+    <motion.main
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       <Back>ایجاد تیم</Back>
       <section className="overflow-y-auto">
         <div className="container px-4">
@@ -184,6 +188,6 @@ export default function AddTeamMate() {
           </Button>
         </div>
       </Modal>
-    </main>
+    </motion.main>
   );
 }

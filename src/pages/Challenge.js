@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import Background from "components/Background";
 import Button from "components/Button";
 import Modal from "components/Modal";
 import CloseIcon from "icons/modal/close.svg";
 import StarIcon from "icons/home/star.svg";
+import { motion } from "framer-motion";
 
 export default function Challenge() {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
@@ -36,9 +36,13 @@ export default function Challenge() {
   };
 
   return (
-    <main className="h-screen">
-      <Background />
-
+    <motion.main
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+      className="h-screen"
+    >
       <section className="2xl:h-full">
         <div className="container p-6 pb-[100px] 2xl:h-full">
           <div className="flex flex-col 2xl:justify-center 2xl:h-full">
@@ -272,6 +276,6 @@ export default function Challenge() {
           </div>
         </div>
       </Modal>
-    </main>
+    </motion.main>
   );
 }
