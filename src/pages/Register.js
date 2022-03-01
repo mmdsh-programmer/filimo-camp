@@ -16,6 +16,10 @@ export default function Register() {
 
   useEffect(() => {
     setUrlRef(searchParams.get("ref"));
+    const swiper = document.querySelector(".register-avatar-selection").swiper;
+    swiper.on("click", function () {
+      this.slideTo(this.clickedIndex, 500, true);
+    });
   }, []);
 
   const handleRegistration = () => {

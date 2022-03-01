@@ -1,13 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Back from "components/Back";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import Button from "components/Button";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { Keyboard } from "swiper";
 
 export default function CreateTeam() {
   const navigator = useNavigate();
+
+  useEffect(() => {
+    const swiper = document.querySelector(
+      ".create-team-avatar-selection"
+    ).swiper;
+    swiper.on("click", function () {
+      this.slideTo(this.clickedIndex, 500, true);
+      console.log(this.clickedSlide)
+    });
+  }, []);
+
   return (
     <motion.main
       initial={{ opacity: 0 }}
@@ -30,6 +42,9 @@ export default function CreateTeam() {
             <Swiper
               slidesPerView={2}
               spaceBetween={10}
+              keyboard={{
+                enabled: true,
+              }}
               breakpoints={{
                 1440: {
                   slidesPerView: 5,
@@ -37,6 +52,7 @@ export default function CreateTeam() {
                 },
               }}
               centeredSlides={true}
+              modules={[Keyboard]}
               className="create-team-avatar-selection"
             >
               <SwiperSlide>
