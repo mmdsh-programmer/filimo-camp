@@ -39,7 +39,7 @@ export default function AddTeamMate() {
           <div className="flex flex-col">
             {/* use this when all items are empty */}
 
-            {/* <div className="min-h-[calc(100vh-200px)] flex flex-col items-center justify-center mb-24 2xl:mt-10 2xl:min-h-fit 2xl:mb-60">
+            {/* <div className="min-h-[calc(100vh-200px)] flex flex-col items-center justify-center mb-24 2xl:mt-14 2xl:min-h-fit 2xl:mb-60">
               <img
                 className="w-44 h-44 object-contain"
                 src={AddTeamMateIcon}
@@ -52,7 +52,7 @@ export default function AddTeamMate() {
               </p>
             </div> */}
 
-            <dl className="list-none flex flex-col gap-y-2 mt-4 2xl:mt-0">
+            <dl className="list-none flex flex-col gap-y-2 mt-4 2xl:mt-4">
               <dt className="font-dana-regular text-sm text-[#3f8dcd] leading-8">
                 هم تیمی ها
               </dt>

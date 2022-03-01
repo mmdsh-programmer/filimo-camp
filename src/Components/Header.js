@@ -1,36 +1,40 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import BackIcon from "icons/common/back.svg";
 import FilimoLogo from "icons/common/filimo-logo.svg";
+import FilimoLogoType from "icons/common/filimo-logo-type.svg";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
-export default function Back({ style, children }) {
+export default function Header() {
   return (
-    <section className={`${style} mb-2 2xl:mb-0`}>
-      <div className="container px-2 pt-4 2xl:px-16 2xl:pt-8 2xl:pb-14 2xl:max-w-[1440px]">
-        <div className="flex relative">
-          <Link to="/" className="w-6 h-6 ml-2">
-            <img
-              className="w-full h-full object-contain"
-              src={BackIcon}
-              alt="back icon"
-            />
-          </Link>
-          <h1 className="text-base text-white font-dana-regular">{children}</h1>
-
-          <Link
-            to="/"
-            className="block absolute -top-[2px] left-2/4 -translate-x-2/4 2xl:hidden"
-          >
-            <figure className=" w-[26px] h-[26px] overflow-hidden">
+    <motion.header
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+      className="w-full hidden 2xl:block"
+    >
+      <div className="container px-14 pt-8 pb-6 2xl:max-w-[1440px]">
+        <div className="flex items-center">
+          <Link to="/" className="ml-[17px]">
+            <figure className="flex w-32 h-10 overflow-hidden">
               <img
+                className="w-10 h-full object-contain ml-[10px]"
                 src={FilimoLogo}
-                className="w-full h-full object-contain"
                 alt="filimo logo"
+              />
+              <img
+                className="w-[78px] h-full object-contain"
+                src={FilimoLogoType}
+                alt="filimo logo type"
               />
             </figure>
           </Link>
 
-          <nav className="hidden 2xl:block mr-auto">
+          <h2 className="text-base text-white font-dana-medium mt-1 ml-auto">
+            کمپین نوروزی فیلیمو
+          </h2>
+
+          <nav>
             <ul className="list-none flex gap-x-11">
               <li>
                 <Link to="/" className="text-base text-white font-dana-medium">
@@ -57,6 +61,6 @@ export default function Back({ style, children }) {
           </nav>
         </div>
       </div>
-    </section>
+    </motion.header>
   );
 }

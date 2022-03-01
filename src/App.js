@@ -14,6 +14,7 @@ const NotFound = lazy(() => import("pages/NotFound"));
 const Invite = lazy(() => import("pages/Invite"));
 const Challenge = lazy(() => import("pages/Challenge"));
 const Register = lazy(() => import("pages/Register"));
+const Games = lazy(() => import("pages/Games"));
 
 export default function App() {
   const location = useLocation();
@@ -34,6 +35,7 @@ export default function App() {
             <Route path="invite" element={<Invite />} />
             <Route path="challenge" element={<Challenge />} />
             <Route path="register" element={<Register />} />
+            <Route path="games" element={<Games />} />
           </Routes>
         </Suspense>
       </AnimatePresence>

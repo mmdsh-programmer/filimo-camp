@@ -18,9 +18,9 @@ export default function CreateTeam() {
     >
       <Back style="mb-6">تیم‌سازی</Back>
 
-      <section className="mt-2 2xl:mt-0">
+      <section className="mt-2 2xl:mt-11">
         <div className="container px-6">
-          <h2 className="text-sm text-white font-dana-regular">
+          <h2 className="text-sm text-white font-dana-regular 2xl:text-center">
             تصویر و عنوان تیم خود را انتخاب کنید
           </h2>
         </div>
@@ -36,7 +36,6 @@ export default function CreateTeam() {
                   spaceBetween: 10,
                 },
               }}
-              loop={true}
               centeredSlides={true}
               className="create-team-avatar-selection"
             >

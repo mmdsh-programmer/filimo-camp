@@ -56,7 +56,6 @@ export default function Register() {
                   slidesPerView: 5,
                 },
               }}
-              loop={true}
               centeredSlides={true}
               className="register-avatar-selection"
             >
