@@ -104,7 +104,7 @@ export default function Home() {
           <div className="container 2xl:max-w-full">
             <figure className="max-w-[360px] h-auto mx-auto 2xl:max-w-full 2xl:max-h-[768px] overflow-hidden">
               <img
-                src={FilimoMap}
+                src={require("images/home/filimo-map.png")}
                 alt="game map"
                 title="نقشه بازی"
                 className="w-full h-full object-contain"
