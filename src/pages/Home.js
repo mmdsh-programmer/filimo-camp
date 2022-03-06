@@ -100,11 +100,12 @@ export default function Home() {
           </div>
         </section>
 
+        {/* home screen map ⬇️ */}
         <section className="map-holder mt-6 2xl:col-start-3 2xl:col-end-4 2xl:mt-0 2xl:h-full">
           <div className="container 2xl:max-w-full">
             <figure className="max-w-[360px] h-auto mx-auto 2xl:max-w-full 2xl:max-h-[768px] overflow-hidden">
               <img
-                src={require("images/home/filimo-map.png")}
+                src={FilimoMap}
                 alt="game map"
                 title="نقشه بازی"
                 className="w-full h-full object-contain"
@@ -113,6 +114,7 @@ export default function Home() {
           </div>
         </section>
 
+        {/* mobile fixed bottom buttons ⬇️*/}
         <section className="w-full fixed bottom-0 2xl:hidden">
           <div className="container p-6">
             <div className="flex gap-2 flex-wrap">
@@ -487,7 +489,7 @@ export default function Home() {
           </div>
         </Menu>
 
-        {/* leader board  */}
+        {/* leader board  drawer*/}
         <Menu
           left
           isOpen={isLeaderBoardMenuOpen}
