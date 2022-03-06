@@ -19,7 +19,7 @@ export default function Games() {
         storageAddress.current = "pac_chef_score";
         break;
       case 2:
-        setGameSource("../games/Bubble-shooter/index.html");
+        setGameSource("../games/bubble-shooter/index.html");
         storageAddress.current = "bubble_shooter_score";
         break;
       case 3:
