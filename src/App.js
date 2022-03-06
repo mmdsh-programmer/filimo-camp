@@ -35,7 +35,7 @@ export default function App() {
             <Route path="invite" element={<Invite />} />
             <Route path="challenge" element={<Challenge />} />
             <Route path="register" element={<Register />} />
-            <Route path="games" element={<Games />} />
+            <Route path="games/:id" element={<Games />} />
           </Routes>
         </Suspense>
       </AnimatePresence>

@@ -1,0 +1,96 @@
+var CANVAS_WIDTH = 1920;
+var CANVAS_HEIGHT = 1920;
+
+var EDGEBOARD_X = 0;
+var EDGEBOARD_Y = 0;
+
+var FONT = "press_start_2pregular";
+var FONT_OUTLINE = 3;
+
+var SOUNDTRACK_VOLUME_IN_GAME = 0.4;
+
+var FPS      = 30;
+var DISABLE_SOUND_MOBILE = false;
+
+var STATE_LOADING = 0;
+var STATE_MENU    = 1;
+var STATE_LEVEL    = 2;
+var STATE_GAME    = 3;
+
+
+
+var ON_MOUSE_DOWN  = 0;
+var ON_MOUSE_UP    = 1;
+var ON_MOUSE_OVER  = 2;
+var ON_MOUSE_OUT   = 3;
+var ON_BUT_YES_DOWN  = 4;
+var ON_BACK_MENU = 5;
+var ON_RESTART = 6;
+var ON_NEXT = 7;
+
+var DIR_TOP = 0;
+var DIR_RIGHT = 1;
+var DIR_BOTTOM = 2;
+var DIR_LEFT = 3;
+
+
+var ANIM_IDLE = "idle";
+var ANIM_WALK = "walk";
+var ANIM_ATTACK = "attack";
+var ANIM_ESCAPE = "escape";
+var ANIM_DIE = "die";
+
+var SCORE_X = 200;
+var SCORE_Y = 200;
+var GRID_ROWS = 20;
+var GRID_COLS = 19;
+var CELL_SIZE = 54;
+var GRID_X = CANVAS_WIDTH/2;
+var GRID_Y = CANVAS_HEIGHT/2;
+var GRID_WIDTH = CELL_SIZE*GRID_COLS;
+var GRID_HEIGHT = CELL_SIZE*GRID_ROWS;
+var CUR_GRID_SCALE = 1;
+var NUM_LIVES;
+
+var HERO_WIDTH = 55;
+var HERO_HEIGHT = 76;
+var ENEMY_WIDTH = 54;
+var ENEMY_HEIGHT = 75;
+var ENABLE_FULLSCREEN;
+
+// KEY CODES
+var LEFT_DIR = 37;
+var TOP_DIR = 38;
+var RIGHT_DIR = 39;
+var BOTTOM_DIR = 40;
+var KEY_ESC = 27;
+var KEY_SPACEBAR = 32;
+var KEY_ENTER = 13;
+
+var CELL_EMPTY = 0;
+var CELL_WALL = 1;
+var CELL_CHEESE = 2;
+var CELL_INGREDIENT = 3;
+
+var STATE_ENEMY_IDLE = 0;
+var STATE_ENEMY_FOLLOW = 1;
+var STATE_ENEMY_ESCAPE = 2;
+
+var PLAYER_SPEED = 6;
+var ENEMY_SPEED = 300;
+var ENEMY_SPEED_SLOW = 500;
+var PLAYER_RADIUS = 52;
+var POINT_PER_ITEM;
+var POINT_PER_POWERUP;
+var POINT_KILL_ENEMY;
+var ENEMY_TYPES = 3;
+var ENEMY_ENTRY_TYPE = 22;
+var COLLISION_DIST = CELL_SIZE * 0.8;
+var FOLLOW_DIST = CELL_SIZE * 4;
+var TIME_POWERUP;
+var NUM_COLS_PAGE_LEVEL = 3;
+var NUM_ROWS_PAGE_LEVEL = 2;
+var NUM_LEVELS = 6;
+var FPS_CHARACTERS = 4;
+
+var SYMBOL_COIN = 23;
