@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Back from "components/Back";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -9,14 +9,20 @@ import { Keyboard } from "swiper";
 
 export default function CreateTeam() {
   const navigator = useNavigate();
+  const [selectedImage, setSelectedImage] = useState(0);
 
   useEffect(() => {
     const swiper = document.querySelector(
       ".create-team-avatar-selection"
     ).swiper;
+
     swiper.on("click", function () {
       this.slideTo(this.clickedIndex, 500, true);
-      console.log(this.clickedSlide)
+    });
+
+    swiper.on("slideChange", function () {
+      setSelectedImage(this.activeIndex);
+      console.log(this.activeIndex)
     });
   }, []);
 

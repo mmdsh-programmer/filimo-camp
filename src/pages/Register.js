@@ -11,14 +11,20 @@ export default function Register() {
   const navigator = useNavigate();
   const [searchParams] = useSearchParams();
   const [urlRef, setUrlRef] = useState(null);
-  const [avatar, setAvatar] = useState(null);
+  const [avatar, setAvatar] = useState(0);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     setUrlRef(searchParams.get("ref"));
     const swiper = document.querySelector(".register-avatar-selection").swiper;
+
     swiper.on("click", function () {
       this.slideTo(this.clickedIndex, 500, true);
+    });
+
+    swiper.on("slideChange", function () {
+      setAvatar(this.activeIndex);
+      console.log(this.activeIndex);
     });
   }, []);
 
