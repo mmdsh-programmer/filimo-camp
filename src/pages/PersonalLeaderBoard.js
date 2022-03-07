@@ -1,9 +1,9 @@
 import { React, useState } from "react";
-import Back from "components/Back";
+import Back from "Components/Back";
 import TransparentStarIcon from "icons/home/transparent-star.svg";
 import BlueStarIcon from "icons/home/blue-star.svg";
-import Modal from "components/Modal";
-import Button from "components/Button";
+import Modal from "Components/Modal";
+import Button from "Components/Button";
 import { motion } from "framer-motion";
 
 export default function PersonalLeaderBoard() {

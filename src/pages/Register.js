@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import TextField from "components/TextField";
-import Button from "components/Button";
+import TextField from "Components/TextField";
+import Button from "Components/Button";
 import { useSearchParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
