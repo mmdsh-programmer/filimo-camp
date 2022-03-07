@@ -20,7 +20,7 @@ export default function TextField({
         />
         <label
           htmlFor={input.name}
-          className={`text-[#bbb] leading-[2] top-[5px] ${style?.label} font-dana-regular absolute mt-[2px] right-3 bg-white -z-1 duration-300 origin-0 text-xs`}
+          className={`text-[#bbb] leading-[2] top-[5px] ${style?.label} font-dana-regular absolute mt-[2px] right-3 bg-white duration-300 origin-0 text-xs`}
         >
           {label}
         </label>
