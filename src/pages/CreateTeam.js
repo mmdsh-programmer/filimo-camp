@@ -129,7 +129,7 @@ export default function CreateTeam() {
       <section className="fixed bottom-0 left-0 w-full 2xl:relative 2xl:mt-16">
         <div className="container px-6 pb-[27px] 2xl:px-0">
           <div className="flex gap-x-2 2xl:flex-wrap 2xl:gap-y-2">
-            <Button type="disabled" style="w-[120px] 2xl:w-full">
+            <Button type="secondary" style="w-[120px] 2xl:w-full">
               انصراف
             </Button>
             <Button
