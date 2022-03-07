@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Modal from "components/Modal";
+import Modal from "Components/Modal";
 import AddIcon from "icons/team/add.svg";
-import Back from "components/Back";
-import Button from "components/Button";
+import Back from "Components/Back";
+import Button from "Components/Button";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 

@@ -1,18 +1,18 @@
 import { Fragment, React, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Menu from "components/Menu";
-import SimpleBottomSheet from "components/SimpleBottomSheet";
+import Menu from "Components/Menu";
+import SimpleBottomSheet from "Components/SimpleBottomSheet";
 import ArrowLeftIcon from "icons/home/arrow-left-circle.svg";
 import TickIcon from "icons/home/tick.svg";
 import FilimoMap from "images/home/filimo-map.svg";
 import StarIcon from "icons/home/star.svg";
-import Button from "components/Button";
+import Button from "Components/Button";
 import TransparentStarIcon from "icons/home/transparent-star.svg";
 import BlueStarIcon from "icons/home/blue-star.svg";
 import { useNavigate } from "react-router-dom";
-import Modal from "components/Modal";
+import Modal from "Components/Modal";
 import { motion } from "framer-motion";
-import Header from "components/Header";
+import Header from "Components/Header";
 
 export default function Home() {
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false); //menu state

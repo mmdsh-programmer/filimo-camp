@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import Back from "components/Back";
+import Back from "Components/Back";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import Button from "components/Button";
+import Button from "Components/Button";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Keyboard } from "swiper";

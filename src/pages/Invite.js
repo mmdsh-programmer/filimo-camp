@@ -1,10 +1,10 @@
 import { React, useState } from "react";
-import SimpleBottomSheet from "components/SimpleBottomSheet";
-import TextField from "components/TextField";
-import Back from "components/Back";
-import Button from "components/Button";
+import SimpleBottomSheet from "Components/SimpleBottomSheet";
+import TextField from "Components/TextField";
+import Back from "Components/Back";
+import Button from "Components/Button";
 import useWindowSize from "hooks/useWindowSize";
-import Modal from "components/Modal";
+import Modal from "Components/Modal";
 import { motion } from "framer-motion";
 
 export default function Invite() {

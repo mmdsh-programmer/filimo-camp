@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Back from "components/Back";
+import Back from "Components/Back";
 import TransparentStarIcon from "icons/home/transparent-star.svg";
 import BlueStarIcon from "icons/home/blue-star.svg";
 import { motion } from "framer-motion";

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import Button from "components/Button";
-import Modal from "components/Modal";
+import Button from "Components/Button";
+import Modal from "Components/Modal";
 import CloseIcon from "icons/modal/close.svg";
 import StarIcon from "icons/home/star.svg";
 import { motion } from "framer-motion";
 import { Fragment } from "react/cjs/react.production.min";
-import Header from "components/Header";
+import Header from "Components/Header";
 import FilimoLogo from "icons/common/filimo-logo.svg";
 import { Link } from "react-router-dom";
 

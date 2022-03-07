@@ -1,6 +1,6 @@
 import { React, lazy, Suspense , Fragment } from "react";
 import { Routes, Route } from "react-router-dom";
-import Background from "components/Background";
+import Background from "./Components/Background";
 import { AnimatePresence } from "framer-motion";
 import { useLocation } from "react-router-dom";
 
