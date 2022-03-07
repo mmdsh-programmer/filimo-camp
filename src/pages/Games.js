@@ -15,8 +15,8 @@ export default function Games() {
   useEffect(() => {
     switch (+id) {
       case 1:
-        setGameSource("../games/pac-chef/index.html");
-        storageAddress.current = "pac_chef_score";
+        setGameSource("../games/tap-the-tile/index.html");
+        storageAddress.current = "tap_the_tile_score";
         break;
       case 2:
         setGameSource("../games/bubble-shooter/index.html");
@@ -33,6 +33,18 @@ export default function Games() {
       case 5:
         setGameSource("../games/sourcerer/index.html");
         storageAddress.current = "sourcerer_score";
+        break;
+      case 6:
+        setGameSource("../games/2048/index.html");
+        storageAddress.current = "2048_score";
+        break;
+      case 7:
+        setGameSource("../games/box-tower/index.html");
+        storageAddress.current = "box_tower_score";
+        break;
+      case 8:
+        setGameSource("../games/maze/index.html");
+        storageAddress.current = "maze_score";
         break;
       default:
         navigator("/");
