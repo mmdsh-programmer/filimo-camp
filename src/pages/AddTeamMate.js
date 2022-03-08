@@ -36,10 +36,10 @@ export default function AddTeamMate() {
       <Back>ایجاد تیم</Back>
       <section className="overflow-y-auto">
         <div className="container px-4">
-          <div className="flex flex-col">
+          <div className="flex flex-col landscape:mb-4">
             {/* use this when all items are empty */}
 
-            {/* <div className="min-h-[calc(100vh-200px)] flex flex-col items-center justify-center mb-24 2xl:mt-14 2xl:min-h-fit 2xl:mb-60">
+            {/* <div className="min-h-[calc(100vh-200px)] flex flex-col items-center justify-center mb-24 2xl:mt-14 2xl:min-h-fit 2xl:mb-60 landscape:mt-6">
               <img
                 className="w-44 h-44 object-contain"
                 src={AddTeamMateIcon}
@@ -52,66 +52,68 @@ export default function AddTeamMate() {
               </p>
             </div> */}
 
-            <dl className="list-none flex flex-col gap-y-2 mt-4 2xl:mt-4">
-              <dt className="font-dana-regular text-sm text-[#3f8dcd] leading-8">
-                هم تیمی ها
-              </dt>
+            <div className="max-h-[calc(100vh-124px)] landscape:max-h-max">
+              <dl className="list-none flex flex-col gap-y-2 mt-4 2xl:mt-4">
+                <dt className="font-dana-regular text-sm text-[#3f8dcd] leading-8">
+                  هم تیمی ها
+                </dt>
 
-              {[...Array(4)].map((e, i) => (
-                <dd
-                  key={i}
-                  className="p-2 flex items-center rounded-[10px] relative overflow-hidden bg-[rgba(255,255,255,0.1)]"
-                >
-                  <div className="w-9 h-9 overflow-hidden rounded-full border-2 border-white ml-2">
+                {[...Array(4)].map((e, i) => (
+                  <dd
+                    key={i}
+                    className="p-2 flex items-center rounded-[10px] relative overflow-hidden bg-[rgba(255,255,255,0.1)]"
+                  >
+                    <div className="w-9 h-9 overflow-hidden rounded-full border-2 border-white ml-2">
+                      <img
+                        className="w-full h-full object-cover"
+                        src={require("images/home/board-avatar.webp")}
+                        alt="team-logo"
+                      />
+                    </div>
+
+                    <span className="text-base text-white text-right font-dana-medium ml-auto leading-[1.81] block mt-1">
+                      09123457689
+                    </span>
+
+                    <span className="text-xs text-white font-dana-regular mt-1 text-opacity-80">
+                      در تیم قرار گرفت
+                    </span>
+                  </dd>
+                ))}
+              </dl>
+
+              <dl className="list-none flex flex-col gap-y-2 mt-6">
+                <dt className="font-dana-regular text-sm text-[#3f8dcd] leading-8">
+                  دوستان دعوت شده
+                </dt>
+
+                {[...Array(3)].map((e, i) => (
+                  <dd
+                    key={i}
+                    className="p-2 flex items-center rounded-[10px] relative overflow-hidden bg-[rgba(255,255,255,0.1)]"
+                  >
+                    <span className="text-base text-white text-right font-dana-medium ml-auto leading-[1.81] block mt-1">
+                      09123457689
+                    </span>
+
+                    <span className="text-xs text-white font-dana-regular ml-2 mt-1 text-opacity-80">
+                      پیام ارسال شده
+                    </span>
+
                     <img
-                      className="w-full h-full object-cover"
-                      src={require("images/home/board-avatar.webp")}
-                      alt="team-logo"
+                      className="w-6 h-6 object-contain"
+                      src={EnvelopeIcon}
+                      alt="envelope icon"
                     />
-                  </div>
-
-                  <span className="text-base text-white text-right font-dana-medium ml-auto leading-[1.81] block mt-1">
-                    09123457689
-                  </span>
-
-                  <span className="text-xs text-white font-dana-regular mt-1 text-opacity-80">
-                    در تیم قرار گرفت
-                  </span>
-                </dd>
-              ))}
-            </dl>
-
-            <dl className="list-none flex flex-col gap-y-2 mt-6">
-              <dt className="font-dana-regular text-sm text-[#3f8dcd] leading-8">
-                دوستان دعوت شده
-              </dt>
-
-              {[...Array(3)].map((e, i) => (
-                <dd
-                  key={i}
-                  className="p-2 flex items-center rounded-[10px] relative overflow-hidden bg-[rgba(255,255,255,0.1)]"
-                >
-                  <span className="text-base text-white text-right font-dana-medium ml-auto leading-[1.81] block mt-1">
-                    09123457689
-                  </span>
-
-                  <span className="text-xs text-white font-dana-regular ml-2 mt-1 text-opacity-80">
-                    پیام ارسال شده
-                  </span>
-
-                  <img
-                    className="w-6 h-6 object-contain"
-                    src={EnvelopeIcon}
-                    alt="envelope icon"
-                  />
-                </dd>
-              ))}
-            </dl>
+                  </dd>
+                ))}
+              </dl>
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="fixed bottom-0 left-0 right-0 2xl:relative 2xl:mt-4">
+      <section className="fixed bottom-0 left-0 right-0 2xl:relative 2xl:mt-4 landscape:relative">
         <div className="container px-4 pb-6">
           <Button
             type="primary"
@@ -135,17 +137,18 @@ export default function AddTeamMate() {
           <TextField type="text" name="phone" placeholder=" " label="موبایل" />
 
           <p className="mt-2 text-xs font-dana-regular leading-6">
-            شماره هم‌تیمی خود را وارد کنید تا لینک از طریق sms برای او ارسال
-            شود.
+            شماره دوست خود را وارد کنید تا از این کمپین مطلع شود. لینک از طریق
+            sms برای او ارسال شود. به ازای هر یک از دوستان که اولین بازی را
+            انجام دهند ۵ امتیاز برای شما ثبت می‌شود.
           </p>
 
           <div className="flex items-center bg-[#ddd] rounded-[10px] bg-opacity-30 mt-4 p-[3px]">
-            <span className="block font-dana-regular text-[#4c4c4c] text-xs leading-[1.8] ml-auto mr-2 mt-1">
-              camp.filimo.com/eyd1400/team
+            <span className="block font-dana-regular text-[#4c4c4c] text-xs leading-[1.8] ml-auto mr-2 mt-1 max-w-[215px] overflow-hidden">
+              Statira-2345
             </span>
 
             <button className="font-dana-medium text-sm text-[#f78e32] py-3 px-2 bg-white rounded-[10px]">
-              کپی لینک
+              کپی کد معرف
             </button>
           </div>
 
@@ -174,12 +177,12 @@ export default function AddTeamMate() {
           </p>
 
           <div className="flex items-center bg-[#ddd] rounded-[10px] bg-opacity-30 mt-4 p-[3px]">
-            <span className="block font-dana-regular text-[#4c4c4c] text-xs leading-[1.8] ml-auto mr-2 mt-1">
-              camp.filimo.com/eyd1400/team
+            <span className="block font-dana-regular text-[#4c4c4c] text-xs leading-[1.8] ml-auto mr-2 mt-1 max-w-[215px] overflow-hidden">
+              Statira-2345
             </span>
 
             <button className="font-dana-medium text-sm text-[#f78e32] py-3 px-2 bg-white rounded-[10px]">
-              کپی لینک
+              کپی کد معرف
             </button>
           </div>
 
