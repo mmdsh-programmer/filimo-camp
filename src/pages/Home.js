@@ -89,10 +89,7 @@ export default function Home() {
                 onClick={handleOpenLeaderBoardMenu}
               >
                 <span className="leading-[2] text-[#d1752e] text-xs font-dana-regular ml-3 block mt-1">
-                  امتیاز
-                </span>
-                <span className="text-base font-dana-medium font-medium text-black ml-2 block mt-1">
-                  235
+                  جدول امتیازات
                 </span>
                 <img src={StarIcon} alt="star logo" />
               </div>
@@ -611,7 +608,7 @@ export default function Home() {
         <SimpleBottomSheet
           isOpen={isSimpleBottomSheetOpen}
           setIsOpen={setIsSimpleBottomSheetOpen}
-          style="backdrop-blur-[4px] bg-white bg-opacity-75"
+          style="bg-white"
         >
           <div className="container p-4">
             <h3 className="text-base default-title-color mx-2 light-text font-dana-regular">
@@ -619,42 +616,65 @@ export default function Home() {
             </h3>
 
             <div className="flex flex-col gap-y-2 my-4">
-              <div className="flex custom-list-item p-2 items-center">
-                <h4 className="leading-[1.81] text-base text-right ml-auto default-title-color font-dana-regular">
+              <Link
+                to="/games/1"
+                target="_blank"
+                className="flex bg-[#f8f8f8] rounded-[10px] p-2 items-center"
+              >
+                <h4 className="leading-[1.81] text-base text-right ml-[39px] text-black font-dana-regular w-[81px]">
                   بازی
                 </h4>
-                <span className="text-sm default-title-color ml-2 font-dana-regular flex items-center">
-                  <span className="score-title ml-1">امتیاز</span>
-                  <span>230+</span>
-                </span>
-                <Link to="/" className="w-6 h-6">
-                  <img
-                    className="w-full h-full object-contain"
-                    src={ArrowLeftIcon}
-                    alt="button icon"
-                  />
-                </Link>
-              </div>
 
-              <div className="flex custom-list-item p-2 items-center">
-                <h4 className="leading-[1.81] text-base text-right ml-auto default-title-color font-dana-regular">
-                  ماموریت
-                </h4>
-                <span className="text-sm default-title-color ml-2 font-dana-regular flex items-center">
+                <span className="text-sm text-black ml-auto mt-1 font-dana-regular flex items-center">
                   <span className="score-title ml-1">امتیاز</span>
                   <span>230+</span>
                 </span>
-                <Link to="/challenge" className="w-6 h-6">
+
+                {/* use this if not done */}
+                <span className="bg-[#ffc23a] rounded-2xl p-2 text-sm font-dana-regular text-black">
+                  شروع بازی
+                </span>
+
+                {/* ue this icon if it is done */}
+                {/* <figure className="w-6 h-6">
                   <img
                     className="w-full h-full object-contain"
                     src={TickIcon}
                     alt="button icon"
                   />
-                </Link>
-              </div>
+                </figure> */}
+              </Link>
+
+              <Link
+                to="/challenge"
+                className="flex bg-[#f8f8f8] rounded-[10px] p-2 items-center"
+              >
+                <h4 className="leading-[1.81] text-base text-right ml-[39px] text-black font-dana-regular w-[81px]">
+                  ماموریت
+                </h4>
+
+                <span className="text-sm text-black ml-auto mt-1 font-dana-regular flex items-center">
+                  <span className="score-title ml-1">امتیاز</span>
+                  <span>230+</span>
+                </span>
+
+                {/* use this if not done */}
+                <span className="bg-[#ffc23a] rounded-2xl p-2 text-sm font-dana-regular text-black">
+                  انجام ماموریت
+                </span>
+
+                {/* ue this icon if it is done */}
+                {/* <figure className="w-6 h-6">
+                  <img
+                    className="w-full h-full object-contain"
+                    src={TickIcon}
+                    alt="button icon"
+                  />
+                </figure> */}
+              </Link>
             </div>
 
-            <div className="rounded-[10px] flex flex-col bg-white">
+            <div className="rounded-[10px] flex flex-col bg-[#f8f8f8]">
               <div className="p-4">
                 <h4 className="text-base font-dana-regular light-text mb-3">
                   تماشا{" "}
@@ -806,43 +826,66 @@ export default function Home() {
             </h3>
 
             <div className="flex flex-col gap-y-2 my-4">
-              <div className="flex custom-list-item p-2 items-center">
-                <h4 className="leading-[1.81] text-base text-right ml-auto default-title-color font-dana-regular">
+              <Link
+                to="/games/1"
+                target="_blank"
+                className="flex bg-[#f8f8f8] rounded-[10px] p-2 items-center"
+              >
+                <h4 className="leading-[1.81] text-base text-right ml-8 text-black font-dana-regular w-[81px]">
                   بازی
                 </h4>
-                <span className="text-sm default-title-color ml-2 font-dana-regular flex items-center">
-                  <span className="score-title ml-1">امتیاز</span>
-                  <span>230+</span>
-                </span>
-                <Link to="/" className="w-6 h-6">
-                  <img
-                    className="w-full h-full object-contain"
-                    src={ArrowLeftIcon}
-                    alt="button icon"
-                  />
-                </Link>
-              </div>
 
-              <div className="flex custom-list-item p-2 items-center">
-                <h4 className="leading-[1.81] text-base text-right ml-auto default-title-color font-dana-regular">
-                  ماموریت
-                </h4>
-                <span className="text-sm default-title-color ml-2 font-dana-regular flex items-center">
+                <span className="text-sm text-black ml-auto mt-1 font-dana-regular flex items-center">
                   <span className="score-title ml-1">امتیاز</span>
                   <span>230+</span>
                 </span>
-                <Link to="/challenge" className="w-6 h-6">
+
+                {/* use this if not done */}
+                <span className="bg-[#ffc23a] rounded-2xl p-2 text-sm font-dana-regular text-black">
+                  شروع بازی
+                </span>
+
+                {/* ue this icon if it is done */}
+                {/* <figure className="w-6 h-6">
                   <img
                     className="w-full h-full object-contain"
                     src={TickIcon}
                     alt="button icon"
                   />
-                </Link>
-              </div>
+                </figure> */}
+              </Link>
+
+              <Link
+                to="/challenge"
+                className="flex bg-[#f8f8f8] rounded-[10px] p-2 items-center"
+              >
+                <h4 className="leading-[1.81] text-base text-right ml-8 text-black font-dana-regular w-[81px]">
+                  ماموریت
+                </h4>
+
+                <span className="text-sm text-black ml-auto mt-1 font-dana-regular flex items-center">
+                  <span className="score-title ml-1">امتیاز</span>
+                  <span>230+</span>
+                </span>
+
+                {/* use this if not done */}
+                <span className="bg-[#ffc23a] rounded-2xl p-2 text-sm font-dana-regular text-black">
+                  انجام ماموریت
+                </span>
+
+                {/* ue this icon if it is done */}
+                {/* <figure className="w-6 h-6">
+                  <img
+                    className="w-full h-full object-contain"
+                    src={TickIcon}
+                    alt="button icon"
+                  />
+                </figure> */}
+              </Link>
             </div>
 
             <div className="mt-4">
-              <h4 className="text-base font-dana-regular text-[#1d1d1d] mb-4">
+              <h4 className="text-base font-dana-regular text-[#1d1d1d] mb-4 text-right">
                 تماشا{" "}
                 <span className="text-xs text-[#7c7c7c]">
                   (با دیدن هر ساعت فیلم ۵ امتیاز بگیر)
