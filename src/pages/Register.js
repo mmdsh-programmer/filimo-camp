@@ -5,18 +5,22 @@ import TextField from "Components/TextField";
 import Button from "Components/Button";
 import { useSearchParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { Login } from 'Helper/login'
 import { motion } from "framer-motion";
 import { avatars } from "helpers/avatars";
+import Fetch from "../Helper/loginFetch";
 
 export default function Register() {
   const navigator = useNavigate();
   const [searchParams] = useSearchParams();
   const [urlRef, setUrlRef] = useState(null);
+  const [refValue, setrefValue] = useState('');
   const [avatar, setAvatar] = useState(0);
   const [loading, setLoading] = useState(false);
-
+  const [FilimoId,setFilimoId]=useState(123456);
+  const [avatarCode,setavatarCode]=useState(125);
   useEffect(() => {
-    setUrlRef(searchParams.get("ref"));
+    setrefValue(searchParams.get("ref"));
     const swiper = document.querySelector(".register-avatar-selection").swiper;
 
     swiper.on("click", function () {
@@ -27,16 +31,36 @@ export default function Register() {
       setAvatar(this.activeIndex);
       console.log(this.activeIndex);
     });
+
+
   }, []);
 
-  const handleRegistration = () => {
-    console.log(urlRef);
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      sessionStorage.setItem("login", true);
-      navigator("/");
-    }, 3000);
+  const handleRegistration = async() => {
+    var raw = JSON.stringify({
+      "filimo_id": FilimoId,
+      "referral_code": refValue,
+      "avator_code": "123"
+    });
+
+    const loginUrl = await Fetch({
+      url: 'http://37.152.185.94:8001/user/login/',
+      method: 'POST',
+      data: raw,
+      headers: {
+        'X-CSRFToken': 'EtWI8gO2TPYM5O2iMrzmmjRwL11vnrZUqlUkGYNxXOptltPJk9AABsUKaO8sBeH0',
+
+      },
+      redirect: 'follow'
+    });
+
+    if (!('ERROR' in loginUrl)) {
+      localStorage.setItem('filimo:ACCESS_TOKEN', loginUrl.data.access);
+
+      navigator('/');
+    } else {
+
+    }
+
   };
 
   return (
@@ -95,8 +119,9 @@ export default function Register() {
             name="referal-code"
             placeholder=" "
             label="کد معرف"
-            defaultValue={urlRef}
             style={{ input: "pt-2", label: "mt-[5px]" }}
+            value={refValue}
+            onInput={e => setrefValue(e.target.value)}
           />
         </div>
       </section>
