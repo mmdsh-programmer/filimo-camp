@@ -13,6 +13,8 @@ import { useNavigate } from "react-router-dom";
 import Modal from "Components/Modal";
 import { motion } from "framer-motion";
 import Header from "Components/Header";
+import CustomTab from "Components/CustomTab";
+import InfoIcon from "icons/home/info-icon.svg";
 
 export default function Home() {
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false); //menu state
@@ -112,7 +114,7 @@ export default function Home() {
         </section>
 
         {/* mobile fixed bottom buttons ⬇️*/}
-        <section className="w-full fixed bottom-0 2xl:hidden">
+        <section className="w-full fixed bottom-0 2xl:hidden landscape:relative">
           <div className="container p-6">
             <div className="flex gap-2 flex-wrap">
               <div className="flex-[1_1_152px] relative">
@@ -173,9 +175,15 @@ export default function Home() {
 
               <div className="bg-[#f8f8f8] rounded-[10px] py-4 px-4 mt-4">
                 <ul className="list-none flex flex-col gap-y-4">
-                  <li className="flex font-dana-regular text-[#1d1d1d] mx-[10px]">
-                    <span className="ml-auto text-base">امتیاز من</span>
-                    <span>234</span>
+                  <li className="flex font-dana-regular text-[#1d1d1d]">
+                    <span className="ml-auto text-base">جدول امتیاز من</span>
+                    <span className="flex">
+                      <span className="mt-[2px] ml-1">234</span>{" "}
+                      <img
+                        className="block w-5 h-5 object-contain"
+                        src={StarIcon}
+                      />
+                    </span>
                   </li>
 
                   <li className="w-full h-[1px] bg-[#ececec]"></li>
@@ -227,6 +235,27 @@ export default function Home() {
                       <span className="text-sm text-black">230+</span>
                     </span>
                   </li>
+
+                  <li className="flex">
+                    <span className="inline-block text-base font-dana-regular text-[#7c7c7c]">
+                      سایر امتیازات
+                    </span>
+
+                    <span className="ml-auto cursor-pointer">
+                      <img
+                        className="w-4 h-4 object-contain block mt-1 mr-1"
+                        src={InfoIcon}
+                        alt="info icon"
+                      />
+                    </span>
+
+                    <span className="inline-block font-dana-regular">
+                      <span className="text-[10px] ml-1 text-black">
+                        امتیاز
+                      </span>
+                      <span className="text-sm text-black">230+</span>
+                    </span>
+                  </li>
                 </ul>
               </div>
 
@@ -256,115 +285,7 @@ export default function Home() {
         <aside className="hidden col-start-4 col-end-5 row-start-1 row-end-2 2xl:block h-fit sticky top-20">
           <div className="w-full bg-white rounded-3xl max-h-[664px] min-h-[664px] overflow-y-auto">
             <div className="container py-6 px-4">
-              <h2 className="text-base font-dana-regular text-[#333]">
-                جدول امتیازات
-              </h2>
-
-              <ul className="list-none flex flex-col gap-y-2 mt-4">
-                {[...Array(5)].map((e, i) => (
-                  <li
-                    key={i}
-                    className={`${
-                      i + 1 === 1
-                        ? "gold-badge"
-                        : i + 1 === 2
-                        ? "silver-badge"
-                        : i + 1 === 3 && "bronze-badge"
-                    } p-2 flex items-center rounded-[10px] bg-[#f8f8f8] relative`}
-                  >
-                    <div className="ml-2">
-                      <div className="w-9 h-9 overflow-hidden rounded-full border-2 border-white">
-                        <img
-                          className="w-full h-full object-cover"
-                          src={require("images/home/board-avatar.webp")}
-                          alt="team-logo"
-                        />
-                      </div>
-                    </div>
-
-                    <span className="text-sm text-[#7c7c7c] text-right font-dana-regular ml-auto mt-1">
-                      تیم شاهین-345
-                    </span>
-
-                    <span className="text-sm text-black font-dana-regular ml-2 mt-1">
-                      234.789
-                    </span>
-
-                    <img
-                      src={TransparentStarIcon}
-                      className="w-4 h-4 object-contain"
-                      alt="star logo"
-                    />
-                  </li>
-                ))}
-
-                <li>
-                  <div className="w-full h-full flex flex-col px-[22px]">
-                    <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
-                    <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
-                    <span className="w-1 h-1 opacity-40 bg-[#333] mb-2 rounded-full"></span>
-                  </div>
-                  <Link
-                    to="/leader-board/teams/my-team"
-                    className="flex items-center p-2 rounded-[10px] bg-[#acffd2] relative you"
-                  >
-                    <div className="ml-2">
-                      <div className="w-9 h-9 overflow-hidden rounded-full border-2 border-white">
-                        <img
-                          className="w-full h-full object-cover"
-                          src={require("images/home/board-avatar.webp")}
-                          alt="team-logo"
-                        />
-                      </div>
-                    </div>
-
-                    <span className="text-base text-[#170d53] font-semibold text-right font-dana-regular ml-auto mt-1">
-                      تیم شما
-                    </span>
-
-                    <span className="text-sm text-[#170d53] font-semibold font-dana-regular ml-2 mt-1">
-                      234.789
-                    </span>
-
-                    <img
-                      src={BlueStarIcon}
-                      className="w-4 h-4 object-contain"
-                      alt="star logo"
-                    />
-                  </Link>
-                  <div className="w-full h-full flex flex-col px-[22px]">
-                    <span className="w-1 h-1 opacity-40 bg-[#333] mt-2 mb-[3px] rounded-full"></span>
-                    <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
-                    <span className="w-1 h-1 opacity-40 bg-[#333] rounded-full"></span>
-                  </div>
-                </li>
-
-                <li className="p-2 flex items-center rounded-[10px] bg-[#f8f8f8] relative">
-                  <div className="ml-2">
-                    <div className="w-9 h-9 overflow-hidden rounded-full border-2 border-white">
-                      <img
-                        className="w-full h-full object-cover"
-                        src={require("images/home/board-avatar.webp")}
-                        alt="team-logo"
-                      />
-                    </div>
-                  </div>
-
-                  <span className="text-sm text-[#7c7c7c] text-right font-dana-regular ml-auto mt-1">
-                    تیم شاهین-345
-                  </span>
-
-                  <span className="text-sm text-black font-dana-regular ml-2 mt-1">
-                    234.789
-                  </span>
-
-                  <img
-                    src={TransparentStarIcon}
-                    className="w-4 h-4 object-contain"
-                    alt="star logo"
-                  />
-                </li>
-              </ul>
+              <CustomTab />
             </div>
           </div>
         </aside>
@@ -398,8 +319,14 @@ export default function Home() {
             <div className="bg-[#f8f8f8] rounded-[10px] py-4 px-[6px] mt-4">
               <ul className="list-none flex flex-col gap-y-4">
                 <li className="flex font-dana-regular text-[#1d1d1d] mx-[10px]">
-                  <span className="ml-auto text-base">امتیاز من</span>
-                  <span>234</span>
+                  <span className="ml-auto text-base">جدول امتیاز من</span>
+                  <span className="flex">
+                    <span className="mt-[2px] ml-1">234</span>{" "}
+                    <img
+                      className="block w-5 h-5 object-contain"
+                      src={StarIcon}
+                    />
+                  </span>
                 </li>
 
                 <li className="w-full h-[1px] bg-[#ececec]"></li>
@@ -443,6 +370,25 @@ export default function Home() {
                     <span className="text-sm text-black">230+</span>
                   </span>
                 </li>
+
+                <li className="flex mx-[10px]">
+                  <span className="inline-block text-base font-dana-regular text-[#7c7c7c]">
+                    سایر امتیازات
+                  </span>
+
+                  <span className="ml-auto cursor-pointer">
+                    <img
+                      className="w-4 h-4 object-contain block mt-1 mr-1"
+                      src={InfoIcon}
+                      alt="info icon"
+                    />
+                  </span>
+
+                  <span className="inline-block font-dana-regular">
+                    <span className="text-[10px] ml-1 text-black">امتیاز</span>
+                    <span className="text-sm text-black">230+</span>
+                  </span>
+                </li>
               </ul>
             </div>
 
@@ -452,7 +398,16 @@ export default function Home() {
                   className="text-base font-dana-regular text-[#1d1d1d] leading-[1.81] w-full"
                   to="/leader-board/teams"
                 >
-                  مشاهده جدول امتیازات
+                  جدول امتیازات
+                </Link>
+              </li>
+
+              <li className="flex rounded-[10px] bg-[#f8f8f8] p-2">
+                <Link
+                  className="text-base font-dana-regular text-[#1d1d1d] leading-[1.81] w-full"
+                  to="/leader-board/invitees"
+                >
+                  جدول دعوت از دوستان
                 </Link>
               </li>
 
@@ -493,115 +448,7 @@ export default function Home() {
           setIsOpen={setIsLeaderBoardMenuOpen}
         >
           <div className="container py-6 px-4">
-            <h2 className="text-base font-dana-regular text-[#333]">
-              جدول امتیازات
-            </h2>
-
-            <ul className="list-none flex flex-col gap-y-2 mt-4">
-              {[...Array(5)].map((e, i) => (
-                <li
-                  key={i}
-                  className={`${
-                    i + 1 === 1
-                      ? "gold-badge"
-                      : i + 1 === 2
-                      ? "silver-badge"
-                      : i + 1 === 3 && "bronze-badge"
-                  } p-2 flex items-center rounded-[10px] bg-[#f8f8f8] relative`}
-                >
-                  <div className="ml-2">
-                    <div className="w-9 h-9 overflow-hidden rounded-full border-2 border-white">
-                      <img
-                        className="w-full h-full object-cover"
-                        src={require("images/home/board-avatar.webp")}
-                        alt="team-logo"
-                      />
-                    </div>
-                  </div>
-
-                  <span className="text-sm text-[#7c7c7c] text-right font-dana-regular ml-auto mt-1">
-                    تیم شاهین-345
-                  </span>
-
-                  <span className="text-sm text-black font-dana-regular ml-2 mt-1">
-                    234.789
-                  </span>
-
-                  <img
-                    src={TransparentStarIcon}
-                    className="w-4 h-4 object-contain"
-                    alt="star logo"
-                  />
-                </li>
-              ))}
-
-              <li>
-                <div className="w-full h-full flex flex-col px-[22px]">
-                  <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
-                  <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
-                  <span className="w-1 h-1 opacity-40 bg-[#333] mb-2 rounded-full"></span>
-                </div>
-                <Link
-                  to="/leader-board/teams/my-team"
-                  className="flex items-center p-2 rounded-[10px] bg-[#acffd2] relative you"
-                >
-                  <div className="ml-2">
-                    <div className="w-9 h-9 overflow-hidden rounded-full border-2 border-white">
-                      <img
-                        className="w-full h-full object-cover"
-                        src={require("images/home/board-avatar.webp")}
-                        alt="team-logo"
-                      />
-                    </div>
-                  </div>
-
-                  <span className="text-base text-[#170d53] font-semibold text-right font-dana-regular ml-auto mt-1">
-                    تیم شما
-                  </span>
-
-                  <span className="text-sm text-[#170d53] font-semibold font-dana-regular ml-2 mt-1">
-                    234.789
-                  </span>
-
-                  <img
-                    src={BlueStarIcon}
-                    className="w-4 h-4 object-contain"
-                    alt="star logo"
-                  />
-                </Link>
-                <div className="w-full h-full flex flex-col px-[22px]">
-                  <span className="w-1 h-1 opacity-40 bg-[#333] mt-2 mb-[3px] rounded-full"></span>
-                  <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
-                  <span className="w-1 h-1 opacity-40 bg-[#333] rounded-full"></span>
-                </div>
-              </li>
-
-              <li className="p-2 flex items-center rounded-[10px] bg-[#f8f8f8] relative">
-                <div className="ml-2">
-                  <div className="w-9 h-9 overflow-hidden rounded-full border-2 border-white">
-                    <img
-                      className="w-full h-full object-cover"
-                      src={require("images/home/board-avatar.webp")}
-                      alt="team-logo"
-                    />
-                  </div>
-                </div>
-
-                <span className="text-sm text-[#7c7c7c] text-right font-dana-regular ml-auto mt-1">
-                  تیم شاهین-345
-                </span>
-
-                <span className="text-sm text-black font-dana-regular ml-2 mt-1">
-                  234.789
-                </span>
-
-                <img
-                  src={TransparentStarIcon}
-                  className="w-4 h-4 object-contain"
-                  alt="star logo"
-                />
-              </li>
-            </ul>
+            <CustomTab />
           </div>
         </Menu>
 
@@ -649,7 +496,7 @@ export default function Home() {
                 to="/challenge"
                 className="flex bg-[#f8f8f8] rounded-[10px] p-2 items-center"
               >
-                <h4 className="leading-[1.81] text-base text-right ml-[39px] text-black font-dana-regular w-[81px]">
+                <h4 className="leading-[1.81] text-base text-right ml-auto text-black font-dana-regular w-[81px]">
                   ماموریت
                 </h4>
 

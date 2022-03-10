@@ -177,9 +177,9 @@
 }
 
 .create-team-avatar-selection .swiper-slide .inner-slide {
-  @apply transition-all ease-out duration-500 bg-white bg-opacity-0 mb-2;
+  @apply transition-all ease-out duration-500 bg-[#a82020] bg-opacity-0 mb-2;
   box-shadow: none;
-  border-radius: 97.5px;
+  @apply rounded-bl-full rounded-br-full;
 }
 
 .create-team-avatar-selection .swiper-slide .inner-slide .slider-text {
