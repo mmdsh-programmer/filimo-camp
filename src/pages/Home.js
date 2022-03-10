@@ -25,7 +25,20 @@ export default function Home() {
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false); //for opening register modal
   const [isChallengeModalOpen, setIsChallengeModalOpen] = useState(false); //for opening challenge modal
   const navigator = useNavigate();
-  let user;
+  let user = {
+    avator_code: null,
+    date_time: "",
+    filimo_id: "",
+    id: 0,
+    is_challenge_unlock: false,
+    is_play_again: false,
+    is_team_head: false,
+    is_team_member: false,
+    mobile: null,
+    total_score: 0,
+    unique_code: "",
+    user_name: null,
+  };
   useEffect(() => {
     // sessionStorage.setItem("login", true);
     //   let isLoggedIn = true;
@@ -44,7 +57,21 @@ export default function Home() {
     });
 
     if (!('ERROR' in loginUrl)) {
-      user.name= loginUrl.data.data.name
+      user = {
+        avator_code: loginUrl.data.data.avator_code,
+        date_time: loginUrl.data.data.date_time,
+        filimo_id: loginUrl.data.data.filimo_id,
+        id: loginUrl.data.data.id,
+        is_challenge_unlock: loginUrl.data.data.is_challenge_unlock,
+        is_play_again: loginUrl.data.data.is_play_again,
+        is_team_head: loginUrl.data.data.is_team_head,
+        is_team_member: loginUrl.data.data.is_team_member,
+        mobile: loginUrl.data.data.mobile,
+        total_score: loginUrl.data.data.total_score,
+        unique_code: loginUrl.data.data.unique_code,
+        user_name: loginUrl.data.data.user_name,
+      };
+      console.log(user);
       debugger;
     } else {
 
