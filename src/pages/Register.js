@@ -6,6 +6,7 @@ import Button from "Components/Button";
 import { useSearchParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { avatars } from "helpers/avatars";
 
 export default function Register() {
   const navigator = useNavigate();
@@ -69,39 +70,19 @@ export default function Register() {
               centeredSlides={true}
               className="register-avatar-selection"
             >
-              <SwiperSlide>
-                <div className="inner-slide w-[131px] h-[131px] rounded-full overflow-hidden transition-all duration-500 ease-in-out flex">
-                  <div className="w-[131px] h-[131px] overflow-hidden rounded-full self-center">
-                    <img
-                      className="w-full h-full object-cover"
-                      src={require("images/common/avatars/woman.webp")}
-                      alt="avatar image"
-                    />
+              {avatars.map(({ mainUrl }, avatarIndex) => (
+                <SwiperSlide key={avatarIndex}>
+                  <div className="inner-slide w-[131px] h-[131px] rounded-full overflow-hidden transition-all duration-500 ease-in-out flex">
+                    <div className="w-[131px] h-[131px] overflow-hidden rounded-full self-center">
+                      <img
+                        className="w-full h-full object-cover"
+                        src={require(`images/common/avatars/${mainUrl}`)}
+                        alt={`avatar ${avatarIndex}`}
+                      />
+                    </div>
                   </div>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className="inner-slide w-[131px] h-[131px] rounded-full overflow-hidden transition-all duration-500 ease-in-out flex">
-                  <div className="w-[131px] h-[131px] overflow-hidden rounded-full self-center">
-                    <img
-                      className="w-full h-full object-cover"
-                      src={require("images/common/avatars/man.webp")}
-                      alt="avatar image"
-                    />
-                  </div>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className="inner-slide w-[131px] h-[131px] rounded-full overflow-hidden transition-all duration-500 ease-in-out flex">
-                  <div className="w-[131px] h-[131px] overflow-hidden rounded-full self-center">
-                    <img
-                      className="w-full h-full object-cover"
-                      src={require("images/common/avatars/flash.webp")}
-                      alt="avatar image"
-                    />
-                  </div>
-                </div>
-              </SwiperSlide>
+                </SwiperSlide>
+              ))}
             </Swiper>
           </div>
         </div>

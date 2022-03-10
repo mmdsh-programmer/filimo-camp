@@ -173,11 +173,11 @@
 }
 
 .create-team-avatar-selection .swiper-slide {
-  @apply w-[184px] h-full flex justify-center items-end opacity-30 transition-all ease-out duration-500 2xl:opacity-100;
+  @apply w-[184px] h-full flex justify-center items-end transition-all ease-out duration-500;
 }
 
 .create-team-avatar-selection .swiper-slide .inner-slide {
-  @apply transition-all ease-out duration-500 bg-[#a82020] bg-opacity-0 mb-2;
+  @apply transition-all ease-out duration-500 bg-opacity-0 mb-2;
   box-shadow: none;
   @apply rounded-bl-full rounded-br-full;
 }
@@ -191,8 +191,12 @@
 }
 
 .create-team-avatar-selection .swiper-slide-active .inner-slide {
-  box-shadow: 0 10px 10px 0 rgba(251, 216, 180, 0.25);
+  box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.4);
   @apply -translate-y-[46px] bg-opacity-100;
+}
+
+.create-team-avatar-selection .swiper-slide-active .inner-slide .image-holder{
+  overflow: visible;
 }
 
 .create-team-avatar-selection .swiper-slide-active .inner-slide .slider-text {
