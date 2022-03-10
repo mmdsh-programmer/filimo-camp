@@ -195,12 +195,36 @@
   @apply -translate-y-[46px] bg-opacity-100;
 }
 
-.create-team-avatar-selection .swiper-slide-active .inner-slide .image-holder{
+.create-team-avatar-selection .swiper-slide-active .inner-slide .image-holder {
   overflow: visible;
 }
 
 .create-team-avatar-selection .swiper-slide-active .inner-slide .slider-text {
   @apply opacity-100;
+}
+
+.info-slider-swiper {
+  @apply w-full h-full;
+}
+
+.info-slider-swiper .swiper-slide {
+  @apply w-full min-h-fit;
+}
+
+.info-slider-swiper .swiper-pagination-bullet {
+  @apply bg-[#d8d8d8] opacity-[0.36] w-2 h-2 transition-all duration-200 rounded-[4px] mx-1;
+}
+
+.info-slider-swiper .swiper-pagination-bullet-active {
+  @apply w-5 opacity-100;
+}
+
+.info-slider-button-holder {
+  background-image: linear-gradient(
+    to bottom,
+    rgba(21, 12, 79, 0),
+    #150c4e 55%
+  );
 }
 
 .container {
