@@ -17,6 +17,7 @@ const Invite = lazy(() => import("pages/Invite"));
 const Challenge = lazy(() => import("pages/Challenge"));
 const Register = lazy(() => import("pages/Register"));
 const Games = lazy(() => import("pages/Games"));
+const Invitees = lazy(() => import("pages/Invitees"));
 
 export default function App() {
   const location = useLocation();
@@ -32,6 +33,7 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="leader-board/individual" element={<PersonalLeaderBoard />} />
             <Route path="leader-board/teams" element={<TeamLeaderBoard />} />
+            <Route path="leader-board/invitees" element={<Invitees />} />
             <Route path="leader-board/teams/my-team" element={<MyTeamLeaderBoard />} />
             <Route path="leader-board/teams/create" element={<CreateTeam />} />
             <Route path="leader-board/teams/add-teammate" element={<AddTeamMate />} />

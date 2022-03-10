@@ -22,7 +22,7 @@ export default function CreateTeam() {
 
     swiper.on("slideChange", function () {
       setSelectedImage(this.activeIndex);
-      console.log(this.activeIndex)
+      console.log(this.activeIndex);
     });
   }, []);
 
@@ -62,7 +62,15 @@ export default function CreateTeam() {
               className="create-team-avatar-selection"
             >
               <SwiperSlide>
-                <div className="inner-slide w-[184px] h-fit rounded-full overflow-hidden transition-all duration-500 ease-in-out avatar-background flex flex-col">
+                <div className="inner-slide w-[184px] h-fit rounded-br-full rounded-bl-full overflow-hidden transition-all duration-500 ease-in-out avatar-background flex flex-col">
+                  <h3 className="w-full text-center mt-[22px] mb-6 slider-text">
+                    <span className="block font-dana-regular text-base text-white">
+                      تیم
+                    </span>
+                    <span className="block font-dana-regular text-[22px] text-white">
+                      اژدهای قرمز
+                    </span>
+                  </h3>
                   <div className="w-44 h-44 overflow-hidden rounded-full self-center">
                     <img
                       className="w-full h-full object-cover"
@@ -70,15 +78,6 @@ export default function CreateTeam() {
                       alt="avatar image"
                     />
                   </div>
-
-                  <h3 className="w-full text-center mt-[22px] mb-6 slider-text">
-                    <span className="block font-dana-regular text-base text-[#1d1d1d]">
-                      تیم
-                    </span>
-                    <span className="block font-dana-regular text-[22px] text-[#1d1d1d]">
-                      شاهین-126
-                    </span>
-                  </h3>
                 </div>
               </SwiperSlide>
               <SwiperSlide>
