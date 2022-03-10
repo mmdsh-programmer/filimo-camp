@@ -15,6 +15,8 @@ import { motion } from "framer-motion";
 import Header from "Components/Header";
 import CustomTab from "Components/CustomTab";
 import InfoIcon from "icons/home/info-icon.svg";
+import Fetch from "../Helper/Fetch";
+
 
 export default function Home() {
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false); //menu state
@@ -23,13 +25,31 @@ export default function Home() {
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false); //for opening register modal
   const [isChallengeModalOpen, setIsChallengeModalOpen] = useState(false); //for opening challenge modal
   const navigator = useNavigate();
-
+  let user;
   useEffect(() => {
     // sessionStorage.setItem("login", true);
-    let isLoggedIn = sessionStorage.getItem("login");
-    !isLoggedIn && handleOpenRegisterModal();
+    //   let isLoggedIn = true;
+    //   !isLoggedIn && handleOpenRegisterModal();
+    // }
+    userData();
   }, []);
+  const userData = async () => {
+    const loginUrl = await Fetch({
+      url: 'http://37.152.185.94:8001/user/user/',
+      method: 'GET',
+      headers: {
+        'X-CSRFToken': 'EtWI8gO2TPYM5O2iMrzmmjRwL11vnrZUqlUkGYNxXOptltPJk9AABsUKaO8sBeH0',
 
+      },
+    });
+
+    if (!('ERROR' in loginUrl)) {
+      user.name= loginUrl.data.data.name
+      debugger;
+    } else {
+
+    }
+  }
   const handleOpenProfileMenu = () => {
     setIsProfileMenuOpen(true);
   };

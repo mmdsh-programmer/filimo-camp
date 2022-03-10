@@ -1,8 +1,10 @@
-import { React, lazy, Suspense , Fragment } from "react";
+import { React, lazy, Suspense, Fragment } from "react";
 import { Routes, Route } from "react-router-dom";
 import Background from "./Components/Background";
 import { AnimatePresence } from "framer-motion";
 import { useLocation } from "react-router-dom";
+import { PrivateRoute } from './Routes/LoginRoute';
+import guardRoute from './Routes/GuardRoute';
 
 const Home = lazy(() => import("pages/Home"));
 const TeamLeaderBoard = lazy(() => import("pages/TeamLeaderBoard"));
@@ -27,17 +29,60 @@ export default function App() {
         <Suspense fallback={null}>
           <Routes location={location} key={location.pathname}>
             <Route path="*" element={<NotFound />} />
-            <Route path="/" element={<Home />} />
-            <Route path="leader-board/individual" element={<PersonalLeaderBoard />} />
-            <Route path="leader-board/teams" element={<TeamLeaderBoard />} />
-            <Route path="leader-board/invitees" element={<Invitees />} />
-            <Route path="leader-board/teams/my-team" element={<MyTeamLeaderBoard />} />
-            <Route path="leader-board/teams/create" element={<CreateTeam />} />
-            <Route path="leader-board/teams/add-teammate" element={<AddTeamMate />} />
-            <Route path="invite" element={<Invite />} />
-            <Route path="challenge" element={<Challenge />} />
-            <Route path="register" element={<Register />} />
-            <Route path="games/:id" element={<Games />} />
+            <Route path="/"
+              element={
+                <PrivateRoute>
+                  <Home />
+                </PrivateRoute>
+              } />
+            <Route path="leader-board/individual" element={
+              <PrivateRoute>
+                <PersonalLeaderBoard />
+              </PrivateRoute>} />
+            <Route path="leader-board/teams" element={
+              <PrivateRoute>
+                <TeamLeaderBoard />
+              </PrivateRoute>} />
+            <Route path="leader-board/invitees" element={
+              <PrivateRoute>
+                <Invitees />
+              </PrivateRoute>
+            } />
+            <Route path="leader-board/teams/my-team" element={<PrivateRoute>
+              <MyTeamLeaderBoard />
+            </PrivateRoute>
+            } />
+            <Route path="leader-board/teams/create" element={
+              <PrivateRoute>
+                <CreateTeam />
+              </PrivateRoute>
+            } />
+            <Route path="leader-board/teams/add-teammate" element={
+              <PrivateRoute>
+                <AddTeamMate />
+              </PrivateRoute>
+            } />
+            <Route path="invite" element={
+              <PrivateRoute>
+                <Invite />
+              </PrivateRoute>
+            } />
+            <Route path="challenge" element={
+              <PrivateRoute>
+                <Challenge />
+              </PrivateRoute>} />
+            <Route path="register" element={
+
+
+              <Register />
+
+            } />
+            <Route path="games/:id" element={
+
+              <PrivateRoute>
+                <Games />
+              </PrivateRoute>
+            } />
           </Routes>
         </Suspense>
       </AnimatePresence>
