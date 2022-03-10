@@ -34,6 +34,30 @@ export default function AddTeamMate() {
       transition={{ duration: 0.5 }}
     >
       <Back>ایجاد تیم</Back>
+
+      <section className="mt-4">
+        <div className="container px-4">
+          <div className="flex">
+            <figure className="w-[72px] h-[72px] overflow-hidden">
+              <img
+                className="w-full h-full object-contain shadow-[0_4px_6px_0_rgba(0,0,0,0.27)]"
+                src={require("images/common/flags/41.png")}
+                alt="team"
+              />
+            </figure>
+
+            <div className="mr-4 flex flex-col justify-center">
+              <h2 className="text-[18px] text-white font-dana-demibold">
+                تیم «اژدهای قرمز»
+              </h2>
+              <span className="text-sm text-white opacity-60 font-dana-regular mt-4 block">
+                مجموع امتیاز : 2373
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="overflow-y-auto">
         <div className="container px-4">
           <div className="flex flex-col landscape:mb-4">
