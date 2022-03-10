@@ -27,6 +27,7 @@ export default function App() {
       <AnimatePresence exitBeforeEnter>
         <Suspense fallback={null}>
           <Routes location={location} key={location.pathname}>
+            {/* <loginRoute path={['/signin']} component={Home} /> */}
             <Route path="*" element={<NotFound />} />
             <Route path="/" element={<Home />} />
             <Route path="leader-board/individual" element={<PersonalLeaderBoard />} />
