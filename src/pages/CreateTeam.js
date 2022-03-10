@@ -6,10 +6,29 @@ import Button from "Components/Button";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Keyboard } from "swiper";
+import { flags } from "helpers/flags";
 
 export default function CreateTeam() {
   const navigator = useNavigate();
   const [selectedImage, setSelectedImage] = useState(0);
+
+  const colorLuminance = (hex, lum) => {
+    hex = String(hex).replace(/[^0-9a-f]/gi, "");
+    if (hex.length < 6) {
+      hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
+    }
+    lum = lum || 0;
+
+    var rgb = "#",
+      c,
+      i;
+    for (i = 0; i < 3; i++) {
+      c = parseInt(hex.substr(i * 2, 2), 16);
+      c = Math.round(Math.min(Math.max(0, c + c * lum), 255)).toString(16);
+      rgb += ("00" + c).substr(c.length);
+    }
+    return rgb;
+  };
 
   useEffect(() => {
     const swiper = document.querySelector(
@@ -61,65 +80,34 @@ export default function CreateTeam() {
               modules={[Keyboard]}
               className="create-team-avatar-selection"
             >
-              <SwiperSlide>
-                <div className="inner-slide w-[184px] h-fit rounded-br-full rounded-bl-full overflow-hidden transition-all duration-500 ease-in-out avatar-background flex flex-col">
-                  <h3 className="w-full text-center mt-[22px] mb-6 slider-text">
-                    <span className="block font-dana-regular text-base text-white">
-                      تیم
-                    </span>
-                    <span className="block font-dana-regular text-[22px] text-white">
-                      اژدهای قرمز
-                    </span>
-                  </h3>
-                  <div className="w-44 h-44 overflow-hidden rounded-full self-center">
-                    <img
-                      className="w-full h-full object-cover"
-                      src={require("images/common/avatars/woman.webp")}
-                      alt="avatar image"
-                    />
+              {flags.map(({ id, url, bg, title }, flagIndex) => (
+                <SwiperSlide key={id}>
+                  <div
+                    className="inner-slide w-[184px] h-fit rounded-br-full bg-opacity-0 rounded-bl-full overflow-hidden transition-all duration-500 ease-in-out avatar-background flex flex-col border-opacity-0"
+                    style={
+                      flagIndex === selectedImage
+                        ? { backgroundColor: colorLuminance(bg, -0.3) }
+                        : {}
+                    }
+                  >
+                    <h3 className="w-full text-center my-5 slider-text">
+                      <span className="block font-dana-regular text-base text-white">
+                        تیم
+                      </span>
+                      <span className="block font-dana-regular text-[22px] text-white">
+                        {title}
+                      </span>
+                    </h3>
+                    <div className="image-holder w-44 h-44 overflow-hidden rounded-full self-center">
+                      <img
+                        className="w-full h-full object-cover"
+                        src={require(`images/common/flags/${url}`)}
+                        alt={`flag ${flagIndex}`}
+                      />
+                    </div>
                   </div>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className="inner-slide w-[184px] h-fit rounded-full overflow-hidden transition-all duration-500 ease-in-out avatar-background flex flex-col">
-                  <div className="w-44 h-44 overflow-hidden rounded-full self-center">
-                    <img
-                      className="w-full h-full object-cover"
-                      src={require("images/common/avatars/man.webp")}
-                      alt="avatar image"
-                    />
-                  </div>
-
-                  <h3 className="w-full text-center mt-[22px] mb-6 slider-text">
-                    <span className="block font-dana-regular text-base text-[#1d1d1d]">
-                      تیم
-                    </span>
-                    <span className="block font-dana-regular text-[22px] text-[#1d1d1d]">
-                      اصغر-352
-                    </span>
-                  </h3>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className="inner-slide w-[184px] h-fit rounded-full overflow-hidden transition-all duration-500 ease-in-out avatar-background flex flex-col">
-                  <div className="w-44 h-44 overflow-hidden rounded-full self-center">
-                    <img
-                      className="w-full h-full object-cover"
-                      src={require("images/common/avatars/flash.webp")}
-                      alt="avatar image"
-                    />
-                  </div>
-
-                  <h3 className="w-full text-center mt-[22px] mb-6 slider-text">
-                    <span className="block font-dana-regular text-base text-[#1d1d1d]">
-                      تیم
-                    </span>
-                    <span className="block font-dana-regular text-[22px] text-[#1d1d1d]">
-                      فلش-252
-                    </span>
-                  </h3>
-                </div>
-              </SwiperSlide>
+                </SwiperSlide>
+              ))}
             </Swiper>
           </div>
         </div>
