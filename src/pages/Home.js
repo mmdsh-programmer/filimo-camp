@@ -16,7 +16,10 @@ import Header from "Components/Header";
 import CustomTab from "Components/CustomTab";
 import InfoIcon from "icons/home/info-icon.svg";
 import Fetch from "../Helper/Fetch";
-
+import TextField from "Components/TextField";
+import EditIcon from "icons/home/edit-icon.svg";
+import OtpInput from "react-otp-input";
+import useWindowSize from "hooks/useWindowSize";
 
 export default function Home() {
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false); //menu state
@@ -24,6 +27,12 @@ export default function Home() {
   const [isSimpleBottomSheetOpen, setIsSimpleBottomSheetOpen] = useState(false); //common modal state
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false); //for opening register modal
   const [isChallengeModalOpen, setIsChallengeModalOpen] = useState(false); //for opening challenge modal
+  const [openPhoneNumberModal, setOpenPhoneNumberModal] = useState(false);
+  const [openPhoneNumberBottomSheet, setOpenPhoneNumberBottomSheet] =
+    useState(false); //for opening get phone number bottom sheet
+  const [phoneNumberStep, setPhoneNumberStep] = useState(1);
+  const [otpState, setOtpState] = useState("");
+
   const navigator = useNavigate();
   let user = {
     avator_code: null,
@@ -45,6 +54,8 @@ export default function Home() {
     //   !isLoggedIn && handleOpenRegisterModal();
     // }
     userData();
+
+    // windowSize >= 1440 ? setOpenPhoneNumberModal(true) : setOpenPhoneNumberBottomSheet(true);
   }, []);
   const userData = async () => {
     const loginUrl = await Fetch({
@@ -70,9 +81,8 @@ export default function Home() {
       console.log(user);
       debugger;
     } else {
-
     }
-  }
+  };
   const handleOpenProfileMenu = () => {
     setIsProfileMenuOpen(true);
   };
@@ -95,6 +105,21 @@ export default function Home() {
 
   const hidePhoneNumber = (phoneNumber) => {
     return phoneNumber.replace(phoneNumber.substr(4, 3), "***");
+  };
+
+  const handleNextPhoneNumberStep = () => {
+    setPhoneNumberStep(2);
+  };
+
+  const handlePrevPhoneNumberStep = () => {
+    setPhoneNumberStep(1);
+  };
+
+  const handleOtpChange = (code) => {
+    setOtpState(code);
+    if (code.length === 5) {
+      console.log("submit code");
+    }
   };
 
   return (
@@ -811,6 +836,208 @@ export default function Home() {
                 ))}
               </div>
             </div>
+          </div>
+        </Modal>
+
+        {/* het phone number bottom sheet */}
+        <SimpleBottomSheet
+          isOpen={openPhoneNumberBottomSheet}
+          setIsOpen={setOpenPhoneNumberBottomSheet}
+          backdropClose={false}
+          style="bg-white"
+        >
+          <div className="container p-6 pt-4">
+            <h2 className="text-right text-base font-dana-regular text-[#1d1d1d]">
+              {phoneNumberStep === 1
+                ? "شماره موبایل خود را ثبت کنید"
+                : "کد ارسالی را وارد کنید"}
+            </h2>
+
+            {phoneNumberStep === 1 ? (
+              <Fragment>
+                <TextField
+                  type="tel"
+                  name="phone"
+                  placeholder=" "
+                  required
+                  maxLength={11}
+                  label="موبایل"
+                  style={{ container: "mt-6" }}
+                />
+
+                <p className="leading-[2] text-[#4c4c4c] mt-2 text-xs font-dana-regular">
+                  در ثبت شماره موبایل دقت کنید تا پیامک ارسال شده حاوی کد ثبت به
+                  دست شما برسد.
+                </p>
+
+                <Button
+                  type="primary"
+                  style="mt-20"
+                  onClick={handleNextPhoneNumberStep}
+                >
+                  تایید شماره موبایل
+                </Button>
+              </Fragment>
+            ) : (
+              <Fragment>
+                <p className="text-[#4d4d4d] text-sm font-dana-regular mt-[9px]">
+                  کد ۵ رقمی به شماره شما پیامک شد
+                </p>
+
+                <button
+                  className="p-2 bg-opacity-10 bg-[#d04f56] rounded-2xl flex items-center w-fit mx-auto mt-[14px]"
+                  onClick={handlePrevPhoneNumberStep}
+                >
+                  <span className="text-sm text-[#d04f56] font-dana-medium ml-2 mt-1">
+                    ۰۹۳۵۷۸۹۴۵۶۰
+                  </span>
+                  <img
+                    src={EditIcon}
+                    className="w-[18px] h-[18px] object-contain"
+                    alt="edit icon"
+                  />
+                </button>
+
+                <div className="mt-[17px] flex justify-center">
+                  <OtpInput
+                    value={otpState}
+                    direction="rtl"
+                    onChange={handleOtpChange}
+                    numInputs={5}
+                    isInputNum={true}
+                    shouldAutoFocus={true}
+                    containerStyle="flex-row-reverse"
+                    className="font-dana-regular"
+                    inputStyle={{
+                      border: "1px solid #bbb",
+                      borderRadius: "10px",
+                      width: "40px",
+                      height: "56px",
+                      fontSize: "30px",
+                      color: "#1b1b1b",
+                      fontWeight: "500",
+                      caretColor: "#1b1b1b",
+                      marginLeft: "4px",
+                      marginRight: "4px",
+                    }}
+                    focusStyle={{
+                      border: "1px solid #3c3c3c",
+                      outline: "none",
+                    }}
+                  />
+                </div>
+
+                <div className="px-6 mt-14">
+                  <span className="text-sm text-[#9b9b9b] font-dana-regular ml-5">
+                    پیامکی دریافت نکردید؟
+                  </span>
+                  <button className="text-sm text-[#db717b] font-dana-medium">
+                    ارسال مجدد پیامک‌
+                  </button>
+                </div>
+              </Fragment>
+            )}
+          </div>
+        </SimpleBottomSheet>
+
+        {/* get phone number modal */}
+        <Modal
+          alignCenter
+          isOpen={openPhoneNumberModal}
+          setIsOpen={setOpenPhoneNumberModal}
+          backdropClose={false}
+        >
+          <div className="container p-6 pt-4">
+            <h2 className="text-right text-base font-dana-regular text-[#1d1d1d]">
+              {phoneNumberStep === 1
+                ? "شماره موبایل خود را ثبت کنید"
+                : "کد ارسالی را وارد کنید"}
+            </h2>
+
+            {phoneNumberStep === 1 ? (
+              <Fragment>
+                <TextField
+                  type="tel"
+                  name="phone"
+                  placeholder=" "
+                  required
+                  maxLength={11}
+                  label="موبایل"
+                  style={{ container: "mt-6" }}
+                />
+
+                <p className="leading-[2] text-[#4c4c4c] mt-2 text-xs font-dana-regular">
+                  در ثبت شماره موبایل دقت کنید تا پیامک ارسال شده حاوی کد ثبت به
+                  دست شما برسد.
+                </p>
+
+                <Button
+                  type="primary"
+                  style="mt-20"
+                  onClick={handleNextPhoneNumberStep}
+                >
+                  تایید شماره موبایل
+                </Button>
+              </Fragment>
+            ) : (
+              <Fragment>
+                <p className="text-[#4d4d4d] text-sm font-dana-regular mt-[9px]">
+                  کد ۵ رقمی به شماره شما پیامک شد
+                </p>
+
+                <button
+                  className="p-2 bg-opacity-10 bg-[#d04f56] rounded-2xl flex items-center w-fit mx-auto mt-[14px]"
+                  onClick={handlePrevPhoneNumberStep}
+                >
+                  <span className="text-sm text-[#d04f56] font-dana-medium ml-2 mt-1">
+                    ۰۹۳۵۷۸۹۴۵۶۰
+                  </span>
+                  <img
+                    src={EditIcon}
+                    className="w-[18px] h-[18px] object-contain"
+                    alt="edit icon"
+                  />
+                </button>
+
+                <div className="mt-[17px] flex justify-center">
+                  <OtpInput
+                    value={otpState}
+                    direction="rtl"
+                    onChange={handleOtpChange}
+                    numInputs={5}
+                    isInputNum={true}
+                    shouldAutoFocus={true}
+                    containerStyle="flex-row-reverse"
+                    className="font-dana-regular"
+                    inputStyle={{
+                      border: "1px solid #bbb",
+                      borderRadius: "10px",
+                      width: "40px",
+                      height: "56px",
+                      fontSize: "30px",
+                      color: "#1b1b1b",
+                      fontWeight: "500",
+                      caretColor: "#1b1b1b",
+                      marginLeft: "4px",
+                      marginRight: "4px",
+                    }}
+                    focusStyle={{
+                      border: "1px solid #3c3c3c",
+                      outline: "none",
+                    }}
+                  />
+                </div>
+
+                <div className="px-6 mt-14">
+                  <span className="text-sm text-[#9b9b9b] font-dana-regular ml-5">
+                    پیامکی دریافت نکردید؟
+                  </span>
+                  <button className="text-sm text-[#db717b] font-dana-medium">
+                    ارسال مجدد پیامک‌
+                  </button>
+                </div>
+              </Fragment>
+            )}
           </div>
         </Modal>
       </motion.main>

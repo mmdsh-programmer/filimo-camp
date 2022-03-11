@@ -4,6 +4,7 @@ export default function SimpleBottomSheet({
   children,
   isOpen,
   setIsOpen,
+  backdropClose = true,
   style,
 }) {
   const handleClose = () => {
@@ -18,7 +19,7 @@ export default function SimpleBottomSheet({
             ? "z-20 duration-500 opacity-100"
             : "-z-10 duration-500 opacity-0"
         }`}
-        onClick={handleClose}
+        onClick={backdropClose ? handleClose : () => {}}
       ></div>
       <div
         className={`${style} 2xl:hidden rounded-tl-3xl rounded-tr-3xl z-20 w-full fixed bottom-0 left-0 transform ease-out transition-all ${
