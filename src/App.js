@@ -18,6 +18,7 @@ const Register = lazy(() => import("pages/Register"));
 const Games = lazy(() => import("pages/Games"));
 const Invitees = lazy(() => import("pages/Invitees"));
 const InfoSlider = lazy(() => import("pages/InfoSlider"));
+const InvitedModal = lazy(() => import("pages/InvitedModal"));
 
 export default function App() {
   const location = useLocation();
@@ -102,6 +103,7 @@ export default function App() {
               }
             />
             <Route path="register" element={<Register />} />
+            <Route path="accept-invite/:id" element={<InvitedModal />} />
             <Route
               path="games/:id"
               element={
