@@ -1,16 +1,35 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Tab } from "@headlessui/react";
 import TransparentStarIcon from "icons/home/transparent-star.svg";
 import BlueStarIcon from "icons/home/blue-star.svg";
 import { Link } from "react-router-dom";
 import TransparentAddUserIcon from "icons/home/transparent-add-user-icon.svg";
 import BlueAddUserIcon from "icons/home/blue-add-user-icon.svg";
+import Fetch from "../Helper/Fetch";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
+const userLeaderBoard =async () => {
+  const loginUrl = await Fetch({
+    url: 'http://37.152.185.94:8001/user/user-leader-board/',
+    method: 'GET',
+   
+  });
+
+  if (!('ERROR' in loginUrl)) {
+  
+    console.log(loginUrl);
+    debugger;
+  } else {
+
+  }
+}
 
 export default function CustomTab() {
+  useEffect(()=>{
+    userLeaderBoard();
+  },[])
   const tabList = ["امتیازات فردی", "امتیازات تیمی", "امتیاز از دعوت"];
 
   const hidePhoneNumber = (phoneNumber) => {
@@ -47,13 +66,12 @@ export default function CustomTab() {
                 {[...Array(5)].map((e, i) => (
                   <li
                     key={i}
-                    className={`${
-                      i + 1 === 1
+                    className={`${i + 1 === 1
                         ? "gold-badge"
                         : i + 1 === 2
-                        ? "silver-badge"
-                        : i + 1 === 3 && "bronze-badge"
-                    } p-2 flex items-center rounded-[10px] bg-[#f8f8f8] relative`}
+                          ? "silver-badge"
+                          : i + 1 === 3 && "bronze-badge"
+                      } p-2 flex items-center rounded-[10px] bg-[#f8f8f8] relative`}
                   >
                     <div className="ml-2">
                       <div className="w-9 h-9 overflow-hidden rounded-full border-2 border-white">
@@ -97,11 +115,10 @@ export default function CustomTab() {
                     <span className="w-1 h-1 opacity-40 bg-[#333] mb-2 rounded-full"></span>
                   </div>
                   <Link
-                    to={`/leader-board/${
-                      tabId === 0 || tabId === 2
+                    to={`/leader-board/${tabId === 0 || tabId === 2
                         ? "individual"
                         : "teams/my-team"
-                    }`}
+                      }`}
                     className="flex items-center p-2 rounded-[10px] bg-[#acffd2] relative you"
                   >
                     <div className="ml-2">

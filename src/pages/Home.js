@@ -50,10 +50,6 @@ export default function Home() {
     const loginUrl = await Fetch({
       url: 'http://37.152.185.94:8001/user/user/',
       method: 'GET',
-      headers: {
-        'X-CSRFToken': 'EtWI8gO2TPYM5O2iMrzmmjRwL11vnrZUqlUkGYNxXOptltPJk9AABsUKaO8sBeH0',
-
-      },
     });
 
     if (!('ERROR' in loginUrl)) {
@@ -215,7 +211,7 @@ export default function Home() {
                     className="text-[12px] text-right light-text font-dana-regular"
                     dir="ltr"
                   >
-                    {hidePhoneNumber("09357894560")}
+                    {hidePhoneNumber(String(user.mobile))}
                   </span>
                 </div>
               </div>
@@ -225,7 +221,7 @@ export default function Home() {
                   <li className="flex font-dana-regular text-[#1d1d1d]">
                     <span className="ml-auto text-base">جدول امتیاز من</span>
                     <span className="flex">
-                      <span className="mt-[2px] ml-1">234</span>{" "}
+                      <span className="mt-[2px] ml-1">{user.total_score}</span>{" "}
                       <img
                         className="block w-5 h-5 object-contain"
                         src={StarIcon}

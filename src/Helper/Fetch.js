@@ -10,22 +10,7 @@ axiosInstance.defaults.baseURL = 'http://37.152.185.94:8001/user/';
 let CancelToken = axios.CancelToken;
 
 let source = CancelToken.source();
-// {
-//   url,
-//   method,
-//   data,
-//   params: {
-//     [key],
-//   },
-//   headers: {
-//     [key],
-//   },
-//   onUploadProgress,
-//   showMessage,
-//   cancelToken,
-//   signal,
-//   responseType,
-// }
+
 const Fetch = async(FetchConfig) => {
   FetchConfig.showMessage = FetchConfig.showMessage === undefined ? true : FetchConfig.showMessage; // default is true
   const expireTime = window.localStorage.getItem('Loyality:EXPIRE_TIME');
@@ -44,6 +29,7 @@ const Fetch = async(FetchConfig) => {
       'Content-Type': 'application/json;charset=utf-8',
       Authorization: 'Bearer ' + window.localStorage.getItem('filimo:ACCESS_TOKEN'),
       'Accept-Language': 'fa-IR,fa;q=0.9',
+      'X-CSRFToken':'EtWI8gO2TPYM5O2iMrzmmjRwL11vnrZUqlUkGYNxXOptltPJk9AABsUKaO8sBeH0LUtdWG48Yml',
     },
     responseType: FetchConfig.responseType,
   };
