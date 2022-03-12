@@ -5,7 +5,7 @@ import TextField from "Components/TextField";
 import Button from "Components/Button";
 import { useSearchParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { Login } from 'Helper/login'
+// import { Login } from 'Helper/login'
 import { motion } from "framer-motion";
 import { avatars } from "helpers/avatars";
 import Fetch from "../Helper/loginFetch";
@@ -14,10 +14,10 @@ export default function Register() {
   const navigator = useNavigate();
   const [searchParams] = useSearchParams();
   const [urlRef, setUrlRef] = useState(null);
-  const [refValue, setrefValue] = useState('');
+  const [refValue, setrefValue] = useState(null);
   const [avatar, setAvatar] = useState(0);
   const [loading, setLoading] = useState(false);
-  const [FilimoId,setFilimoId]=useState(123456);
+  const [FilimoId,setFilimoId]=useState(257643);
   const [avatarCode,setavatarCode]=useState(125);
   useEffect(() => {
     setrefValue(searchParams.get("ref"));
@@ -29,7 +29,8 @@ export default function Register() {
 
     swiper.on("slideChange", function () {
       setAvatar(this.activeIndex);
-      console.log(this.activeIndex);
+      setavatarCode(avatars[this.activeIndex].id);
+  
     });
 
 
@@ -39,7 +40,7 @@ export default function Register() {
     var raw = JSON.stringify({
       "filimo_id": FilimoId,
       "referral_code": refValue,
-      "avator_code": "123"
+      "avator_code": String(avatarCode),
     });
 
     const loginUrl = await Fetch({

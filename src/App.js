@@ -4,6 +4,7 @@ import Background from "./Components/Background";
 import { AnimatePresence } from "framer-motion";
 import { useLocation } from "react-router-dom";
 import { PrivateRoute } from "./Routes/LoginRoute";
+import { ToastContainer } from 'react-toastify';
 
 const Home = lazy(() => import("pages/Home"));
 const TeamLeaderBoard = lazy(() => import("pages/TeamLeaderBoard"));
@@ -25,6 +26,17 @@ export default function App() {
 
   return (
     <Fragment>
+      <ToastContainer
+        position="bottom-left"
+        autoClose={4000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <Background />
       <AnimatePresence exitBeforeEnter>
         <Suspense fallback={null}>

@@ -300,3 +300,12 @@ export const flags = [
     title: "خرس قرمز",
   },
 ];
+export const FindFlagAdd = (id) => {
+  let result ;
+  flags.map((item, index) => {
+    if (id === item.id) {
+      result= item.url;
+    }
+  })
+  return String(result);
+}

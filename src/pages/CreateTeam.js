@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Keyboard } from "swiper";
 import { flags } from "helpers/flags";
+import Fetch from "Helper/Fetch";
+import { toast } from "react-toastify";
 
 export default function CreateTeam() {
   const navigator = useNavigate();
@@ -29,7 +31,34 @@ export default function CreateTeam() {
     }
     return rgb;
   };
+  const CreateTeamReq = async() => {
+    let teamName;
+    let teamavatarId;
+    flags.map((item, index) => {
+      if ((index+1) === selectedImage) {
+        teamName = item.title;
+        teamavatarId= item.id;
+      }
+    })
+    var raw = JSON.stringify({
+      "name": teamName,
+      "avator_code": teamavatarId,
+    });
 
+    const teamReq = await Fetch({
+      url: 'http://37.152.185.94:8001/user/create-team/',
+      method: 'POST',
+      data: raw,
+    });
+    if (!('ERROR' in teamReq)) {
+      toast.success('تیم شما با موفقیت افزوده شد');
+      navigator("/leader-board/teams/add-teammate");
+    }
+    else{
+      toast.error('خطا در افزودن تیم');
+    }
+
+  }
   useEffect(() => {
     const swiper = document.querySelector(
       ".create-team-avatar-selection"
@@ -122,7 +151,9 @@ export default function CreateTeam() {
             <Button
               type="primary"
               style="flex-[1] 2xl:w-full"
-              onClick={() => navigator("/leader-board/teams/add-teammate")}
+              onClick={() => {
+                CreateTeamReq(); 
+              }}
             >
               ثبت تیم
             </Button>
