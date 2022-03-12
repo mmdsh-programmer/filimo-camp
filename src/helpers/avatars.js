@@ -102,3 +102,13 @@ export const avatars = [
     sadUrl: "17-sad.png",
   },
 ];
+
+export const FindAvatarAdd = (id, status) => {
+  let result ;
+  avatars.map((item, index) => {
+    if (id === item.id) {
+      result= item.mainUrl;
+    }
+  })
+  return String(result);
+}

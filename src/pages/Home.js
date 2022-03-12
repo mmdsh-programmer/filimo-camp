@@ -32,22 +32,10 @@ export default function Home() {
     useState(false); //for opening get phone number bottom sheet
   const [phoneNumberStep, setPhoneNumberStep] = useState(1);
   const [otpState, setOtpState] = useState("");
-
+  let user;
+  let taemData;
   const navigator = useNavigate();
-  let user = {
-    avator_code: null,
-    date_time: "",
-    filimo_id: "",
-    id: 0,
-    is_challenge_unlock: false,
-    is_play_again: false,
-    is_team_head: false,
-    is_team_member: false,
-    mobile: null,
-    total_score: 0,
-    unique_code: "",
-    user_name: null,
-  };
+
   useEffect(() => {
     // sessionStorage.setItem("login", true);
     //   let isLoggedIn = true;
@@ -58,28 +46,42 @@ export default function Home() {
     // windowSize >= 1440 ? setOpenPhoneNumberModal(true) : setOpenPhoneNumberBottomSheet(true);
   }, []);
   const userData = async () => {
+
     const loginUrl = await Fetch({
       url: 'http://37.152.185.94:8001/user/user/',
       method: 'GET',
     });
 
     if (!('ERROR' in loginUrl)) {
-      user = {
-        avator_code: loginUrl.data.data.avator_code,
-        date_time: loginUrl.data.data.date_time,
-        filimo_id: loginUrl.data.data.filimo_id,
-        id: loginUrl.data.data.id,
-        is_challenge_unlock: loginUrl.data.data.is_challenge_unlock,
-        is_play_again: loginUrl.data.data.is_play_again,
-        is_team_head: loginUrl.data.data.is_team_head,
-        is_team_member: loginUrl.data.data.is_team_member,
-        mobile: loginUrl.data.data.mobile,
-        total_score: loginUrl.data.data.total_score,
-        unique_code: loginUrl.data.data.unique_code,
-        user_name: loginUrl.data.data.user_name,
-      };
-      console.log(user);
-      debugger;
+
+      localStorage.setItem("filimoId", loginUrl.data.data.user_info.filimo_id);
+      localStorage.setItem("filimoNumberPh", loginUrl.data.data.user_info.mobile);
+
+      user = { ...loginUrl.data.data.user_info };
+
+      taemData = { ...loginUrl.data.data.team_info };
+      localStorage.setItem('filimo::user', JSON.stringify(user));
+      localStorage.setItem('filimo::teaminfo', JSON.stringify(taemData));
+      var retrievedObject = localStorage.getItem('filimo::user')
+      
+      console.log('sssss', JSON.parse(retrievedObject));
+
+      // user = {
+      //   avator_code: loginUrl.data.data.user_info.avator_code,
+      //   date_time: loginUrl.data.data.user_info.date_time,
+      //   filimo_id: loginUrl.data.data.user_info.filimo_id,
+      //   id: loginUrl.data.data.user_info.id,
+      //   is_challenge_unlock: loginUrl.data.data.user_info.is_challenge_unlock,
+      //   is_play_again: loginUrl.data.data.user_info.is_play_again,
+      //   is_team_head: loginUrl.data.data.user_info.is_team_head,
+      //   is_team_member: loginUrl.data.data.user_info.is_team_member,
+      //   mobile: loginUrl.data.data.user_info.mobile,
+      //   total_score: loginUrl.data.data.user_info.total_score,
+      //   unique_code: loginUrl.data.data.user_info.unique_code,
+      //   user_name: loginUrl.data.data.user_info.user_name,
+      // };
+      console.log('datauser', user, taemData);
+
     } else {
     }
   };
@@ -236,7 +238,7 @@ export default function Home() {
                     className="text-[12px] text-right light-text font-dana-regular"
                     dir="ltr"
                   >
-                    {hidePhoneNumber(String(user.mobile))}
+                    {/* {hidePhoneNumber(String(user.mobile))} */}
                   </span>
                 </div>
               </div>
@@ -246,7 +248,10 @@ export default function Home() {
                   <li className="flex font-dana-regular text-[#1d1d1d]">
                     <span className="ml-auto text-base">جدول امتیاز من</span>
                     <span className="flex">
-                      <span className="mt-[2px] ml-1">{user.total_score}</span>{" "}
+                      <span className="mt-[2px] ml-1">
+
+                        {/* {user.total_score} */}
+                      </span>{" "}
                       <img
                         className="block w-5 h-5 object-contain"
                         src={StarIcon}
