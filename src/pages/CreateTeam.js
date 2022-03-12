@@ -6,7 +6,7 @@ import Button from "Components/Button";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Keyboard } from "swiper";
-import { flags } from "helpers/flags";
+import { flags } from "Helper/flags";
 import Fetch from "Helper/Fetch";
 import { toast } from "react-toastify";
 

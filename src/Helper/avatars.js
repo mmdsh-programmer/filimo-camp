@@ -104,11 +104,17 @@ export const avatars = [
 ];
 
 export const FindAvatarAdd = (id, status) => {
-  let result ;
-  avatars.map((item, index) => {
-    if (id === item.id) {
-      result= item.mainUrl;
-    }
-  })
-  return String(result);
+  let result;
+  if (id) {
+    avatars.map((item, index) => {
+      if (id === item.id) {
+        result = item.mainUrl;
+      }
+    })
+    return String(result);
+  }
+  else{
+    return '17.png'
+  }
+
 }

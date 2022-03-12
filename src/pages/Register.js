@@ -7,7 +7,7 @@ import { useSearchParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 // import { Login } from 'Helper/login'
 import { motion } from "framer-motion";
-import { avatars } from "helpers/avatars";
+import { avatars } from "Helper/avatars";
 import Fetch from "../Helper/loginFetch";
 
 export default function Register() {
@@ -17,7 +17,7 @@ export default function Register() {
   const [refValue, setrefValue] = useState(null);
   const [avatar, setAvatar] = useState(0);
   const [loading, setLoading] = useState(false);
-  const [FilimoId,setFilimoId]=useState(257643);
+  const [FilimoId,setFilimoId]=useState(111122);
   const [avatarCode,setavatarCode]=useState(125);
   useEffect(() => {
     setrefValue(searchParams.get("ref"));
