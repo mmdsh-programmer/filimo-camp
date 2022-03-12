@@ -1,4 +1,4 @@
-import { Fragment, React, useEffect, useState } from "react";
+import { Fragment, React, useEffect, useState,useRef } from "react";
 import { Link } from "react-router-dom";
 import Menu from "Components/Menu";
 import SimpleBottomSheet from "Components/SimpleBottomSheet";
@@ -15,76 +15,54 @@ import { motion } from "framer-motion";
 import Header from "Components/Header";
 import CustomTab from "Components/CustomTab";
 import InfoIcon from "icons/home/info-icon.svg";
-import Fetch from "../Helper/Fetch";
 import TextField from "Components/TextField";
 import EditIcon from "icons/home/edit-icon.svg";
 import OtpInput from "react-otp-input";
 import useWindowSize from "hooks/useWindowSize";
+import { userData, Poster } from 'Helper/helperFunc';
+import { avatars, FindAvatarAdd } from "Helper/avatars";
+
 
 export default function Home() {
+  const poster=useRef([]);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false); //menu state
   const [isLeaderBoardMenuOpen, setIsLeaderBoardMenuOpen] = useState(false); //menu state
   const [isSimpleBottomSheetOpen, setIsSimpleBottomSheetOpen] = useState(false); //common modal state
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false); //for opening register modal
   const [isChallengeModalOpen, setIsChallengeModalOpen] = useState(false); //for opening challenge modal
   const [openPhoneNumberModal, setOpenPhoneNumberModal] = useState(false);
-  const [openPhoneNumberBottomSheet, setOpenPhoneNumberBottomSheet] =
-    useState(false); //for opening get phone number bottom sheet
+  const [openPhoneNumberBottomSheet, setOpenPhoneNumberBottomSheet] = useState(false); //for opening get phone number bottom sheet
   const [phoneNumberStep, setPhoneNumberStep] = useState(1);
   const [otpState, setOtpState] = useState("");
   let user;
-  let taemData;
-  const navigator = useNavigate();
+  let teamData;
+  let posterresult;
 
-  useEffect(() => {
-    // sessionStorage.setItem("login", true);
-    //   let isLoggedIn = true;
-    //   !isLoggedIn && handleOpenRegisterModal();
-    // }
-    userData();
+  const navigator = useNavigate();
+  const test = async () => {
+    let mostafa = await userData();
+    user = { ...mostafa[0] };
+    teamData = { ...mostafa[1] };
+   
+  
+  }
+  // useEffect( () => {
+
+   
+ 
+  //   // windowSize >= 1440 ? setOpenPhoneNumberModal(true) : setOpenPhoneNumberBottomSheet(true);
+  // }, []);
+  useEffect(async () => {
+
+    test();
+  
+    posterresult = await Poster();
+    poster.current=[...posterresult];
+    console.log(posterresult,poster);
 
     // windowSize >= 1440 ? setOpenPhoneNumberModal(true) : setOpenPhoneNumberBottomSheet(true);
-  }, []);
-  const userData = async () => {
-
-    const loginUrl = await Fetch({
-      url: 'http://37.152.185.94:8001/user/user/',
-      method: 'GET',
-    });
-
-    if (!('ERROR' in loginUrl)) {
-
-      localStorage.setItem("filimoId", loginUrl.data.data.user_info.filimo_id);
-      localStorage.setItem("filimoNumberPh", loginUrl.data.data.user_info.mobile);
-
-      user = { ...loginUrl.data.data.user_info };
-
-      taemData = { ...loginUrl.data.data.team_info };
-      localStorage.setItem('filimo::user', JSON.stringify(user));
-      localStorage.setItem('filimo::teaminfo', JSON.stringify(taemData));
-      var retrievedObject = localStorage.getItem('filimo::user')
-      
-      console.log('sssss', JSON.parse(retrievedObject));
-
-      // user = {
-      //   avator_code: loginUrl.data.data.user_info.avator_code,
-      //   date_time: loginUrl.data.data.user_info.date_time,
-      //   filimo_id: loginUrl.data.data.user_info.filimo_id,
-      //   id: loginUrl.data.data.user_info.id,
-      //   is_challenge_unlock: loginUrl.data.data.user_info.is_challenge_unlock,
-      //   is_play_again: loginUrl.data.data.user_info.is_play_again,
-      //   is_team_head: loginUrl.data.data.user_info.is_team_head,
-      //   is_team_member: loginUrl.data.data.user_info.is_team_member,
-      //   mobile: loginUrl.data.data.user_info.mobile,
-      //   total_score: loginUrl.data.data.user_info.total_score,
-      //   unique_code: loginUrl.data.data.user_info.unique_code,
-      //   user_name: loginUrl.data.data.user_info.user_name,
-      // };
-      console.log('datauser', user, taemData);
-
-    } else {
-    }
-  };
+  },[]);
+  
   const handleOpenProfileMenu = () => {
     setIsProfileMenuOpen(true);
   };
@@ -101,12 +79,15 @@ export default function Home() {
     setIsRegisterModalOpen(true);
   };
 
-  const handleOpenChallengeModal = () => {
+  const handleOpenChallengeModal = async() => {
+  
     setIsChallengeModalOpen(true);
   };
 
   const hidePhoneNumber = (phoneNumber) => {
-    return phoneNumber.replace(phoneNumber.substr(4, 3), "***");
+    if (phoneNumber)
+      return phoneNumber.replace(phoneNumber.substr(4, 3), "***");
+    else return 0
   };
 
   const handleNextPhoneNumberStep = () => {
@@ -144,7 +125,8 @@ export default function Home() {
               >
                 <img
                   className="w-full h-full object-cover"
-                  src={require("images/home/avatar.webp")}
+                  src={require(`images/common/avatars/${FindAvatarAdd(user?.avator_code)}`)}
+
                   alt="avatar logo"
                 />
               </figure>
@@ -153,7 +135,8 @@ export default function Home() {
                 className="light-text font-dana-regular text-xs ml-auto block mt-1 text-right"
                 dir="ltr"
               >
-                {hidePhoneNumber("09358944560")}
+
+                {hidePhoneNumber(user?.mobile)}
               </span>
 
               <div
@@ -224,7 +207,7 @@ export default function Home() {
               <div className="flex items-center my-2">
                 <figure className="rounded-full overflow-hidden w-w-10/5 h-h-10/5 ml-[6px] mr-[10px]">
                   <img
-                    src={require("images/home/avatar.webp")}
+                    src={require(`images/common/avatars/${FindAvatarAdd(user?.avator_code)}`)}
                     alt="پروفایل"
                     className="w-full h-full object-cover"
                   />
@@ -232,13 +215,13 @@ export default function Home() {
 
                 <div className="flex flex-col">
                   <span className="text-base text-right text-[#333333] font-dana-regular">
-                    UID-34565
+                    UID-{user?.filimo_id}
                   </span>
                   <span
                     className="text-[12px] text-right light-text font-dana-regular"
                     dir="ltr"
                   >
-                    {/* {hidePhoneNumber(String(user.mobile))} */}
+                    {hidePhoneNumber(user?.mobile)}
                   </span>
                 </div>
               </div>
@@ -370,7 +353,8 @@ export default function Home() {
             <div className="flex items-center my-2">
               <figure className="rounded-full overflow-hidden w-w-10/5 h-h-10/5 ml-[6px]">
                 <img
-                  src={require("images/home/avatar.webp")}
+                  src={require(`images/common/avatars/${FindAvatarAdd(user?.avator_code)}`)}
+
                   alt="پروفایل"
                   className="w-full h-full object-cover"
                 />
@@ -378,13 +362,13 @@ export default function Home() {
 
               <div className="flex flex-col">
                 <span className="text-base text-right text-[#333333] font-dana-regular">
-                  UID-34565
+                  UID-{user?.filimo_id}
                 </span>
                 <span
                   className="text-[12px] text-right light-text font-dana-regular"
                   dir="ltr"
                 >
-                  {hidePhoneNumber("09357894560")}
+                  {hidePhoneNumber(user?.mobile)}
                 </span>
               </div>
             </div>
@@ -813,32 +797,57 @@ export default function Home() {
               </h4>
 
               <div className="flex flex-col gap-y-2">
-                {[...Array(2)].map((e, i) => (
-                  <a
-                    key={i}
-                    className="flex items-center bg-[#f9f9f9] rounded-[10px] overflow-hidden"
-                    href="https://filimo.com"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <figure className="w-12 h-16 overflow-hidden">
-                      <img
-                        className="w-full h-full object-cover"
-                        src={require("images/home/video.png")}
-                        alt="پیشنهاد فیلیمو"
-                      />
-                    </figure>
+                {/* {[...Array(2)].map((e, i) => ( */}
+               <a
+                      // key={i}
+                      className="flex items-center bg-[#f9f9f9] rounded-[10px] overflow-hidden"
+                      href="https://filimo.com"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <figure className="w-12 h-16 overflow-hidden">
+                        <img
+                          className="w-full h-full object-cover"
+                          src={String(poster.current[0]?.poster1)}
 
-                    <div className="mr-2">
-                      <span className="block font-dana-regular text-xs text-[#7c7c7c]">
-                        پیشنهاد فیلیمو
-                      </span>
-                      <h6 className="font-dana-regular text-base text-[#1d1d1d]">
-                        سریال جیران
-                      </h6>
-                    </div>
-                  </a>
-                ))}
+                          alt="پیشنهاد فیلیمو"
+                        />
+                      </figure>
+
+                      <div className="mr-2">
+                        <span className="block font-dana-regular text-xs text-[#7c7c7c]">
+                          پیشنهاد فیلیمو
+                        </span>
+                        <h6 className="font-dana-regular text-base text-[#1d1d1d]">
+                          سریال جیران
+                        </h6>
+                      </div>
+                    </a>
+                      <a
+                        // key={i}
+                        className="flex items-center bg-[#f9f9f9] rounded-[10px] overflow-hidden"
+                        href="https://filimo.com"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <figure className="w-12 h-16 overflow-hidden">
+                          <img
+                            className="w-full h-full object-cover"
+                            src={ String(poster.current[0]?.poster2) }
+                            alt="پیشنهاد فیلیمو"
+                          />
+                        </figure>
+
+                        <div className="mr-2">
+                          <span className="block font-dana-regular text-xs text-[#7c7c7c]">
+                            پیشنهاد فیلیمو
+                          </span>
+                          <h6 className="font-dana-regular text-base text-[#1d1d1d]">
+                            سریال جیران
+                          </h6>
+                        </div>
+                      </a>
+                {/* ))} */}
               </div>
             </div>
           </div>
