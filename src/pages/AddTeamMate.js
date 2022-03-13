@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import SimpleBottomSheet from "Components/SimpleBottomSheet";
 import TextField from "Components/TextField";
 import Back from "Components/Back";
@@ -8,11 +8,28 @@ import AddTeamMateIcon from "icons/add-teammate/add-teammate.svg";
 import useWindowSize from "hooks/useWindowSize";
 import Modal from "Components/Modal";
 import { motion } from "framer-motion";
+import { userData } from "Helper/helperFunc";
+import { useNavigate } from "react-router-dom";
+import { FindFlagAdd } from "Helper/flags";
+import Fetch from "Helper/Fetch";
+import { toast } from "react-toastify";
 
 export default function AddTeamMate() {
   const windowSize = useWindowSize();
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [hasError, setHasError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [userInfo, setUserInfo] = useState([]);
+  const [teamImage, setTeamImage] = useState(null);
+
+  const navigator = useNavigate();
+
+  useEffect(() => {
+    getUserData();
+  }, []);
 
   const handleBottomSheetOpen = () => {
     setOpenBottomSheet(true);
@@ -24,6 +41,57 @@ export default function AddTeamMate() {
 
   const handleModalOpen = () => {
     setOpenModal(true);
+  };
+
+  const checkPhoneNumber = (phoneNumber) => {
+    return !!phoneNumber?.match("^(\\+98|0)?9\\d{9}$");
+  };
+
+  const handlePhoneNumberChange = ({ target: { value: inputValue } }) => {
+    setPhoneNumber(inputValue);
+  };
+
+  const getUserData = async () => {
+    const userInfo = await userData();
+    setUserInfo(userInfo);
+    setTeamImage(FindFlagAdd(+userInfo[1].avator_code));
+
+    if (Object.keys(userInfo[1]).length === 0) {
+      navigator("/leader-board/teams/create");
+    }
+  };
+
+  const inviteMember = async (phoneNumber) => {
+    const raw = JSON.stringify({
+      mobile: phoneNumber,
+    });
+
+    const teamReq = await Fetch({
+      url: "http://37.152.185.94:8001/user/join-to-team-request/",
+      method: "POST",
+      data: raw,
+    });
+
+    if (!("ERROR" in teamReq)) {
+      toast.success("تیم شما با موفقیت افزوده شد");
+      // navigator("/leader-board/teams/add-teammate");
+    } else {
+      toast.error("خطا در افزودن تیم");
+    }
+  };
+
+  const handleSubmit = () => {
+    setLoading(false);
+    if (!checkPhoneNumber(phoneNumber)) {
+      setHasError(true);
+      setErrorMessage("شماره همراه صحیح نمیباشد");
+    } else {
+      setHasError(false);
+      setErrorMessage(null);
+      setLoading(true);
+      inviteMember(phoneNumber);
+      //send code from here
+    }
   };
 
   return (
@@ -41,17 +109,21 @@ export default function AddTeamMate() {
             <figure className="w-[72px] h-[72px] overflow-hidden">
               <img
                 className="w-full h-full object-contain shadow-[0_4px_6px_0_rgba(0,0,0,0.27)]"
-                src={require("images/common/flags/41.png")}
+                src={
+                  teamImage
+                    ? require(`images/common/flags/${teamImage}`)
+                    : require(`images/common/flags/41.png`)
+                }
                 alt="team"
               />
             </figure>
 
             <div className="mr-4 flex flex-col justify-center">
               <h2 className="text-[18px] text-white font-dana-demibold">
-                تیم «اژدهای قرمز»
+                تیم «{userInfo[1]?.name}»
               </h2>
               <span className="text-sm text-white opacity-60 font-dana-regular mt-4 block">
-                مجموع امتیاز : 2373
+                مجموع امتیاز : {userInfo[1]?.total_score}
               </span>
             </div>
           </div>
@@ -158,7 +230,17 @@ export default function AddTeamMate() {
             افزودن به ترکیب تیم
           </h2>
 
-          <TextField type="text" name="phone" placeholder=" " label="موبایل" />
+          <TextField
+            type="number"
+            maxLength={11}
+            name="phone"
+            placeholder=" "
+            label="موبایل"
+            onChange={handlePhoneNumberChange}
+            value={phoneNumber.current}
+            hasError={hasError}
+            helperText={errorMessage}
+          />
 
           <p className="mt-2 text-xs font-dana-regular leading-6">
             شماره دوست خود را وارد کنید تا از این کمپین مطلع شود. لینک از طریق
@@ -176,7 +258,13 @@ export default function AddTeamMate() {
             </button>
           </div>
 
-          <Button type="primary" style="mt-4">
+          <Button
+            type="primary"
+            style="mt-4"
+            onClick={handleSubmit}
+            disabled={loading}
+            loading={loading}
+          >
             ارسال پیامک
           </Button>
         </div>
@@ -193,7 +281,17 @@ export default function AddTeamMate() {
             افزودن به ترکیب تیم
           </h2>
 
-          <TextField type="text" name="phone" placeholder=" " label="موبایل" />
+          <TextField
+            type="number"
+            maxLength={11}
+            name="phone"
+            placeholder=" "
+            label="موبایل"
+            onChange={handlePhoneNumberChange}
+            value={phoneNumber.current}
+            hasError={hasError}
+            helperText={errorMessage}
+          />
 
           <p className="mt-2 text-xs font-dana-regular leading-6">
             شماره هم‌تیمی خود را وارد کنید تا لینک از طریق sms برای او ارسال
@@ -210,7 +308,13 @@ export default function AddTeamMate() {
             </button>
           </div>
 
-          <Button type="primary" style="mt-4">
+          <Button
+            type="primary"
+            style="mt-4"
+            onClick={handleSubmit}
+            disabled={loading}
+            loading={loading}
+          >
             ارسال پیامک
           </Button>
         </div>
