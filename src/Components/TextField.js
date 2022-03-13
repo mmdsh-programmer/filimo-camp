@@ -26,7 +26,7 @@ export default function TextField({
         </label>
       </div>
       {hasError && (
-        <span className="text-xs text-red-600 text-right mr-1">
+        <span className="text-xs text-red-600 block text-right mr-1 font-dana-regular mt-1">
           {helperText}
         </span>
       )}

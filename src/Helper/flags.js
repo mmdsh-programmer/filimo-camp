@@ -301,11 +301,11 @@ export const flags = [
   },
 ];
 export const FindFlagAdd = (id) => {
-  let result ;
+  let result;
   flags.map((item, index) => {
     if (id === item.id) {
-      result= item.url;
+      result = item.url;
     }
-  })
+  });
   return String(result);
-}
+};
