@@ -9,6 +9,7 @@ import { Keyboard } from "swiper";
 import { flags } from "Helper/flags";
 import Fetch from "Helper/Fetch";
 import { toast } from "react-toastify";
+import { userData } from "Helper/helperFunc";
 
 export default function CreateTeam() {
   const navigator = useNavigate();
@@ -31,35 +32,42 @@ export default function CreateTeam() {
     }
     return rgb;
   };
-  const CreateTeamReq = async() => {
+  const CreateTeamReq = async () => {
     let teamName;
     let teamavatarId;
     flags.map((item, index) => {
-      if ((index+1) === selectedImage) {
+      if (index + 1 === selectedImage) {
         teamName = item.title;
-        teamavatarId= item.id;
+        teamavatarId = item.id;
       }
-    })
+    });
     var raw = JSON.stringify({
-      "name": teamName,
-      "avator_code": teamavatarId,
+      name: teamName,
+      avator_code: teamavatarId,
     });
 
     const teamReq = await Fetch({
-      url: 'http://37.152.185.94:8001/user/create-team/',
-      method: 'POST',
+      url: "http://37.152.185.94:8001/user/create-team/",
+      method: "POST",
       data: raw,
     });
-    if (!('ERROR' in teamReq)) {
-      toast.success('تیم شما با موفقیت افزوده شد');
+    if (!("ERROR" in teamReq)) {
+      toast.success("تیم شما با موفقیت افزوده شد");
       navigator("/leader-board/teams/add-teammate");
+    } else {
+      toast.error("خطا در افزودن تیم");
     }
-    else{
-      toast.error('خطا در افزودن تیم');
+  };
+
+  const goToHome = () => {
+    navigator("/");
+  };
+
+  useEffect(() => {
+    if(Object.keys(JSON.parse(localStorage.getItem("filimo::teaminfo"))).length > 0){
+      navigator("/leader-board/teams/add-teammate")
     }
 
-  }
-  useEffect(() => {
     const swiper = document.querySelector(
       ".create-team-avatar-selection"
     ).swiper;
@@ -73,6 +81,7 @@ export default function CreateTeam() {
       console.log(this.activeIndex);
     });
   }, []);
+  
 
   return (
     <motion.main
@@ -145,14 +154,18 @@ export default function CreateTeam() {
       <section className="fixed bottom-0 left-0 w-full 2xl:relative 2xl:mt-16">
         <div className="container px-6 pb-[27px] 2xl:px-0">
           <div className="flex gap-x-2 2xl:flex-wrap 2xl:gap-y-2">
-            <Button type="secondary" style="w-[120px] 2xl:w-full">
+            <Button
+              type="secondary"
+              style="w-[120px] 2xl:w-full"
+              onClick={goToHome}
+            >
               انصراف
             </Button>
             <Button
               type="primary"
               style="flex-[1] 2xl:w-full"
               onClick={() => {
-                CreateTeamReq(); 
+                CreateTeamReq();
               }}
             >
               ثبت تیم
