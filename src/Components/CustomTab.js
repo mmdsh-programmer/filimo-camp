@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Tab } from "@headlessui/react";
 import TransparentStarIcon from "icons/home/transparent-star.svg";
 import BlueStarIcon from "icons/home/blue-star.svg";
@@ -8,15 +8,18 @@ import BlueAddUserIcon from "icons/home/blue-add-user-icon.svg";
 import Fetch from "../Helper/Fetch";
 import { flags, FindFlagAdd } from "Helper/flags";
 import { avatars, FindAvatarAdd } from "Helper/avatars";
+import { userData } from 'Helper/helperFunc'
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function CustomTab() {
-  let userLeaderBoardData;
-  let teamLeaderBoardData;
-  let userFilimoID = localStorage.getItem("filimoId");
-  let userFilimoPho = localStorage.getItem("filimoNumberPh");
+  const [userLeaderBoardData, setuserLeaderBoardData] = useState([]);
+  const [teamLeaderBoardData, setteamLeaderBoardData] = useState([]);
+  const [userReferralLeaderBoardData, setuserReferralLeaderBoardData] = useState([]);
+
+  let userFilimoID;
+  let teamID;
   const userLeaderBoard = async () => {
     const userLeaderBoardUrl = await Fetch({
       url: 'http://37.152.185.94:8001/user/user-leader-board/',
@@ -26,8 +29,9 @@ export default function CustomTab() {
 
     if (!('ERROR' in userLeaderBoardUrl)) {
 
-      userLeaderBoardData = [...userLeaderBoardUrl.data];
-      console.log('userLeaderBoardData', userLeaderBoardData);
+
+      setuserLeaderBoardData(userLeaderBoardUrl?.data.data);
+
 
     } else {
 
@@ -42,27 +46,54 @@ export default function CustomTab() {
 
     if (!('ERROR' in teamLeaderBoardUrl)) {
 
-      teamLeaderBoardData = [...teamLeaderBoardUrl.data];
-      console.log('teamLeaderBoardData', teamLeaderBoardData);
+      setteamLeaderBoardData(teamLeaderBoardUrl?.data.data)
+
 
     } else {
 
     }
   }
+  const userReferralLeaderBoard = async () => {
+    const userReferralLeaderBoardURL = await Fetch({
+      url: 'http://37.152.185.94:8001/user/user-referral-leader-board/',
+      method: 'GET',
+
+    });
+
+    if (!('ERROR' in userReferralLeaderBoardURL)) {
+
+      setuserReferralLeaderBoardData(userReferralLeaderBoardURL?.data.data);
 
 
-  useEffect(() => {
+    } else {
+
+    }
+  }
+  const funcreqHandler = () => {
     userLeaderBoard();
     teamLeaderBoard();
+    userReferralLeaderBoard();
+  }
+  useEffect(async () => {
+    funcreqHandler();
+    let result = await userData();
+    let userFilimoID = result[0].filimo_id;
+    let teamID = result[1].id;
   }, [])
   const tabList = ["امتیازات فردی", "امتیازات تیمی", "امتیاز از دعوت"];
 
   const hidePhoneNumber = (phoneNumber) => {
-    return phoneNumber.replace(phoneNumber.substr(4, 3), "***");
+    if (phoneNumber === "null") {
+      return '---'
+    }
+    else
+      return phoneNumber.replace(phoneNumber.substr(4, 3), "***");
   };
 
   const handleTabChange = (e) => {
     console.log(e);
+
+
   };
 
   return (
@@ -87,137 +118,58 @@ export default function CustomTab() {
         <Tab.Panels className="mt-2">
           <Tab.Panel className={classNames("bg-white")}>
             <ul className="list-none flex flex-col gap-y-2 mt-4">
-              {[...Array(5)].map((e, i) => (
-                <li
-                  key={i}
-                  className={`${i + 1 === 1
-                    ? "gold-badge"
-                    : i + 1 === 2
-                      ? "silver-badge"
-                      : i + 1 === 3 && "bronze-badge"
-                    } p-2 flex items-center rounded-[10px] bg-[#f8f8f8] relative`}
-                >
-                  <div className="ml-2">
-                    <div className="w-9 h-9 overflow-hidden rounded-full border-2 border-white">
-
-
-                      <img
-                        className="w-full h-full object-cover"
-                        src={require(`images/common/avatars/${FindAvatarAdd(userLeaderBoardData?.avator_code | 201)}`)}
-                        alt="team-logo"
-                      />
-
-
-                    </div>
-                  </div>
-
-                  <span
-                    className="text-sm text-[#7c7c7c] text-right font-dana-regular ml-auto mt-1"
-                    dir="ltr"
-                  >
-
-
-                    {hidePhoneNumber('09151170865')}
-
-                  </span>
-
-                  <span className="text-sm text-black font-dana-regular ml-2 mt-1">
-
-                    {String(userLeaderBoardData?.total_score)}
-                  </span>
-
-                  <img
-                    src={
-
-                      TransparentAddUserIcon
-
-                    }
-                    className="w-4 h-4 object-contain"
-                    alt="star logo"
-                  />
-                </li>
-              ))}
-
-              <li>
-                <div className="w-full h-full flex flex-col px-[22px]">
-                  <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
-                  <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
-                  <span className="w-1 h-1 opacity-40 bg-[#333] mb-2 rounded-full"></span>
-                </div>
-                <Link
-                  to={`/leader-board/$
+              {userLeaderBoardData.map((e, i) => {
+                // console.log(userLeaderBoardData.current);
+                // debugger
+                if (e.filimo_id === userFilimoID) {
+                  return (
+                    <li>
+                      <div className="w-full h-full flex flex-col px-[22px]">
+                        <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
+                        <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
+                        <span className="w-1 h-1 opacity-40 bg-[#333] mb-2 rounded-full"></span>
+                      </div>
+                      <Link
+                        to={`/leader-board/$
                       "individual"
                      `}
-                  className="flex items-center p-2 rounded-[10px] bg-[#acffd2] relative you"
-                >
-                  <div className="ml-2">
-                    <div className="w-9 h-9 overflow-hidden rounded-full border-2 border-white">
-                      <img
-                        className="w-full h-full object-cover"
-                        src={require("images/home/board-avatar.webp")}
-                        alt="team-logo"
-                      />
-                    </div>
-                  </div>
+                        className="flex items-center p-2 rounded-[10px] bg-[#acffd2] relative you"
+                      >
+                        <div className="ml-2">
+                          <div className="w-9 h-9 overflow-hidden rounded-full border-2 border-white">
+                            <img
+                              className="w-full h-full object-cover"
+                              src={e.avator_code ? require(`images/common/avatars/${FindAvatarAdd(e.avatar_code)}`) : require(`images/common/avatars/${FindAvatarAdd(217)}`)}
 
-                  <span className="text-base text-[#170d53] font-semibold text-right font-dana-regular ml-auto mt-1">
-                شما
-                  </span>
+                              alt="team-logo"
+                            />
+                          </div>
+                        </div>
 
-                  <span className="text-sm text-[#170d53] font-semibold font-dana-regular ml-2 mt-1">
-                    234.789
-                  </span>
+                        <span className="text-base text-[#170d53] font-semibold text-right font-dana-regular ml-auto mt-1">
+                          شما
+                        </span>
 
-                  <img
-                    src={ BlueAddUserIcon}
-                    className="w-4 h-4 object-contain"
-                    alt="star logo"
-                  />
-                </Link>
-                <div className="w-full h-full flex flex-col px-[22px]">
-                  <span className="w-1 h-1 opacity-40 bg-[#333] mt-2 mb-[3px] rounded-full"></span>
-                  <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
-                  <span className="w-1 h-1 opacity-40 bg-[#333] rounded-full"></span>
-                </div>
-              </li>
+                        <span className="text-sm text-[#170d53] font-semibold font-dana-regular ml-2 mt-1">
+                          {e.total_score}
+                        </span>
 
-              <li className="p-2 flex items-center rounded-[10px] bg-[#f8f8f8] relative">
-                <div className="ml-2">
-                  <div className="w-9 h-9 overflow-hidden rounded-full border-2 border-white">
-                    <img
-                      className="w-full h-full object-cover"
-                      src={require("images/home/board-avatar.webp")}
-                      alt="team-logo"
-                    />
-                  </div>
-                </div>
+                        <img
+                          src={BlueStarIcon}
+                          className="w-4 h-4 object-contain"
+                          alt="star logo"
+                        />
+                      </Link>
+                      <div className="w-full h-full flex flex-col px-[22px]">
+                        <span className="w-1 h-1 opacity-40 bg-[#333] mt-2 mb-[3px] rounded-full"></span>
+                        <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
+                        <span className="w-1 h-1 opacity-40 bg-[#333] rounded-full"></span>
+                      </div>
+                    </li>
 
-                <span className="text-sm text-[#7c7c7c] text-right font-dana-regular ml-auto mt-1" dir="ltr">
-                
-                  {  hidePhoneNumber("09357894360")}
-                   
-                </span>
-
-                <span className="text-sm text-black font-dana-regular ml-2 mt-1">
-                  234.789
-                </span>
-
-                <img
-                  src={
-                    TransparentAddUserIcon 
-                  }
-                  className="w-4 h-4 object-contain"
-                  alt="star logo"
-                />
-              </li>
-            </ul>
-          </Tab.Panel>
-          {/* {[...Array(tabList.length)].map((posts, tabId) => {
-            // debugger;
-            return(
-              <Tab.Panel key={tabId} className={classNames("bg-white")}>
-                <ul className="list-none flex flex-col gap-y-2 mt-4">
-                  {[...Array(5)].map((e, i) => (
+                  )
+                } else {
+                  return (
                     <li
                       key={i}
                       className={`${i + 1 === 1
@@ -229,83 +181,89 @@ export default function CustomTab() {
                     >
                       <div className="ml-2">
                         <div className="w-9 h-9 overflow-hidden rounded-full border-2 border-white">
-  
-                          {tabId === 0 || tabId === 2
-                            ? <img
-                              className="w-full h-full object-cover"
-                              src={require(`images/common/avatars/${FindAvatarAdd(userLeaderBoardData?.avator_code | 201)}`)}
-                              alt="team-logo"
-                            />
-                            : <img
-                              className="w-full h-full object-cover"
-                              src={require(`images/common/flags/${FindFlagAdd(teamLeaderBoardData?.avator_code | 150)}`)}
-                              alt="team-logo"
-                            />}
-  
+
+
+                          <img
+                            className="w-full h-full object-cover"
+                            src={e.avator_code ? require(`images/common/avatars/${FindAvatarAdd(e.avatar_code)}`) : require(`images/common/avatars/${FindAvatarAdd(217)}`)}
+
+                            alt="team-logo"
+                          />
+
+
                         </div>
                       </div>
-  
+
                       <span
                         className="text-sm text-[#7c7c7c] text-right font-dana-regular ml-auto mt-1"
                         dir="ltr"
                       >
-                        {tabId === 0 || tabId === 2
-                          // ? hidePhoneNumber(userLeaderBoardData?.filimo_id)
-                          ? hidePhoneNumber('09151170865')
-                          : "تیم شاهین"}
+
+
+                        {hidePhoneNumber(String(e?.mobile))}
+
                       </span>
-  
+
                       <span className="text-sm text-black font-dana-regular ml-2 mt-1">
-                        {tabId === 0 || tabId === 2
-                          ? String(userLeaderBoardData?.total_score)
-                          : String(teamLeaderBoardData?.total_score)}
+
+                        {String(e?.total_score)}
                       </span>
-  
+
                       <img
                         src={
-                          tabId === 2
-                            ? TransparentAddUserIcon
-                            : TransparentStarIcon
+
+                          TransparentStarIcon
+
                         }
                         className="w-4 h-4 object-contain"
                         alt="star logo"
                       />
                     </li>
-                  ))}
-  
-                  <li>
+                  )
+                }
+
+              })}
+
+
+
+            </ul>
+          </Tab.Panel>
+          <Tab.Panel className={classNames("bg-white")}>
+            <ul className="list-none flex flex-col gap-y-2 mt-4">
+              {teamLeaderBoardData.map((e, i) => {
+                if (e.id === teamID) {
+                  return (<li>
                     <div className="w-full h-full flex flex-col px-[22px]">
                       <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
                       <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
                       <span className="w-1 h-1 opacity-40 bg-[#333] mb-2 rounded-full"></span>
                     </div>
                     <Link
-                      to={`/leader-board/${tabId === 0 || tabId === 2
-                        ? "individual"
-                        : "teams/my-team"
-                        }`}
+                      to={`/leader-board/$
+                          "individual"
+                         `}
                       className="flex items-center p-2 rounded-[10px] bg-[#acffd2] relative you"
                     >
                       <div className="ml-2">
                         <div className="w-9 h-9 overflow-hidden rounded-full border-2 border-white">
                           <img
                             className="w-full h-full object-cover"
-                            src={require("images/home/board-avatar.webp")}
+                            src={e.avator_code ? require(`images/common/flags/${FindFlagAdd(e.avator_code)}`) : require(`images/common/flags/${FindFlagAdd(150)}`)}
                             alt="team-logo"
                           />
                         </div>
                       </div>
-  
+
                       <span className="text-base text-[#170d53] font-semibold text-right font-dana-regular ml-auto mt-1">
-                        {tabId === 1 ? "تیم شما" : "شما"}
+                        شما
                       </span>
-  
+
                       <span className="text-sm text-[#170d53] font-semibold font-dana-regular ml-2 mt-1">
-                        234.789
+                        {e.total_score}
                       </span>
-  
+
                       <img
-                        src={tabId === 2 ? BlueAddUserIcon : BlueStarIcon}
+                        src={BlueStarIcon}
                         className="w-4 h-4 object-contain"
                         alt="star logo"
                       />
@@ -315,40 +273,174 @@ export default function CustomTab() {
                       <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
                       <span className="w-1 h-1 opacity-40 bg-[#333] rounded-full"></span>
                     </div>
-                  </li>
-  
-                  <li className="p-2 flex items-center rounded-[10px] bg-[#f8f8f8] relative">
-                    <div className="ml-2">
-                      <div className="w-9 h-9 overflow-hidden rounded-full border-2 border-white">
-                        <img
-                          className="w-full h-full object-cover"
-                          src={require("images/home/board-avatar.webp")}
-                          alt="team-logo"
-                        />
+                  </li>)
+                }
+                else {
+                  return (
+                    <li
+                      key={i}
+                      className={`${i + 1 === 1
+                        ? "gold-badge"
+                        : i + 1 === 2
+                          ? "silver-badge"
+                          : i + 1 === 3 && "bronze-badge"
+                        } p-2 flex items-center rounded-[10px] bg-[#f8f8f8] relative`}
+                    >
+                      <div className="ml-2">
+                        <div className="w-9 h-9 overflow-hidden rounded-full border-2 border-white">
+
+                          <img
+                            className="w-full h-full object-cover"
+                            src={e.avator_code === 'null' ? require(`images/common/flags/${FindFlagAdd(+e?.avator_code)}`) : require(`images/common/flags/42.png`)}
+                            alt="team-logo"
+                          />
+
+                        </div>
                       </div>
+
+                      <span
+                        className="text-sm text-[#7c7c7c] text-right font-dana-regular ml-auto mt-1"
+                        dir="ltr"
+                      >
+
+                        {e.name}
+                      </span>
+
+                      <span className="text-sm text-black font-dana-regular ml-2 mt-1">
+
+                        {String(e.total_score)}
+                      </span>
+
+                      <img
+                        src={
+
+                          TransparentStarIcon
+                        }
+                        className="w-4 h-4 object-contain"
+                        alt="star logo"
+                      />
+                    </li>
+                  )
+                }
+
+              }
+              )}
+
+
+            </ul>
+          </Tab.Panel>
+
+          <Tab.Panel className={classNames("bg-white")}>
+            <ul className="list-none flex flex-col gap-y-2 mt-4">
+              {userReferralLeaderBoardData.map((e, i) => {
+                if (e.filimo_id === userFilimoID) {
+                  return(
+                  <li>
+                    <div className="w-full h-full flex flex-col px-[22px]">
+                      <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
+                      <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
+                      <span className="w-1 h-1 opacity-40 bg-[#333] mb-2 rounded-full"></span>
                     </div>
-  
-                    <span className="text-sm text-[#7c7c7c] text-right font-dana-regular ml-auto mt-1" dir="ltr">
-                      {tabId === 0 || tabId === 2
-                        ? hidePhoneNumber("09357894360")
-                        : "تیم شاهین"}
-                    </span>
-  
-                    <span className="text-sm text-black font-dana-regular ml-2 mt-1">
-                      234.789
-                    </span>
-  
-                    <img
-                      src={
-                        tabId === 2 ? TransparentAddUserIcon : TransparentStarIcon
-                      }
-                      className="w-4 h-4 object-contain"
-                      alt="star logo"
-                    />
-                  </li>
-                </ul>
-              </Tab.Panel>
-            )
+                    <Link
+                      to={`/leader-board/$
+                        "individual"
+                       `}
+                      className="flex items-center p-2 rounded-[10px] bg-[#acffd2] relative you"
+                    >
+                      <div className="ml-2">
+                        <div className="w-9 h-9 overflow-hidden rounded-full border-2 border-white">
+                          <img
+                            className="w-full h-full object-cover"
+                            src={e.avator_code ? require(`images/common/avatars/${FindAvatarAdd(e.avatar_code)}`) : require(`images/common/avatars/${FindAvatarAdd(217)}`)}
+
+                            alt="team-logo"
+                          />
+                        </div>
+                      </div>
+
+                      <span className="text-base text-[#170d53] font-semibold text-right font-dana-regular ml-auto mt-1">
+                        شما
+                      </span>
+
+                      <span className="text-sm text-[#170d53] font-semibold font-dana-regular ml-2 mt-1">
+                        {e.ref_score}
+                      </span>
+
+                      <img
+                        src={BlueAddUserIcon}
+                        className="w-4 h-4 object-contain"
+                        alt="star logo"
+                      />
+                    </Link>
+                    <div className="w-full h-full flex flex-col px-[22px]">
+                      <span className="w-1 h-1 opacity-40 bg-[#333] mt-2 mb-[3px] rounded-full"></span>
+                      <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
+                      <span className="w-1 h-1 opacity-40 bg-[#333] rounded-full"></span>
+                    </div>
+                  </li>)
+                }
+                else {
+                  return (
+                    <li
+                      key={i}
+                      className={`${i + 1 === 1
+                        ? "gold-badge"
+                        : i + 1 === 2
+                          ? "silver-badge"
+                          : i + 1 === 3 && "bronze-badge"
+                        } p-2 flex items-center rounded-[10px] bg-[#f8f8f8] relative`}
+                    >
+                      <div className="ml-2">
+                        <div className="w-9 h-9 overflow-hidden rounded-full border-2 border-white">
+
+
+                          <img
+                            className="w-full h-full object-cover"
+                            src={e.avator_code ? require(`images/common/avatars/${FindAvatarAdd(e.avatar_code)}`) : require(`images/common/avatars/${FindAvatarAdd(217)}`)}
+
+                            alt="team-logo"
+                          />
+
+
+                        </div>
+                      </div>
+
+                      <span
+                        className="text-sm text-[#7c7c7c] text-right font-dana-regular ml-auto mt-1"
+                        dir="ltr"
+                      >
+
+
+                        {hidePhoneNumber(String(e.mobile))}
+
+                      </span>
+
+                      <span className="text-sm text-black font-dana-regular ml-2 mt-1">
+
+                        {String(e.ref_score)}
+                      </span>
+
+                      <img
+                        src={
+
+                          TransparentAddUserIcon
+
+                        }
+                        className="w-4 h-4 object-contain"
+                        alt="star logo"
+                      />
+                    </li>
+                  )
+                }
+
+              })}
+
+
+
+
+            </ul>
+          </Tab.Panel>
+          {/* )
           })} */}
         </Tab.Panels>
       </Tab.Group>
