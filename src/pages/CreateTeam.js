@@ -36,7 +36,8 @@ export default function CreateTeam() {
     let teamName;
     let teamavatarId;
     flags.map((item, index) => {
-      if (index + 1 === selectedImage) {
+      console.log(selectedImage)
+      if (index === selectedImage) {
         teamName = item.title;
         teamavatarId = item.id;
       }

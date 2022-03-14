@@ -16,7 +16,7 @@ export default function TextField({
       >
         <input
           {...input}
-          className={`${style?.input} block w-full font-dana-regular text-[#1b1b1b] appearance-none focus:outline-none bg-transparent default-title-color text-sm`}
+          className={`${style?.input} default-input block w-full font-dana-regular text-[#1b1b1b] appearance-none focus:outline-none bg-transparent default-title-color text-sm`}
         />
         <label
           htmlFor={input.name}
