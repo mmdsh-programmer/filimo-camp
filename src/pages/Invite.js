@@ -8,6 +8,7 @@ import Modal from "Components/Modal";
 import { motion } from "framer-motion";
 import AddTeamMateIcon from "icons/add-teammate/add-teammate.svg";
 import { userData } from "Helper/helperFunc";
+import Fetch from "Helper/Fetch";
 
 export default function Invite() {
   const windowSize = useWindowSize();
@@ -15,6 +16,7 @@ export default function Invite() {
   const [openModal, setOpenModal] = useState(false);
   const [userInfo, setUserInfo] = useState([]);
   const [isCopied, setIsCopied] = useState(false);
+  const [yourScore, setYourScore] = useState(0);
 
   const handleBottomSheetOpen = () => {
     setOpenBottomSheet(true);
@@ -30,12 +32,30 @@ export default function Invite() {
 
   useEffect(() => {
     getUserData();
+    getUserScore();
   }, []);
 
   const getUserData = async () => {
     const userInfo = await userData();
     setUserInfo(userInfo);
     console.log(userInfo);
+  };
+
+  const getUserScore = async () => {
+    const getScore = await Fetch({
+      url: "http://37.152.185.94:8001/user/user_scores/",
+      method: "GET",
+      redirect: "follow",
+    });
+
+    if (!("ERROR" in getScore)) {
+      // setYourScore()
+      const {
+        data: { data: finalData },
+      } = getScore;
+      setYourScore(finalData?.referral_score);
+    } else {
+    }
   };
 
   const copyToClipBoard = () => {
@@ -54,7 +74,7 @@ export default function Invite() {
       transition={{ duration: 0.5 }}
     >
       <Back style="mb-6">معرفی دوستان</Back>
-      <section className="overflow-y-auto 2xl:h-fit">
+      <section className=" 2xl:h-fit">
         <div className="container px-4">
           <div className="flex flex-col">
             {/* use this when all items are empty */}
@@ -72,7 +92,7 @@ export default function Invite() {
               </p>
             </div> */}
 
-            <div className="max-h-[calc(100vh-290px)]">
+            {/* <div className="max-h-[calc(100vh-290px)]">
               <dl className="list-none flex flex-col gap-y-2 mt-4 2xl:mt-0">
                 <dt className="font-dana-regular text-sm text-[#aa59c0]">
                   معرفی شده‌های فعال
@@ -153,12 +173,19 @@ export default function Invite() {
                   <span className="text-white mt-1">-</span>
                 </dd>
               </dl>
-            </div>
+            </div> */}
+
+            <h2 className="text-2xl font-dana-demibold text-white mt-4 text-center">
+              امتیاز شما از دعوت <br />
+              <span className="font-dana-demibold text-5xl mt-9 block">
+                {yourScore}
+              </span>
+            </h2>
           </div>
         </div>
       </section>
 
-      <section className="fixed bottom-0 left-0 right-0 2xl:relative landscape:relative">
+      <section className="fixed bottom-0 left-0 right-0">
         <div className="container px-4 pb-6">
           <div className="p-4 my-4 border-[1px] border-opacity-10 border-white rounded-[10px] bg-white bg-opacity-5">
             <p className="text-sm text-white font-dana-regular text-opacity-50 leading-[2.07]">

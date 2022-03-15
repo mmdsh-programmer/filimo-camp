@@ -81,6 +81,8 @@
                     if (getParamValue('ctl-arcade') === "true") {
                         parent.__ctlArcadeSaveScore({score: iScore});
                     }
+
+                    localStorage.setItem("lights_score" , iScore)
                 });
 
                 $(oMain).on("show_interlevel_ad", function (evt) {
