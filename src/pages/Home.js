@@ -68,7 +68,7 @@ export default function Home() {
        d2 = new Date(d3);
     diff = d2.getTime() - d1.getTime();
     daydiff = diff / (1000 * 60 * 60 * 24);
-
+    debugger;
     test();
     posterresult = await Poster();
     poster.current = [...posterresult];
@@ -134,7 +134,7 @@ export default function Home() {
       casual_levels.current.map((item, index) => {
 
         if (item.unlock === true && mission_levels.current[index].unlock === true) {
-          localStorage.setItem(`GameIdFilimoCam::${index}`,item.id);
+          localStorage.setItem(`GameIdFilimoCam::${index+1}`,item.id);
           debugger;
           index++;
           let obj = {
