@@ -24,8 +24,9 @@ export default function AddTeamMate() {
   const [loading, setLoading] = useState(false);
   const [userInfo, setUserInfo] = useState([]);
   const [teamImage, setTeamImage] = useState(null);
+  const [isCopied, setIsCopied] = useState(false);
 
-  const navigator = useNavigate();
+  const navigation = useNavigate();
 
   useEffect(() => {
     getUserData();
@@ -57,7 +58,7 @@ export default function AddTeamMate() {
     setTeamImage(FindFlagAdd(+userInfo[1].avator_code));
 
     if (Object.keys(userInfo[1]).length === 0) {
-      navigator("/leader-board/teams/create");
+      navigation("/leader-board/teams/create");
     }
   };
 
@@ -73,10 +74,10 @@ export default function AddTeamMate() {
     });
 
     if (!("ERROR" in teamReq)) {
-      toast.success("تیم شما با موفقیت افزوده شد");
-      // navigator("/leader-board/teams/add-teammate");
+      toast.success("پیامک با موفقیت ارسال شد");
+      setLoading(false);
     } else {
-      toast.error("خطا در افزودن تیم");
+      toast.error("خطا در افزودن به تیم");
     }
   };
 
@@ -92,6 +93,13 @@ export default function AddTeamMate() {
       inviteMember(phoneNumber);
       //send code from here
     }
+  };
+
+  const copyToClipBoard = () => {
+    setIsCopied(true);
+    navigator.clipboard.writeText(userInfo[0]?.unique_code);
+    setIsCopied(false);
+    setTimeout(() => {}, 2000);
   };
 
   return (
@@ -250,11 +258,14 @@ export default function AddTeamMate() {
 
           <div className="flex items-center bg-[#ddd] rounded-[10px] bg-opacity-30 mt-4 p-[3px]">
             <span className="block font-dana-regular text-[#4c4c4c] text-xs leading-[1.8] ml-auto mr-2 mt-1 max-w-[215px] overflow-hidden">
-              Statira-2345
+              {userInfo[0]?.unique_code || "--"}
             </span>
 
-            <button className="font-dana-medium text-sm text-[#f78e32] py-3 px-2 bg-white rounded-[10px]">
-              کپی کد معرف
+            <button
+              className="font-dana-medium text-sm text-[#f78e32] py-3 px-2 bg-white rounded-[10px]"
+              onClick={copyToClipBoard}
+            >
+              {isCopied ? "کپی شد" : "کپی کد معرف"}
             </button>
           </div>
 
@@ -300,11 +311,14 @@ export default function AddTeamMate() {
 
           <div className="flex items-center bg-[#ddd] rounded-[10px] bg-opacity-30 mt-4 p-[3px]">
             <span className="block font-dana-regular text-[#4c4c4c] text-xs leading-[1.8] ml-auto mr-2 mt-1 max-w-[215px] overflow-hidden">
-              Statira-2345
+              {userInfo[0]?.unique_code || "--"}
             </span>
 
-            <button className="font-dana-medium text-sm text-[#f78e32] py-3 px-2 bg-white rounded-[10px]">
-              کپی کد معرف
+            <button
+              className="font-dana-medium text-sm text-[#f78e32] py-3 px-2 bg-white rounded-[10px]"
+              onClick={copyToClipBoard}
+            >
+              {isCopied ? "کپی شد" : "کپی کد معرف"}
             </button>
           </div>
 

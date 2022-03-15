@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import SimpleBottomSheet from "Components/SimpleBottomSheet";
 import TextField from "Components/TextField";
 import Back from "Components/Back";
@@ -7,11 +7,14 @@ import useWindowSize from "hooks/useWindowSize";
 import Modal from "Components/Modal";
 import { motion } from "framer-motion";
 import AddTeamMateIcon from "icons/add-teammate/add-teammate.svg";
+import { userData } from "Helper/helperFunc";
 
 export default function Invite() {
   const windowSize = useWindowSize();
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  const [userInfo, setUserInfo] = useState([]);
+  const [isCopied, setIsCopied] = useState(false);
 
   const handleBottomSheetOpen = () => {
     setOpenBottomSheet(true);
@@ -23,6 +26,24 @@ export default function Invite() {
 
   const handleModalOpen = () => {
     setOpenModal(true);
+  };
+
+  useEffect(() => {
+    getUserData();
+  }, []);
+
+  const getUserData = async () => {
+    const userInfo = await userData();
+    setUserInfo(userInfo);
+    console.log(userInfo);
+  };
+
+  const copyToClipBoard = () => {
+    setIsCopied(true);
+    navigator.clipboard.writeText(userInfo[0]?.unique_code);
+    setTimeout(() => {
+      setIsCopied(false);
+    }, 2000);
   };
 
   return (
@@ -50,7 +71,7 @@ export default function Invite() {
                 دوستان خود را به تیم بیافزایید
               </p>
             </div> */}
-            
+
             <div className="max-h-[calc(100vh-290px)]">
               <dl className="list-none flex flex-col gap-y-2 mt-4 2xl:mt-0">
                 <dt className="font-dana-regular text-sm text-[#aa59c0]">
@@ -165,26 +186,19 @@ export default function Invite() {
             دعوت از دوستان
           </h2>
 
-          <TextField type="text" name="phone" placeholder=" " label="موبایل" />
-
           <p className="leading-[2] text-[#4c4c4c] mt-2 text-xs font-dana-regular">
-            شماره دوست خود را وارد کنید تا از این کمپین مطلع شود. لینک از طریق
-            sms برای او ارسال شود. به ازای هر یک از دوستان که اولین بازی را
-            انجام دهند ۵ امتیاز برای شما ثبت می‌شود.
+            به ازای هر یک از دوستان که اولین بازی را انجام دهند ۵ امتیاز برای
+            شما ثبت می‌شود.
           </p>
 
           <div className="flex items-center bg-[#ddd] rounded-[10px] bg-opacity-30 mt-4 p-[3px]">
             <span className="block font-dana-regular text-[#4c4c4c] text-xs leading-[1.8] ml-auto mr-2 mt-1 max-w-[215px] overflow-hidden">
-              Statira-2345
+              {userInfo[0]?.unique_code}
             </span>
-
-            <button className="font-dana-medium text-sm text-[#f78e32] py-3 px-2 bg-white rounded-[10px]">
-              کپی کد معرف
-            </button>
           </div>
 
-          <Button type="primary" style="mt-4">
-            ارسال پیامک
+          <Button type="primary" style="mt-4" onClick={copyToClipBoard}>
+            {isCopied ? "کپی شد" : "کپی کد معرف"}
           </Button>
         </div>
       </SimpleBottomSheet>
@@ -200,26 +214,19 @@ export default function Invite() {
             دعوت از دوستان
           </h2>
 
-          <TextField type="text" name="phone" placeholder=" " label="موبایل" />
-
           <p className="leading-[2] text-[#4c4c4c] mt-2 text-xs font-dana-regular">
-            شماره دوست خود را وارد کنید تا از این کمپین مطلع شود. لینک از طریق
-            sms برای او ارسال شود. به ازای هر یک از دوستان که اولین بازی را
-            انجام دهند ۵ امتیاز برای شما ثبت می‌شود.
+            به ازای هر یک از دوستان که اولین بازی را انجام دهند ۵ امتیاز برای
+            شما ثبت می‌شود.
           </p>
 
           <div className="flex items-center bg-[#ddd] rounded-[10px] bg-opacity-30 mt-4 p-[3px]">
             <span className="block font-dana-regular text-[#4c4c4c] text-xs leading-[1.8] ml-auto mr-2 mt-1 max-w-[215px] overflow-hidden">
-              Statira-2345
+              {userInfo[0]?.unique_code}
             </span>
-
-            <button className="font-dana-medium text-sm text-[#f78e32] py-3 px-2 bg-white rounded-[10px]">
-              کپی کد معرف
-            </button>
           </div>
 
-          <Button type="primary" style="mt-4">
-            ارسال پیامک
+          <Button type="primary" style="mt-4" onClick={copyToClipBoard}>
+            {isCopied ? "کپی شد" : "کپی کد معرف"}
           </Button>
         </div>
       </Modal>
