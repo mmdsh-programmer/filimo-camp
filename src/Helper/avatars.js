@@ -105,16 +105,23 @@ export const avatars = [
 
 export const FindAvatarAdd = (id, status) => {
   let result;
-  if (id) {
+  if (id !== undefined && typeof id == 'number' && !isNaN(id)) {
     avatars.map((item, index) => {
       if (id === item.id) {
         result = item.mainUrl;
+
       }
-    })
-    return String(result);
+    });
+    if (result === undefined) {
+      return '50.png'
+    } else {
+      return String(result);
+
+    }
+
   }
-  else{
-    return '17.png'
+  else {
+    return '11.png'
   }
 
 }

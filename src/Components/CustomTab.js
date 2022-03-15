@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import TransparentAddUserIcon from "icons/home/transparent-add-user-icon.svg";
 import BlueAddUserIcon from "icons/home/blue-add-user-icon.svg";
 import Fetch from "../Helper/Fetch";
-import { flags, FindFlagAdd } from "Helper/flags";
+import { FindFlagAdd } from "Helper/flags";
 import { avatars, FindAvatarAdd } from "Helper/avatars";
 import { userData } from 'Helper/helperFunc'
 function classNames(...classes) {
@@ -120,7 +120,7 @@ export default function CustomTab() {
             <ul className="list-none flex flex-col gap-y-2 mt-4">
               {userLeaderBoardData.map((e, i) => {
                 // console.log(userLeaderBoardData.current);
-                // debugger
+                  
                 if (e.filimo_id === userFilimoID) {
                   return (
                     <li>
@@ -139,7 +139,7 @@ export default function CustomTab() {
                           <div className="w-9 h-9 overflow-hidden rounded-full border-2 border-white">
                             <img
                               className="w-full h-full object-cover"
-                              src={e.avator_code ? require(`images/common/avatars/${FindAvatarAdd(e.avatar_code)}`) : require(`images/common/avatars/${FindAvatarAdd(217)}`)}
+                              src={e.avatar_code ? require(`images/common/avatars/${FindAvatarAdd(parseInt(e.avatar_code))}`) : require(`images/common/avatars/${FindAvatarAdd(217)}`)}
 
                               alt="team-logo"
                             />
@@ -185,7 +185,7 @@ export default function CustomTab() {
 
                           <img
                             className="w-full h-full object-cover"
-                            src={e.avator_code ? require(`images/common/avatars/${FindAvatarAdd(e.avatar_code)}`) : require(`images/common/avatars/${FindAvatarAdd(217)}`)}
+                            src={e?.avatar_code ? require(`images/common/avatars/${FindAvatarAdd(parseInt(e.avatar_code))}`) : require(`images/common/avatars/${FindAvatarAdd(217)}`)}
 
                             alt="team-logo"
                           />
@@ -248,7 +248,7 @@ export default function CustomTab() {
                         <div className="w-9 h-9 overflow-hidden rounded-full border-2 border-white">
                           <img
                             className="w-full h-full object-cover"
-                            src={e.avator_code ? require(`images/common/flags/${FindFlagAdd(e.avator_code)}`) : require(`images/common/flags/${FindFlagAdd(150)}`)}
+                            src={e.avator_code ? require(`images/common/flags/${FindFlagAdd(parseInt(e.avator_code))}`) : require(`images/common/flags/${FindFlagAdd(150)}`)}
                             alt="team-logo"
                           />
                         </div>
@@ -291,7 +291,7 @@ export default function CustomTab() {
 
                           <img
                             className="w-full h-full object-cover"
-                            src={e.avator_code === 'null' ? require(`images/common/flags/${FindFlagAdd(+e?.avator_code)}`) : require(`images/common/flags/42.png`)}
+                            src={e.avator_code ? require(`images/common/flags/${FindFlagAdd(parseInt(e.avator_code))}`) : require(`images/common/flags/${FindFlagAdd(150)}`)}
                             alt="team-logo"
                           />
 
@@ -351,7 +351,7 @@ export default function CustomTab() {
                         <div className="w-9 h-9 overflow-hidden rounded-full border-2 border-white">
                           <img
                             className="w-full h-full object-cover"
-                            src={e.avator_code ? require(`images/common/avatars/${FindAvatarAdd(e.avatar_code)}`) : require(`images/common/avatars/${FindAvatarAdd(217)}`)}
+                            src={e.avator_code ? require(`images/common/avatars/${FindAvatarAdd(parseInt(e.avatar_code))}`) : require(`images/common/avatars/${FindAvatarAdd(217)}`)}
 
                             alt="team-logo"
                           />
@@ -396,7 +396,7 @@ export default function CustomTab() {
 
                           <img
                             className="w-full h-full object-cover"
-                            src={e.avator_code ? require(`images/common/avatars/${FindAvatarAdd(e.avatar_code)}`) : require(`images/common/avatars/${FindAvatarAdd(217)}`)}
+                            src={e.avator_code ? require(`images/common/avatars/${FindAvatarAdd(parseInt(e.avatar_code))}`) : require(`images/common/avatars/${FindAvatarAdd(217)}`)}
 
                             alt="team-logo"
                           />

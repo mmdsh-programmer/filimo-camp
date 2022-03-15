@@ -301,11 +301,27 @@ export const flags = [
   },
 ];
 export const FindFlagAdd = (id) => {
+
   let result;
-  flags.map((item, index) => {
-    if (id === item.id) {
-      result = item.url;
+  if (id !== undefined && typeof id === 'number' && !isNaN(id)) {
+    flags.map((item, index) => {
+      if (id === item.id) {
+        result = item.url;
+
+
+      }
+    });
+
+    if (result === undefined) {
+      return '50.png'
+    } else {
+      return String(result);
+
     }
-  });
-  return String(result);
+
+  }
+  else {
+    return '49.png'
+  }
+
 };
