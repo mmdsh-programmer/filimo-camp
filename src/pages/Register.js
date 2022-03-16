@@ -17,9 +17,10 @@ export default function Register() {
   const [refValue, setrefValue] = useState(null);
   const [avatar, setAvatar] = useState(0);
   const [loading, setLoading] = useState(false);
-  const [FilimoId, setFilimoId] = useState(994412);
+  const [FilimoId, setFilimoId] = useState(985472);
   const [avatarCode, setavatarCode] = useState(125);
   useEffect(() => {
+
     setrefValue(searchParams.get("ref"));
     userExist();
     const swiper = document.querySelector(".register-avatar-selection").swiper;
@@ -53,7 +54,7 @@ export default function Register() {
         var raw = {
           "filimo_id": FilimoId,
         };
-     
+
 
         const loginUrl = await Fetch({
           url: 'http://37.152.185.94:8001/user/login/',
@@ -65,8 +66,15 @@ export default function Register() {
         if (!('ERROR' in loginUrl)) {
           localStorage.setItem('filimo:ACCESS_TOKEN', loginUrl.data.access);
 
-          navigator('/');
-        } 
+          if (!!sessionStorage.getItem('filimo:inviteteamID')) {
+            
+            navigator(`/join-team/${sessionStorage.getItem('filimo:inviteteamID')}`);
+
+          } else {
+            navigator('/');
+
+          }
+        }
       }
 
 
@@ -97,7 +105,14 @@ export default function Register() {
     if (!('ERROR' in loginUrl)) {
       localStorage.setItem('filimo:ACCESS_TOKEN', loginUrl.data.access);
 
-      navigator('/');
+      if (!!sessionStorage.getItem('filimo:inviteteamID')) {
+        
+        navigator(`/join-team/${sessionStorage.getItem('filimo:inviteteamID')}`);
+
+      } else {
+        navigator('/');
+
+      }
     } else {
 
     }

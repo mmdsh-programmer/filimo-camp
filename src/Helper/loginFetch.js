@@ -26,7 +26,7 @@ const Fetch = async(FetchConfig)=> {
       return res.data || { data: 'OK' };
     })
     .catch(async (error) => {
-      debugger
+
       // && error.response.config.url !== '/admin-panel/login'
       if (error.response && error.response.data && error.response.status === 401) {
         // const refreshResult = await RefreshToken();

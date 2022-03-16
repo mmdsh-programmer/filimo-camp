@@ -119,7 +119,7 @@ export default function App() {
                 }
               />
               <Route path="register" element={<Register />} />
-              <Route path="accept-invite/:id" element={<InvitedModal />} />
+              <Route path="join-team/:id" element={<InvitedModal />} />
               <Route
                 path="games/:id"
                 element={
