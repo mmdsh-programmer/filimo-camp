@@ -30,6 +30,7 @@ export default function Home() {
   const mission_levels = useRef([]);
   const user_played_levels = useRef([]);
   const challengeLevel = useRef();
+  const challengeLevelID = useRef();
   let levelState = useRef([]);
   const windowSize = useWindowSize();
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false); //menu state
@@ -45,7 +46,7 @@ export default function Home() {
   let d1 = new Date("Tue Mar 13 2022 21:38:41 GMT+0330 (Iran Standard Time)");
   let d2;
   let diff;
-  let daydiff;
+  let daydiff = useRef();
 
   // console.log(levelState, Math.floor(daydiff));
   let [user, setUser] = useState();
@@ -65,14 +66,12 @@ export default function Home() {
   // }, []);
   useEffect(async () => {
     let d3 = await getTimeServer();
-       d2 = new Date(d3);
+    d2 = new Date(d3);
     diff = d2.getTime() - d1.getTime();
-    daydiff = diff / (1000 * 60 * 60 * 24);
-    debugger;
+    daydiff.current = diff / (1000 * 60 * 60 * 24);
     test();
     posterresult = await Poster();
     poster.current = [...posterresult];
-    console.log(posterresult, poster);
     getDataGame();
     user_scores_table();
 
@@ -134,8 +133,8 @@ export default function Home() {
       casual_levels.current.map((item, index) => {
 
         if (item.unlock === true && mission_levels.current[index].unlock === true) {
-          localStorage.setItem(`GameIdFilimoCam::${index+1}`,item.id);
-          debugger;
+          localStorage.setItem(`GameIdFilimoCam::${index + 1}`, item.id);
+
           index++;
           let obj = {
             lock: false,
@@ -161,7 +160,7 @@ export default function Home() {
         lock: true,
         today: true
       }
-      levelState.current[Math.floor(daydiff)].today = true;
+      levelState.current[Math.floor(daydiff.current)].today = true;
 
 
     } else {
@@ -181,11 +180,11 @@ export default function Home() {
     }
   }
   const handleLevelClick = (level) => {
-
     if (casual_levels.current[level - 1] !== undefined && mission_levels.current[level - 1] !== undefined) {
       if (casual_levels.current[level - 1].unlock && mission_levels.current[level - 1].unlock) {
         toast.success(`به مرحله ${level} خوش امدید.`)
         challengeLevel.current = level;
+        challengeLevelID.current = mission_levels.current[level - 1].id;
         console.log(windowSize);
         if (windowSize >= 1440) {
           handleOpenChallengeModal();
@@ -2335,7 +2334,7 @@ export default function Home() {
               <Button
                 style={"flex-[1_1_152px] relative"}
                 type="primary"
-                onClick={() => handleLevelClick(Math.floor(daydiff))}
+                onClick={() => { handleLevelClick(Math.floor(daydiff.current)); debugger }}
               >
                 <span className="my-1 block">چالش</span>
               </Button>
@@ -2478,7 +2477,7 @@ export default function Home() {
                   ایجاد تیم
                 </Link>
 
-                <Button type="primary" onClick={() => handleLevelClick(Math.floor(daydiff))}
+                <Button type="primary" onClick={() => { handleLevelClick(Math.floor(daydiff.current)); debugger; }}
                 >
                   <span className="my-1 block">چالش</span>
                 </Button>
@@ -2698,7 +2697,7 @@ export default function Home() {
               </Link>
 
               <Link
-                to="/challenge"
+                to={`/challenge/${challengeLevel.current}-${challengeLevelID.current}`}
                 className="flex bg-[#f8f8f8] rounded-[10px] p-2 items-center"
               >
                 <h4 className="leading-[1.81] text-base text-right ml-auto text-black font-dana-regular w-[81px]">
@@ -2909,7 +2908,8 @@ export default function Home() {
               </Link>
 
               <Link
-                to="/challenge"
+                to={`/challenge/${challengeLevel.current}-${challengeLevelID.current}`}
+
                 className="flex bg-[#f8f8f8] rounded-[10px] p-2 items-center"
               >
                 <h4 className="leading-[1.81] text-base text-right ml-8 text-black font-dana-regular w-[81px]">

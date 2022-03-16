@@ -64,7 +64,7 @@ export default function AddTeamMate() {
 
   const inviteMember = async (phoneNumber) => {
     const raw = JSON.stringify({
-      mobile: phoneNumber,
+      mobile: phoneNumber.replace(phoneNumber.charAt(0),98),
     });
 
     const teamReq = await Fetch({

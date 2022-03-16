@@ -124,8 +124,8 @@
   height: 25px;
   object-fit: contain;
   position: absolute;
-  bottom: 8px;
-  right: 8px;
+  bottom: 3px;
+  right: 23px;
 }
 
 .silver-badge::before {
@@ -134,8 +134,8 @@
   height: 25px;
   object-fit: contain;
   position: absolute;
-  bottom: 8px;
-  right: 8px;
+  bottom: 3px;
+  right: 23px;
 }
 
 .bronze-badge::before {
@@ -144,8 +144,8 @@
   height: 25px;
   object-fit: contain;
   position: absolute;
-  bottom: 8px;
-  right: 8px;
+  bottom: 3px;
+  right: 23px;
 }
 
 .you {

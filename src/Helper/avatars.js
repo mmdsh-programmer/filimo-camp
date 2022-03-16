@@ -109,7 +109,11 @@ export const FindAvatarAdd = (id, status) => {
     avatars.map((item, index) => {
       if (id === item.id) {
         result = item.mainUrl;
-
+        if (status === 'sad') {
+          result = item.sadUrl;
+        } else if(status === 'happy'){
+          result = item.happyUrl;
+        }
       }
     });
     if (result === undefined) {

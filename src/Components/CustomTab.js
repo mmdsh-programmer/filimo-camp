@@ -20,7 +20,9 @@ export default function CustomTab() {
   let user_referral_rank = useRef();
   let user_rank = useRef();
   let team_rank = useRef()
-
+  let userinfo = useRef();
+  let teaminfo = useRef();
+  let referal;
   let userFilimoID;
   let teamID;
   const userLeaderBoard = async () => {
@@ -37,7 +39,7 @@ export default function CustomTab() {
 
       user_rank.current = userLeaderBoardUrl?.data.data.user_rank;
 
-      debugger
+
     } else {
 
     }
@@ -83,6 +85,9 @@ export default function CustomTab() {
   useEffect(async () => {
     funcreqHandler();
     let result = await userData();
+    userinfo.current = result[0];
+    teaminfo.current = result[0]
+
     let userFilimoID = result[0].filimo_id;
     let teamID = result[1].id;
   }, [])
@@ -126,7 +131,7 @@ export default function CustomTab() {
             <ul className="list-none flex flex-col gap-y-2 mt-4">
               {userLeaderBoardData.map((e, i) => {
                 // console.log(userLeaderBoardData.current);
-                debugger;
+
                 if (i + 1 === user_rank.current) {
                   return (
                     <li>
@@ -141,7 +146,10 @@ export default function CustomTab() {
                      `}
                         className="flex items-center p-2 rounded-[10px] bg-[#acffd2] relative you"
                       >
+                         <span className="ml-2 text-base text-black font-dana-regular">{i+1}</span>
                         <div className="ml-2">
+                         
+                         
                           <div className="w-9 h-9 overflow-hidden rounded-full border-2 border-white">
                             <img
                               className="w-full h-full object-cover"
@@ -188,7 +196,9 @@ export default function CustomTab() {
                           : i + 1 === 3 && "bronze-badge"
                         } p-2 flex items-center rounded-[10px] bg-[#f8f8f8] relative`}
                     >
+                      <span className="ml-2 text-base text-black font-dana-regular">{i+1}</span>
                       <div className="ml-2">
+
                         <div className="w-9 h-9 overflow-hidden rounded-full border-2 border-white">
 
 
@@ -233,7 +243,61 @@ export default function CustomTab() {
 
               })}
 
+              {
+                user_rank.current > 10 ?
+                  (
+                    <li>
+                      {!(user_rank.current === 1) ? (<div className="w-full h-full flex flex-col px-[22px]">
+                        <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
+                        <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
+                        <span className="w-1 h-1 opacity-40 bg-[#333] mb-2 rounded-full"></span>
+                      </div>) : null}
+                      <Link
+                        to={`/leader-board/$
+                        "individual"
+                       `}
+                        className="flex items-center p-2 rounded-[10px] bg-[#acffd2] relative you"
+                      >
+                        <span className="ml-2 text-base text-black font-dana-regular">{user_rank.current}</span>
+                        <div className="ml-2">
 
+                          <div className="w-9 h-9 overflow-hidden rounded-full border-2 border-white">
+                            <img
+                              className="w-full h-full object-cover"
+                              src={userinfo.current.avatar_code ? require(`images/common/avatars/${FindAvatarAdd(parseInt(userinfo.current.avatar_code))}`) : require(`images/common/avatars/${FindAvatarAdd(217)}`)}
+
+                              alt="team-logo"
+                            />
+                          </div>
+                        </div>
+
+                        <span className="text-base text-[#170d53] font-semibold text-right font-dana-regular ml-auto mt-1">
+                          شما
+                        </span>
+
+                        <span className="text-sm text-[#170d53] font-semibold font-dana-regular ml-2 mt-1">
+                          {userinfo.current.total_score}
+                        </span>
+
+                        <img
+                          src={BlueStarIcon}
+                          className="w-4 h-4 object-contain"
+                          alt="star logo"
+                        />
+                      </Link>
+                      {!(user_rank.current >= 10) ? (<div className="w-full h-full flex flex-col px-[22px]">
+                        <span className="w-1 h-1 opacity-40 bg-[#333] mt-2 mb-[3px] rounded-full"></span>
+                        <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
+                        <span className="w-1 h-1 opacity-40 bg-[#333] rounded-full"></span>
+                      </div>) : null
+                      }
+                      {/* } */}
+
+                    </li>
+
+                  ) : null
+
+              }
 
             </ul>
           </Tab.Panel>
@@ -252,8 +316,11 @@ export default function CustomTab() {
                           "individual"
                          `}
                       className="flex items-center p-2 rounded-[10px] bg-[#acffd2] relative you"
-                    >
+                    ><span className="ml-2 text-base text-black font-dana-regular">{i+1}</span>
                       <div className="ml-2">
+                      
+
+
                         <div className="w-9 h-9 overflow-hidden rounded-full border-2 border-white">
                           <img
                             className="w-full h-full object-cover"
@@ -296,7 +363,9 @@ export default function CustomTab() {
                           : i + 1 === 3 && "bronze-badge"
                         } p-2 flex items-center rounded-[10px] bg-[#f8f8f8] relative`}
                     >
+                      <span className="ml-2 text-base text-black font-dana-regular">{i+1}</span>
                       <div className="ml-2">
+
                         <div className="w-9 h-9 overflow-hidden rounded-full border-2 border-white">
 
                           <img
@@ -336,17 +405,66 @@ export default function CustomTab() {
               }
               )}
 
+              {(team_rank.current >= 10) ?
+                (
+                  <li>
+                    {!(team_rank.current === 1) ? (<div className="w-full h-full flex flex-col px-[22px]">
+                      <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
+                      <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
+                      <span className="w-1 h-1 opacity-40 bg-[#333] mb-2 rounded-full"></span>
+                    </div>) : null}
+                    <Link
+                      to={`/leader-board/$
+                          "individual"
+                         `}
+                      className="flex items-center p-2 rounded-[10px] bg-[#acffd2] relative you"
+                    >
+                      <span className="ml-2 text-base text-black font-dana-regular">{team_rank.current}</span>
+                      <div className="ml-2">
 
+                        <div className="w-9 h-9 overflow-hidden rounded-full border-2 border-white">
+                          <img
+                            className="w-full h-full object-cover"
+                            src={teaminfo.current.avator_code ? require(`images/common/flags/${FindFlagAdd(parseInt(teaminfo.current.avator_code))}`) : require(`images/common/flags/${FindFlagAdd(150)}`)}
+                            alt="team-logo"
+                          />
+                        </div>
+                      </div>
+
+                      <span className="text-base text-[#170d53] font-semibold text-right font-dana-regular ml-auto mt-1">
+                        تیم شما
+                      </span>
+
+                      <span className="text-sm text-[#170d53] font-semibold font-dana-regular ml-2 mt-1">
+                        {teaminfo.current.total_score}
+                      </span>
+
+                      <img
+                        src={BlueStarIcon}
+                        className="w-4 h-4 object-contain"
+                        alt="star logo"
+                      />
+                    </Link>
+                    {!(team_rank.current >= 10) ?
+                      (<div className="w-full h-full flex flex-col px-[22px]">
+                        <span className="w-1 h-1 opacity-40 bg-[#333] mt-2 mb-[3px] rounded-full"></span>
+                        <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
+                        <span className="w-1 h-1 opacity-40 bg-[#333] rounded-full"></span>
+                      </div>) : null}
+                  </li>
+                ) :
+                null
+              }
             </ul>
           </Tab.Panel>
 
           <Tab.Panel className={classNames("bg-white")}>
             <ul className="list-none flex flex-col gap-y-2 mt-4">
               {userReferralLeaderBoardData.map((e, i) => {
-                if (i + 1 === team_rank.current) {
+                if (i + 1 === user_referral_rank.current) {
                   return (
                     <li>
-                      {!(user_rank.current === 1) ? (<div className="w-full h-full flex flex-col px-[22px]">
+                      {!(user_referral_rank.current === 1) ? (<div className="w-full h-full flex flex-col px-[22px]">
                         <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
                         <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
                         <span className="w-1 h-1 opacity-40 bg-[#333] mb-2 rounded-full"></span>
@@ -358,7 +476,9 @@ export default function CustomTab() {
                        `}
                         className="flex items-center p-2 rounded-[10px] bg-[#acffd2] relative you"
                       >
+                      <span className="ml-2 text-base text-black font-dana-regular">{i+1}</span>
                         <div className="ml-2">
+
                           <div className="w-9 h-9 overflow-hidden rounded-full border-2 border-white">
                             <img
                               className="w-full h-full object-cover"
@@ -383,7 +503,7 @@ export default function CustomTab() {
                           alt="star logo"
                         />
                       </Link>
-                      {!(user_rank.current >= 10) ? (<div className="w-full h-full flex flex-col px-[22px]">
+                      {!(user_referral_rank.current >= 10) ? (<div className="w-full h-full flex flex-col px-[22px]">
                         <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
                         <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
                         <span className="w-1 h-1 opacity-40 bg-[#333] mb-2 rounded-full"></span>
@@ -401,7 +521,9 @@ export default function CustomTab() {
                           : i + 1 === 3 && "bronze-badge"
                         } p-2 flex items-center rounded-[10px] bg-[#f8f8f8] relative`}
                     >
+                      <span className="ml-2 text-base text-black font-dana-regular">{i+1}</span>
                       <div className="ml-2">
+
                         <div className="w-9 h-9 overflow-hidden rounded-full border-2 border-white">
 
 
@@ -445,6 +567,55 @@ export default function CustomTab() {
                 }
 
               })}
+              {
+                user_referral_rank.current > 10 ?
+                  (
+                    <li>
+                      {!(user_referral_rank.current === 1) ? (<div className="w-full h-full flex flex-col px-[22px]">
+                        <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
+                        <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
+                        <span className="w-1 h-1 opacity-40 bg-[#333] mb-2 rounded-full"></span>
+                      </div>) : null}
+
+                      <Link
+                        to={`/leader-board/$
+                    "individual"
+                   `}
+                        className="flex items-center p-2 rounded-[10px] bg-[#acffd2] relative you"
+                      >
+                      <span className="ml-2 text-base text-black font-dana-regular">{user_referral_rank.current}</span>
+                        <div className="ml-2">
+
+                          <div className="w-9 h-9 overflow-hidden rounded-full border-2 border-white">
+                            <img
+                              className="w-full h-full object-cover"
+                              src={userinfo.current.avator_code ? require(`images/common/avatars/${FindAvatarAdd(parseInt(userinfo.current.avatar_code))}`) : require(`images/common/avatars/${FindAvatarAdd(217)}`)}
+
+                              alt="team-logo"
+                            />
+                          </div>
+                        </div>
+
+                        <span className="text-base text-[#170d53] font-semibold text-right font-dana-regular ml-auto mt-1">
+                          شما
+                        </span>
+
+                        <span className="text-sm text-[#170d53] font-semibold font-dana-regular ml-2 mt-1">
+                          {/* {e.ref_score} */}
+                        </span>
+
+                        <img
+                          src={BlueAddUserIcon}
+                          className="w-4 h-4 object-contain"
+                          alt="star logo"
+                        />
+                      </Link>
+                  
+                    </li>
+                  )
+                  :
+                  null
+              }
 
 
 

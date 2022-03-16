@@ -17,10 +17,11 @@ export default function Register() {
   const [refValue, setrefValue] = useState(null);
   const [avatar, setAvatar] = useState(0);
   const [loading, setLoading] = useState(false);
-  const [FilimoId, setFilimoId] = useState(852951);
+  const [FilimoId, setFilimoId] = useState(225544);
   const [avatarCode, setavatarCode] = useState(125);
   useEffect(() => {
     setrefValue(searchParams.get("ref"));
+    userExist();
     const swiper = document.querySelector(".register-avatar-selection").swiper;
 
     swiper.on("click", function () {
@@ -35,14 +36,51 @@ export default function Register() {
 
 
   }, []);
+  const userExist = async () => {
+    localStorage.clear();
+    //localStorage save id
+    var raw = {
+      "filimo_id": FilimoId,
+    };
+    const loginUrl = await Fetch({
+      url: 'http://37.152.185.94:8001/user/user-exist/',
+      method: 'POST',
+      data: JSON.stringify(raw),
+      redirect: 'follow'
+    });
+    if (!('ERROR' in loginUrl)) {
+      if (loginUrl.data.exists) {
+        var raw = {
+          "filimo_id": FilimoId,
+        };
+     
 
+        const loginUrl = await Fetch({
+          url: 'http://37.152.185.94:8001/user/login/',
+          method: 'POST',
+          data: JSON.stringify(raw),
+          redirect: 'follow'
+        });
+
+        if (!('ERROR' in loginUrl)) {
+          localStorage.setItem('filimo:ACCESS_TOKEN', loginUrl.data.access);
+
+          navigator('/');
+        } 
+      }
+
+
+    } else {
+
+    }
+  }
   const handleRegistration = async () => {
     var raw = {
       "filimo_id": FilimoId,
-      "avator_code": String(avatarCode),
+      "avatar_code": String(avatarCode),
     };
     if (refValue) {
-      raw.referral_code=refValue;
+      raw.referral_code = refValue;
     }
 
     const loginUrl = await Fetch({
