@@ -2343,7 +2343,7 @@ export default function Home() {
         </section>
 
         {/* desktop layout ⬇️*/}
-        <aside className="hidden col-start-2 col-end-3 row-start-1 row-end-2 2xl:block h-fit sticky top-20">
+        <aside className="hidden col-start-2 col-end-3 row-start-1 row-end-2 2xl:block h-fit sticky top-20 mb-12">
           <div className="w-full bg-white rounded-3xl ">
             <div className="container p-4 pt-[27px]">
               <div className="flex items-center my-2">
@@ -2486,7 +2486,7 @@ export default function Home() {
           </div>
         </aside>
 
-        <aside className="hidden col-start-4 col-end-5 row-start-1 row-end-2 2xl:block h-fit sticky top-20">
+        <aside className="hidden col-start-4 col-end-5 row-start-1 row-end-2 2xl:block h-fit sticky top-20 mb-12">
           <div className="w-full bg-white rounded-3xl max-h-[664px] min-h-[664px] overflow-y-auto">
             <div className="container py-6 px-4">
               <CustomTab />

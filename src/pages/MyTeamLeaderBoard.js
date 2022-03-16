@@ -14,7 +14,7 @@ import { toast } from "react-toastify";
 export default function MyTeamLeaderBoard() {
   const [openModal, setOpenModal] = useState(false);
   let navigate = useNavigate();
-  const { isLoading, data, isError, error } = useQuery("get-team", userData);
+  const { isLoading, data } = useQuery("get-team", userData);
 
   const queryClient = useQueryClient();
 
@@ -108,6 +108,7 @@ export default function MyTeamLeaderBoard() {
                 >
                   <span className="text-sm text-white font-dana-regular ml-[6px] block mt-1">
                     {index + 1}
+                    {console.log(member)}
                   </span>
 
                   <div className="ml-3">
@@ -115,9 +116,9 @@ export default function MyTeamLeaderBoard() {
                       <img
                         className="w-full h-full object-cover"
                         src={
-                          member?.avatar_code
+                          member.avatar_code
                             ? require(`images/common/avatars/${FindAvatarAdd(
-                                member?.avatar_code
+                                +member.avatar_code
                               )}`)
                             : require("images/home/board-avatar.webp")
                         }
@@ -162,30 +163,32 @@ export default function MyTeamLeaderBoard() {
         </div>
       </section>
 
-      <section className="fixed bottom-0 left-0 w-full 2xl:relative">
-        <div className="container p-4 pb-8">
-          <Button
-            type="primary"
-            onClick={() => navigate("/leader-board/teams/add-teammate")}
-          >
-            <div className="flex items-center">
-              <img
-                className="w-6 h-6 object-contain ml-[6px]"
-                src={AddIcon}
-                alt="add icon"
-              />
+      {data[0].is_team_head && (
+        <section className="fixed bottom-0 left-0 w-full 2xl:relative">
+          <div className="container p-4 pb-8">
+            <Button
+              type="primary"
+              onClick={() => navigate("/leader-board/teams/add-teammate")}
+            >
+              <div className="flex items-center">
+                <img
+                  className="w-6 h-6 object-contain ml-[6px]"
+                  src={AddIcon}
+                  alt="add icon"
+                />
 
-              <span className="block text-base font-dana-demibold ml-auto text-[#1d1d1d] mt-1">
-                می‌توانید تا ۷ نفر اضافه کنید
-              </span>
+                <span className="block text-base font-dana-demibold ml-auto text-[#1d1d1d] mt-1">
+                  می‌توانید تا ۷ نفر اضافه کنید
+                </span>
 
-              <span className="text-sm font-dana-regular block mt-1">
-                افزودن
-              </span>
-            </div>
-          </Button>
-        </div>
-      </section>
+                <span className="text-sm font-dana-regular block mt-1">
+                  افزودن
+                </span>
+              </div>
+            </Button>
+          </div>
+        </section>
+      )}
 
       <Modal alignCenter isOpen={openModal} setIsOpen={setOpenModal}>
         <div className="container pt-2 pb-4 px-4">

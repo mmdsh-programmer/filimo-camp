@@ -84,7 +84,7 @@ export default function AddTeamMate() {
 
   const inviteMember = async (phoneNumber) => {
     const raw = JSON.stringify({
-      mobile: phoneNumber.replace(phoneNumber.charAt(0),98),
+      mobile: phoneNumber.replace(phoneNumber.charAt(0), 98),
     });
 
     const teamReq = await Fetch({
@@ -119,6 +119,19 @@ export default function AddTeamMate() {
     setTimeout(() => {
       setIsCopied(false);
     }, 2000);
+  };
+
+  const leaveTeam = async () => {
+    const leave = await Fetch({
+      url: "http://37.152.185.94:8001/user/leave-team/",
+      method: "GET",
+      redirect: "follow",
+    });
+
+    if (!("ERROR" in leave)) {
+      toast.success("شما با موفقیت از تیم خارج شدید");
+      navigation("/");
+    }
   };
 
   if (isGetTeamLoading || isGetInvitedLoading) {
@@ -268,12 +281,20 @@ export default function AddTeamMate() {
 
       <section className="fixed bottom-0 left-0 right-0 2xl:relative 2xl:mt-4 landscape:relative">
         <div className="container px-4 pb-6">
-          <Button
-            type="primary"
-            onClick={windowSize > 768 ? handleModalOpen : handleBottomSheetOpen}
-          >
-            افزودن به تیم
-          </Button>
+          {getTeamData[0].is_team_head ? (
+            <Button
+              type="primary"
+              onClick={
+                windowSize > 768 ? handleModalOpen : handleBottomSheetOpen
+              }
+            >
+              افزودن به تیم
+            </Button>
+          ) : (
+            <Button type="secondary" onClick={leaveTeam}>
+              خروج از تیم
+            </Button>
+          )}
         </div>
       </section>
 
