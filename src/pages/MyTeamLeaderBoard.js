@@ -1,14 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "Components/Modal";
 import AddIcon from "icons/team/add.svg";
 import Back from "Components/Back";
 import Button from "Components/Button";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useQuery, useQueryClient } from "react-query";
+import { userData } from "Helper/helperFunc";
+import { FindAvatarAdd } from "Helper/avatars";
+import Fetch from "Helper/Fetch";
+import { toast } from "react-toastify";
 
 export default function MyTeamLeaderBoard() {
   const [openModal, setOpenModal] = useState(false);
   let navigate = useNavigate();
+  const { isLoading, data, isError, error } = useQuery("get-team", userData);
+
+  const queryClient = useQueryClient();
 
   const handleOpenModal = () => {
     setOpenModal(true);
@@ -21,6 +29,51 @@ export default function MyTeamLeaderBoard() {
   const hidePhoneNumber = (phoneNumber) => {
     return phoneNumber.replace(phoneNumber.substr(7, 3), "***");
   };
+
+  const isNullObject = (object) => {
+    return Object.keys(object).length === 0;
+  };
+
+  const removeUser = async (userId) => {
+    const raw = {
+      user_id: userId,
+    };
+
+    const remove = await Fetch({
+      url: "http://37.152.185.94:8001/user/remove-member/",
+      method: "POST",
+      data: JSON.stringify(raw),
+      redirect: "follow",
+    });
+
+    if (!("ERROR" in remove)) {
+      toast.success("کاربر با موفقیت از تیم حذف شد");
+      queryClient.invalidateQueries("get-team");
+    }
+  };
+
+  const leaveTeam = async () => {
+    const leave = await Fetch({
+      url: "http://37.152.185.94:8001/user/leave-team/",
+      method: "GET",
+      redirect: "follow",
+    });
+
+    if (!("ERROR" in leave)) {
+      toast.success("شما با موفقیت از تیم خارج شدید");
+      navigate("/leader-board/teams/create");
+    }
+  };
+
+  if (isLoading) {
+    return null;
+  }
+
+  if (!isLoading) {
+    if (Object.keys(data[1]).length === 0) {
+      navigate("/leader-board/teams/create");
+    }
+  }
 
   return (
     <motion.main
@@ -39,7 +92,7 @@ export default function MyTeamLeaderBoard() {
           </h2>
 
           <span className="text-4xl text-white font-dana-medium mt-2 block">
-            23567
+            {data[1]?.total_score}
           </span>
         </div>
       </section>
@@ -47,38 +100,64 @@ export default function MyTeamLeaderBoard() {
       <section className="my-6 mb-[100px] 2xl:mb-4">
         <div className="container px-4">
           <ul className="list-none flex flex-col gap-y-2 mt-4">
-            {[...Array(5)].map((e, index) => (
-              <li
-                className="p-2 flex items-center rounded-[10px] bg-[#f9f9f9] bg-opacity-10 relative cursor-pointer"
-                onClick={handleOpenModal}
-                key={index}
-              >
-                <span className="text-sm text-white font-dana-regular ml-[6px] block mt-1">
-                  {index + 1}
-                </span>
-
-                <div className="ml-3">
-                  <div className="w-9 h-9 overflow-hidden rounded-full border-2 border-white">
-                    <img
-                      className="w-full h-full object-cover"
-                      src={require("images/home/board-avatar.webp")}
-                      alt="team-logo"
-                    />
-                  </div>
-                </div>
-
-                <span
-                  className="text-base text-white text-right font-dana-regular ml-auto mt-1"
-                  dir="ltr"
+            {!isNullObject(data[1]) &&
+              data[1]?.members?.map((member, index) => (
+                <li
+                  className="p-2 flex items-center rounded-[10px] bg-[#f9f9f9] bg-opacity-10 relative cursor-pointer"
+                  key={member.id}
                 >
-                  {hidePhoneNumber("9357894056")}
-                </span>
+                  <span className="text-sm text-white font-dana-regular ml-[6px] block mt-1">
+                    {index + 1}
+                  </span>
 
-                <span className="text-sm text-white font-dana-regular mt-1">
-                  234.789
-                </span>
-              </li>
-            ))}
+                  <div className="ml-3">
+                    <div className="w-9 h-9 overflow-hidden rounded-full border-2 border-white">
+                      <img
+                        className="w-full h-full object-cover"
+                        src={
+                          member?.avatar_code
+                            ? require(`images/common/avatars/${FindAvatarAdd(
+                                member?.avatar_code
+                              )}`)
+                            : require("images/home/board-avatar.webp")
+                        }
+                        alt="team-logo"
+                      />
+                    </div>
+                  </div>
+
+                  <span
+                    className="text-base text-white text-right font-dana-regular ml-auto mt-1"
+                    dir="ltr"
+                  >
+                    {hidePhoneNumber(
+                      member?.mobile ? String(member.mobile) : "--"
+                    )}
+                  </span>
+
+                  <span className="text-sm text-white font-dana-regular mt-1 ml-4">
+                    {member?.total_score}
+                  </span>
+
+                  {data[0].is_team_head && data[0].id !== member.id ? (
+                    <button
+                      className="text-sm font-dana-medium text-[#cc304b] leading-8"
+                      onClick={() => removeUser(member.id)}
+                    >
+                      حذف از تیم
+                    </button>
+                  ) : (
+                    data[0].id === member.id && (
+                      <button
+                        className="text-sm font-dana-medium text-[#cc304b] leading-8"
+                        onClick={() => leaveTeam(member.id)}
+                      >
+                        خروج از تیم
+                      </button>
+                    )
+                  )}
+                </li>
+              ))}
           </ul>
         </div>
       </section>

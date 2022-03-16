@@ -4,7 +4,10 @@ import Background from "./Components/Background";
 import { AnimatePresence } from "framer-motion";
 import { useLocation } from "react-router-dom";
 import { PrivateRoute } from "./Routes/LoginRoute";
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer } from "react-toastify";
+import { QueryClient, QueryClientProvider } from "react-query";
+
+const queryClient = new QueryClient();
 
 const Home = lazy(() => import("pages/Home"));
 const TeamLeaderBoard = lazy(() => import("pages/TeamLeaderBoard"));
@@ -25,109 +28,111 @@ export default function App() {
   const location = useLocation();
 
   return (
-    <Fragment>
-      <ToastContainer
-        position="bottom-left"
-        autoClose={4000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
-      <Background />
-      <AnimatePresence exitBeforeEnter>
-        <Suspense fallback={null}>
-          <Routes location={location} key={location.pathname}>
-            <Route path="*" element={<NotFound />} />
-            <Route
-              path="/"
-              element={
-                <PrivateRoute>
-                  <Home />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="leader-board/individual"
-              element={
-                <PrivateRoute>
-                  <PersonalLeaderBoard />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="leader-board/teams"
-              element={
-                <PrivateRoute>
-                  <TeamLeaderBoard />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="leader-board/invitees"
-              element={
-                <PrivateRoute>
-                  <Invitees />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="leader-board/teams/my-team"
-              element={
-                <PrivateRoute>
-                  <MyTeamLeaderBoard />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="leader-board/teams/create"
-              element={
-                <PrivateRoute>
-                  <CreateTeam />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="leader-board/teams/add-teammate"
-              element={
-                <PrivateRoute>
-                  <AddTeamMate />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="invite"
-              element={
-                <PrivateRoute>
-                  <Invite />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="challenge"
-              element={
-                <PrivateRoute>
-                  <Challenge />
-                </PrivateRoute>
-              }
-            />
-            <Route path="register" element={<Register />} />
-            <Route path="accept-invite/:id" element={<InvitedModal />} />
-            <Route
-              path="games/:id"
-              element={
-                <PrivateRoute>
-                  <Games />
-                </PrivateRoute>
-              }
-            />
-            <Route path="info-slider" element={<InfoSlider />} />
-          </Routes>
-        </Suspense>
-      </AnimatePresence>
-    </Fragment>
+    <QueryClientProvider client={queryClient}>
+      <Fragment>
+        <ToastContainer
+          position="bottom-left"
+          autoClose={4000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
+        <Background />
+        <AnimatePresence exitBeforeEnter>
+          <Suspense fallback={null}>
+            <Routes location={location} key={location.pathname}>
+              <Route path="*" element={<NotFound />} />
+              <Route
+                path="/"
+                element={
+                  <PrivateRoute>
+                    <Home />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="leader-board/individual"
+                element={
+                  <PrivateRoute>
+                    <PersonalLeaderBoard />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="leader-board/teams"
+                element={
+                  <PrivateRoute>
+                    <TeamLeaderBoard />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="leader-board/invitees"
+                element={
+                  <PrivateRoute>
+                    <Invitees />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="leader-board/teams/my-team"
+                element={
+                  <PrivateRoute>
+                    <MyTeamLeaderBoard />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="leader-board/teams/create"
+                element={
+                  <PrivateRoute>
+                    <CreateTeam />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="leader-board/teams/add-teammate"
+                element={
+                  <PrivateRoute>
+                    <AddTeamMate />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="invite"
+                element={
+                  <PrivateRoute>
+                    <Invite />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="challenge"
+                element={
+                  <PrivateRoute>
+                    <Challenge />
+                  </PrivateRoute>
+                }
+              />
+              <Route path="register" element={<Register />} />
+              <Route path="accept-invite/:id" element={<InvitedModal />} />
+              <Route
+                path="games/:id"
+                element={
+                  <PrivateRoute>
+                    <Games />
+                  </PrivateRoute>
+                }
+              />
+              <Route path="info-slider" element={<InfoSlider />} />
+            </Routes>
+          </Suspense>
+        </AnimatePresence>
+      </Fragment>
+    </QueryClientProvider>
   );
 }
