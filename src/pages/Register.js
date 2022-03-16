@@ -17,8 +17,8 @@ export default function Register() {
   const [refValue, setrefValue] = useState(null);
   const [avatar, setAvatar] = useState(0);
   const [loading, setLoading] = useState(false);
-  const [FilimoId,setFilimoId]=useState(753126);
-  const [avatarCode,setavatarCode]=useState(125);
+  const [FilimoId, setFilimoId] = useState(852951);
+  const [avatarCode, setavatarCode] = useState(125);
   useEffect(() => {
     setrefValue(searchParams.get("ref"));
     const swiper = document.querySelector(".register-avatar-selection").swiper;
@@ -30,23 +30,25 @@ export default function Register() {
     swiper.on("slideChange", function () {
       setAvatar(this.activeIndex);
       setavatarCode(avatars[this.activeIndex].id);
-  
+
     });
 
 
   }, []);
 
-  const handleRegistration = async() => {
-    var raw = JSON.stringify({
+  const handleRegistration = async () => {
+    var raw = {
       "filimo_id": FilimoId,
-      "referral_code": refValue,
       "avator_code": String(avatarCode),
-    });
+    };
+    if (refValue) {
+      raw.referral_code=refValue;
+    }
 
     const loginUrl = await Fetch({
       url: 'http://37.152.185.94:8001/user/login/',
       method: 'POST',
-      data: raw,
+      data: JSON.stringify(raw),
       headers: {
         'X-CSRFToken': 'EtWI8gO2TPYM5O2iMrzmmjRwL11vnrZUqlUkGYNxXOptltPJk9AABsUKaO8sBeH0',
 
