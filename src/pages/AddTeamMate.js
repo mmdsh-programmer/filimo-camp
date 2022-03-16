@@ -11,8 +11,24 @@ import { motion } from "framer-motion";
 import { userData } from "Helper/helperFunc";
 import { useNavigate } from "react-router-dom";
 import { FindFlagAdd } from "Helper/flags";
+import { FindAvatarAdd } from "Helper/avatars";
 import Fetch from "Helper/Fetch";
 import { toast } from "react-toastify";
+import { useQuery, useQueryClient } from "react-query";
+
+const getInvitedData = async () => {
+  const result = await Fetch({
+    url: "http://37.152.185.94:8001/user/join-to-team-request/",
+    method: "GET",
+  });
+
+  if (!("ERROR" in result)) {
+    const { data } = result;
+    return data.data;
+  }
+
+  return false;
+};
 
 export default function AddTeamMate() {
   const windowSize = useWindowSize();
@@ -26,11 +42,17 @@ export default function AddTeamMate() {
   const [teamImage, setTeamImage] = useState(null);
   const [isCopied, setIsCopied] = useState(false);
 
-  const navigation = useNavigate();
+  const queryClient = useQueryClient();
 
-  useEffect(() => {
-    getUserData();
-  }, []);
+  const navigation = useNavigate();
+  const { isLoading: isGetTeamLoading, data: getTeamData } = useQuery(
+    "get-team",
+    userData
+  );
+  const { isLoading: isGetInvitedLoading, data: invitedData } = useQuery(
+    "get-invited",
+    getInvitedData
+  );
 
   const handleBottomSheetOpen = () => {
     setOpenBottomSheet(true);
@@ -52,14 +74,12 @@ export default function AddTeamMate() {
     setPhoneNumber(inputValue);
   };
 
-  const getUserData = async () => {
-    const userInfo = await userData();
-    setUserInfo(userInfo);
-    setTeamImage(FindFlagAdd(+userInfo[1].avator_code));
+  const isNullObject = (object) => {
+    return Object.keys(object).length === 0;
+  };
 
-    if (Object.keys(userInfo[1]).length === 0) {
-      navigation("/leader-board/teams/create");
-    }
+  const hidePhoneNumber = (phoneNumber) => {
+    return phoneNumber.replace(phoneNumber.substr(7, 3), "***");
   };
 
   const inviteMember = async (phoneNumber) => {
@@ -75,9 +95,8 @@ export default function AddTeamMate() {
 
     if (!("ERROR" in teamReq)) {
       toast.success("پیامک با موفقیت ارسال شد");
+      queryClient.invalidateQueries("get-invited");
       setLoading(false);
-    } else {
-      toast.error("خطا در افزودن به تیم");
     }
   };
 
@@ -91,16 +110,26 @@ export default function AddTeamMate() {
       setErrorMessage(null);
       setLoading(true);
       inviteMember(phoneNumber);
-      //send code from here
     }
   };
 
   const copyToClipBoard = () => {
     setIsCopied(true);
-    navigator.clipboard.writeText(userInfo[0]?.unique_code);
-    setIsCopied(false);
-    setTimeout(() => {}, 2000);
+    navigator.clipboard.writeText(getTeamData[0]?.unique_code);
+    setTimeout(() => {
+      setIsCopied(false);
+    }, 2000);
   };
+
+  if (isGetTeamLoading || isGetInvitedLoading) {
+    return null;
+  }
+
+  if (!isGetTeamLoading && !isGetInvitedLoading) {
+    if (isNullObject(getTeamData[1])) {
+      navigation("/leader-board/teams/create");
+    }
+  }
 
   return (
     <motion.main
@@ -118,20 +147,23 @@ export default function AddTeamMate() {
               <img
                 className="w-full h-full object-contain shadow-[0_4px_6px_0_rgba(0,0,0,0.27)]"
                 src={
-                  teamImage
-                    ? require(`images/common/flags/${teamImage}`)
+                  !isNullObject(getTeamData[1])
+                    ? require(`images/common/flags/${FindFlagAdd(
+                        +getTeamData[1]?.avator_code
+                      )}`)
                     : require(`images/common/flags/41.png`)
                 }
                 alt="team"
               />
+              {console.log("team data : ", getTeamData)}
             </figure>
 
             <div className="mr-4 flex flex-col justify-center">
               <h2 className="text-[18px] text-white font-dana-demibold">
-                تیم «{userInfo[1]?.name}»
+                تیم «{getTeamData[1]?.name}»
               </h2>
               <span className="text-sm text-white opacity-60 font-dana-regular mt-4 block">
-                مجموع امتیاز : {userInfo[1]?.total_score}
+                مجموع امتیاز : {getTeamData[1]?.total_score}
               </span>
             </div>
           </div>
@@ -160,58 +192,75 @@ export default function AddTeamMate() {
               <dl className="list-none flex flex-col gap-y-2 mt-4 2xl:mt-4">
                 <dt className="font-dana-regular text-sm text-[#3f8dcd] leading-8">
                   هم تیمی ها
+                  {console.log(getTeamData[1])}
                 </dt>
 
-                {[...Array(4)].map((e, i) => (
-                  <dd
-                    key={i}
-                    className="p-2 flex items-center rounded-[10px] relative overflow-hidden bg-[rgba(255,255,255,0.1)]"
-                  >
-                    <div className="w-9 h-9 overflow-hidden rounded-full border-2 border-white ml-2">
+                {!isNullObject(getTeamData[1]) &&
+                  getTeamData[1]?.members?.map((member) => (
+                    <dd
+                      key={member.id}
+                      className="p-2 flex items-center rounded-[10px] relative overflow-hidden bg-[rgba(255,255,255,0.1)]"
+                    >
+                      <div className="w-9 h-9 overflow-hidden rounded-full border-2 border-white ml-2">
+                        <img
+                          className="w-full h-full object-cover"
+                          src={
+                            member?.avatar_code
+                              ? require(`images/common/avatars/${FindAvatarAdd(
+                                  +member.avatar_code
+                                )}`)
+                              : require("images/home/board-avatar.webp")
+                          }
+                          alt="team-logo"
+                        />
+                      </div>
+
+                      <span className="text-base text-white text-right font-dana-medium ml-auto leading-[1.81] block mt-1">
+                        {member?.mobile
+                          ? hidePhoneNumber(String(member?.mobile))
+                          : "--"}
+                      </span>
+
+                      <span className="text-xs text-white font-dana-regular mt-1 text-opacity-80">
+                        در تیم قرار گرفت
+                      </span>
+                    </dd>
+                  ))}
+              </dl>
+
+              {invitedData.length ? (
+                <dl className="list-none flex flex-col gap-y-2 mt-6">
+                  <dt className="font-dana-regular text-sm text-[#3f8dcd] leading-8">
+                    دوستان دعوت شده
+                  </dt>
+
+                  {invitedData?.map((user, i) => (
+                    <dd
+                      key={user.mobile}
+                      className="p-2 flex items-center rounded-[10px] relative overflow-hidden bg-[rgba(255,255,255,0.1)]"
+                    >
+                      <span
+                        className="text-base text-white text-right font-dana-medium ml-auto leading-[1.81] block mt-1"
+                        dir="ltr"
+                      >
+                        {user?.mobile
+                          ? hidePhoneNumber(String(user?.mobile))
+                          : "--"}
+                      </span>
+
+                      <span className="text-xs text-white font-dana-regular ml-2 mt-1 text-opacity-80">
+                        پیام ارسال شده
+                      </span>
+
                       <img
-                        className="w-full h-full object-cover"
-                        src={require("images/home/board-avatar.webp")}
-                        alt="team-logo"
+                        className="w-6 h-6 object-contain"
+                        src={EnvelopeIcon}
+                        alt="envelope icon"
                       />
-                    </div>
-
-                    <span className="text-base text-white text-right font-dana-medium ml-auto leading-[1.81] block mt-1">
-                      09123457689
-                    </span>
-
-                    <span className="text-xs text-white font-dana-regular mt-1 text-opacity-80">
-                      در تیم قرار گرفت
-                    </span>
-                  </dd>
-                ))}
-              </dl>
-
-              <dl className="list-none flex flex-col gap-y-2 mt-6">
-                <dt className="font-dana-regular text-sm text-[#3f8dcd] leading-8">
-                  دوستان دعوت شده
-                </dt>
-
-                {[...Array(3)].map((e, i) => (
-                  <dd
-                    key={i}
-                    className="p-2 flex items-center rounded-[10px] relative overflow-hidden bg-[rgba(255,255,255,0.1)]"
-                  >
-                    <span className="text-base text-white text-right font-dana-medium ml-auto leading-[1.81] block mt-1">
-                      09123457689
-                    </span>
-
-                    <span className="text-xs text-white font-dana-regular ml-2 mt-1 text-opacity-80">
-                      پیام ارسال شده
-                    </span>
-
-                    <img
-                      className="w-6 h-6 object-contain"
-                      src={EnvelopeIcon}
-                      alt="envelope icon"
-                    />
-                  </dd>
-                ))}
-              </dl>
+                    </dd>
+                  ))}
+                </dl>
+              ) : null}
             </div>
           </div>
         </div>
@@ -258,7 +307,7 @@ export default function AddTeamMate() {
 
           <div className="flex items-center bg-[#ddd] rounded-[10px] bg-opacity-30 mt-4 p-[3px]">
             <span className="block font-dana-regular text-[#4c4c4c] text-xs leading-[1.8] ml-auto mr-2 mt-1 max-w-[215px] overflow-hidden">
-              {userInfo[0]?.unique_code || "--"}
+              {getTeamData[0]?.unique_code || "--"}
             </span>
 
             <button
@@ -311,7 +360,7 @@ export default function AddTeamMate() {
 
           <div className="flex items-center bg-[#ddd] rounded-[10px] bg-opacity-30 mt-4 p-[3px]">
             <span className="block font-dana-regular text-[#4c4c4c] text-xs leading-[1.8] ml-auto mr-2 mt-1 max-w-[215px] overflow-hidden">
-              {userInfo[0]?.unique_code || "--"}
+              {getTeamData[0]?.unique_code || "--"}
             </span>
 
             <button
