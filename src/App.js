@@ -54,30 +54,30 @@ export default function App() {
                   </PrivateRoute>
                 }
               />
-              <Route
+              {/* <Route
                 path="leader-board/individual"
                 element={
                   <PrivateRoute>
                     <PersonalLeaderBoard />
                   </PrivateRoute>
                 }
-              />
-              <Route
+              /> */}
+              {/* <Route
                 path="leader-board/teams"
                 element={
                   <PrivateRoute>
                     <TeamLeaderBoard />
                   </PrivateRoute>
                 }
-              />
-              <Route
+              /> */}
+              {/* <Route
                 path="leader-board/invitees"
                 element={
                   <PrivateRoute>
                     <Invitees />
                   </PrivateRoute>
                 }
-              />
+              /> */}
               <Route
                 path="leader-board/teams/my-team"
                 element={
