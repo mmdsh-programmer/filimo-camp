@@ -30,11 +30,11 @@ export default function Games() {
   };
 
   const handleSubmit = async () => {
-    if (+finalScore >= 500) {
-      navigator("/");
-    } else {
-      setOpenEndModal(false);
-    }
+    // if (+finalScore >= 500) {
+
+    // } else {
+    //   setOpenEndModal(false);
+    // }
 
     const raw = JSON.stringify({
       value: +finalScore >= 500 ? 500 : +finalScore,
@@ -50,6 +50,7 @@ export default function Games() {
 
     if (!("ERROR" in sendScore)) {
       toast.success("امتیاز بازی با موفقیت ذخیره شد");
+      navigator("/");
     } else {
     }
   };

@@ -104,7 +104,6 @@ export const avatars = [
 ];
 
 export const FindAvatarAdd = (id, status) => {
-  debugger;
   let result;
   if (id !== undefined && typeof id == "number" && !isNaN(id)) {
     avatars.map((item, index) => {

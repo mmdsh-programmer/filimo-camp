@@ -115,7 +115,9 @@ export default function AddTeamMate() {
 
   const copyToClipBoard = () => {
     setIsCopied(true);
-    navigator.clipboard.writeText(getTeamData[0]?.unique_code);
+    navigator.clipboard.writeText(
+      `${process.env.PUBLIC_URL}/join-team/${getTeamData[0]?.id}`
+    );
     setTimeout(() => {
       setIsCopied(false);
     }, 2000);
@@ -235,7 +237,7 @@ export default function AddTeamMate() {
                       </span>
 
                       <span className="text-xs text-white font-dana-regular mt-1 text-opacity-80">
-                        در تیم قرار گرفت
+                        {member?.total_score}
                       </span>
                     </dd>
                   ))}
@@ -328,14 +330,14 @@ export default function AddTeamMate() {
 
           <div className="flex items-center bg-[#ddd] rounded-[10px] bg-opacity-30 mt-4 p-[3px]">
             <span className="block font-dana-regular text-[#4c4c4c] text-xs leading-[1.8] ml-auto mr-2 mt-1 max-w-[215px] overflow-hidden">
-              {getTeamData[0]?.unique_code || "--"}
+              {`${process.env.PUBLIC_URL}/join-team/${getTeamData[0]?.id}`}
             </span>
 
             <button
               className="font-dana-medium text-sm text-[#f78e32] py-3 px-2 bg-white rounded-[10px]"
               onClick={copyToClipBoard}
             >
-              {isCopied ? "کپی شد" : "کپی کد معرف"}
+              {isCopied ? "کپی شد" : "کپی لینک دعوت"}
             </button>
           </div>
 
@@ -381,14 +383,14 @@ export default function AddTeamMate() {
 
           <div className="flex items-center bg-[#ddd] rounded-[10px] bg-opacity-30 mt-4 p-[3px]">
             <span className="block font-dana-regular text-[#4c4c4c] text-xs leading-[1.8] ml-auto mr-2 mt-1 max-w-[215px] overflow-hidden">
-              {getTeamData[0]?.unique_code || "--"}
+              {`${process.env.PUBLIC_URL}/join-team/${getTeamData[0]?.id}`}
             </span>
 
             <button
               className="font-dana-medium text-sm text-[#f78e32] py-3 px-2 bg-white rounded-[10px]"
               onClick={copyToClipBoard}
             >
-              {isCopied ? "کپی شد" : "کپی کد معرف"}
+              {isCopied ? "کپی شد" : "کپی لینک دعوت"}
             </button>
           </div>
 
