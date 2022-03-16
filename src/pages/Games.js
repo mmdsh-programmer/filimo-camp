@@ -13,7 +13,6 @@ export default function Games() {
   const [finalScore, setFinalScore] = useState(0);
   const [modalText, setModalText] = useState("");
   const storageAddress = useRef(null);
-  const [isFirstTime, setIsFirstTime] = useState(true);
 
   const syncScore = () => {
     if (localStorage.getItem(storageAddress.current) !== null) {
@@ -41,15 +40,11 @@ export default function Games() {
       value: +finalScore >= 500 ? 500 : +finalScore,
     });
     const idGame = localStorage.getItem(`GameIdFilimoCam::${id}`);
- 
+
     const sendScore = await Fetch({
       url: `http://37.152.185.94:8001/user/play-game/${idGame}/`,
       method: "POST",
       data: raw,
-      // headers: {
-      //   "X-CSRFToken":
-      //     "EtWI8gO2TPYM5O2iMrzmmjRwL11vnrZUqlUkGYNxXOptltPJk9AABsUKaO8sBeH0",
-      // },
       redirect: "follow",
     });
 
@@ -59,6 +54,10 @@ export default function Games() {
     }
   };
 
+  const handleCloseModal = () => {
+    setOpenEndModal(false);
+  };
+
   useEffect(() => {
     if (localStorage.getItem(`GameIdFilimoCam::${id}`) === null) {
       navigator("/");
@@ -66,54 +65,54 @@ export default function Games() {
     switch (+id) {
       case 1:
       case 9:
-        localStorage.removeItem('tap_the_tile_score');
+        localStorage.removeItem("tap_the_tile_score");
         setGameSource("../games/tap-the-tile/index.html");
         storageAddress.current = "tap_the_tile_score";
         break;
       case 2:
       case 10:
-        localStorage.removeItem('bubble_shooter_score');
+        localStorage.removeItem("bubble_shooter_score");
 
         setGameSource("../games/bubble-shooter/index.html");
         storageAddress.current = "bubble_shooter_score";
         break;
       case 3:
       case 11:
-        localStorage.removeItem('jelly_island_score');
+        localStorage.removeItem("jelly_island_score");
 
         setGameSource("../games/jelly-island/index.html");
         storageAddress.current = "jelly_island_score";
         break;
       case 4:
       case 12:
-        localStorage.removeItem('lights_score');
+        localStorage.removeItem("lights_score");
 
         setGameSource("../games/lights/index.html");
         storageAddress.current = "lights_score";
         break;
       case 5:
       case 13:
-        localStorage.removeItem('sourcerer_score');
-        
+        localStorage.removeItem("sourcerer_score");
+
         setGameSource("../games/sourcerer/index.html");
         storageAddress.current = "sourcerer_score";
         break;
       case 6:
       case 14:
-        localStorage.removeItem('2048_score');
-        
+        localStorage.removeItem("2048_score");
+
         setGameSource("../games/2048/index.html");
         storageAddress.current = "2048_score";
         break;
       case 7:
       case 15:
-        localStorage.removeItem('box_tower_score');
+        localStorage.removeItem("box_tower_score");
 
         setGameSource("../games/box-tower/index.html");
         storageAddress.current = "box_tower_score";
         break;
       case 8:
-        localStorage.removeItem('maze_score');
+        localStorage.removeItem("maze_score");
 
         setGameSource("../games/maze/index.html");
         storageAddress.current = "maze_score";
@@ -151,15 +150,21 @@ export default function Games() {
             نتیجه بازی
           </h2>
 
-          <p className="mt-2 text-xs font-dana-regular leading-6">
+          <p className="mt-2 text-base font-dana-regular leading-6">
             امتیاز شما از این بازی : {finalScore}
             <br />
             {modalText}
           </p>
 
           <Button type="primary" style="mt-4" onClick={handleSubmit}>
-            تایید
+            پایان بازی
           </Button>
+
+          {+finalScore < 500 && (
+            <Button type="secondary" style="mt-2" onClick={handleCloseModal}>
+              ادامه
+            </Button>
+          )}
         </div>
       </Modal>
     </Fragment>

@@ -104,28 +104,25 @@ export const avatars = [
 ];
 
 export const FindAvatarAdd = (id, status) => {
+  debugger;
   let result;
-  if (id !== undefined && typeof id == 'number' && !isNaN(id)) {
+  if (id !== undefined && typeof id == "number" && !isNaN(id)) {
     avatars.map((item, index) => {
       if (id === item.id) {
         result = item.mainUrl;
-        if (status === 'sad') {
+        if (status === "sad") {
           result = item.sadUrl;
-        } else if(status === 'happy'){
+        } else if (status === "happy") {
           result = item.happyUrl;
         }
       }
     });
     if (result === undefined) {
-      return '50.png'
+      return "50.png";
     } else {
       return String(result);
-
     }
-
+  } else {
+    return "11.png";
   }
-  else {
-    return '11.png'
-  }
-
-}
+};
