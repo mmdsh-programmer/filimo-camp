@@ -41,7 +41,7 @@ export default function Games() {
       value: +finalScore >= 500 ? 500 : +finalScore,
     });
     const idGame = localStorage.getItem(`GameIdFilimoCam::${id}`);
-    debugger;
+ 
     const sendScore = await Fetch({
       url: `http://37.152.185.94:8001/user/play-game/${idGame}/`,
       method: "POST",

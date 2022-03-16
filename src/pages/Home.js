@@ -2334,7 +2334,7 @@ export default function Home() {
               <Button
                 style={"flex-[1_1_152px] relative"}
                 type="primary"
-                onClick={() => { handleLevelClick(Math.floor(daydiff.current)); debugger }}
+                onClick={() => { handleLevelClick(Math.floor(daydiff.current)) }}
               >
                 <span className="my-1 block">چالش</span>
               </Button>
@@ -2477,7 +2477,7 @@ export default function Home() {
                   ایجاد تیم
                 </Link>
 
-                <Button type="primary" onClick={() => { handleLevelClick(Math.floor(daydiff.current)); debugger; }}
+                <Button type="primary" onClick={() => { handleLevelClick(Math.floor(daydiff.current));  }}
                 >
                   <span className="my-1 block">چالش</span>
                 </Button>
