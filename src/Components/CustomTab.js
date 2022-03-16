@@ -17,6 +17,9 @@ export default function CustomTab() {
   const [userLeaderBoardData, setuserLeaderBoardData] = useState([]);
   const [teamLeaderBoardData, setteamLeaderBoardData] = useState([]);
   const [userReferralLeaderBoardData, setuserReferralLeaderBoardData] = useState([]);
+  let user_referral_rank = useRef();
+  let user_rank = useRef();
+  let team_rank = useRef()
 
   let userFilimoID;
   let teamID;
@@ -30,9 +33,11 @@ export default function CustomTab() {
     if (!('ERROR' in userLeaderBoardUrl)) {
 
 
-      setuserLeaderBoardData(userLeaderBoardUrl?.data.data);
+      setuserLeaderBoardData(userLeaderBoardUrl?.data.data.board);
 
+      user_rank.current = userLeaderBoardUrl?.data.data.user_rank;
 
+      debugger
     } else {
 
     }
@@ -46,8 +51,8 @@ export default function CustomTab() {
 
     if (!('ERROR' in teamLeaderBoardUrl)) {
 
-      setteamLeaderBoardData(teamLeaderBoardUrl?.data.data)
-
+      setteamLeaderBoardData(teamLeaderBoardUrl?.data.data.board)
+      team_rank.current = teamLeaderBoardUrl?.data.data.team_rank;
 
     } else {
 
@@ -62,7 +67,8 @@ export default function CustomTab() {
 
     if (!('ERROR' in userReferralLeaderBoardURL)) {
 
-      setuserReferralLeaderBoardData(userReferralLeaderBoardURL?.data.data);
+      setuserReferralLeaderBoardData(userReferralLeaderBoardURL?.data.data.board);
+      user_referral_rank.current = userReferralLeaderBoardURL?.data.data.user_referral_rank;
 
 
     } else {
@@ -120,15 +126,15 @@ export default function CustomTab() {
             <ul className="list-none flex flex-col gap-y-2 mt-4">
               {userLeaderBoardData.map((e, i) => {
                 // console.log(userLeaderBoardData.current);
-                  
-                if (e.filimo_id === userFilimoID) {
+                debugger;
+                if (i + 1 === user_rank.current) {
                   return (
                     <li>
-                      <div className="w-full h-full flex flex-col px-[22px]">
+                      {!(user_rank.current === 1) ? (<div className="w-full h-full flex flex-col px-[22px]">
                         <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
                         <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
                         <span className="w-1 h-1 opacity-40 bg-[#333] mb-2 rounded-full"></span>
-                      </div>
+                      </div>) : null}
                       <Link
                         to={`/leader-board/$
                       "individual"
@@ -160,11 +166,14 @@ export default function CustomTab() {
                           alt="star logo"
                         />
                       </Link>
-                      <div className="w-full h-full flex flex-col px-[22px]">
+                      {!(user_rank.current >= 10) ? (<div className="w-full h-full flex flex-col px-[22px]">
                         <span className="w-1 h-1 opacity-40 bg-[#333] mt-2 mb-[3px] rounded-full"></span>
                         <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
                         <span className="w-1 h-1 opacity-40 bg-[#333] rounded-full"></span>
-                      </div>
+                      </div>) : null
+                      }
+                      {/* } */}
+
                     </li>
 
                   )
@@ -231,13 +240,13 @@ export default function CustomTab() {
           <Tab.Panel className={classNames("bg-white")}>
             <ul className="list-none flex flex-col gap-y-2 mt-4">
               {teamLeaderBoardData.map((e, i) => {
-                if (e.id === teamID) {
+                if (i + 1 === team_rank.current) {
                   return (<li>
-                    <div className="w-full h-full flex flex-col px-[22px]">
+                    {!(team_rank.current === 1) ? (<div className="w-full h-full flex flex-col px-[22px]">
                       <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
                       <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
                       <span className="w-1 h-1 opacity-40 bg-[#333] mb-2 rounded-full"></span>
-                    </div>
+                    </div>) : null}
                     <Link
                       to={`/leader-board/$
                           "individual"
@@ -255,7 +264,7 @@ export default function CustomTab() {
                       </div>
 
                       <span className="text-base text-[#170d53] font-semibold text-right font-dana-regular ml-auto mt-1">
-                        شما
+                        تیم شما
                       </span>
 
                       <span className="text-sm text-[#170d53] font-semibold font-dana-regular ml-2 mt-1">
@@ -268,11 +277,12 @@ export default function CustomTab() {
                         alt="star logo"
                       />
                     </Link>
-                    <div className="w-full h-full flex flex-col px-[22px]">
-                      <span className="w-1 h-1 opacity-40 bg-[#333] mt-2 mb-[3px] rounded-full"></span>
-                      <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
-                      <span className="w-1 h-1 opacity-40 bg-[#333] rounded-full"></span>
-                    </div>
+                    {!(team_rank.current >= 10) ?
+                      (<div className="w-full h-full flex flex-col px-[22px]">
+                        <span className="w-1 h-1 opacity-40 bg-[#333] mt-2 mb-[3px] rounded-full"></span>
+                        <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
+                        <span className="w-1 h-1 opacity-40 bg-[#333] rounded-full"></span>
+                      </div>) : null}
                   </li>)
                 }
                 else {
@@ -333,51 +343,52 @@ export default function CustomTab() {
           <Tab.Panel className={classNames("bg-white")}>
             <ul className="list-none flex flex-col gap-y-2 mt-4">
               {userReferralLeaderBoardData.map((e, i) => {
-                if (e.filimo_id === userFilimoID) {
-                  return(
-                  <li>
-                    <div className="w-full h-full flex flex-col px-[22px]">
-                      <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
-                      <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
-                      <span className="w-1 h-1 opacity-40 bg-[#333] mb-2 rounded-full"></span>
-                    </div>
-                    <Link
-                      to={`/leader-board/$
+                if (i + 1 === team_rank.current) {
+                  return (
+                    <li>
+                      {!(user_rank.current === 1) ? (<div className="w-full h-full flex flex-col px-[22px]">
+                        <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
+                        <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
+                        <span className="w-1 h-1 opacity-40 bg-[#333] mb-2 rounded-full"></span>
+                      </div>) : null}
+
+                      <Link
+                        to={`/leader-board/$
                         "individual"
                        `}
-                      className="flex items-center p-2 rounded-[10px] bg-[#acffd2] relative you"
-                    >
-                      <div className="ml-2">
-                        <div className="w-9 h-9 overflow-hidden rounded-full border-2 border-white">
-                          <img
-                            className="w-full h-full object-cover"
-                            src={e.avator_code ? require(`images/common/avatars/${FindAvatarAdd(parseInt(e.avatar_code))}`) : require(`images/common/avatars/${FindAvatarAdd(217)}`)}
+                        className="flex items-center p-2 rounded-[10px] bg-[#acffd2] relative you"
+                      >
+                        <div className="ml-2">
+                          <div className="w-9 h-9 overflow-hidden rounded-full border-2 border-white">
+                            <img
+                              className="w-full h-full object-cover"
+                              src={e.avator_code ? require(`images/common/avatars/${FindAvatarAdd(parseInt(e.avatar_code))}`) : require(`images/common/avatars/${FindAvatarAdd(217)}`)}
 
-                            alt="team-logo"
-                          />
+                              alt="team-logo"
+                            />
+                          </div>
                         </div>
-                      </div>
 
-                      <span className="text-base text-[#170d53] font-semibold text-right font-dana-regular ml-auto mt-1">
-                        شما
-                      </span>
+                        <span className="text-base text-[#170d53] font-semibold text-right font-dana-regular ml-auto mt-1">
+                          شما
+                        </span>
 
-                      <span className="text-sm text-[#170d53] font-semibold font-dana-regular ml-2 mt-1">
-                        {e.ref_score}
-                      </span>
+                        <span className="text-sm text-[#170d53] font-semibold font-dana-regular ml-2 mt-1">
+                          {e.ref_score}
+                        </span>
 
-                      <img
-                        src={BlueAddUserIcon}
-                        className="w-4 h-4 object-contain"
-                        alt="star logo"
-                      />
-                    </Link>
-                    <div className="w-full h-full flex flex-col px-[22px]">
-                      <span className="w-1 h-1 opacity-40 bg-[#333] mt-2 mb-[3px] rounded-full"></span>
-                      <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
-                      <span className="w-1 h-1 opacity-40 bg-[#333] rounded-full"></span>
-                    </div>
-                  </li>)
+                        <img
+                          src={BlueAddUserIcon}
+                          className="w-4 h-4 object-contain"
+                          alt="star logo"
+                        />
+                      </Link>
+                      {!(user_rank.current >= 10) ? (<div className="w-full h-full flex flex-col px-[22px]">
+                        <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
+                        <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
+                        <span className="w-1 h-1 opacity-40 bg-[#333] mb-2 rounded-full"></span>
+                      </div>) : null}
+                    </li>)
                 }
                 else {
                   return (
