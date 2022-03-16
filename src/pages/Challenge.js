@@ -1,27 +1,79 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Button from "Components/Button";
 import Modal from "Components/Modal";
 import CloseIcon from "icons/modal/close.svg";
 import StarIcon from "icons/home/star.svg";
 import { motion } from "framer-motion";
-import { Fragment } from "react/cjs/react.production.min";
+import { Fragment, } from "react/cjs/react.production.min";
 import Header from "Components/Header";
 import FilimoLogo from "icons/common/filimo-logo.svg";
 import { Link } from "react-router-dom";
-
+import Fetch from "Helper/Fetch";
+import { useLocation } from "react-router-dom";
+import {userData} from 'Helper/helperFunc'
+import {FindAvatarAdd} from 'Helper/avatars'
 export default function Challenge() {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [openSuccessModal, setOpenSuccessModal] = useState(false);
   const [openUnsuccessModal, setOpenUnSuccessModal] = useState(false);
-
+  const [questionDetails, setquestionDetails] = useState({});
+  const location = useLocation();
+  let [level, setLevel] = useState('');
+  let levelID = useRef('');
+  const [valueGame, setvalueGame] = useState();
+  const [userAvatar, setuserAvatar] = useState();
   const handleSelection = ({ target: { value } }) => {
+
     setSelectedAnswer(value);
+
   };
 
   const handleSubmit = (e) => {
+
     e.preventDefault();
-    selectedAnswer === "قرمز" ? handleOpenSuccess() : handleOpenUnsuccess();
+    setAns()
+
+
   };
+  const setAns = async () => {
+
+    var raw = JSON.stringify({
+      "quiz_id": String(questionDetails.id),
+      "choice_id": String(selectedAnswer)
+    });
+    var id = 6;
+
+    const ansURL = await Fetch({
+      url: `http://37.152.185.94:8001/user/play-quiz/${levelID.current}/`,
+      method: 'POST',
+      data: raw,
+      redirect: 'follow'
+    });
+    if (!('ERROR' in ansURL)) {
+      setvalueGame(ansURL.data.data.value);
+      ansURL.data.data.result ? handleOpenSuccess() : handleOpenUnsuccess();
+
+    }
+    else {
+
+    }
+
+  }
+  const getQuestion = async () => {
+    const loginUrl = await Fetch({
+      url: 'http://37.152.185.94:8001/user/get-quiz/',
+      method: 'GET',
+      redirect: 'follow'
+    });
+    if (!('ERROR' in loginUrl)) {
+      setquestionDetails({ ...loginUrl.data.data });
+
+
+    }
+    else {
+
+    }
+  }
 
   const handleOpenSuccess = () => {
     setOpenSuccessModal(true);
@@ -38,7 +90,14 @@ export default function Challenge() {
   const handleCloseUnsuccess = () => {
     setOpenUnSuccessModal(false);
   };
-
+  useEffect(async () => {
+    await getQuestion();
+    setLevel(location.pathname.split('/')[2].split('-')[0]);
+    levelID.current = location.pathname.split('/')[2].split('-')[1];
+    let avatarid= await userData()
+    setuserAvatar(avatarid[0].avatar_code)
+  }, [])
+  useEffect(() => { }, [level]);
   return (
     <Fragment>
       <Header />
@@ -58,7 +117,7 @@ export default function Challenge() {
               </h1>
 
               <span className="font-dana-regular text-xs text-[#7c7c7c]">
-                مرحله ۱۴
+                مرحله {level}
               </span>
 
               <Link
@@ -76,83 +135,35 @@ export default function Challenge() {
             </div>
 
             <h2 className="text-base mt-10 mb-14 text-white font-dana-regular">
-              کلاه شخصیت کلاه‌قرمزی چه رنگی است؟
+              {questionDetails?.question}
             </h2>
 
             <div className="mt-auto">
               <form>
                 <ul className="flex flex-col gap-y-2">
-                  <li className="relative rounded-[10px] bg-[#f9f9f9] bg-opacity-10 overflow-hidden">
-                    <input
-                      className="sr-only peer"
-                      type="radio"
-                      value="نارنجی"
-                      name="answer"
-                      id="answer_1"
-                      onChange={handleSelection}
-                    />
-                    <label
-                      className="font-dana-regular text-sm text-white flex p-2 pt-[10px] leading-[2.07] cursor-pointer 
+                  {questionDetails.choices?.map((item, index) => {
+                    return (
+                      <li className="relative rounded-[10px] bg-[#f9f9f9] bg-opacity-10 overflow-hidden">
+                        <input
+                          className="sr-only peer"
+                          type="radio"
+                          value={item.id}
+                          name="answer"
+                          id={`answer_${index}`}
+                          onChange={handleSelection}
+                        />
+                        <label
+                          className="font-dana-regular text-sm text-white flex p-2 pt-[10px] leading-[2.07] cursor-pointer 
                       peer-checked:bg-white peer-checked:text-black peer-checked:font-dana-medium peer-checked:ring-2 peer-checked:border-transparent"
-                      htmlFor="answer_1"
-                    >
-                      نارنجی
-                    </label>
-                  </li>
+                          htmlFor={`answer_${index}`}
+                        >
+                          {item.choice}
+                        </label>
+                      </li>)
+                  })}
 
-                  <li className="relative rounded-[10px] bg-[#f9f9f9] bg-opacity-10 overflow-hidden">
-                    <input
-                      className="sr-only peer"
-                      type="radio"
-                      value="قرمز"
-                      name="answer"
-                      id="answer_2"
-                      onChange={handleSelection}
-                    />
-                    <label
-                      className="font-dana-regular text-sm text-white flex p-2 pt-[10px] leading-[2.07] cursor-pointer 
-                      peer-checked:bg-white peer-checked:text-black peer-checked:font-dana-medium peer-checked:ring-2 peer-checked:border-transparent"
-                      htmlFor="answer_2"
-                    >
-                      قرمز
-                    </label>
-                  </li>
 
-                  <li className="relative rounded-[10px] bg-[#f9f9f9] bg-opacity-10 overflow-hidden">
-                    <input
-                      className="sr-only peer"
-                      type="radio"
-                      value="سبز"
-                      name="answer"
-                      id="answer_3"
-                      onChange={handleSelection}
-                    />
-                    <label
-                      className="font-dana-regular text-sm text-white flex p-2 pt-[10px] leading-[2.07] cursor-pointer 
-                      peer-checked:bg-white peer-checked:text-black peer-checked:font-dana-medium peer-checked:ring-2 peer-checked:border-transparent"
-                      htmlFor="answer_3"
-                    >
-                      سبز
-                    </label>
-                  </li>
 
-                  <li className="relative rounded-[10px] bg-[#f9f9f9] bg-opacity-10 overflow-hidden">
-                    <input
-                      className="sr-only peer"
-                      type="radio"
-                      value="آبی"
-                      name="answer"
-                      id="answer_4"
-                      onChange={handleSelection}
-                    />
-                    <label
-                      className="font-dana-regular text-sm text-white flex p-2 pt-[10px] leading-[2.07] cursor-pointer 
-                      peer-checked:bg-white peer-checked:text-black peer-checked:font-dana-medium peer-checked:ring-2 peer-checked:border-transparent"
-                      htmlFor="answer_4"
-                    >
-                      آبی
-                    </label>
-                  </li>
                 </ul>
 
                 <div className="flex w-full fixed bottom-0 left-0 2xl:relative">
@@ -188,7 +199,8 @@ export default function Challenge() {
             <div className="rounded-full overflow-hidden mx-auto w-52 h-52">
               <img
                 className="w-full h-full object-cover"
-                src={require("images/challenge/happy.webp")}
+                src={require(`images/common/avatars/${FindAvatarAdd(parseInt(userAvatar), 'happy')}`)}
+
                 alt="profile image"
               />
             </div>
@@ -206,7 +218,7 @@ export default function Challenge() {
                 امتیاز این مرحله
               </span>
               <span className="font-dana-medium text-xl text-black ml-1 mt-[6px]">
-                5
+                {valueGame}
               </span>
               <img
                 className="w-4 h-4 object-contain"
@@ -215,13 +227,13 @@ export default function Challenge() {
               />
             </div>
 
-            <Button
+            {/* <Button
               type="primary"
               style="w-full mt-14"
               onClick={handleCloseSuccess}
             >
               اشتراک‌گذاری در صفحات اجتماعی
-            </Button>
+            </Button> */}
 
             <Button
               type="secondary"
@@ -249,7 +261,8 @@ export default function Challenge() {
             <div className="rounded-full overflow-hidden mx-auto w-52 h-52">
               <img
                 className="w-full h-full object-cover"
-                src={require("images/challenge/sad.webp")}
+                src={require(`images/common/avatars/${FindAvatarAdd(parseInt(userAvatar), 'sad')}`)}
+
                 alt="profile image"
               />
             </div>
@@ -259,8 +272,8 @@ export default function Challenge() {
             </h6>
 
             <p className="text-center font-dana-regular text-xs text-black leading-9">
-              حالا اشکالی نداره یبار دیگه می‌تونی بازی کنی! <br />فقط
-              حواست باشه برای بازی مجدد ۲۰ امتیاز ازت کسر می‌شه
+              <br />عیبی نداره
+             انشالله فردا بازی میکنی و میبری.
             </p>
 
             <div className="flex items-center border-[1px] border-[#f1f1f1] rounded-[5px] p-2 mt-4">
@@ -268,7 +281,7 @@ export default function Challenge() {
                 امتیاز این مرحله
               </span>
               <span className="font-dana-medium text-xl text-black ml-1 mt-[6px]">
-                -
+                {valueGame}
               </span>
               <img
                 className="w-4 h-4 object-contain"
@@ -280,18 +293,18 @@ export default function Challenge() {
             <div className="flex gap-x-2 mt-6">
               <Button
                 type="secondary"
-                style="w-24"
+                style="w-full mt-2"
                 onClick={handleCloseUnsuccess}
               >
-                بعدا
+                 متوجه شدم
               </Button>
-              <Button
+              {/* <Button
                 type="primary"
                 style="flex-[1]"
                 onClick={handleCloseUnsuccess}
               >
                 دوباره
-              </Button>
+              </Button> */}
             </div>
           </div>
         </Modal>

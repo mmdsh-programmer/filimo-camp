@@ -3,14 +3,17 @@ import SimpleBottomSheet from "Components/SimpleBottomSheet";
 import useWindowSize from "hooks/useWindowSize";
 import Button from "Components/Button";
 import Modal from "Components/Modal";
+import { useLocation } from "react-router-dom";
 
 export default function InvitedModal() {
   const [openInvteBottomSheet, setOpenInviteBottomSheet] = useState(false);
   const [openInviteModal, setOpenInviteModal] = useState(false);
-
+  const location = useLocation();
   const windowSize = useWindowSize();
+  const [teamID, settaeamID] = useState('');
 
   useEffect(() => {
+    settaeamID(location.pathname.split('/')[2]);
     windowSize >= 1440
       ? setOpenInviteModal(true)
       : setOpenInviteBottomSheet(true);
@@ -20,9 +23,9 @@ export default function InvitedModal() {
     return phoneNumber.replace(phoneNumber.substr(4, 3), "***");
   };
 
-  const handleAccept = () => {};
+  const handleAccept = () => { };
 
-  const handleReject = () => {};
+  const handleReject = () => { };
 
   return (
     <main className="min-h-screen">
