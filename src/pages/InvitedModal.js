@@ -1,19 +1,34 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import SimpleBottomSheet from "Components/SimpleBottomSheet";
 import useWindowSize from "hooks/useWindowSize";
+import { useNavigate } from "react-router-dom";
 import Button from "Components/Button";
 import Modal from "Components/Modal";
 import { useLocation } from "react-router-dom";
+import { toast } from "react-toastify";
+import Fetch from "Helper/Fetch";
+import {isAuth} from 'Helper/Auth'
 
 export default function InvitedModal() {
   const [openInvteBottomSheet, setOpenInviteBottomSheet] = useState(false);
   const [openInviteModal, setOpenInviteModal] = useState(false);
   const location = useLocation();
   const windowSize = useWindowSize();
-  const [teamID, settaeamID] = useState('');
+  const navigator = useNavigate();
+
+  const teamID = useRef('');
 
   useEffect(() => {
-    settaeamID(location.pathname.split('/')[2]);
+    teamID.current = location.pathname.split('/')[2];
+    sessionStorage.setItem('filimo:inviteteamID', teamID.current);
+    if (isAuth()) {
+      
+    }
+    else {
+      navigator('/');
+
+    }
+
     windowSize >= 1440
       ? setOpenInviteModal(true)
       : setOpenInviteBottomSheet(true);
@@ -23,9 +38,27 @@ export default function InvitedModal() {
     return phoneNumber.replace(phoneNumber.substr(4, 3), "***");
   };
 
-  const handleAccept = () => { };
+  const handleAccept = async () => {
+    const loginUrl = await Fetch({
+      url: `http://37.152.185.94:8001/user/join-team/${teamID.current}/`,
+      method: 'GET',
+      redirect: 'follow'
+    });
+    if (!('ERROR' in loginUrl)) {
+     toast.success('شما به تیم ملحق شدید.');
+     navigator('/');
 
-  const handleReject = () => { };
+    }
+    else {
+     
+    }
+  };
+
+  const handleReject = () => {
+    toast.error('عضویت شما در تیم لغو شد.')
+    navigator('/');
+
+  };
 
   return (
     <main className="min-h-screen">
