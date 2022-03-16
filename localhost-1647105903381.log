@@ -1,0 +1,99 @@
+avatar_code: null
+date_time: "2022-03-12T15:20:33.120909+03:30"
+filimo_id: "257643"
+id: 19
+is_challenge_unlock: false
+is_play_again: false
+is_team_head: true
+is_team_member: true
+mobile: null
+total_score: 741
+unique_code: "b9d74"
+user_name: null
+
+
+
+
+avator_code: "101"
+id: 4
+members: [{…}]
+name: "شیر آبی"
+team_leader: 19
+total_score: 0
+
+
+
+name: "پوستر"
+poster1: "http://37.152.185.94:8001/media/poster/images.jpg"
+poster2: "http://37.152.185.94:8001/media/poster/cq1ndsj6.jpg"
+
+
+
+
+avatar_code: null
+filimo_id: "257643"
+id: 19
+mobile: null
+total_score: 741
+user_name: null
+user_rank: 1
+
+
+avator_code: "e21"
+id: 1
+name: "pers"
+total_score: 0
+
+
+avatar_code: null
+filimo_id: "852411"
+id: 14
+mobile: null
+ref_score: 751
+referral_rank: 1
+user_name: null
+
+                              src={e.avator_code ? require(`images/common/avatars/${FindAvatarAdd(e.avatar_code)}`) : require(`images/common/avatars/${FindAvatarAdd(217)}`)}
+
+
+can_play_again: true
+casual_levels: Array(2)
+0: {id: 4, level: 1, name: 'مرحله 1 - بازی کژوال', unlock: false, value: 50}
+1: {id: 5, level: 2, name: 'مرحله 2 - بازی کژوال', unlock: false, value: 50}
+length: 2
+[[Prototype]]: Array(0)
+mission_levels: Array(4)
+0: {id: 6, level: 1, name: 'مرحله 1 - بازی ماموریتی', unlock: false, value: 50}
+1: {id: 7, level: 2, name: 'مرحله 2 - بازی ماموریتی', unlock: false, value: 50}
+2: {id: 14, level: 3, name: 'مرحله 3 - بازی ماموریتی', unlock: false, value: 50}
+3: {id: 15, level: 4, name: 'مرحله 4 - بازی ماموریتی', unlock: false, value: 50}
+length: 4
+[[Prototype]]: Array(0)
+user_played_levels: Array(0)
+length: 0
+[[Prototype]]: Array(0)
+
+
+
+
+avatar_code: null
+date_time: "2022-03-13T21:17:11.010870+03:30"
+filimo_id: "858585"
+id: 31
+is_challenge_unlock: false
+is_play_again: false
+is_team_head: true
+is_team_member: true
+mobile: "989309264100"
+total_score: 0
+unique_code: "39e65"
+user_name: null
+
+
+
+casual_score: 0
+mission_score: 0
+referral_score: 0
+watch_time_score: 0
+
+userScorsTable

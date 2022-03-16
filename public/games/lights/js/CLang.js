@@ -1,0 +1,31 @@
+var TEXT_HELP1              = "همه سیم‌ها رو به هم وصل کن تا همه چراغ‌ها روشن بشن";
+var TEXT_HELP2              = "رو هر سیم بزن تا بچرخه.  حواست به زمان هم باشه که بیشترین امتیاز رو بگیری";
+var TEXT_SELECT_LEVEL       = "یک مرحله انتخاب کنید";
+var TEXT_SELECT             = "میزان سختی بازی را مشخص کنید";
+var TEXT_EASY               = "آسان";
+var TEXT_MEDIUM             = "معمولی";
+var TEXT_HARD               = "سخت";
+var TEXT_EXTREME            = "خیلی سخت";
+var TEXT_LEVEL              = "مرحله";
+var TEXT_PTS                = "امتیاز";
+var TEXT_TIME               = "زمان";
+var TEXT_MULTIPLIER         = "امتیاز سختی: ";
+var TEXT_YOUR_BEST_SCORE    = "بهترین امتیاز: ";
+var TEXT_TOTAL_SCORE        = "بیشترین امتیاز: ";
+var TEXT_CONGRATS           = "آفرین!";
+var TEXT_YOU_MADE           = "";
+var TEXT_GAMEOVER           = "وقتت تموم شد!";
+var TEXT_END_PANEL          = "امتیاز نهایی شما";
+var TEXT_ARE_SURE           = "واقعا میخوای که خارج بشی؟ همه امتیازات حذف میشن!";
+var TEXT_DIFFICULTY         = [TEXT_EASY, TEXT_MEDIUM, TEXT_HARD, TEXT_EXTREME];
+
+var TEXT_PRELOADER_CONTINUE = "شروع";
+var TEXT_CREDITS_DEVELOPED  = "DEVELOPED BY";
+var TEXT_ERR_LS             = "YOUR WEB BROWSER DOES NOT SUPPORT STORING SETTING LOCALLY. IN SAFARI, THE MOST COMMON CAUSE OF THIS IS USING 'PRIVATE BROWSING MODE'. SOME INFO MAY NOT SAVE OR SOME FEATURE MAY NOT WORK PROPERLY.";
+
+var TEXT_SHARE_IMAGE        = "200x200.jpg";
+var TEXT_SHARE_TITLE        = "Congratulations!";
+var TEXT_SHARE_MSG1         = "You collected <strong>";
+var TEXT_SHARE_MSG2         = " points</strong>!<br><br>Share your score with your friends!";
+var TEXT_SHARE_SHARE1       = "My score is ";
+var TEXT_SHARE_SHARE2       = " points! Can you do better";
