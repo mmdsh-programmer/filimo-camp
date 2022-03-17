@@ -9,9 +9,11 @@ import Header from "Components/Header";
 import FilimoLogo from "icons/common/filimo-logo.svg";
 import { Link } from "react-router-dom";
 import Fetch from "Helper/Fetch";
-import { useLocation } from "react-router-dom";
+import { useLocation ,useNavigate} from "react-router-dom";
 import {userData} from 'Helper/helperFunc'
 import {FindAvatarAdd} from 'Helper/avatars'
+
+
 export default function Challenge() {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [openSuccessModal, setOpenSuccessModal] = useState(false);
@@ -19,6 +21,7 @@ export default function Challenge() {
   const [questionDetails, setquestionDetails] = useState({});
   const location = useLocation();
   let [level, setLevel] = useState('');
+  const navigator = useNavigate();
   let levelID = useRef('');
   const [valueGame, setvalueGame] = useState();
   const [userAvatar, setuserAvatar] = useState();
@@ -77,10 +80,13 @@ export default function Challenge() {
 
   const handleOpenSuccess = () => {
     setOpenSuccessModal(true);
+
   };
 
   const handleCloseSuccess = () => {
     setOpenSuccessModal(false);
+    navigator('/');
+
   };
 
   const handleOpenUnsuccess = () => {
@@ -89,6 +95,8 @@ export default function Challenge() {
 
   const handleCloseUnsuccess = () => {
     setOpenUnSuccessModal(false);
+    navigator('/');
+
   };
   useEffect(async () => {
     await getQuestion();
@@ -137,7 +145,8 @@ export default function Challenge() {
             <h2 className="text-base mt-10 mb-14 text-white font-dana-regular">
               {questionDetails?.question}
             </h2>
-
+            {questionDetails?.note  && ( <small className="text-base text-white font-data-regular mt-4 ">راهنما : {questionDetails?.note}</small>)}
+           
             <div className="mt-auto">
               <form>
                 <ul className="flex flex-col gap-y-2">
