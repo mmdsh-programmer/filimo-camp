@@ -243,8 +243,12 @@
 }
 
 /* Firefox */
-input[type=number] {
+input[type="number"] {
   -moz-appearance: textfield;
+}
+
+.custom-container {
+  @apply container sm:max-w-screen-sm md:max-w-3xl lg:max-w-5xl xl:max-w-7xl 2xl:max-w-screen-2xl;
 }
 
 @media (min-width: 1440px) {
