@@ -70,7 +70,8 @@ export default function InvitedModal() {
       >
         <div className="container p-6 pt-4">
           <h2 className="text-base text-[#1d1d1d] font-dana-regular text-right">
-            ورود به تیم «اژدهای قرمز - ۶۷۸»
+            شما به تیم دعوت شدید.
+            {/* ورود به تیم «اژدهای قرمز - ۶۷۸» */}
           </h2>
 
           <div className="flex justify-center mt-[100px]">
@@ -84,15 +85,17 @@ export default function InvitedModal() {
           </div>
 
           <p className="text-sm text-[#4d4d4d] font-dana-regular leading-[1.79] mt-[73px]">
-            دوست شما با شماره{" "}
+            {/* دوست شما با شماره{" "}
             <span dir="ltr">{hidePhoneNumber("09158569874")}</span> <br />
             شما را به تیم خود دعوت کرده است. <br />
-            می‌توانید وارد شوید
+            می‌توانید وارد شوید */}
+            دوست شما را به تیم خود دعوت کرده است.<br/>
+            میتوانید وارد شوید.
           </p>
 
           <div className="flex flex-col gap-y-2 mt-6">
             <Button type="primary" style="w-full" onClick={handleAccept}>
-              ورود
+              پذیرفتن 
             </Button>
             <Button type="secondary" style="w-full" onClick={handleReject}>
               رد کردن
@@ -109,7 +112,8 @@ export default function InvitedModal() {
       >
         <div className="container p-6 pt-4">
           <h2 className="text-base text-[#1d1d1d] font-dana-regular text-right">
-            ورود به تیم «اژدهای قرمز - ۶۷۸»
+          شما به تیم دعوت شدید.
+            {/* ورود به تیم «اژدهای قرمز - ۶۷۸» */}
           </h2>
 
           <div className="flex justify-center mt-[100px]">
@@ -122,16 +126,19 @@ export default function InvitedModal() {
             </figure>
           </div>
 
+         
           <p className="text-sm text-[#4d4d4d] font-dana-regular leading-[1.79] mt-[73px]">
-            دوست شما با شماره{" "}
+            {/* دوست شما با شماره{" "}
             <span dir="ltr">{hidePhoneNumber("09158569874")}</span> <br />
             شما را به تیم خود دعوت کرده است. <br />
-            می‌توانید وارد شوید
+            می‌توانید وارد شوید */}
+            دوستتون شما را به تیم خود دعوت کرده است.<br/>
+            میتوانید وارد شوید.
           </p>
 
           <div className="flex flex-col gap-y-2 mt-6">
             <Button type="primary" style="w-full" onClick={handleAccept}>
-              ورود
+            پذیرفتن
             </Button>
             <Button type="secondary" style="w-full" onClick={handleReject}>
               رد کردن

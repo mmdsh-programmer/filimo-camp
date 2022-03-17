@@ -111,7 +111,7 @@ export default function App() {
                 }
               />
               <Route
-                path="challenge"
+                path="challenge/:id"
                 element={
                   <PrivateRoute>
                     <Challenge />
