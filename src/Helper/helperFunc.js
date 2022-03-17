@@ -39,7 +39,6 @@ export const Poster = async () => {
     // var retrievedObject = localStorage.getItem('filimo::user')
     // console.log('sssss', JSON.parse(retrievedObject));
     // console.log('datauser', user, taemData);
-
     return posterURl.data.data;
   }
   return false;

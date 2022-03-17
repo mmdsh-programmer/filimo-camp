@@ -17,10 +17,13 @@ export default function Register() {
   const [refValue, setrefValue] = useState(null);
   const [avatar, setAvatar] = useState(0);
   const [loading, setLoading] = useState(false);
-  const [FilimoId, setFilimoId] = useState(552841);
+  const [FilimoId, setFilimoId] = useState();
   const [avatarCode, setavatarCode] = useState(125);
+  const [laoding,setlaoding]=useState(true);
   useEffect(() => {
+
     setrefValue(searchParams.get("ref"));
+    setFilimoId(searchParams.get("filimo"));
     userExist();
     const swiper = document.querySelector(".register-avatar-selection").swiper;
 
@@ -33,6 +36,7 @@ export default function Register() {
       setavatarCode(avatars[this.activeIndex].id);
     });
   }, []);
+  
   const userExist = async () => {
     localStorage.clear();
     //localStorage save id
@@ -47,6 +51,7 @@ export default function Register() {
     });
     if (!("ERROR" in loginUrl)) {
       if (loginUrl.data.exists) {
+        setlaoding(true);
         var raw = {
           filimo_id: FilimoId,
         };
@@ -108,83 +113,103 @@ export default function Register() {
   };
 
   return (
-    <motion.main
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
-      className="min-h-screen bg-white"
-    >
-      <section>
-        <div className="container py-4 px-6 2xl:pt-16 2xl:pb-14 2xl:max-w-[1440px]">
-          <h1 className="text-base text-black font-dana-regular">ثبت نام</h1>
-        </div>
-      </section>
+   <>
+   {laoding?
+   ( <motion.main
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+    transition={{ duration: 0.5 }}
+    className="min-h-screen bg-white"
+  >
+    <section>
+      <div className="container py-4 px-6 2xl:pt-16 2xl:pb-14 2xl:max-w-[1440px]">
+        <h1 className="text-base text-black font-dana-regular">ثبت نام</h1>
+      </div>
+    </section>
 
-      <section>
-        <div className="container 2xl:max-w-[968px]">
-          <h2 className="text-sm text-[#333] font-dana-regular text-center mt-2 leading-7 2xl:mt-0">
-            یه عکس برای خودت انتخاب کن
-          </h2>
+    <section>
+      <div className="container 2xl:max-w-[968px]">
+        <h2 className="text-sm text-[#333] font-dana-regular text-center mt-2 leading-7 2xl:mt-0">
+          یه عکس برای خودت انتخاب کن
+        </h2>
 
-          <div className="w-full h-[146px] mt-10">
-            <Swiper
-              slidesPerView={2}
-              breakpoints={{
-                1440: {
-                  slidesPerView: 5,
-                },
-              }}
-              centeredSlides={true}
-              className="register-avatar-selection"
-            >
-              {avatars.map(({ mainUrl }, avatarIndex) => (
-                <SwiperSlide key={avatarIndex}>
-                  <div className="inner-slide w-[131px] h-[131px] rounded-full overflow-hidden transition-all duration-500 ease-in-out flex">
-                    <div className="w-[131px] h-[131px] overflow-hidden rounded-full self-center">
-                      <img
-                        className="w-full h-full object-cover"
-                        src={require(`images/common/avatars/${mainUrl}`)}
-                        alt={`avatar ${avatarIndex}`}
-                      />
-                    </div>
+        <div className="w-full h-[146px] mt-10">
+          <Swiper
+            slidesPerView={2}
+            breakpoints={{
+              1440: {
+                slidesPerView: 5,
+              },
+            }}
+            centeredSlides={true}
+            className="register-avatar-selection"
+          >
+            {avatars.map(({ mainUrl }, avatarIndex) => (
+              <SwiperSlide key={avatarIndex}>
+                <div className="inner-slide w-[131px] h-[131px] rounded-full overflow-hidden transition-all duration-500 ease-in-out flex">
+                  <div className="w-[131px] h-[131px] overflow-hidden rounded-full self-center">
+                    <img
+                      className="w-full h-full object-cover"
+                      src={require(`images/common/avatars/${mainUrl}`)}
+                      alt={`avatar ${avatarIndex}`}
+                    />
                   </div>
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          </div>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section className="mt-[62px] mb-24 2xl:mb-4">
-        <div className="container px-6">
-          <TextField
-            type="text"
-            name="referal-code"
-            placeholder=" "
-            label="کد معرف"
-            style={{ input: "pt-2", label: "mt-[5px]" }}
-            value={refValue}
-            onInput={(e) => setrefValue(e.target.value)}
-          />
-        </div>
-      </section>
+    <section className="mt-[62px] mb-24 2xl:mb-4">
+      <div className="container px-6">
+        <TextField
+          type="text"
+          name="referal-code"
+          placeholder=" "
+          label="کد معرف"
+          style={{ input: "pt-2", label: "mt-[5px]" }}
+          value={refValue}
+          onInput={e => setrefValue(e.target.value)}
+        />
+      </div>
+    </section>
 
-      <section className="fixed bottom-0 left-0 bg-white w-full 2xl:relative">
-        <div className="container px-6 pb-[27px]">
-          <div className="flex justify-center">
-            <Button
-              autoWidth={loading}
-              loading={loading}
-              type="primary"
-              disabled={loading}
-              onClick={handleRegistration}
-            >
-              ورود و ثبت‌نام از فیلیمو
-            </Button>
-          </div>
+    <section className="mt-[62px] mb-24 2xl:mb-4">
+      <div className="container px-6">
+        <TextField
+          type="text"
+          name="referal-code"
+          placeholder=" "
+          label="فیلیمو ای دی"
+          style={{ input: "pt-2", label: "mt-[5px]" }}
+          value={FilimoId}
+          onInput={e => setFilimoId(e.target.value)}
+        />
+      </div>
+    </section>
+
+    <section className="fixed bottom-0 left-0 bg-white w-full 2xl:relative">
+      <div className="container px-6 pb-[27px]">
+        <div className="flex justify-center">
+          <Button
+            autoWidth={loading}
+            loading={loading}
+            type="primary"
+            disabled={loading}
+            onClick={handleRegistration}
+          >
+            ورود و ثبت‌نام از فیلیمو
+          </Button>
         </div>
-      </section>
-    </motion.main>
+      </div>
+    </section>
+  </motion.main>)
+  :
+  (<h2>در حال ورود ...</h2>)
+  }
+   </>
   );
 }
