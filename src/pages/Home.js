@@ -143,6 +143,8 @@ export default function Home() {
       casual_levels.current = [...getDataGameURL.data.data.casual_levels];
       mission_levels.current = [...getDataGameURL.data.data.mission_levels];
       user_played_levels.current = [...getDataGameURL.data.data.user_played_levels];
+
+
       casual_levels.current.map((item, index) => {
 
         if (item.unlock === true && mission_levels.current[index].unlock === true) {
@@ -168,6 +170,23 @@ export default function Home() {
           levelState.current[index] = obj
 
         }
+
+      });
+      user_played_levels.current.map((item, index) => {
+        let idGame;
+        casual_levels.current.map((itemcasual_levels, index) => {
+          if (itemcasual_levels.id === item.score_type) {
+            idGame = item.score_type;
+          }
+
+        })
+        mission_levels.current.map((itemmission_levels, index) => {
+          if (itemmission_levels.id === item.score_type) {
+            idGame = item.score_type;
+          }
+        })
+
+        debugger
         levelState.current[index].casual_levels_gaming_agian = false;
         levelState.current[index].casual_levels_gaming = false;
         levelState.current[index].mission_levels_gaming = false;
@@ -2791,7 +2810,7 @@ export default function Home() {
                           پیشنهاد فیلیمو
                         </span>
                         <h6 className="text-base text-right default-title-color text-ellipsis overflow-hidden font-dana-regular">
-                        { poster.current[0]?.name}
+                          {poster.current[0]?.name}
 
                         </h6>
                       </div>
@@ -2809,7 +2828,7 @@ export default function Home() {
                           پیشنهاد فیلیمو
                         </span>
                         <h6 className="text-base text-right default-title-color font-dana-regular">
-                       { poster.current[1]?.name}
+                          {poster.current[1]?.name}
                         </h6>
                       </div>
                     </div>
@@ -3009,7 +3028,7 @@ export default function Home() {
                 <a
                   // key={i}
                   className="flex items-center bg-[#f9f9f9] rounded-[10px] overflow-hidden"
-                  href=  { poster.current[0]?.link}
+                  href={poster.current[0]?.link}
                   target="_blank"
                   rel="noreferrer"
                 >
@@ -3026,14 +3045,14 @@ export default function Home() {
                       پیشنهاد فیلیمو
                     </span>
                     <h6 className="font-dana-regular text-base text-[#1d1d1d] text-right">
-                    { poster.current[0]?.name}
+                      {poster.current[0]?.name}
                     </h6>
                   </div>
                 </a>
                 <a
                   // key={i}
                   className="flex items-center bg-[#f9f9f9] rounded-[10px] overflow-hidden"
-                  href=  { poster.current[1]?.link}
+                  href={poster.current[1]?.link}
                   target="_blank"
                   rel="noreferrer"
                 >
@@ -3050,7 +3069,7 @@ export default function Home() {
                       پیشنهاد فیلیمو
                     </span>
                     <h6 className="font-dana-regular text-base text-[#1d1d1d] text-right">
-                    { poster.current[1]?.name}
+                      {poster.current[1]?.name}
                     </h6>
                   </div>
                 </a>
