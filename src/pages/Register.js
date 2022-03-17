@@ -17,7 +17,7 @@ export default function Register() {
   const [refValue, setrefValue] = useState(null);
   const [avatar, setAvatar] = useState(0);
   const [loading, setLoading] = useState(false);
-  const [FilimoId, setFilimoId] = useState(874520);
+  const [FilimoId, setFilimoId] = useState(552841);
   const [avatarCode, setavatarCode] = useState(125);
   useEffect(() => {
     setrefValue(searchParams.get("ref"));

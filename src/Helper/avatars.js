@@ -118,7 +118,7 @@ export const FindAvatarAdd = (id, status) => {
       }
     });
     if (result === undefined) {
-      return "50.png";
+      return "11.png";
     } else {
       return String(result);
     }
