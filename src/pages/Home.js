@@ -2779,11 +2779,11 @@ export default function Home() {
                   </span>
                 </h4>
                 <div className="flex gap-x-2">
-                  <a href="https://filimo.com" rel="noreferrer">
+                  <a href={poster.current[0]?.link} rel="noreferrer">
                     <div className="flex items-center">
                       <img
                         className="max-w-[48px] h-auto object-cover"
-                        src={String(poster.current[0]?.poster1)}
+                        src={String(poster.current[0]?.poster)}
                         alt="video"
                       />
                       <div className="max-w-[88px] flex flex-col mr-2">
@@ -2791,16 +2791,17 @@ export default function Home() {
                           پیشنهاد فیلیمو
                         </span>
                         <h6 className="text-base text-right default-title-color text-ellipsis overflow-hidden font-dana-regular">
-                          سریال جیران
+                        { poster.current[0]?.name}
+
                         </h6>
                       </div>
                     </div>
                   </a>
-                  <a href="https://filimo.com" rel="noreferrer">
+                  <a href={poster.current[1]?.link} rel="noreferrer">
                     <div className="flex items-center">
                       <img
                         className="max-w-[48px] h-auto object-cover"
-                        src={String(poster.current[0]?.poster2)}
+                        src={String(poster.current[1]?.poster)}
                         alt="video"
                       />
                       <div className="max-w-[88px] flex flex-col mr-2">
@@ -2808,7 +2809,7 @@ export default function Home() {
                           پیشنهاد فیلیمو
                         </span>
                         <h6 className="text-base text-right default-title-color font-dana-regular">
-                          سریال جیران
+                       { poster.current[1]?.name}
                         </h6>
                       </div>
                     </div>
@@ -3008,14 +3009,14 @@ export default function Home() {
                 <a
                   // key={i}
                   className="flex items-center bg-[#f9f9f9] rounded-[10px] overflow-hidden"
-                  href="https://filimo.com"
+                  href=  { poster.current[0]?.link}
                   target="_blank"
                   rel="noreferrer"
                 >
                   <figure className="w-12 h-16 overflow-hidden">
                     <img
                       className="w-full h-full object-cover"
-                      src={String(poster.current[0]?.poster1)}
+                      src={String(poster.current[0]?.poster)}
                       alt="پیشنهاد فیلیمو"
                     />
                   </figure>
@@ -3024,22 +3025,22 @@ export default function Home() {
                     <span className="block font-dana-regular text-xs text-[#7c7c7c]">
                       پیشنهاد فیلیمو
                     </span>
-                    <h6 className="font-dana-regular text-base text-[#1d1d1d]">
-                      سریال جیران
+                    <h6 className="font-dana-regular text-base text-[#1d1d1d] text-right">
+                    { poster.current[0]?.name}
                     </h6>
                   </div>
                 </a>
                 <a
                   // key={i}
                   className="flex items-center bg-[#f9f9f9] rounded-[10px] overflow-hidden"
-                  href="https://filimo.com"
+                  href=  { poster.current[1]?.link}
                   target="_blank"
                   rel="noreferrer"
                 >
                   <figure className="w-12 h-16 overflow-hidden">
                     <img
                       className="w-full h-full object-cover"
-                      src={String(poster.current[0]?.poster2)}
+                      src={String(poster.current[1]?.poster)}
                       alt="پیشنهاد فیلیمو"
                     />
                   </figure>
@@ -3048,8 +3049,8 @@ export default function Home() {
                     <span className="block font-dana-regular text-xs text-[#7c7c7c]">
                       پیشنهاد فیلیمو
                     </span>
-                    <h6 className="font-dana-regular text-base text-[#1d1d1d]">
-                      سریال جیران
+                    <h6 className="font-dana-regular text-base text-[#1d1d1d] text-right">
+                    { poster.current[1]?.name}
                     </h6>
                   </div>
                 </a>

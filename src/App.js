@@ -24,6 +24,7 @@ const Games = lazy(() => import("pages/Games"));
 const Invitees = lazy(() => import("pages/Invitees"));
 const InfoSlider = lazy(() => import("pages/InfoSlider"));
 const InvitedModal = lazy(() => import("pages/InvitedModal"));
+const Landing = lazy(() => import("pages/Landing"));
 
 export default function App() {
   const location = useLocation();
@@ -42,7 +43,8 @@ export default function App() {
           draggable
           pauseOnHover
         />
-        <Background />
+        {location.pathname !== "/landing" && <Background />}
+
         <AnimatePresence exitBeforeEnter>
           <Suspense fallback={null}>
             <Routes location={location} key={location.pathname}>
@@ -129,6 +131,7 @@ export default function App() {
                   </PrivateRoute>
                 }
               />
+              <Route path="landing" element={<Landing />} />
               <Route path="info-slider" element={<InfoSlider />} />
             </Routes>
           </Suspense>

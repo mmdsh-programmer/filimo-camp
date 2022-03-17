@@ -31,6 +31,7 @@ const getInvitedData = async () => {
 };
 
 export default function AddTeamMate() {
+  const  PUBLIC_URL = 'http://filimo.sweatoff.ir';
   const windowSize = useWindowSize();
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
   const [openModal, setOpenModal] = useState(false);
@@ -118,7 +119,7 @@ export default function AddTeamMate() {
     setIsCopied(true);
     addteaminvited.current = `سلام دوست عزیزم.
     ازت دعوت میکنم به تیم من بپیوندی.
-    ${process.env.PUBLIC_URL}/join-team/${getTeamData[0]?.id}`;
+    ${PUBLIC_URL}/join-team/${getTeamData[0]?.id}`;
 
     navigator.clipboard.writeText(addteaminvited.current);
     setTimeout(() => {
@@ -334,7 +335,7 @@ export default function AddTeamMate() {
 
           <div className="flex items-center bg-[#ddd] rounded-[10px] bg-opacity-30 mt-4 p-[3px]">
             <span className="block font-dana-regular text-[#4c4c4c] text-xs leading-[1.8] ml-auto mr-2 mt-1 max-w-[215px] overflow-hidden">
-              {` ${process.env.PUBLIC_URL}/join-team/${getTeamData[0]?.id}`}
+              {` ${PUBLIC_URL}/join-team/${getTeamData[0]?.id}`}
             </span>
 
             <button
@@ -387,7 +388,7 @@ export default function AddTeamMate() {
 
           <div className="flex items-center bg-[#ddd] rounded-[10px] bg-opacity-30 mt-4 p-[3px]">
             <span className="block font-dana-regular text-[#4c4c4c] text-xs leading-[1.8] ml-auto mr-2 mt-1 max-w-[215px] overflow-hidden">
-          {` ${process.env.PUBLIC_URL}/join-team/${getTeamData[0]?.id}`}
+          {` ${PUBLIC_URL}/join-team/${getTeamData[0]?.id}`}
             </span>
 
             <button

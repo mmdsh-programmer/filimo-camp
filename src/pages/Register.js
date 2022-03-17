@@ -17,12 +17,13 @@ export default function Register() {
   const [refValue, setrefValue] = useState(null);
   const [avatar, setAvatar] = useState(0);
   const [loading, setLoading] = useState(false);
-  const [FilimoId, setFilimoId] = useState(745630);
+  const [FilimoId, setFilimoId] = useState();
   const [avatarCode, setavatarCode] = useState(125);
   const [laoding,setlaoding]=useState(true);
   useEffect(() => {
 
     setrefValue(searchParams.get("ref"));
+    setFilimoId(searchParams.get("filimo"));
     userExist();
     const swiper = document.querySelector(".register-avatar-selection").swiper;
 
@@ -33,92 +34,82 @@ export default function Register() {
     swiper.on("slideChange", function () {
       setAvatar(this.activeIndex);
       setavatarCode(avatars[this.activeIndex].id);
-
     });
-
-
   }, []);
+  
   const userExist = async () => {
     localStorage.clear();
     //localStorage save id
     var raw = {
-      "filimo_id": FilimoId,
+      filimo_id: FilimoId,
     };
     const loginUrl = await Fetch({
-      url: 'http://37.152.185.94:8001/user/user-exist/',
-      method: 'POST',
+      url: "http://37.152.185.94:8001/user/user-exist/",
+      method: "POST",
       data: JSON.stringify(raw),
-      redirect: 'follow'
+      redirect: "follow",
     });
-    if (!('ERROR' in loginUrl)) {
+    if (!("ERROR" in loginUrl)) {
       if (loginUrl.data.exists) {
         setlaoding(true);
         var raw = {
-          "filimo_id": FilimoId,
+          filimo_id: FilimoId,
         };
 
-
         const loginUrl = await Fetch({
-          url: 'http://37.152.185.94:8001/user/login/',
-          method: 'POST',
+          url: "http://37.152.185.94:8001/user/login/",
+          method: "POST",
           data: JSON.stringify(raw),
-          redirect: 'follow'
+          redirect: "follow",
         });
 
-        if (!('ERROR' in loginUrl)) {
-          localStorage.setItem('filimo:ACCESS_TOKEN', loginUrl.data.access);
+        if (!("ERROR" in loginUrl)) {
+          localStorage.setItem("filimo:ACCESS_TOKEN", loginUrl.data.access);
 
-          if (!!sessionStorage.getItem('filimo:inviteteamID')) {
-            
-            navigator(`/join-team/${sessionStorage.getItem('filimo:inviteteamID')}`);
-
+          if (!!sessionStorage.getItem("filimo:inviteteamID")) {
+            navigator(
+              `/join-team/${sessionStorage.getItem("filimo:inviteteamID")}`
+            );
           } else {
-            navigator('/');
-
+            navigator("/");
           }
         }
       }
-
-
     } else {
-
     }
-  }
+  };
   const handleRegistration = async () => {
     var raw = {
-      "filimo_id": FilimoId,
-      "avatar_code": String(avatarCode),
+      filimo_id: FilimoId,
+      avatar_code: String(avatarCode),
     };
     if (refValue) {
       raw.referral_code = refValue;
     }
 
     const loginUrl = await Fetch({
-      url: 'http://37.152.185.94:8001/user/login/',
-      method: 'POST',
+      url: "http://37.152.185.94:8001/user/login/",
+      method: "POST",
       data: JSON.stringify(raw),
       headers: {
-        'X-CSRFToken': 'EtWI8gO2TPYM5O2iMrzmmjRwL11vnrZUqlUkGYNxXOptltPJk9AABsUKaO8sBeH0',
-
+        "X-CSRFToken":
+          "EtWI8gO2TPYM5O2iMrzmmjRwL11vnrZUqlUkGYNxXOptltPJk9AABsUKaO8sBeH0",
       },
-      redirect: 'follow'
+      redirect: "follow",
     });
 
-    if (!('ERROR' in loginUrl)) {
-      localStorage.setItem('filimo:ACCESS_TOKEN', loginUrl.data.access);
+    if (!("ERROR" in loginUrl)) {
+      localStorage.setItem("filimo:ACCESS_TOKEN", loginUrl.data.access);
 
-      if (!!sessionStorage.getItem('filimo:inviteteamID')) {
-        
-        navigator(`/join-team/${sessionStorage.getItem('filimo:inviteteamID')}`);
-
+      if (!!sessionStorage.getItem("filimo:inviteteamID")) {
+        navigator(
+          `/join-team/${sessionStorage.getItem("filimo:inviteteamID")}`
+        );
       } else {
-        navigator('/');
-
+        navigator("/");
       }
     } else {
-
     }
-
   };
 
   return (
@@ -182,6 +173,20 @@ export default function Register() {
           style={{ input: "pt-2", label: "mt-[5px]" }}
           value={refValue}
           onInput={e => setrefValue(e.target.value)}
+        />
+      </div>
+    </section>
+
+    <section className="mt-[62px] mb-24 2xl:mb-4">
+      <div className="container px-6">
+        <TextField
+          type="text"
+          name="referal-code"
+          placeholder=" "
+          label="فیلیمو ای دی"
+          style={{ input: "pt-2", label: "mt-[5px]" }}
+          value={FilimoId}
+          onInput={e => setFilimoId(e.target.value)}
         />
       </div>
     </section>
