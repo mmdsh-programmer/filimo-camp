@@ -11,6 +11,7 @@ import { userData } from "Helper/helperFunc";
 import Fetch from "Helper/Fetch";
 
 export default function Invite() {
+  const  PUBLIC_URL = 'http://filimo.sweatoff.ir';
   const windowSize = useWindowSize();
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
   const [openModal, setOpenModal] = useState(false);
@@ -60,7 +61,8 @@ export default function Invite() {
 
   const copyToClipBoard = () => {
     setIsCopied(true);
-    navigator.clipboard.writeText(userInfo[0]?.unique_code);
+
+    navigator.clipboard.writeText(PUBLIC_URL + '/register/?ref=' + userInfo[0]?.unique_code);
     setTimeout(() => {
       setIsCopied(false);
     }, 2000);
@@ -218,9 +220,9 @@ export default function Invite() {
             شما ثبت می‌شود.
           </p>
 
-          <div className="flex items-center bg-[#ddd] rounded-[10px] bg-opacity-30 mt-4 p-[3px]">
-            <span className="block font-dana-regular text-[#4c4c4c] text-xs leading-[1.8] ml-auto mr-2 mt-1 max-w-[215px] overflow-hidden">
-              {userInfo[0]?.unique_code}
+          <div className="flex items-center bg-[#ddd] rounded-[10px] bg-opacity-30 mt-4 p-[3px] justify-center">
+            <span className="block font-dana-regular text-[#4c4c4c] text-xs leading-[1.8] ml-2 mr-2 mt-1 text-center overflow-hidden">
+              {PUBLIC_URL + '/register/?ref=' + userInfo[0]?.unique_code}
             </span>
           </div>
 
@@ -246,9 +248,10 @@ export default function Invite() {
             شما ثبت می‌شود.
           </p>
 
-          <div className="flex items-center bg-[#ddd] rounded-[10px] bg-opacity-30 mt-4 p-[3px]">
-            <span className="block font-dana-regular text-[#4c4c4c] text-xs leading-[1.8] ml-auto mr-2 mt-1 max-w-[215px] overflow-hidden">
-              {userInfo[0]?.unique_code}
+          <div className="flex items-center bg-[#ddd] rounded-[10px] bg-opacity-30 mt-4 p-[3px] justify-center">
+            <span className="block font-dana-regular text-[#4c4c4c] text-xs leading-[1.8] ml-2 mr-2 mt-1 text-center overflow-hidden">
+              {PUBLIC_URL + '/register/?ref=' + userInfo[0]?.unique_code}
+
             </span>
           </div>
 

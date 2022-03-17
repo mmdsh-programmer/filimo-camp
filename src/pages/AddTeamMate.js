@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect, useRef } from "react";
 import SimpleBottomSheet from "Components/SimpleBottomSheet";
 import TextField from "Components/TextField";
 import Back from "Components/Back";
@@ -31,6 +31,7 @@ const getInvitedData = async () => {
 };
 
 export default function AddTeamMate() {
+  const  PUBLIC_URL = 'http://filimo.sweatoff.ir';
   const windowSize = useWindowSize();
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
   const [openModal, setOpenModal] = useState(false);
@@ -41,7 +42,7 @@ export default function AddTeamMate() {
   const [userInfo, setUserInfo] = useState([]);
   const [teamImage, setTeamImage] = useState(null);
   const [isCopied, setIsCopied] = useState(false);
-
+  let addteaminvited = useRef('');
   const queryClient = useQueryClient();
 
   const navigation = useNavigate();
@@ -102,24 +103,31 @@ export default function AddTeamMate() {
 
   const handleSubmit = () => {
     setLoading(false);
-    if (!checkPhoneNumber(phoneNumber)) {
-      setHasError(true);
-      setErrorMessage("شماره همراه صحیح نمیباشد");
-    } else {
-      setHasError(false);
-      setErrorMessage(null);
-      setLoading(true);
-      inviteMember(phoneNumber);
-    }
+    setOpenModal(false);
+    // if (!checkPhoneNumber(phoneNumber)) {
+    //   setHasError(true);
+    //   setErrorMessage("شماره همراه صحیح نمیباشد");
+    // } else {
+    //   setHasError(false);
+    //   setErrorMessage(null);
+      // setLoading(true);
+    //   inviteMember(phoneNumber);
+    // }
   };
 
   const copyToClipBoard = () => {
     setIsCopied(true);
-    navigator.clipboard.writeText(getTeamData[0]?.unique_code);
+    addteaminvited.current = `سلام دوست عزیزم.
+    ازت دعوت میکنم به تیم من بپیوندی.
+    ${PUBLIC_URL}/join-team/${getTeamData[0]?.id}`;
+
+    navigator.clipboard.writeText(addteaminvited.current);
     setTimeout(() => {
       setIsCopied(false);
     }, 2000);
   };
+
+
 
   const leaveTeam = async () => {
     const leave = await Fetch({
@@ -162,8 +170,8 @@ export default function AddTeamMate() {
                 src={
                   !isNullObject(getTeamData[1])
                     ? require(`images/common/flags/${FindFlagAdd(
-                        +getTeamData[1]?.avator_code
-                      )}`)
+                      +getTeamData[1]?.avator_code
+                    )}`)
                     : require(`images/common/flags/41.png`)
                 }
                 alt="team"
@@ -220,8 +228,8 @@ export default function AddTeamMate() {
                           src={
                             member?.avatar_code
                               ? require(`images/common/avatars/${FindAvatarAdd(
-                                  +member.avatar_code
-                                )}`)
+                                +member.avatar_code
+                              )}`)
                               : require("images/home/board-avatar.webp")
                           }
                           alt="team-logo"
@@ -308,7 +316,7 @@ export default function AddTeamMate() {
             افزودن به ترکیب تیم
           </h2>
 
-          <TextField
+          {/* <TextField
             type="number"
             maxLength={11}
             name="phone"
@@ -318,17 +326,16 @@ export default function AddTeamMate() {
             value={phoneNumber.current}
             hasError={hasError}
             helperText={errorMessage}
-          />
+          /> */}
 
           <p className="mt-2 text-xs font-dana-regular leading-6">
-            شماره دوست خود را وارد کنید تا از این کمپین مطلع شود. لینک از طریق
-            sms برای او ارسال شود. به ازای هر یک از دوستان که اولین بازی را
-            انجام دهند ۵ امتیاز برای شما ثبت می‌شود.
+          لینک زیر را کپی کنید و به از دوستانتان بخواهید به تیمتان بپیوندند.
+
           </p>
 
           <div className="flex items-center bg-[#ddd] rounded-[10px] bg-opacity-30 mt-4 p-[3px]">
             <span className="block font-dana-regular text-[#4c4c4c] text-xs leading-[1.8] ml-auto mr-2 mt-1 max-w-[215px] overflow-hidden">
-              {getTeamData[0]?.unique_code || "--"}
+              {` ${PUBLIC_URL}/join-team/${getTeamData[0]?.id}`}
             </span>
 
             <button
@@ -346,7 +353,7 @@ export default function AddTeamMate() {
             disabled={loading}
             loading={loading}
           >
-            ارسال پیامک
+            متوجه شدم
           </Button>
         </div>
       </SimpleBottomSheet>
@@ -362,7 +369,7 @@ export default function AddTeamMate() {
             افزودن به ترکیب تیم
           </h2>
 
-          <TextField
+          {/* <TextField
             type="number"
             maxLength={11}
             name="phone"
@@ -372,16 +379,16 @@ export default function AddTeamMate() {
             value={phoneNumber.current}
             hasError={hasError}
             helperText={errorMessage}
-          />
+          /> */}
 
           <p className="mt-2 text-xs font-dana-regular leading-6">
-            شماره هم‌تیمی خود را وارد کنید تا لینک از طریق sms برای او ارسال
-            شود.
+          لینک زیر را کپی کنید و به از دوستانتان بخواهید به تیمتان بپیوندند.
+
           </p>
 
           <div className="flex items-center bg-[#ddd] rounded-[10px] bg-opacity-30 mt-4 p-[3px]">
             <span className="block font-dana-regular text-[#4c4c4c] text-xs leading-[1.8] ml-auto mr-2 mt-1 max-w-[215px] overflow-hidden">
-              {getTeamData[0]?.unique_code || "--"}
+          {` ${PUBLIC_URL}/join-team/${getTeamData[0]?.id}`}
             </span>
 
             <button
@@ -399,7 +406,7 @@ export default function AddTeamMate() {
             disabled={loading}
             loading={loading}
           >
-            ارسال پیامک
+           متوجه شدم
           </Button>
         </div>
       </Modal>

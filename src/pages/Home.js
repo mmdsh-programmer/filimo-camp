@@ -42,7 +42,9 @@ export default function Home() {
   const [openPhoneNumberBottomSheet, setOpenPhoneNumberBottomSheet] =
     useState(false); //for opening get phone number bottom sheet
   const [phoneNumberStep, setPhoneNumberStep] = useState(1);
+  const [acceptOpenModal, setacceptOpenModal] = useState(false);
   const [otpState, setOtpState] = useState("");
+  let playGameAgianId = useRef();
   let d1 = new Date("Tue Mar 13 2022 21:38:41 GMT+0330 (Iran Standard Time)");
   let d2;
   let diff;
@@ -109,7 +111,18 @@ export default function Home() {
   const handleNextPhoneNumberStep = () => {
     setPhoneNumberStep(2);
   };
+  const gamePlayAgain = async (id) => {
+    const user_scores_tableURL = await Fetch({
+      url: `http://37.152.185.94:8001/user/play-again/${id}/`,
+      method: "POST",
 
+    });
+    if (!("ERROR" in user_scores_tableURL)) {
+      debugger;
+    } else {
+      debugger;
+    }
+  }
   const handlePrevPhoneNumberStep = () => {
     setPhoneNumberStep(1);
   };
@@ -130,6 +143,8 @@ export default function Home() {
       casual_levels.current = [...getDataGameURL.data.data.casual_levels];
       mission_levels.current = [...getDataGameURL.data.data.mission_levels];
       user_played_levels.current = [...getDataGameURL.data.data.user_played_levels];
+
+
       casual_levels.current.map((item, index) => {
 
         if (item.unlock === true && mission_levels.current[index].unlock === true) {
@@ -155,6 +170,26 @@ export default function Home() {
           levelState.current[index] = obj
 
         }
+
+      });
+      user_played_levels.current.map((item, index) => {
+        let idGame;
+        casual_levels.current.map((itemcasual_levels, index) => {
+          if (itemcasual_levels.id === item.score_type) {
+            idGame = item.score_type;
+          }
+
+        })
+        mission_levels.current.map((itemmission_levels, index) => {
+          if (itemmission_levels.id === item.score_type) {
+            idGame = item.score_type;
+          }
+        })
+
+        debugger
+        levelState.current[index].casual_levels_gaming_agian = false;
+        levelState.current[index].casual_levels_gaming = false;
+        levelState.current[index].mission_levels_gaming = false;
       })
       let obj = {
         lock: true,
@@ -167,6 +202,7 @@ export default function Home() {
       toast.error("خطا در دریافت جزییات بازی");
     }
   }
+
   const user_scores_table = async () => {
     const user_scores_tableURL = await Fetch({
       url: "http://37.152.185.94:8001/user/user_scores/",
@@ -207,8 +243,19 @@ export default function Home() {
 
   return (
     <Fragment>
-      <Header />
 
+      <Header />
+      <Modal alignCenter isOpen={acceptOpenModal} setIsOpen={setacceptOpenModal}>
+        <div className="container p-8" >
+          <p className="text-base text-black font-dana-regular ">آیا میخواهید دوباره بازی را انجام دهید؟   </p>
+          <p className="text-xs mt-3 text-black font-dana-regular ">در صورت تایید امتیاز شما صفر شده و دوباره بازی خواهی کرد.</p>
+          <div className="flex gap-x-2 mt-8">
+            <Button type="primary" onClick={() => gamePlayAgain(playGameAgianId.current)} >بله</Button>
+            <Button type="secondary" onClick={() => { setacceptOpenModal(false) }}>خیر  </Button>
+          </div>
+
+        </div>
+      </Modal>
       <motion.main
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -2357,7 +2404,7 @@ export default function Home() {
 
                 <div className="flex flex-col">
                   <span className="text-base text-right text-[#333333] font-dana-regular">
-                    UID-{user?.filimo_id}
+                    کاربر شماره - {user?.filimo_id}
                   </span>
                   <span
                     className="text-[12px] text-right light-text font-dana-regular"
@@ -2477,7 +2524,7 @@ export default function Home() {
                   ایجاد تیم
                 </Link>
 
-                <Button type="primary" onClick={() => { handleLevelClick(Math.floor(daydiff.current));  }}
+                <Button type="primary" onClick={() => { handleLevelClick(Math.floor(daydiff.current)); }}
                 >
                   <span className="my-1 block">چالش</span>
                 </Button>
@@ -2509,7 +2556,8 @@ export default function Home() {
 
               <div className="flex flex-col">
                 <span className="text-base text-right text-[#333333] font-dana-regular">
-                  UID-{user?.filimo_id}
+                  کاربر شماره - {user?.filimo_id}
+
                 </span>
                 <span
                   className="text-[12px] text-right light-text font-dana-regular"
@@ -2668,9 +2716,15 @@ export default function Home() {
 
             <div className="flex flex-col gap-y-2 my-4">
               <Link
-                to={`/games/${challengeLevel.current}`}
-                target="_blank"
-                className="flex bg-[#f8f8f8] rounded-[10px] p-2 items-center"
+                to={!levelState.current[challengeLevel.current]?.casual_levels_gaming_agian ?
+                  `/games/${challengeLevel.current}` :
+                  (!levelState.current[challengeLevel.current]?.casual_levels_gaming ?
+                    `` :
+                    '')}
+
+
+                className={levelState.current[challengeLevel.current]?.casual_levels_gaming ? ("flex bg-[#f8f8f8] rounded-[10px] p-2 items-center disabled_link") : ('flex bg-[#f8f8f8] rounded-[10px] p-2 items-center')}
+
               >
                 <h4 className="leading-[1.81] text-base text-right ml-[39px] text-black font-dana-regular w-[81px]">
                   بازی
@@ -2682,8 +2736,15 @@ export default function Home() {
                 </span>
 
                 {/* use this if not done */}
-                <span className="bg-[#ffc23a] rounded-2xl p-2 text-sm font-dana-regular text-black">
-                  شروع بازی
+                <span className={!levelState.current[challengeLevel.current]?.casual_levels_gaming ? "bg-[#ffc23a] rounded-2xl p-2 text-sm font-dana-regular text-black game_level" : "bg-[#ffc23a] rounded-2xl p-2 text-sm font-dana-regular text-black game_level_2"}>
+
+                  {!levelState.current[challengeLevel.current]?.casual_levels_gaming_agian ?
+                    `  شروع بازی ` :
+                    (!levelState.current[challengeLevel.current]?.casual_levels_gaming ?
+                      (<button onClick={() => { setacceptOpenModal(true); playGameAgianId.current = casual_levels.current[challengeLevel.current - 1]?.id }}>بازی مجدد</button>) :
+                      <img src={TickIcon} />)}
+
+
                 </span>
 
                 {/* ue this icon if it is done */}
@@ -2698,7 +2759,8 @@ export default function Home() {
 
               <Link
                 to={`/challenge/${challengeLevel.current}-${challengeLevelID.current}`}
-                className="flex bg-[#f8f8f8] rounded-[10px] p-2 items-center"
+                className={levelState.current[challengeLevel.current]?.mission_levels_gaming ? ("flex bg-[#f8f8f8] rounded-[10px] p-2 items-center disabled_link") : ('flex bg-[#f8f8f8] rounded-[10px] p-2 items-center')}
+
               >
                 <h4 className="leading-[1.81] text-base text-right ml-auto text-black font-dana-regular w-[81px]">
                   ماموریت
@@ -2710,8 +2772,10 @@ export default function Home() {
                 </span>
 
                 {/* use this if not done */}
-                <span className="bg-[#ffc23a] rounded-2xl p-2 text-sm font-dana-regular text-black">
-                  انجام ماموریت
+                <span className="bg-[#ffc23a] rounded-2xl p-2 text-sm font-dana-regular text-black mission_level">
+                  {!levelState.current[challengeLevel.current]?.mission_levels_gaming ? `انجام ماموریت` : (<img src={TickIcon} />)}
+
+
                 </span>
 
                 {/* ue this icon if it is done */}
@@ -2734,11 +2798,11 @@ export default function Home() {
                   </span>
                 </h4>
                 <div className="flex gap-x-2">
-                  <a href="https://filimo.com" rel="noreferrer">
+                  <a href={poster.current[0]?.link} rel="noreferrer">
                     <div className="flex items-center">
                       <img
                         className="max-w-[48px] h-auto object-cover"
-                        src={String(poster.current[0]?.poster1)}
+                        src={String(poster.current[0]?.poster)}
                         alt="video"
                       />
                       <div className="max-w-[88px] flex flex-col mr-2">
@@ -2746,16 +2810,17 @@ export default function Home() {
                           پیشنهاد فیلیمو
                         </span>
                         <h6 className="text-base text-right default-title-color text-ellipsis overflow-hidden font-dana-regular">
-                          سریال جیران
+                          {poster.current[0]?.name}
+
                         </h6>
                       </div>
                     </div>
                   </a>
-                  <a href="https://filimo.com" rel="noreferrer">
+                  <a href={poster.current[1]?.link} rel="noreferrer">
                     <div className="flex items-center">
                       <img
                         className="max-w-[48px] h-auto object-cover"
-                        src={String(poster.current[0]?.poster2)}
+                        src={String(poster.current[1]?.poster)}
                         alt="video"
                       />
                       <div className="max-w-[88px] flex flex-col mr-2">
@@ -2763,7 +2828,7 @@ export default function Home() {
                           پیشنهاد فیلیمو
                         </span>
                         <h6 className="text-base text-right default-title-color font-dana-regular">
-                          سریال جیران
+                          {poster.current[1]?.name}
                         </h6>
                       </div>
                     </div>
@@ -2878,9 +2943,14 @@ export default function Home() {
 
             <div className="flex flex-col gap-y-2 my-4">
               <Link
-                to="/games/1"
-                target="_blank"
-                className="flex bg-[#f8f8f8] rounded-[10px] p-2 items-center"
+                to={!levelState.current[challengeLevel.current]?.casual_levels_gaming_agian ?
+                  `/games/${challengeLevel.current}` :
+                  (!levelState.current[challengeLevel.current]?.casual_levels_gaming ?
+                    `` :
+                    '')}
+
+                className={levelState.current[challengeLevel.current]?.casual_levels_gaming ? ("flex bg-[#f8f8f8] rounded-[10px] p-2 items-center disabled_link") : ('flex bg-[#f8f8f8] rounded-[10px] p-2 items-center')}
+
               >
                 <h4 className="leading-[1.81] text-base text-right ml-8 text-black font-dana-regular w-[81px]">
                   بازی
@@ -2893,8 +2963,14 @@ export default function Home() {
                 </span>
 
                 {/* use this if not done */}
-                <span className="bg-[#ffc23a] rounded-2xl p-2 text-sm font-dana-regular text-black">
-                  شروع بازی
+                <span className={!levelState.current[challengeLevel.current]?.casual_levels_gaming ? "bg-[#ffc23a] rounded-2xl p-2 text-sm font-dana-regular text-black game_level" : "bg-[#ffc23a] rounded-2xl p-2 text-sm font-dana-regular text-black game_level_2"}>
+                  {/* { !levelState.current[challengeLevel.current]?.casual_levels_gaming ? `  شروع بازی `:(<img src={TickIcon} />)}  */}
+                  {!levelState.current[challengeLevel.current]?.casual_levels_gaming_agian ?
+                    `  شروع بازی ` :
+                    (!levelState.current[challengeLevel.current]?.casual_levels_gaming ?
+                      (<button onClick={() => { setacceptOpenModal(true); playGameAgianId.current = casual_levels.current[challengeLevel.current - 1]?.id }}>بازی مجدد</button>) :
+
+                      <img src={TickIcon} />)}
                 </span>
 
                 {/* ue this icon if it is done */}
@@ -2910,8 +2986,9 @@ export default function Home() {
               <Link
                 to={`/challenge/${challengeLevel.current}-${challengeLevelID.current}`}
 
-                className="flex bg-[#f8f8f8] rounded-[10px] p-2 items-center"
+                className={levelState.current[challengeLevel.current]?.mission_levels_gaming ? ("flex bg-[#f8f8f8] rounded-[10px] p-2 items-center disabled_link") : ('flex bg-[#f8f8f8] rounded-[10px] p-2 items-center')}
               >
+                {/* {console.log('ssss',levelState.current[challengeLevel.current - 1]?.mission_levels_gaming  ,challengeLevel.current)} */}
                 <h4 className="leading-[1.81] text-base text-right ml-8 text-black font-dana-regular w-[81px]">
                   ماموریت
                 </h4>
@@ -2923,8 +3000,8 @@ export default function Home() {
                 </span>
 
                 {/* use this if not done */}
-                <span className="bg-[#ffc23a] rounded-2xl p-2 text-sm font-dana-regular text-black">
-                  انجام ماموریت
+                <span className="bg-[#ffc23a] rounded-2xl p-2 text-sm font-dana-regular text-black mission_level">
+                  {!levelState.current[challengeLevel.current]?.mission_levels_gaming ? `انجام ماموریت` : (<img src={TickIcon} />)}
                 </span>
 
                 {/* ue this icon if it is done */}
@@ -2951,14 +3028,14 @@ export default function Home() {
                 <a
                   // key={i}
                   className="flex items-center bg-[#f9f9f9] rounded-[10px] overflow-hidden"
-                  href="https://filimo.com"
+                  href={poster.current[0]?.link}
                   target="_blank"
                   rel="noreferrer"
                 >
                   <figure className="w-12 h-16 overflow-hidden">
                     <img
                       className="w-full h-full object-cover"
-                      src={String(poster.current[0]?.poster1)}
+                      src={String(poster.current[0]?.poster)}
                       alt="پیشنهاد فیلیمو"
                     />
                   </figure>
@@ -2967,22 +3044,22 @@ export default function Home() {
                     <span className="block font-dana-regular text-xs text-[#7c7c7c]">
                       پیشنهاد فیلیمو
                     </span>
-                    <h6 className="font-dana-regular text-base text-[#1d1d1d]">
-                      سریال جیران
+                    <h6 className="font-dana-regular text-base text-[#1d1d1d] text-right">
+                      {poster.current[0]?.name}
                     </h6>
                   </div>
                 </a>
                 <a
                   // key={i}
                   className="flex items-center bg-[#f9f9f9] rounded-[10px] overflow-hidden"
-                  href="https://filimo.com"
+                  href={poster.current[1]?.link}
                   target="_blank"
                   rel="noreferrer"
                 >
                   <figure className="w-12 h-16 overflow-hidden">
                     <img
                       className="w-full h-full object-cover"
-                      src={String(poster.current[0]?.poster2)}
+                      src={String(poster.current[1]?.poster)}
                       alt="پیشنهاد فیلیمو"
                     />
                   </figure>
@@ -2991,8 +3068,8 @@ export default function Home() {
                     <span className="block font-dana-regular text-xs text-[#7c7c7c]">
                       پیشنهاد فیلیمو
                     </span>
-                    <h6 className="font-dana-regular text-base text-[#1d1d1d]">
-                      سریال جیران
+                    <h6 className="font-dana-regular text-base text-[#1d1d1d] text-right">
+                      {poster.current[1]?.name}
                     </h6>
                   </div>
                 </a>

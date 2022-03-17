@@ -131,7 +131,6 @@ export default function CustomTab() {
             <ul className="list-none flex flex-col gap-y-2 mt-4">
               {userLeaderBoardData.map((e, i) => {
                 // console.log(userLeaderBoardData.current);
-
                 if (i + 1 === user_rank.current) {
                   return (
                     <li>
@@ -204,7 +203,7 @@ export default function CustomTab() {
 
                           <img
                             className="w-full h-full object-cover"
-                            src={e?.avatar_code ? require(`images/common/avatars/${FindAvatarAdd(parseInt(e.avatar_code))}`) : require(`images/common/avatars/${FindAvatarAdd(217)}`)}
+                            src={e?.avatar_code ? require(`images/common/avatars/${FindAvatarAdd(parseInt(e?.avatar_code))}`) : require(`images/common/avatars/${FindAvatarAdd(217)}`)}
 
                             alt="team-logo"
                           />
