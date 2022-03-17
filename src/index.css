@@ -247,6 +247,26 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
+.filimo-box {
+  background-image: url("images/landing/filimo-box-mobile.webp");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.ps5 {
+  background-image: url("images/landing/ps5-background.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+@media (min-width: 768px) {
+  .filimo-box {
+    background-image: url("images/landing/filimo-box-desktop.webp");
+  }
+}
+
 .custom-container {
   @apply container sm:max-w-screen-sm md:max-w-3xl lg:max-w-5xl xl:max-w-7xl 2xl:max-w-screen-2xl;
 }
