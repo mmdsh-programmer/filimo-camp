@@ -127,7 +127,23 @@
   bottom: 3px;
   right: 23px;
 }
+.disabled_link {
+  pointer-events: none;
+  /* background-color: gray!important; */
+}
+.disabled_link .mission_level{
+  background-color: transparent;
 
+}
+.disabled_link .game_level{
+  pointer-events: auto;
+
+}
+.disabled_link .game_level_2{
+  background-color: transparent;
+  pointer-events: none;
+
+}
 .silver-badge::before {
   content: url("icons/home/silver-badge.svg");
   width: 18px;

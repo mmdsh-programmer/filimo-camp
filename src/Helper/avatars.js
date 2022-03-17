@@ -104,7 +104,6 @@ export const avatars = [
 ];
 
 export const FindAvatarAdd = (id, status) => {
-  debugger;
   let result;
   if (id !== undefined && typeof id == "number" && !isNaN(id)) {
     avatars.map((item, index) => {
@@ -118,7 +117,7 @@ export const FindAvatarAdd = (id, status) => {
       }
     });
     if (result === undefined) {
-      return "50.png";
+      return "11.png";
     } else {
       return String(result);
     }

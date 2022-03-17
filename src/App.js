@@ -1,4 +1,4 @@
-import { React, lazy, Suspense, Fragment } from "react";
+import { React, lazy, Suspense, Fragment, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import Background from "./Components/Background";
 import { AnimatePresence } from "framer-motion";
@@ -6,6 +6,7 @@ import { useLocation } from "react-router-dom";
 import { PrivateRoute } from "./Routes/LoginRoute";
 import { ToastContainer } from "react-toastify";
 import { QueryClient, QueryClientProvider } from "react-query";
+
 
 const queryClient = new QueryClient();
 

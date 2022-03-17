@@ -4,6 +4,7 @@ import { ERequest } from "./App.enums";
 // import Manifest from '../manifest';
 import { toast } from "react-toastify";
 import { getErrorMessage } from "./errorCodes";
+import { useNavigate } from "react-router-dom";
 
 export const axiosInstance = axios.create();
 axiosInstance.defaults.baseURL = "http://37.152.185.94:8001/user/";
@@ -12,6 +13,7 @@ let CancelToken = axios.CancelToken;
 let source = CancelToken.source();
 
 const Fetch = async (FetchConfig) => {
+
   FetchConfig.showMessage =
     FetchConfig.showMessage === undefined ? true : FetchConfig.showMessage; // default is true
   const expireTime = window.localStorage.getItem("Loyality:EXPIRE_TIME");
@@ -54,6 +56,9 @@ const Fetch = async (FetchConfig) => {
         error.response.data &&
         error.response.status === 401
       ) {
+        localStorage.clear();
+        // navigator('/');
+
         // const refreshResult = await RefreshToken();
         // retry after refresh token
         // if (refreshResult !== 'ERROR') {
@@ -88,6 +93,7 @@ const Fetch = async (FetchConfig) => {
     });
   if (response === undefined) {
     FetchConfig.showMessage && showError(["خطا در برقراری ارتباط با سرور"]);
+    // localStorage.clear();
     return {
       ERROR: "ERROR",
       status: -1,
