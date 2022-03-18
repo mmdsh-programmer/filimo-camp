@@ -31,7 +31,7 @@ const getInvitedData = async () => {
 };
 
 export default function AddTeamMate() {
-  const  PUBLIC_URL = 'http://filimo.sweatoff.ir';
+  const  PUBLIC_URL = 'https://filimo.com/Nowruz';
   const windowSize = useWindowSize();
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
   const [openModal, setOpenModal] = useState(false);
@@ -121,7 +121,7 @@ export default function AddTeamMate() {
     ازت دعوت میکنم به تیم من بپیوندی.
     ${PUBLIC_URL}/join-team/${getTeamData[0]?.id}`;
 
-    navigator.clipboard.writeText(addteaminvited.current);
+    navigator.clipboard.writeText(`${addteaminvited.current}`);
     setTimeout(() => {
       setIsCopied(false);
     }, 2000);
@@ -176,7 +176,7 @@ export default function AddTeamMate() {
                 }
                 alt="team"
               />
-              {console.log("team data : ", getTeamData)}
+          
             </figure>
 
             <div className="mr-4 flex flex-col justify-center">
@@ -213,7 +213,7 @@ export default function AddTeamMate() {
               <dl className="list-none flex flex-col gap-y-2 mt-4 2xl:mt-4">
                 <dt className="font-dana-regular text-sm text-[#3f8dcd] leading-8">
                   هم تیمی ها
-                  {console.log(getTeamData[1])}
+             
                 </dt>
 
                 {!isNullObject(getTeamData[1]) &&

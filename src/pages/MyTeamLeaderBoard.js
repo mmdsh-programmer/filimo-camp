@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Modal from "Components/Modal";
 import AddIcon from "icons/team/add.svg";
 import Back from "Components/Back";
@@ -138,7 +138,7 @@ export default function MyTeamLeaderBoard() {
                   >
                     <span className="text-sm text-white font-dana-regular ml-[6px] block mt-1">
                       {index + 1}
-                      {console.log(member)}
+                   
                     </span>
 
                     <div className="ml-3">
