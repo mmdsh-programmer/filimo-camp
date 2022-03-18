@@ -1,66 +1,164 @@
-import React from "react";
+import React, { Fragment, useState } from "react";
 import FilimoLogo from "icons/common/filimo-logo.svg";
 import FilimoLogoType from "icons/common/filimo-logo-type.svg";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import Button from "./Button";
+import Modal from "./Modal";
 
 export default function Header() {
+  const [openRulesModal, setOpenRulesModal] = useState(false);
+
+  const handleOpenRulesModal = () => {
+    setOpenRulesModal(true);
+  };
+
+  const handleCloseRulesModal = () => {
+    setOpenRulesModal(false);
+  };
+
   return (
-    <motion.header
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
-      className="w-full hidden 2xl:block"
-    >
-      <div className="container px-14 pt-8 pb-6 2xl:max-w-[1440px]">
-        <div className="flex items-center">
-          <Link to="/" className="ml-[17px]">
-            <figure className="flex w-32 h-10 overflow-hidden">
-              <img
-                className="w-10 h-full object-contain ml-[10px]"
-                src={FilimoLogo}
-                alt="filimo logo"
-              />
-              <img
-                className="w-[78px] h-full object-contain"
-                src={FilimoLogoType}
-                alt="filimo logo type"
-              />
-            </figure>
-          </Link>
+    <Fragment>
+      <motion.header
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.5 }}
+        className="w-full hidden 2xl:block"
+      >
+        <div className="container px-14 pt-8 pb-6 2xl:max-w-[1440px]">
+          <div className="flex items-center">
+            <Link to="/" className="ml-[17px]">
+              <figure className="flex w-32 h-10 overflow-hidden">
+                <img
+                  className="w-10 h-full object-contain ml-[10px]"
+                  src={FilimoLogo}
+                  alt="filimo logo"
+                />
+                <img
+                  className="w-[78px] h-full object-contain"
+                  src={FilimoLogoType}
+                  alt="filimo logo type"
+                />
+              </figure>
+            </Link>
 
-          <h2 className="text-base text-white font-dana-medium mt-1 ml-auto">
-            کمپین نوروزی فیلیمو
-          </h2>
+            <h2 className="text-base text-white font-dana-medium mt-1 ml-auto">
+              کمپین نوروزی فیلیمو
+            </h2>
 
-          <nav>
-            <ul className="list-none flex gap-x-11">
-              <li>
-                <Link to="/" className="text-base text-white font-dana-medium">
-                  شرایط و مقرارت
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/leader-board/teams/create"
-                  className="text-base text-white font-dana-medium"
-                >
-                  ایجاد تیم
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/invite"
-                  className="text-base text-white font-dana-medium"
-                >
-                  دعوت از دوستان
-                </Link>
-              </li>
-            </ul>
-          </nav>
+            <nav>
+              <ul className="list-none flex gap-x-11">
+                <li>
+                  <button
+                    className="text-base text-white font-dana-medium"
+                    onClick={handleOpenRulesModal}
+                  >
+                    شرایط و مقرارت
+                  </button>
+                </li>
+                <li>
+                  <Link
+                    to="/leader-board/teams/create"
+                    className="text-base text-white font-dana-medium"
+                  >
+                    ایجاد تیم
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/invite"
+                    className="text-base text-white font-dana-medium"
+                  >
+                    دعوت از دوستان
+                  </Link>
+                </li>
+              </ul>
+            </nav>
+          </div>
         </div>
-      </div>
-    </motion.header>
+      </motion.header>
+
+      <Modal alignEnd isOpen={openRulesModal} setIsOpen={setOpenRulesModal}>
+        <h6 className="text-base text-[#333] text-right font-dana-regular leading-8 mx-4 mt-4">
+          قوانین و مقررات
+        </h6>
+        <p className="text-xs text-[#333] text-right font-dana-regular max-h-[357px] overflow-hidden overflow-y-auto mt-2 px-4 leading-6">
+          کاربر گرامی؛ ضمن سپاس از انتخاب سرویس فیلیمو لازم است پیش از خرید مورد
+          نظر و تماشای فیلم، سریال و تئاتر، توافقنامه و قوانین ذیل را مطالعه
+          فرمایید، فیلیمو سرویس خود را تحت شرایط و مقررات این توافقنامه در
+          اختیار شما می گذارد و شما به عنوان کاربران این سرویس ملزم به رعایت
+          مفاد مذکور در این توافقنامه که ممکن است در آینده تغییر یابد، هستید.{" "}
+          <br /> این سرویس با نام تجاری "فیلیمو" ثبت گردیده است و از حق کپی رایت
+          برخوردار است. اگر در سایت های دیگر با موارد نقض کپی رایت فیلیمو مواجه
+          شدید، لطفا آن را به سرویس پشتیبانی « فیلیمو» به آدرس ایمیل support
+          [at] filimo [dot] com زیر اطلاع دهید. تمامی محتواهای ارایه شده در
+          سرویس فیلیمو در چارچوب قوانین و مقررات جمهوری اسلامی ایران می باشد.
+          برای دسترسی به نمایش محتوای مورد نظر، کاربر باید اقدام به خرید اشتراک
+          نماید. خرید اشتراک در واقع به منزله خرید دسترسی به محتواهای فیلیمو می
+          باشد. فیلیمو در صورت مشاهده هرگونه اقدام غیر متعارف برای دسترسی به
+          اشتراک، خرید و ورود، این حق را دارد که این اقدامات غیرمجاز را متوقف و
+          در ادامه اشتراک کاربر را لغو کند. تعداد محتواهایی که کاربران با خرید
+          اشتراک به آنها دسترسی پیدا می کنند ممکن است پیش از پایان مدت اعتبار
+          اشتراک، تغییر یافته و فیلم ها یا سریال هایی به مجموع محتواها اضافه یا
+          از آن حذف گردد. همچنین ممکن است با تغییر مکان جغرافیایی خود به سایر
+          کشورها، دسترسی به تعدادی از محتواها که اجازه نشر در خارج از کشور
+          ندارند را از دست بدهید. اعمال غیر قانونی و مغایر با قوانین موضوعه
+          جمهوری اسلامی ایران به هر نحو ممکن ممنوع است. استفاده از سرویس فیلیمو
+          هیچگونه حقی را برای کاربران در ارتباط با مالکیت فیلم ها، سریال ها و به
+          طور کلی هر محتوای ارائه شده و انتشار یا پخش عمومی آنها چه از طریق
+          سرویس فیلیمو و چه از طرق دیگر ایجاد نمی کند. مسلم است با پرداخت مبلغ،
+          شما می توانید خدمات خریداری شده را در بازه زمانی مشخص شده مشاهده کنید،
+          اما مالک این محتوا نخواهید شد و اجازه دانلود (به استثنای دانلود محافظت
+          شده اپلیکیشن فیلیمو https://www.filimo.com/app و بازنشر آن را ندارید.
+          فیلیمو این حق را دارد که در صورت نیاز تغییراتی در قوانین ایجاد کرده یا
+          مانع دسترسی به بعضی از قسمت های سرویس یا همه سرویس بطور موقت یا دائمی
+          شود. فیلیمو این حق را دارد در صورت صلاحدید به منظور کاهش هزینه‌ها و
+          جلوگیری از افزایش قیمت اشتراک‌ها در هر بخش از محتوا، نسبت به پخش
+          تبلیغات اقدام نماید. فیلیمو با داشتن تنوع محتوایی این اختیار را به
+          کاربر داده است تا خود طبق علایق و سلایق شخصی و اجتماعی خود، فیلم مورد
+          نظر خود را تماشا نماید، ما هیچ تضمینی بر اعتبار آنها و تاثیر مثبت یا
+          منفی آنها بر مخاطب نخواهیم داشت. ممکن است در آینده تغییراتی در این
+          توافقنامه ایجاد شود که شامل نه محدود به حذف یا اضافه کردن مطالب و
+          قوانینی به آن است که بلافاصله از نظر مسئولان سرویس لازم الاجراست. لذا
+          کاربر موظف به مرور قوانین طی استفاده از سرویس فیلیمو است تا از تغییرات
+          احتمالی آن آگاه گردد. این تغیرات در شبکه های اجتماعی فیلیمو به اطلاع
+          کاربران خواهد رسید. در قسمت مربوط به نظرات کاربران، انتشار مطالب خلاف
+          یا نقض کننده قوانین جمهوری اسلامی ایران، مضر، تهدید کننده، توهین آمیز،
+          غیر اخلاقی، افترا آمیز و مبتذل و همچنین مطالبی که به نژاد، گروه یا
+          دسته خاصی از مردم توهین کند، ممنوع است در قسمت مربوط به نظرات کاربران،
+          قرار دادن لینک هایی به سایت های غیر قانونی، غیر اخلاقی یا مبتذل و
+          همینطور سایت هایی که به هر نحو مناسبات فرهنگی، اخلاقی، عرفی یا قانونی
+          جامعه را زیر پا می گذارند یا با قوانین جمهوری اسلامی ایران مغایرند،
+          ممنوع است. هر کاربر در فیلیمو حق ایجاد یک نام کاربری را دارد و ایجاد
+          چند نام کاربری برای یک نفر جهت استفاده بیشتر از تسهیلاتی که برخی اوقات
+          توسط فیلیمو در اختیار کاربران قرار می گیرد، ممنوع است. همچنین کاربران
+          فیلیمو حق واگذاری نام کاربری خود به فرد دیگر و یا استفاده از نام
+          کاربری فرد دیگر را ندارند محتواهای موجود توسط یک تهیه‌کننده یا شرکت
+          تولیدی فیلم تهیه شده است. فیلیمو تنها یک بستر نمایش این محتواها بوده و
+          نقشی در تولید آنها نداشته، از اینرو مسئولیتی در قبال محتوای ارائه شده
+          ندارد. درصورت بروز شرایط فورس ماژور (مانند سیل، زلزله، بلایای طبیعی
+          و...) و پیش آمدهای خارج از کنترل فیلیموکه منجر به قطع سرویس و ارائه
+          خدمات شود، تا زمان برطرف شدن مشکل، این قرارداد معلق خواهد شد. این
+          توافقنامه مشروعیت و اعتبار خود را از قوانین حاکم بر جمهوری اسلامی
+          ایران کسب می کند. ترافیک مصرفی کاربران فیلیمو ، بر اساس سیاست‌ها و
+          تنظیمات اپراتورهای مختلف اینترنتی به صورت تمام بها یا نیم بها محاسبه
+          خواهد شد و فیلیمو تضمینی برای محاسبه ترافیک نیم بها برای کاربران خود
+          نخواهد داشت.
+        </p>
+
+        <div className="h-[1px] bg-[#f1f1f1] mx-4 mt-2"></div>
+
+        <span className="text-xs text-[#333] font-dana-regular mt-[18px] block leading-6 text-right mx-4">
+          قوانین شرکت در مسابقه را خواندم
+        </span>
+
+        <div className="flex px-4 pb-4">
+          <Button type="primary" style="mt-2" onClick={handleCloseRulesModal}>
+            تایید
+          </Button>
+        </div>
+      </Modal>
+    </Fragment>
   );
 }

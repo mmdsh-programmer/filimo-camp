@@ -116,7 +116,7 @@ export default function CustomTab() {
               key={category}
               className={({ selected }) =>
                 classNames(
-                  "w-full p-2 text-[13px] leading-7 font-dana-regular rounded-[10px]",
+                  "w-full p-2 text-[12px] leading-7 font-dana-regular rounded-[10px]",
                   "focus:outline-none",
                   selected ? "bg-white" : "text-[#7c7c7c]"
                 )
