@@ -9,9 +9,10 @@ import { motion } from "framer-motion";
 import AddTeamMateIcon from "icons/add-teammate/add-teammate.svg";
 import { userData } from "Helper/helperFunc";
 import Fetch from "Helper/Fetch";
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 export default function Invite() {
-  const  PUBLIC_URL = 'https://filimo.com/Nowruz';
+  const PUBLIC_URL = 'https://filimo.com/Nowruz';
   const windowSize = useWindowSize();
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
   const [openModal, setOpenModal] = useState(false);
@@ -29,6 +30,7 @@ export default function Invite() {
 
   const handleModalOpen = () => {
     setOpenModal(true);
+    setIsCopied(false)
   };
 
   useEffect(() => {
@@ -44,7 +46,7 @@ export default function Invite() {
 
   const getUserScore = async () => {
     const getScore = await Fetch({
-      url: process.env.REACT_APP_API_URL+"/user_scores/",
+      url: process.env.REACT_APP_API_URL + "/user_scores/",
       method: "GET",
       redirect: "follow",
     });
@@ -225,10 +227,14 @@ export default function Invite() {
               {PUBLIC_URL + '/register/?ref=' + userInfo[0]?.unique_code}
             </span>
           </div>
+          <CopyToClipboard text= {PUBLIC_URL + '/register/?ref=' + userInfo[0]?.unique_code}
+            onCopy={() => setIsCopied(true)}>
 
-          <Button type="primary" style="mt-4" onClick={copyToClipBoard}>
-            {isCopied ? "کپی شد" : "کپی کد معرف"}
-          </Button>
+            <Button type="primary" style="mt-4">
+              {isCopied ? "کپی شد" : "کپی کد "}
+            </Button>
+          </CopyToClipboard>
+
         </div>
       </SimpleBottomSheet>
 
@@ -255,9 +261,13 @@ export default function Invite() {
             </span>
           </div>
 
-          <Button type="primary" style="mt-4" onClick={copyToClipBoard}>
-            {isCopied ? "کپی شد" : "کپی کد معرف"}
-          </Button>
+          <CopyToClipboard text= {PUBLIC_URL + '/register/?ref=' + userInfo[0]?.unique_code}
+            onCopy={() => setIsCopied(true)}>
+
+            <Button type="primary" style="mt-4">
+              {isCopied ? "کپی شد" : "کپی کد "}
+            </Button>
+          </CopyToClipboard>
         </div>
       </Modal>
     </motion.main>
