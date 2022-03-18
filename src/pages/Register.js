@@ -70,6 +70,7 @@ export default function Register() {
             navigator(
               `/join-team/${sessionStorage.getItem("filimo:inviteteamID")}`
             );
+            sessionStorage.clear();
           } else {
             navigator("/");
           }
@@ -105,6 +106,7 @@ export default function Register() {
         navigator(
           `/join-team/${sessionStorage.getItem("filimo:inviteteamID")}`
         );
+        sessionStorage.clear();
       } else {
         navigator("/");
       }

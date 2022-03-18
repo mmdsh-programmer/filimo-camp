@@ -140,9 +140,11 @@ export default function CustomTab() {
                         <span className="w-1 h-1 opacity-40 bg-[#333] mb-2 rounded-full"></span>
                       </div>) : null}
                       <Link
-                        to={`/leader-board/$
-                      "individual"
-                     `}
+                      to='/'
+
+                    //     to={`/leader-board/$
+                    //   "individual"
+                    //  `}
                         className="flex items-center p-2 rounded-[10px] bg-[#acffd2] relative you"
                       >
                          <span className="ml-2 text-base text-black font-dana-regular">{i+1}</span>
@@ -252,9 +254,11 @@ export default function CustomTab() {
                         <span className="w-1 h-1 opacity-40 bg-[#333] mb-2 rounded-full"></span>
                       </div>) : null}
                       <Link
-                        to={`/leader-board/$
-                        "individual"
-                       `}
+                      to='/'
+
+                      //   to={`/leader-board/$
+                      //   "individual"
+                      //  `}
                         className="flex items-center p-2 rounded-[10px] bg-[#acffd2] relative you"
                       >
                         <span className="ml-2 text-base text-black font-dana-regular">{user_rank.current}</span>
@@ -311,9 +315,11 @@ export default function CustomTab() {
                       <span className="w-1 h-1 opacity-40 bg-[#333] mb-2 rounded-full"></span>
                     </div>) : null}
                     <Link
-                      to={`/leader-board/$
-                          "individual"
-                         `}
+                      to='/leader-board/teams/my-team'
+
+                      // to={`/leader-board/$
+                      //     "individual"
+                      //    `}
                       className="flex items-center p-2 rounded-[10px] bg-[#acffd2] relative you"
                     ><span className="ml-2 text-base text-black font-dana-regular">{i+1}</span>
                       <div className="ml-2">
@@ -413,9 +419,11 @@ export default function CustomTab() {
                       <span className="w-1 h-1 opacity-40 bg-[#333] mb-2 rounded-full"></span>
                     </div>) : null}
                     <Link
-                      to={`/leader-board/$
-                          "individual"
-                         `}
+                      to='/leader-board/teams/my-team'
+
+                      // to={`/leader-board/$
+                      //     "individual"
+                      //    `}
                       className="flex items-center p-2 rounded-[10px] bg-[#acffd2] relative you"
                     >
                       <span className="ml-2 text-base text-black font-dana-regular">{team_rank.current}</span>
@@ -470,9 +478,7 @@ export default function CustomTab() {
                       </div>) : null}
 
                       <Link
-                        to={`/leader-board/$
-                        "individual"
-                       `}
+                       to="/"
                         className="flex items-center p-2 rounded-[10px] bg-[#acffd2] relative you"
                       >
                       <span className="ml-2 text-base text-black font-dana-regular">{i+1}</span>
@@ -577,9 +583,10 @@ export default function CustomTab() {
                       </div>) : null}
 
                       <Link
-                        to={`/leader-board/$
-                    "individual"
-                   `}
+                      to='/'
+                  //       to={`/leader-board/$
+                  //   "individual"
+                  //  `}
                         className="flex items-center p-2 rounded-[10px] bg-[#acffd2] relative you"
                       >
                       <span className="ml-2 text-base text-black font-dana-regular">{user_referral_rank.current}</span>
