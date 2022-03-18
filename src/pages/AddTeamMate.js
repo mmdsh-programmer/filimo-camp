@@ -31,7 +31,7 @@ const getInvitedData = async () => {
 };
 
 export default function AddTeamMate() {
-  const  PUBLIC_URL = 'http://filimo.sweatoff.ir';
+  const  PUBLIC_URL = 'https://filimo.com/Nowruz';
   const windowSize = useWindowSize();
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
   const [openModal, setOpenModal] = useState(false);
