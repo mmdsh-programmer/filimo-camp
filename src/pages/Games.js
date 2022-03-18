@@ -26,7 +26,7 @@ export default function Games() {
 
     const totalScore = localStorage.getItem(storageAddress.current);
     setFinalScore(totalScore);
-    console.log("storage value changed! ", +totalScore);
+  
   };
 
   const handleSubmit = async () => {

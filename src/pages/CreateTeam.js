@@ -36,7 +36,7 @@ export default function CreateTeam() {
     let teamName;
     let teamavatarId;
     flags.map((item, index) => {
-      console.log(selectedImage)
+
       if (index === selectedImage) {
         teamName = item.title;
         teamavatarId = item.id;
@@ -79,7 +79,7 @@ export default function CreateTeam() {
 
     swiper.on("slideChange", function () {
       setSelectedImage(this.activeIndex);
-      console.log(this.activeIndex);
+    
     });
   }, []);
   

@@ -11,7 +11,7 @@ import { userData } from "Helper/helperFunc";
 import Fetch from "Helper/Fetch";
 
 export default function Invite() {
-  const  PUBLIC_URL = 'http://filimo.sweatoff.ir';
+  const  PUBLIC_URL = 'https://filimo.com/Nowruz';
   const windowSize = useWindowSize();
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
   const [openModal, setOpenModal] = useState(false);
@@ -39,7 +39,7 @@ export default function Invite() {
   const getUserData = async () => {
     const userInfo = await userData();
     setUserInfo(userInfo);
-    console.log(userInfo);
+
   };
 
   const getUserScore = async () => {
@@ -62,7 +62,7 @@ export default function Invite() {
   const copyToClipBoard = () => {
     setIsCopied(true);
 
-    navigator.clipboard.writeText(PUBLIC_URL + '/register/?ref=' + userInfo[0]?.unique_code);
+    navigator.clipboard.writeText(`${PUBLIC_URL + '/register/?ref=' + userInfo[0]?.unique_code}`);
     setTimeout(() => {
       setIsCopied(false);
     }, 2000);
