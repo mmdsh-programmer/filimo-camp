@@ -50,7 +50,11 @@ export default function Games() {
 
     if (!("ERROR" in sendScore)) {
       toast.success("امتیاز بازی با موفقیت ذخیره شد");
+      localStorage.removeItem(storageAddress.current);
+      navigator("/");
+
     } else {
+      navigator("/");
     }
   };
 
@@ -59,6 +63,7 @@ export default function Games() {
   };
 
   useEffect(() => {
+    indexedDB.deleteDatabase("localforage");
     if (localStorage.getItem(`GameIdFilimoCam::${id}`) === null) {
       navigator("/");
     }
