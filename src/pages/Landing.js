@@ -22,17 +22,13 @@ export default function Landing() {
         <div className="custom-container py-4 md:py-7">
           <div className="flex justify-center">
             <Link to="/">
-              <picture>
-                <source
-                  media="(min-width:768px)"
-                  srcset={require("images/landing/filimo-logo.webp")}
-                />
+              <figure className="w-32 h-10">
                 <img
-                  className="w-[26px] h-[26px] md:w-32 md:h-10 object-contain"
-                  src={FilimoLogo}
+                  className="w-full h-full object-contain"
+                  src={require("images/landing/filimo-logo.webp")}
                   alt="filimo logo"
                 />
-              </picture>
+              </figure>
             </Link>
           </div>
         </div>
@@ -51,7 +47,7 @@ export default function Landing() {
             <div className="bg-[#ffc23a] opacity-25 blur-[50px] w-64 h-80 rounded-full absolute -right-[80px] -bottom-[100px] md:w-[600px] md:h-[600px] md:-right-[160px] md:-bottom-[180px]"></div>
           </div>
 
-          <div className="custom-container relative z-[5] px-4 pt-[70px] md:pt-[138px] xl:px-[135px]">
+          <div className="custom-container relative z-[5] px-4 pt-[80px] md:pt-[138px] xl:px-[135px]">
             <div className="flex flex-col-reverse items-center md:flex-row md:justify-between">
               <div className="mt-7 md:mt-0">
                 <h1 className="text-3xl text-white text-center font-dana-demibold md:text-right md:text-[40px]">
