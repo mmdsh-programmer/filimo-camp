@@ -42,7 +42,7 @@ export default function Games() {
     const idGame = localStorage.getItem(`GameIdFilimoCam::${id}`);
 
     const sendScore = await Fetch({
-      url: `http://37.152.185.94:8001/user/play-game/${idGame}/`,
+      url: process.env.REACT_APP_API_URL+`/play-game/${idGame}/`,
       method: "POST",
       data: raw,
       redirect: "follow",
@@ -50,7 +50,11 @@ export default function Games() {
 
     if (!("ERROR" in sendScore)) {
       toast.success("امتیاز بازی با موفقیت ذخیره شد");
+      localStorage.removeItem(storageAddress.current);
+      navigator("/");
+
     } else {
+      navigator("/");
     }
   };
 
@@ -59,6 +63,7 @@ export default function Games() {
   };
 
   useEffect(() => {
+    indexedDB.deleteDatabase("localforage");
     if (localStorage.getItem(`GameIdFilimoCam::${id}`) === null) {
       navigator("/");
     }

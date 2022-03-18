@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig } from 'axios';
 import { toast } from 'react-toastify';
 
 export const axiosInstance = axios.create();
-axiosInstance.defaults.baseURL = 'http://37.152.185.94:8001/user/';
+axiosInstance.defaults.baseURL = process.env.REACT_APP_API_URL;
 
 
 const Fetch = async(FetchConfig)=> {

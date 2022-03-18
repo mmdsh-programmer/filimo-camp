@@ -41,7 +41,7 @@ export default function MyTeamLeaderBoard() {
     };
 
     const remove = await Fetch({
-      url: "http://37.152.185.94:8001/user/remove-member/",
+      url: process.env.REACT_APP_API_URL+"/remove-member/",
       method: "POST",
       data: JSON.stringify(raw),
       redirect: "follow",
@@ -51,14 +51,14 @@ export default function MyTeamLeaderBoard() {
       toast.success("کاربر با موفقیت از تیم حذف شد");
       queryClient.invalidateQueries("get-team");
     }
-  }; 
+  };
   const removeUser = async (userId) => {
     setacceptUserRemoverOpenModal(true);
     // removeUserReq(userId);
   }
   const leaveTeamReq = async () => {
     const leave = await Fetch({
-      url: "http://37.152.185.94:8001/user/leave-team/",
+      url: process.env.REACT_APP_API_URL+"/leave-team/",
       method: "GET",
       redirect: "follow",
     });
@@ -68,7 +68,7 @@ export default function MyTeamLeaderBoard() {
       navigate("/leader-board/teams/create");
     }
   }
- 
+
   const leaveTeam = async () => {
     setacceptOpenModal(true);
 
@@ -86,12 +86,12 @@ export default function MyTeamLeaderBoard() {
 
   return (
     <>
-     <Modal alignCenter isOpen={acceptUserRemoverOpenModal} setIsOpen={setacceptUserRemoverOpenModal}>
+      <Modal alignCenter isOpen={acceptUserRemoverOpenModal} setIsOpen={setacceptUserRemoverOpenModal}>
         <div className="container p-8" >
           <p className="text-base text-black font-dana-regular ">آیا میخواهید از تیم خارج حذف کنید؟</p>
           <div className="flex gap-x-2 mt-8">
             <Button type="primary" onClick={leaveTeamReq}>بله</Button>
-            <Button type="secondary" onClick={()=>{setacceptUserRemoverOpenModal(false)}}>خیر  </Button>
+            <Button type="secondary" onClick={() => { setacceptUserRemoverOpenModal(false) }}>خیر  </Button>
           </div>
 
         </div>
@@ -101,7 +101,7 @@ export default function MyTeamLeaderBoard() {
           <p className="text-base text-black font-dana-regular ">آیا میخواهید از تیم خارج شوید؟</p>
           <div className="flex gap-x-2 mt-8">
             <Button type="primary" onClick={leaveTeamReq}>بله</Button>
-            <Button type="secondary" onClick={()=>{setacceptOpenModal(false)}}>خیر  </Button>
+            <Button type="secondary" onClick={() => { setacceptOpenModal(false) }}>خیر  </Button>
           </div>
 
         </div>
@@ -170,23 +170,39 @@ export default function MyTeamLeaderBoard() {
                       {member?.total_score}
                     </span>
 
-                    {data[0].is_team_head && data[0].id !== member.id ? (
-                      <button
-                        className="text-sm font-dana-medium text-[#cc304b] leading-8"
-                        onClick={() => removeUser(member.id)}
-                      >
-                        حذف از تیم
-                      </button>
-                    ) : (
-                      data[0].id === member.id && (
+
+                    {
+                      data[0].id === member.id && !data[0].is_team_head ? (
                         <button
                           className="text-sm font-dana-medium text-[#cc304b] leading-8"
                           onClick={() => leaveTeam(member.id)}
                         >
                           خروج از تیم
                         </button>
-                      )
-                    )}
+                      ) :
+                        (
+                          data[0].is_team_head && data[0].id !== member.id ? (
+                            <button
+                              className="text-sm font-dana-medium text-[#cc304b] leading-8"
+                              onClick={() => removeUser(member.id)}
+                            >
+                              حذف از تیم
+                            </button>
+                          ) : null
+                        )
+                    }
+                    {/* {data[0].is_team_head && data[0].id !== member.id ? (
+
+                    ): (
+                        data[0].id === member.id && (
+                    <button
+                      className="text-sm font-dana-medium text-[#cc304b] leading-8"
+                      onClick={() => leaveTeam(member.id)}
+                    >
+                      خروج از تیم
+                    </button>
+                    )
+                    )} */}
                   </li>
                 ))}
             </ul>
@@ -208,7 +224,7 @@ export default function MyTeamLeaderBoard() {
                   />
 
                   <span className="block text-base font-dana-demibold ml-auto text-[#1d1d1d] mt-1">
-                    می‌توانید تا ۷ نفر اضافه کنید
+                    می‌توانید تا {(5 - (data[1]?.members.length))} نفر اضافه کنید
                   </span>
 
                   <span className="text-sm font-dana-regular block mt-1">

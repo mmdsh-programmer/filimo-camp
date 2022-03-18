@@ -112,15 +112,34 @@ export default function Home() {
     setPhoneNumberStep(2);
   };
   const gamePlayAgain = async (id) => {
+    // levelState.current[index].casual_levels_gaming = false;
+    let levelNum;
+    casual_levels.current.map((itemcasual_levels, indexcasual_levels) => {
+      if (itemcasual_levels.id === id) {
+        levelNum = itemcasual_levels.level;
+
+      }
+
+    })
+    mission_levels.current.map((itemmission_levels, indexitemmission_levels) => {
+      if (itemmission_levels.id === id) {
+        levelNum = itemmission_levels.level;
+
+      }
+    })
+
     const user_scores_tableURL = await Fetch({
-      url: `http://37.152.185.94:8001/user/play-again/${id}/`,
+      url: process.env.REACT_APP_API_URL+`/play-again/${id}/`,
       method: "POST",
 
     });
     if (!("ERROR" in user_scores_tableURL)) {
-      debugger;
+
+
+      navigator(`/games/${levelNum}`);
+
     } else {
-      debugger;
+
     }
   }
   const handlePrevPhoneNumberStep = () => {
@@ -135,7 +154,7 @@ export default function Home() {
   };
   const getDataGame = async () => {
     const getDataGameURL = await Fetch({
-      url: "http://37.152.185.94:8001/user/show-game-level/",
+      url: process.env.REACT_APP_API_URL+"/show-game-level/",
       method: "GET",
 
     });
@@ -171,26 +190,40 @@ export default function Home() {
 
         }
 
-      });
-      user_played_levels.current.map((item, index) => {
-        let idGame;
-        casual_levels.current.map((itemcasual_levels, index) => {
-          if (itemcasual_levels.id === item.score_type) {
-            idGame = item.score_type;
-          }
-
-        })
-        mission_levels.current.map((itemmission_levels, index) => {
-          if (itemmission_levels.id === item.score_type) {
-            idGame = item.score_type;
-          }
-        })
-
-        debugger
         levelState.current[index].casual_levels_gaming_agian = false;
         levelState.current[index].casual_levels_gaming = false;
         levelState.current[index].mission_levels_gaming = false;
+      });
+      user_played_levels.current.map((item, index) => {
+
+
+        casual_levels.current.map((itemcasual_levels, indexcasual_levels) => {
+
+          if (itemcasual_levels.id === item.score_type) {
+            
+            if (item.can_play_again === true) {
+              levelState.current[itemcasual_levels.level].casual_levels_gaming_agian = true;
+
+            }
+            else if (item.can_play_again === false) {
+              levelState.current[itemcasual_levels.level].casual_levels_gaming_agian = true;
+              levelState.current[itemcasual_levels.level].casual_levels_gaming = true;
+            }
+
+
+          }
+
+        })
+        mission_levels.current.map((itemmission_levels, indexitemmission_levels) => {
+          if (itemmission_levels.id === item.score_type) {
+
+            levelState.current[itemmission_levels.level].mission_levels_gaming = true;
+
+          }
+        })
+
       })
+
       let obj = {
         lock: true,
         today: true
@@ -205,7 +238,7 @@ export default function Home() {
 
   const user_scores_table = async () => {
     const user_scores_tableURL = await Fetch({
-      url: "http://37.152.185.94:8001/user/user_scores/",
+      url: process.env.REACT_APP_API_URL+"/user_scores/",
       method: "GET",
 
     });
@@ -2718,14 +2751,19 @@ export default function Home() {
               <Link
                 to={!levelState.current[challengeLevel.current]?.casual_levels_gaming_agian ?
                   `/games/${challengeLevel.current}` :
-                  (!levelState.current[challengeLevel.current]?.casual_levels_gaming ?
-                    `` :
-                    '')}
+                  `/`
+                }
+                // to={!levelState.current[challengeLevel.current]?.casual_levels_gaming_agian ?
+                //   `/games/${challengeLevel.current}` :
+                //   (!levelState.current[challengeLevel.current]?.casual_levels_gaming ?
+                //     `/` :
+                //     '/')}
 
 
                 className={levelState.current[challengeLevel.current]?.casual_levels_gaming ? ("flex bg-[#f8f8f8] rounded-[10px] p-2 items-center disabled_link") : ('flex bg-[#f8f8f8] rounded-[10px] p-2 items-center')}
 
               >
+                {console.log('=>>>>>>>>>>>.', levelState.current[challengeLevel.current]?.casual_levels_gaming_agian)}
                 <h4 className="leading-[1.81] text-base text-right ml-[39px] text-black font-dana-regular w-[81px]">
                   بازی
                 </h4>
@@ -2945,13 +2983,19 @@ export default function Home() {
               <Link
                 to={!levelState.current[challengeLevel.current]?.casual_levels_gaming_agian ?
                   `/games/${challengeLevel.current}` :
-                  (!levelState.current[challengeLevel.current]?.casual_levels_gaming ?
-                    `` :
-                    '')}
+                  `/`
+                }
+                // to={levelState.current[challengeLevel.current]?.casual_levels_gaming_agian ?
+                //   `/games/${challengeLevel.current}` :
+                //   (!levelState.current[challengeLevel.current]?.casual_levels_gaming ?
+                //     `/` :
+                //     '/')}
 
                 className={levelState.current[challengeLevel.current]?.casual_levels_gaming ? ("flex bg-[#f8f8f8] rounded-[10px] p-2 items-center disabled_link") : ('flex bg-[#f8f8f8] rounded-[10px] p-2 items-center')}
 
               >
+                {console.log('=>>>>>>>>>>>.', levelState.current[challengeLevel.current]?.casual_levels_gaming_agian)}
+
                 <h4 className="leading-[1.81] text-base text-right ml-8 text-black font-dana-regular w-[81px]">
                   بازی
                 </h4>
