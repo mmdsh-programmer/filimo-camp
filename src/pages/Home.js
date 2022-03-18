@@ -145,7 +145,7 @@ export default function Home() {
   const handleOtpChange = (code) => {
     setOtpState(code);
     if (code.length === 5) {
-      console.log("submit code");
+    
     }
   };
   const getDataGame = async () => {
@@ -173,7 +173,7 @@ export default function Home() {
             today: false,
           };
           levelState.current[index] = obj;
-          console.log(levelState);
+         
         } else {
           index++;
 
@@ -248,7 +248,7 @@ export default function Home() {
         toast.success(`به مرحله ${level} خوش امدید.`);
         challengeLevel.current = level;
         challengeLevelID.current = mission_levels.current[level - 1].id;
-        console.log(windowSize);
+       
         if (windowSize >= 1440) {
           handleOpenChallengeModal();
         } else {
@@ -2637,11 +2637,7 @@ export default function Home() {
                     : "flex bg-[#f8f8f8] rounded-[10px] p-2 items-center"
                 }
               >
-                {console.log(
-                  "=>>>>>>>>>>>.",
-                  levelState.current[challengeLevel.current]
-                    ?.casual_levels_gaming_agian
-                )}
+               
                 <h4 className="leading-[1.81] text-base text-right ml-[39px] text-black font-dana-regular w-[81px]">
                   بازی
                 </h4>
@@ -2903,11 +2899,7 @@ export default function Home() {
                     : "flex bg-[#f8f8f8] rounded-[10px] p-2 items-center"
                 }
               >
-                {console.log(
-                  "=>>>>>>>>>>>.",
-                  levelState.current[challengeLevel.current]
-                    ?.casual_levels_gaming_agian
-                )}
+             
 
                 <h4 className="leading-[1.81] text-base text-right ml-8 text-black font-dana-regular w-[81px]">
                   بازی
@@ -2968,7 +2960,7 @@ export default function Home() {
                     : "flex bg-[#f8f8f8] rounded-[10px] p-2 items-center"
                 }
               >
-                {/* {console.log('ssss',levelState.current[challengeLevel.current - 1]?.mission_levels_gaming  ,challengeLevel.current)} */}
+           
                 <h4 className="leading-[1.81] text-base text-right ml-8 text-black font-dana-regular w-[81px]">
                   ماموریت
                 </h4>

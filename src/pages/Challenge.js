@@ -152,7 +152,7 @@ export default function Challenge() {
                 <ul className="flex flex-col gap-y-2">
                   {questionDetails.choices?.map((item, index) => {
                     return (
-                      <li className="relative rounded-[10px] bg-[#f9f9f9] bg-opacity-10 overflow-hidden">
+                      <li key={'ques'+index} className="relative rounded-[10px] bg-[#f9f9f9] bg-opacity-10 overflow-hidden">
                         <input
                           className="sr-only peer"
                           type="radio"

@@ -41,12 +41,12 @@ const Fetch = async (FetchConfig) => {
 
   const response = await axiosInstance(request)
     .then((res) => {
-      console.log("res.data", res);
+    
       return res || { data: "OK" };
     })
     .catch(async (error) => {
       if (axios.isCancel(error)) {
-        console.log("error2", error);
+      
         return {
           ERROR: error.message,
         };

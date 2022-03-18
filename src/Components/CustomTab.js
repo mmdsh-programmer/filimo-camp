@@ -7,7 +7,7 @@ import TransparentAddUserIcon from "icons/home/transparent-add-user-icon.svg";
 import BlueAddUserIcon from "icons/home/blue-add-user-icon.svg";
 import Fetch from "../Helper/Fetch";
 import { FindFlagAdd } from "Helper/flags";
-import { avatars, FindAvatarAdd } from "Helper/avatars";
+import { FindAvatarAdd } from "Helper/avatars";
 import { userData } from 'Helper/helperFunc'
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -22,9 +22,6 @@ export default function CustomTab() {
   let team_rank = useRef()
   let userinfo = useRef();
   let teaminfo = useRef();
-  let referal;
-  let userFilimoID;
-  let teamID;
   const userLeaderBoard = async () => {
     const userLeaderBoardUrl = await Fetch({
       url: process.env.REACT_APP_API_URL+'/user-leader-board/',
@@ -133,7 +130,7 @@ export default function CustomTab() {
                 // console.log(userLeaderBoardData.current);
                 if (i + 1 === user_rank.current) {
                   return (
-                    <li>
+                    <li key={'user'+i}>
                       {!(user_rank.current === 1) ? (<div className="w-full h-full flex flex-col px-[22px]">
                         <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
                         <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
@@ -189,7 +186,7 @@ export default function CustomTab() {
                 } else {
                   return (
                     <li
-                      key={i}
+                    key={'user'+i}
                       className={`${i + 1 === 1
                         ? "gold-badge"
                         : i + 1 === 2
@@ -247,7 +244,7 @@ export default function CustomTab() {
               {
                 user_rank.current > 10 ?
                   (
-                    <li>
+                    <li key={'user11'}>
                       {!(user_rank.current === 1) ? (<div className="w-full h-full flex flex-col px-[22px]">
                         <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
                         <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
@@ -308,7 +305,7 @@ export default function CustomTab() {
             <ul className="list-none flex flex-col gap-y-2 mt-4">
               {teamLeaderBoardData.map((e, i) => {
                 if (i + 1 === team_rank.current) {
-                  return (<li>
+                  return (<li key={'team'+i}>
                     {!(team_rank.current === 1) ? (<div className="w-full h-full flex flex-col px-[22px]">
                       <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
                       <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
@@ -360,7 +357,7 @@ export default function CustomTab() {
                 else {
                   return (
                     <li
-                      key={i}
+                    key={'team'+i}
                       className={`${i + 1 === 1
                         ? "gold-badge"
                         : i + 1 === 2
@@ -412,7 +409,7 @@ export default function CustomTab() {
 
               {(team_rank.current > 10) ?
                 (
-                  <li>
+                  <li key={'team11'}>
                     {!(team_rank.current === 1) ? (<div className="w-full h-full flex flex-col px-[22px]">
                       <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
                       <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
@@ -470,7 +467,7 @@ export default function CustomTab() {
               {userReferralLeaderBoardData.map((e, i) => {
                 if (i + 1 === user_referral_rank.current) {
                   return (
-                    <li>
+                    <li key={'ref'+i}>
                       {!(user_referral_rank.current === 1) ? (<div className="w-full h-full flex flex-col px-[22px]">
                         <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
                         <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
@@ -518,7 +515,7 @@ export default function CustomTab() {
                 else {
                   return (
                     <li
-                      key={i}
+                    key={'ref'+i}
                       className={`${i + 1 === 1
                         ? "gold-badge"
                         : i + 1 === 2
@@ -575,7 +572,7 @@ export default function CustomTab() {
               {
                 user_referral_rank.current > 10 ?
                   (
-                    <li>
+                    <li key={'ref11'}>
                       {!(user_referral_rank.current === 1) ? (<div className="w-full h-full flex flex-col px-[22px]">
                         <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
                         <span className="w-1 h-1 opacity-40 bg-[#333] mb-[3px] rounded-full"></span>
