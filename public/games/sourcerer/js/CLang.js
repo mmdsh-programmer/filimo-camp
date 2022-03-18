@@ -1,16 +1,16 @@
-var TEXT_GAMEOVER    = "GAME OVER";
-var TEXT_CONGRATS    = "CONGRATULATIONS";
-var TEXT_PLAY        = "PLAY";
-var TEXT_SCORE       = "SCORE";
-var TEXT_LEVEL       = "LEVEL";
-var TEXT_FINAL_SCORE = "FINAL SCORE";
-var TEXT_SELECT_LEVEL = "SELECT A LEVEL";
-var TEXT_DELETE_SAVINGS = "ALL YOUR PROGRESS WILL BE CANCELLED! ARE YOU SURE?";
-var TEXT_NO = "NO";
-var TEXT_YES = "YES";
+var TEXT_GAMEOVER    = "باختی";
+var TEXT_CONGRATS    = "تبریک میگیم";
+var TEXT_PLAY        = "شروع";
+var TEXT_SCORE       = "امتیاز";
+var TEXT_LEVEL       = "مرحله";
+var TEXT_FINAL_SCORE = "امتیاز نهایی";
+var TEXT_SELECT_LEVEL = "یک مرحله انتخاب کنید";
+var TEXT_DELETE_SAVINGS = "تمام امتیازاتت رو از دست میدی، مطمئنی میخوای خارج بشی?";
+var TEXT_NO = "نه";
+var TEXT_YES = "آره";
 var TEXT_ERR_LS = "YOUR WEB BROWSER DOES NOT SUPPORT STORING SETTING LOCALLY. IN SAFARI, THE MOST COMMON CAUSE OF THIS IS USING 'PRIVATE BROWSING MODE'. SOME INFO MAY NOT SAVE OR SOME FEATURE MAY NOT WORK PROPERLY.";
 var TEXT_CREDITS_DEVELOPED = "DEVELOPED BY";
-var TEXT_PRELOADER_CONTINUE = "START";
+var TEXT_PRELOADER_CONTINUE = "شروع";
 
 var TEXT_SHARE_IMAGE = "200x200.jpg";
 var TEXT_SHARE_TITLE = "Congratulations!";
