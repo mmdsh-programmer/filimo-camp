@@ -15,10 +15,12 @@ import { FindAvatarAdd } from "Helper/avatars";
 import Fetch from "Helper/Fetch";
 import { toast } from "react-toastify";
 import { useQuery, useQueryClient } from "react-query";
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+
 
 const getInvitedData = async () => {
   const result = await Fetch({
-    url: process.env.REACT_APP_API_URL+"/join-to-team-request/",
+    url: process.env.REACT_APP_API_URL + "/join-to-team-request/",
     method: "GET",
   });
 
@@ -31,7 +33,7 @@ const getInvitedData = async () => {
 };
 
 export default function AddTeamMate() {
-  const  PUBLIC_URL = 'https://filimo.com/Nowruz';
+  const PUBLIC_URL = 'https://filimo.com/Nowruz';
   const windowSize = useWindowSize();
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
   const [openModal, setOpenModal] = useState(false);
@@ -89,7 +91,7 @@ export default function AddTeamMate() {
     });
 
     const teamReq = await Fetch({
-      url: process.env.REACT_APP_API_URL+"/join-to-team-request/",
+      url: process.env.REACT_APP_API_URL + "/join-to-team-request/",
       method: "POST",
       data: raw,
     });
@@ -104,22 +106,21 @@ export default function AddTeamMate() {
   const handleSubmit = () => {
     setLoading(false);
     setOpenModal(false);
+    setIsCopied(false);
     // if (!checkPhoneNumber(phoneNumber)) {
     //   setHasError(true);
     //   setErrorMessage("شماره همراه صحیح نمیباشد");
     // } else {
     //   setHasError(false);
     //   setErrorMessage(null);
-      // setLoading(true);
+    // setLoading(true);
     //   inviteMember(phoneNumber);
     // }
   };
 
   const copyToClipBoard = () => {
     setIsCopied(true);
-    addteaminvited.current = `سلام دوست عزیزم.
-    ازت دعوت میکنم به تیم من بپیوندی.
-    ${PUBLIC_URL}/join-team/${getTeamData[0]?.id}`;
+
 
     navigator.clipboard.writeText(`${addteaminvited.current}`);
     setTimeout(() => {
@@ -131,7 +132,7 @@ export default function AddTeamMate() {
 
   const leaveTeam = async () => {
     const leave = await Fetch({
-      url: process.env.REACT_APP_API_URL+"/leave-team/",
+      url: process.env.REACT_APP_API_URL + "/leave-team/",
       method: "GET",
       redirect: "follow",
     });
@@ -159,6 +160,7 @@ export default function AddTeamMate() {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
     >
+      {addteaminvited.current = `سلام دوست عزیزم. ازت دعوت میکنم به تیم من بپیوندی. ${PUBLIC_URL}/join-team/${getTeamData[0]?.id}`}
       <Back>ایجاد تیم</Back>
 
       <section className="mt-4">
@@ -176,7 +178,7 @@ export default function AddTeamMate() {
                 }
                 alt="team"
               />
-          
+
             </figure>
 
             <div className="mr-4 flex flex-col justify-center">
@@ -213,7 +215,7 @@ export default function AddTeamMate() {
               <dl className="list-none flex flex-col gap-y-2 mt-4 2xl:mt-4">
                 <dt className="font-dana-regular text-sm text-[#3f8dcd] leading-8">
                   هم تیمی ها
-             
+
                 </dt>
 
                 {!isNullObject(getTeamData[1]) &&
@@ -243,7 +245,7 @@ export default function AddTeamMate() {
                       </span>
 
                       <span className="text-xs text-white font-dana-regular mt-1 text-opacity-80">
-                      امتیاز : { member.total_score}
+                        امتیاز : {member.total_score}
                       </span>
                     </dd>
                   ))}
@@ -329,7 +331,7 @@ export default function AddTeamMate() {
           /> */}
 
           <p className="mt-2 text-xs font-dana-regular leading-6">
-          لینک زیر را کپی کنید و به از دوستانتان بخواهید به تیمتان بپیوندند.
+            لینک زیر را کپی کنید و به از دوستانتان بخواهید به تیمتان بپیوندند.
 
           </p>
 
@@ -338,12 +340,17 @@ export default function AddTeamMate() {
               {` ${PUBLIC_URL}/join-team/${getTeamData[0]?.id}`}
             </span>
 
-            <button
-              className="font-dana-medium text-sm text-[#f78e32] py-3 px-2 bg-white rounded-[10px]"
-              onClick={copyToClipBoard}
-            >
-              {isCopied ? "کپی شد" : "کپی کد معرف"}
-            </button>
+            <CopyToClipboard text={addteaminvited.current}
+              onCopy={() => setIsCopied(true)}>
+
+              <button
+                className="font-dana-medium text-sm text-[#f78e32] py-3 px-2 bg-white rounded-[10px]"
+               
+              >
+                {isCopied ? "کپی شد" : "کپی کد "}
+              </button>
+            </CopyToClipboard>
+
           </div>
 
           <Button
@@ -382,21 +389,25 @@ export default function AddTeamMate() {
           /> */}
 
           <p className="mt-2 text-xs font-dana-regular leading-6">
-          لینک زیر را کپی کنید و به از دوستانتان بخواهید به تیمتان بپیوندند.
+            لینک زیر را کپی کنید و به از دوستانتان بخواهید به تیمتان بپیوندند.
 
           </p>
 
           <div className="flex items-center bg-[#ddd] rounded-[10px] bg-opacity-30 mt-4 p-[3px]">
             <span className="block font-dana-regular text-[#4c4c4c] text-xs leading-[1.8] ml-auto mr-2 mt-1 max-w-[215px] overflow-hidden">
-          {` ${PUBLIC_URL}/join-team/${getTeamData[0]?.id}`}
+              {` ${PUBLIC_URL}/join-team/${getTeamData[0]?.id}`}
             </span>
 
-            <button
-              className="font-dana-medium text-sm text-[#f78e32] py-3 px-2 bg-white rounded-[10px]"
-              onClick={copyToClipBoard}
-            >
-              {isCopied ? "کپی شد" : "کپی کد معرف"}
-            </button>
+            <CopyToClipboard text={addteaminvited.current}
+              onCopy={() => setIsCopied(true)}>
+
+              <button
+                className="font-dana-medium text-sm text-[#f78e32] py-3 px-2 bg-white rounded-[10px]"
+               
+              >
+                {isCopied ? "کپی شد" : "کپی کد "}
+              </button>
+            </CopyToClipboard>
           </div>
 
           <Button
@@ -406,7 +417,7 @@ export default function AddTeamMate() {
             disabled={loading}
             loading={loading}
           >
-           متوجه شدم
+            متوجه شدم
           </Button>
         </div>
       </Modal>

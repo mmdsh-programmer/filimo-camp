@@ -99,7 +99,7 @@ export default function CustomTab() {
   };
 
   const handleTabChange = (e) => {
-    console.log(e);
+    // console.log(e);
 
 
   };

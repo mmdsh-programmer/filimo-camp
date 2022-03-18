@@ -45,7 +45,7 @@ export default function Home() {
   const [acceptOpenModal, setacceptOpenModal] = useState(false);
   const [otpState, setOtpState] = useState("");
   let playGameAgianId = useRef();
-  let d1 = new Date("Tue Mar 13 2022 21:38:41 GMT+0330 (Iran Standard Time)");
+  let d1 = new Date(process.env.REACT_APP_GAME_START);
   let d2;
   let diff;
   let daydiff = useRef();
