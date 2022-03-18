@@ -71,55 +71,55 @@ export default function Games() {
       case 1:
       case 9:
         localStorage.removeItem("tap_the_tile_score");
-        setGameSource(`${process.env.PUBLIC_URL}/games/tap-the-tile/index.html`);
+        setGameSource(`${process.env.REACT_APP_DEP_TEST === 'false' ? process.env.PUBLIC_URL :  ''}/games/tap-the-tile/index.html`);
         storageAddress.current = "tap_the_tile_score";
         break;
       case 2:
       case 10:
         localStorage.removeItem("bubble_shooter_score");
 
-        setGameSource(`${process.env.PUBLIC_URL}/games/bubble-shooter/index.html`);
+        setGameSource(`${process.env.REACT_APP_DEP_TEST === 'false' ? process.env.PUBLIC_URL :  ''}/games/bubble-shooter/index.html`);
         storageAddress.current = "bubble_shooter_score";
         break;
       case 3:
       case 11:
         localStorage.removeItem("jelly_island_score");
 
-        setGameSource(`${process.env.PUBLIC_URL}/games/jelly-island/index.html`);
+        setGameSource(`${process.env.REACT_APP_DEP_TEST === 'false' ? process.env.PUBLIC_URL :  ''}/games/jelly-island/index.html`);
         storageAddress.current = "jelly_island_score";
         break;
       case 4:
       case 12:
         localStorage.removeItem("lights_score");
 
-        setGameSource(`${process.env.PUBLIC_URL}/games/lights/index.html`);
+        setGameSource(`${process.env.REACT_APP_DEP_TEST === 'false' ? process.env.PUBLIC_URL :  ''}/games/lights/index.html`);
         storageAddress.current = "lights_score";
         break;
       case 5:
       case 13:
         localStorage.removeItem("sourcerer_score");
 
-        setGameSource(`${process.env.PUBLIC_URL}/games/sourcerer/index.html`);
+        setGameSource(`${process.env.REACT_APP_DEP_TEST === 'false' ? process.env.PUBLIC_URL :  ''}/games/sourcerer/index.html`);
         storageAddress.current = "sourcerer_score";
         break;
       case 6:
       case 14:
         localStorage.removeItem("2048_score");
 
-        setGameSource(`${process.env.PUBLIC_URL}/games/2048/index.html`);
+        setGameSource(`${process.env.REACT_APP_DEP_TEST === 'false' ? process.env.PUBLIC_URL :  ''}/games/2048/index.html`);
         storageAddress.current = "2048_score";
         break;
       case 7:
       case 15:
         localStorage.removeItem("box_tower_score");
 
-        setGameSource(`${process.env.PUBLIC_URL}/games/box-tower/index.html`);
+        setGameSource(`${process.env.REACT_APP_DEP_TEST === 'false' ? process.env.PUBLIC_URL :  ''}/games/box-tower/index.html`);
         storageAddress.current = "box_tower_score";
         break;
       case 8:
         localStorage.removeItem("maze_score");
 
-        setGameSource(`${process.env.PUBLIC_URL}/games/maze/index.html`);
+        setGameSource(`${process.env.REACT_APP_DEP_TEST === 'false' ? process.env.PUBLIC_URL :  ''}/games/maze/index.html`);
         storageAddress.current = "maze_score";
         break;
       default:
