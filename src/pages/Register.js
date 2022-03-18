@@ -44,7 +44,7 @@ export default function Register() {
       filimo_id: FilimoId,
     };
     const loginUrl = await Fetch({
-      url: "http://37.152.185.94:8001/user/user-exist/",
+      url: process.env.REACT_APP_API_URL+"/user-exist/",
       method: "POST",
       data: JSON.stringify(raw),
       redirect: "follow",
@@ -57,7 +57,7 @@ export default function Register() {
         };
 
         const loginUrl = await Fetch({
-          url: "http://37.152.185.94:8001/user/login/",
+          url: process.env.REACT_APP_API_URL+"/login/",
           method: "POST",
           data: JSON.stringify(raw),
           redirect: "follow",
@@ -89,7 +89,7 @@ export default function Register() {
     }
 
     const loginUrl = await Fetch({
-      url: "http://37.152.185.94:8001/user/login/",
+      url: process.env.REACT_APP_API_URL+"/login/",
       method: "POST",
       data: JSON.stringify(raw),
       headers: {

@@ -48,7 +48,7 @@ export default function CreateTeam() {
     });
 
     const teamReq = await Fetch({
-      url: "http://37.152.185.94:8001/user/create-team/",
+      url: process.env.REACT_APP_API_URL+"/create-team/",
       method: "POST",
       data: raw,
     });

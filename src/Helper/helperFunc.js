@@ -4,7 +4,7 @@ export const userData = async () => {
   let userinfo;
   let teaminfo;
   const userserviceURL = await Fetch({
-    url: 'http://37.152.185.94:8001/user/user/',
+    url: process.env.REACT_APP_API_URL+'/user/',
     method: 'GET',
   });
 
@@ -28,7 +28,7 @@ export const userData = async () => {
 export const Poster = async () => {
 
   const posterURl = await Fetch({
-    url: 'http://37.152.185.94:8001/user/poster/',
+    url: process.env.REACT_APP_API_URL+'/poster/',
     method: 'GET',
   });
 

@@ -41,7 +41,7 @@ export default function MyTeamLeaderBoard() {
     };
 
     const remove = await Fetch({
-      url: "http://37.152.185.94:8001/user/remove-member/",
+      url: process.env.REACT_APP_API_URL+"/remove-member/",
       method: "POST",
       data: JSON.stringify(raw),
       redirect: "follow",
@@ -58,7 +58,7 @@ export default function MyTeamLeaderBoard() {
   }
   const leaveTeamReq = async () => {
     const leave = await Fetch({
-      url: "http://37.152.185.94:8001/user/leave-team/",
+      url: process.env.REACT_APP_API_URL+"/leave-team/",
       method: "GET",
       redirect: "follow",
     });

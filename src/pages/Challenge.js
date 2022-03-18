@@ -47,7 +47,7 @@ export default function Challenge() {
     var id = 6;
 
     const ansURL = await Fetch({
-      url: `http://37.152.185.94:8001/user/play-quiz/${levelID.current}/`,
+      url: process.env.REACT_APP_API_URL+`/play-quiz/${levelID.current}/`,
       method: 'POST',
       data: raw,
       redirect: 'follow'
@@ -64,7 +64,7 @@ export default function Challenge() {
   }
   const getQuestion = async () => {
     const loginUrl = await Fetch({
-      url: 'http://37.152.185.94:8001/user/get-quiz/',
+      url: process.env.REACT_APP_API_URL+'/get-quiz/',
       method: 'GET',
       redirect: 'follow'
     });
