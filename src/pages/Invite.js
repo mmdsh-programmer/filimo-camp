@@ -44,7 +44,7 @@ export default function Invite() {
 
   const getUserScore = async () => {
     const getScore = await Fetch({
-      url: "http://37.152.185.94:8001/user/user_scores/",
+      url: process.env.REACT_APP_API_URL+"/user_scores/",
       method: "GET",
       redirect: "follow",
     });

@@ -42,7 +42,7 @@ export default function Games() {
     const idGame = localStorage.getItem(`GameIdFilimoCam::${id}`);
 
     const sendScore = await Fetch({
-      url: `http://37.152.185.94:8001/user/play-game/${idGame}/`,
+      url: process.env.REACT_APP_API_URL+`/play-game/${idGame}/`,
       method: "POST",
       data: raw,
       redirect: "follow",

@@ -1,6 +1,5 @@
 {
   "name": "filimo-camp",
-  "homepage": "http://filimo.sweatoff.ir/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

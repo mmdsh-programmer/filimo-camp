@@ -40,21 +40,23 @@ export default function InvitedModal() {
 
   const handleAccept = async () => {
     const loginUrl = await Fetch({
-      url: `http://37.152.185.94:8001/user/join-team/${teamID.current}/`,
+      url: process.env.REACT_APP_API_URL+`/join-team/${teamID.current}/`,
       method: 'GET',
       redirect: 'follow'
     });
     if (!('ERROR' in loginUrl)) {
      toast.success('شما به تیم ملحق شدید.');
+     sessionStorage.clear();
      navigator('/');
 
     }
     else {
-     
+      sessionStorage.clear();
     }
   };
 
   const handleReject = () => {
+    sessionStorage.clear();
     toast.error('عضویت شما در تیم لغو شد.')
     navigator('/');
 

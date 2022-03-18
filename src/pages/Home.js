@@ -129,7 +129,7 @@ export default function Home() {
     })
 
     const user_scores_tableURL = await Fetch({
-      url: `http://37.152.185.94:8001/user/play-again/${id}/`,
+      url: process.env.REACT_APP_API_URL+`/play-again/${id}/`,
       method: "POST",
 
     });
@@ -154,7 +154,7 @@ export default function Home() {
   };
   const getDataGame = async () => {
     const getDataGameURL = await Fetch({
-      url: "http://37.152.185.94:8001/user/show-game-level/",
+      url: process.env.REACT_APP_API_URL+"/show-game-level/",
       method: "GET",
 
     });
@@ -238,7 +238,7 @@ export default function Home() {
 
   const user_scores_table = async () => {
     const user_scores_tableURL = await Fetch({
-      url: "http://37.152.185.94:8001/user/user_scores/",
+      url: process.env.REACT_APP_API_URL+"/user_scores/",
       method: "GET",
 
     });

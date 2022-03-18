@@ -27,7 +27,7 @@ export default function CustomTab() {
   let teamID;
   const userLeaderBoard = async () => {
     const userLeaderBoardUrl = await Fetch({
-      url: 'http://37.152.185.94:8001/user/user-leader-board/',
+      url: process.env.REACT_APP_API_URL+'/user-leader-board/',
       method: 'GET',
 
     });
@@ -46,7 +46,7 @@ export default function CustomTab() {
   }
   const teamLeaderBoard = async () => {
     const teamLeaderBoardUrl = await Fetch({
-      url: 'http://37.152.185.94:8001/user/team-leader-board/',
+      url: process.env.REACT_APP_API_URL+'/team-leader-board/',
       method: 'GET',
 
     });
@@ -62,7 +62,7 @@ export default function CustomTab() {
   }
   const userReferralLeaderBoard = async () => {
     const userReferralLeaderBoardURL = await Fetch({
-      url: 'http://37.152.185.94:8001/user/user-referral-leader-board/',
+      url: process.env.REACT_APP_API_URL+'/user-referral-leader-board/',
       method: 'GET',
 
     });

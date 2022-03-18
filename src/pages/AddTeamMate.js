@@ -18,7 +18,7 @@ import { useQuery, useQueryClient } from "react-query";
 
 const getInvitedData = async () => {
   const result = await Fetch({
-    url: "http://37.152.185.94:8001/user/join-to-team-request/",
+    url: process.env.REACT_APP_API_URL+"/join-to-team-request/",
     method: "GET",
   });
 
@@ -89,7 +89,7 @@ export default function AddTeamMate() {
     });
 
     const teamReq = await Fetch({
-      url: "http://37.152.185.94:8001/user/join-to-team-request/",
+      url: process.env.REACT_APP_API_URL+"/join-to-team-request/",
       method: "POST",
       data: raw,
     });
@@ -131,7 +131,7 @@ export default function AddTeamMate() {
 
   const leaveTeam = async () => {
     const leave = await Fetch({
-      url: "http://37.152.185.94:8001/user/leave-team/",
+      url: process.env.REACT_APP_API_URL+"/leave-team/",
       method: "GET",
       redirect: "follow",
     });
@@ -243,7 +243,7 @@ export default function AddTeamMate() {
                       </span>
 
                       <span className="text-xs text-white font-dana-regular mt-1 text-opacity-80">
-                        در تیم قرار گرفت
+                      امتیاز : { member.total_score}
                       </span>
                     </dd>
                   ))}
