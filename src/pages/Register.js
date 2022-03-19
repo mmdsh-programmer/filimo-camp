@@ -49,6 +49,7 @@ export default function Register() {
   const loginFilimo = async () => {
     if (!!searchParams.get("hash")) {
       FilimoId.current = location.pathname.split('/')[3];
+      console.log(FilimoId.current);
       hashLogin.current = searchParams.get("hash");
       await userExist()
 
