@@ -33,7 +33,7 @@ const getInvitedData = async () => {
 };
 
 export default function AddTeamMate() {
-  const PUBLIC_URL = 'https://filimo.com/Nowruz';
+  const PUBLIC_URL = 'https://filimo.com/nowruz';
   const windowSize = useWindowSize();
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
   const [openModal, setOpenModal] = useState(false);
@@ -160,7 +160,7 @@ export default function AddTeamMate() {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
     >
-      {addteaminvited.current = `سلام دوست عزیزم. ازت دعوت میکنم به تیم من بپیوندی. ${PUBLIC_URL}/join-team/${getTeamData[0]?.id}`}
+     <div style={{display:"none"}}> {addteaminvited.current = `سلام دوست عزیزم. ازت دعوت میکنم به تیم من بپیوندی. ${PUBLIC_URL}/join-team/${getTeamData[0]?.id}`}</div>
       <Back>ایجاد تیم</Back>
 
       <section className="mt-4">

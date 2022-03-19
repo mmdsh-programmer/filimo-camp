@@ -12,7 +12,7 @@ import Fetch from "Helper/Fetch";
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 export default function Invite() {
-  const PUBLIC_URL = 'https://filimo.com/Nowruz';
+  const PUBLIC_URL = 'https://filimo.com/nowruz';
   const windowSize = useWindowSize();
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
   const [openModal, setOpenModal] = useState(false);
