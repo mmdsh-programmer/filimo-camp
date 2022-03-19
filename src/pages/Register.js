@@ -1,4 +1,4 @@
-import React, { useEffect, useState,useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import TextField from "Components/TextField";
@@ -18,7 +18,7 @@ export default function Register() {
   const [avatar, setAvatar] = useState(0);
   const [loading, setLoading] = useState(false);
   // const [FilimoId, setFilimoId] = useState();
-  const FilimoId= useRef();
+  const FilimoId = useRef();
   // const [hashLogin, sethashLogin] = useState();
   const hashLogin = useRef();
   const [avatarCode, setavatarCode] = useState(125);
@@ -46,19 +46,23 @@ export default function Register() {
       setavatarCode(avatars[this.activeIndex].id);
     });
   }, []);
-  const loginFilimo = () => {
+  const loginFilimo = async () => {
     if (!!searchParams.get("hash")) {
-      FilimoId.current=location.pathname.split('/')[2];
-      hashLogin.current=searchParams.get("hash");
-      userExist()
+      FilimoId.current = location.pathname.split('/')[3];
+      console.log(FilimoId.current);
+      hashLogin.current = searchParams.get("hash");
+      await userExist()
+
 
     }
-    if (!localStorage.getItem('filimo:ACCESS_TOKEN')) {
+    else if (!localStorage.getItem('filimo:ACCESS_TOKEN')) {
+
       window.location.href = 'https://www.filimo.com/api/fa/v1/partner/game/login?name=nowruz';
     }
   }
   const userExist = async () => {
     localStorage.clear();
+
     var raw = {
       filimo_id: FilimoId.current,
     };
@@ -75,7 +79,7 @@ export default function Register() {
           filimo_id: FilimoId.current,
           hash: hashLogin.current,
         };
-
+        debugger
         const loginUrl = await Fetch({
           url: process.env.REACT_APP_API_URL + "/login/",
           method: "POST",
@@ -105,6 +109,7 @@ export default function Register() {
       avatar_code: String(avatarCode),
       hash: hashLogin.current,
     };
+    
     if (refValue) {
       raw.referral_code = refValue;
     }
