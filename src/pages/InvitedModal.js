@@ -19,8 +19,8 @@ export default function InvitedModal() {
   const teamID = useRef('');
 
   useEffect(() => {
-    teamID.current = location.pathname.split('/')[2];
-    sessionStorage.setItem('filimo:inviteteamID', teamID.current);
+      teamID.current=  sessionStorage.getItem('filimo:inviteteamID');
+    
     if (isAuth()) {
       
     }
@@ -46,17 +46,18 @@ export default function InvitedModal() {
     });
     if (!('ERROR' in loginUrl)) {
      toast.success('شما به تیم ملحق شدید.');
-     sessionStorage.clear();
+     sessionStorage.removeItem('filimo:inviteteamID');
      navigator('/');
 
     }
     else {
-      sessionStorage.clear();
+      sessionStorage.removeItem('filimo:inviteteamID');
+
     }
   };
 
   const handleReject = () => {
-    sessionStorage.clear();
+    sessionStorage.removeItem('filimo:inviteteamID');
     toast.error('عضویت شما در تیم لغو شد.')
     navigator('/');
 

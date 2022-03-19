@@ -1,5 +1,5 @@
-import { React, lazy, Suspense, Fragment, useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { React, lazy, Suspense, Fragment, useEffect, useRef } from "react";
+import { Routes, Route, useNavigate, useSearchParams } from "react-router-dom";
 import Background from "./Components/Background";
 import { AnimatePresence } from "framer-motion";
 import { useLocation } from "react-router-dom";
@@ -28,7 +28,25 @@ const Landing = lazy(() => import("pages/Landing"));
 
 export default function App() {
   const location = useLocation();
+  const navigator = useNavigate();
+  const teamID = useRef('');
+  const [searchParams] = useSearchParams();
 
+  useEffect(() => {
+    if (location.pathname.split('/')[1] === 'join-team') {
+      teamID.current = location.pathname.split('/')[2];
+      sessionStorage.setItem('filimo:inviteteamID', teamID.current);
+    }
+
+
+    if (!!searchParams.get("ref")) {
+      sessionStorage.setItem('filimo:refCode', searchParams.get("ref"));
+    }
+
+    if (sessionStorage.getItem("filimo:Landing") !== 'true') {
+      navigator('/landing')
+    }
+  }, [])
   return (
     <QueryClientProvider client={queryClient}>
       <Fragment>
