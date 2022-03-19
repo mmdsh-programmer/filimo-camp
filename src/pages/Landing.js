@@ -105,7 +105,7 @@ export default function Landing() {
                 <Button
                   style="max-w-[290px] mt-7 mb-8 md:mb-[72px]"
                   type="primary"
-                  onClick={() => navigation("/")}
+                  onClick={() => {sessionStorage.setItem("filimo:Landing",true);navigation("/") ; }}
                 >
                   <span className="text-xl text-[#5e4003] font-dana-demibold p-3 block">
                     ورود به فیلیمو و بازی
@@ -157,7 +157,8 @@ export default function Landing() {
               <Button
                 style="max-w-[290px] mt-7"
                 type="primary"
-                onClick={() => navigation("/")}
+                onClick={() => {sessionStorage.setItem("filimo:Landing",true);navigation("/") ; }}
+
               >
                 <span className="text-xl text-[#5e4003] font-dana-demibold p-3 block">
                   ورود به فیلیمو و بازی
@@ -323,7 +324,7 @@ export default function Landing() {
           <Button
             style="max-w-[290px] mt-14 mx-auto"
             type="primary"
-            onClick={() => navigation("/")}
+            onClick={() => {sessionStorage.setItem("filimo:Landing",true);navigation("/") ; }}
           >
             <span className="text-xl text-[#5e4003] font-dana-demibold p-3 block">
               ورود به فیلیمو و بازی

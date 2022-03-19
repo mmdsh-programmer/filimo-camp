@@ -21,9 +21,14 @@ export default function Register() {
   const [avatarCode, setavatarCode] = useState(125);
   const [laoding,setlaoding]=useState(true);
   useEffect(() => {
+   debugger;
+    if( !!sessionStorage.getItem('filimo:refCode')){
+      
+      setrefValue(sessionStorage.getItem('filimo:refCode'));
 
-    setrefValue(searchParams.get("ref"));
+    }
     setFilimoId(searchParams.get("filimo"));
+   
     userExist();
     const swiper = document.querySelector(".register-avatar-selection").swiper;
 
@@ -70,7 +75,7 @@ export default function Register() {
             navigator(
               `/join-team/${sessionStorage.getItem("filimo:inviteteamID")}`
             );
-            sessionStorage.clear();
+            sessionStorage.removeItem('filimo:inviteteamID');
           } else {
             navigator("/");
           }
@@ -106,7 +111,7 @@ export default function Register() {
         navigator(
           `/join-team/${sessionStorage.getItem("filimo:inviteteamID")}`
         );
-        sessionStorage.clear();
+        sessionStorage.removeItem('filimo:inviteteamID');
       } else {
         navigator("/");
       }
