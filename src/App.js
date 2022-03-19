@@ -140,6 +140,7 @@ export default function App() {
                 }
               />
               <Route path="register" element={<Register />} />
+              <Route path="users/:id/login/callback" element={<Register />} />
               <Route path="join-team/:id" element={<InvitedModal />} />
               <Route
                 path="games/:id"
