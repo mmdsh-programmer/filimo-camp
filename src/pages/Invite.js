@@ -64,7 +64,7 @@ export default function Invite() {
   const copyToClipBoard = () => {
     setIsCopied(true);
 
-    navigator.clipboard.writeText(`${PUBLIC_URL + '/register/?ref=' + userInfo[0]?.unique_code}`);
+    navigator.clipboard.writeText(`${PUBLIC_URL + '/register/?refCode=' + userInfo[0]?.unique_code}`);
     setTimeout(() => {
       setIsCopied(false);
     }, 2000);
@@ -224,10 +224,10 @@ export default function Invite() {
 
           <div className="flex items-center bg-[#ddd] rounded-[10px] bg-opacity-30 mt-4 p-[3px] justify-center">
             <span className="block font-dana-regular text-[#4c4c4c] text-xs leading-[1.8] ml-2 mr-2 mt-1 text-center overflow-hidden">
-              {PUBLIC_URL + '/register/?ref=' + userInfo[0]?.unique_code}
+              {PUBLIC_URL + '/register/?refCode=' + userInfo[0]?.unique_code}
             </span>
           </div>
-          <CopyToClipboard text= {PUBLIC_URL + '/register/?ref=' + userInfo[0]?.unique_code}
+          <CopyToClipboard text= {PUBLIC_URL + '/register/?refCode=' + userInfo[0]?.unique_code}
             onCopy={() => setIsCopied(true)}>
 
             <Button type="primary" style="mt-4">
@@ -256,12 +256,12 @@ export default function Invite() {
 
           <div className="flex items-center bg-[#ddd] rounded-[10px] bg-opacity-30 mt-4 p-[3px] justify-center">
             <span className="block font-dana-regular text-[#4c4c4c] text-xs leading-[1.8] ml-2 mr-2 mt-1 text-center overflow-hidden">
-              {PUBLIC_URL + '/register/?ref=' + userInfo[0]?.unique_code}
+              {PUBLIC_URL + '/register/?refCode=' + userInfo[0]?.unique_code}
 
             </span>
           </div>
 
-          <CopyToClipboard text= {PUBLIC_URL + '/register/?ref=' + userInfo[0]?.unique_code}
+          <CopyToClipboard text= {PUBLIC_URL + '/register/?refCode=' + userInfo[0]?.unique_code}
             onCopy={() => setIsCopied(true)}>
 
             <Button type="primary" style="mt-4">

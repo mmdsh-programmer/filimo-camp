@@ -102,17 +102,17 @@ function CMenu(){
         _oButTextTimeAttack = new CTextButton(
                                                    _iXButTimeAttack,
                                                     1300,
-                                                    oSpriteButText,
+                                                    " ",
                                                     TEXT_TIME_ATTACK,
                                                     PRIMARY_FONT,
-                                                    PRIMARY_FONT_COLOR,
+                                                    "transparent",
                                                     60,
                                                     "center",
                                                     0,
                                                     -10,
                                                     s_oStage
                                                 );
-        _oButTextTimeAttack.addEventListener(ON_MOUSE_UP, this._onPressUpButTimeAttack, this);
+        _oButTextTimeAttack.addEventListener(ON_MOUSE_UP, null, this);
         
         _iXButStoryMode = CANVAS_WIDTH/2 + 240;
         _oButTextStoryMode = new CTextButton(

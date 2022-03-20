@@ -238,7 +238,7 @@ export default function AddTeamMate() {
                         />
                       </div>
 
-                      <span className="text-base text-white text-right font-dana-medium ml-auto leading-[1.81] block mt-1">
+                      <span className="text-base text-white text-right font-dana-medium ml-auto leading-[1.81] block mt-1" style={{direction:'ltr'}}>
                         {member?.mobile
                           ? hidePhoneNumber(String(member?.mobile))
                           : "--"}

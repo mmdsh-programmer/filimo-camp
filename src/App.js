@@ -39,8 +39,8 @@ export default function App() {
     }
 
 
-    if (!!searchParams.get("ref")) {
-      sessionStorage.setItem('filimo:refCode', searchParams.get("ref"));
+    if (!!searchParams.get("refCode")) {
+      sessionStorage.setItem('filimo:refCode', searchParams.get("refCode"));
     }
 
     if (sessionStorage.getItem("filimo:Landing") !== 'true') {
