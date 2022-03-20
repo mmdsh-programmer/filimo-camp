@@ -2389,6 +2389,32 @@ export default function Home() {
                       </span>
                     </span>
                   </li>
+                  <li className="flex">
+                    <span className="inline-block ml-auto text-base font-dana-regular text-[#7c7c7c]">
+                      امتیاز از درج کامنت
+                    </span>
+                    <span className="inline-block font-dana-regular">
+                      <span className="text-[10px] ml-1 text-black">
+                        امتیاز
+                      </span>
+                      <span className="text-sm text-black">
+                        {userScorsTable?.comment_score}
+                      </span>
+                    </span>
+                  </li>
+                  <li className="flex">
+                    <span className="inline-block ml-auto text-base font-dana-regular text-[#7c7c7c]">
+                      امتیاز از خرید اشتراک
+                    </span>
+                    <span className="inline-block font-dana-regular">
+                      <span className="text-[10px] ml-1 text-black">
+                        امتیاز
+                      </span>
+                      <span className="text-sm text-black">
+                        {userScorsTable?.account_score}
+                      </span>
+                    </span>
+                  </li>
 
                   <li className="flex">
                     <span className="inline-block ml-auto text-base font-dana-regular text-[#7c7c7c]">
@@ -2565,6 +2591,32 @@ export default function Home() {
                     </span>
                   </span>
                 </li>
+                <li className="flex  mx-[10px]">
+                    <span className="inline-block ml-auto text-base font-dana-regular text-[#7c7c7c]">
+                      امتیاز از درج کامنت
+                    </span>
+                    <span className="inline-block font-dana-regular">
+                      <span className="text-[10px] ml-1 text-black">
+                        امتیاز
+                      </span>
+                      <span className="text-sm text-black">
+                        {userScorsTable?.comment_score}
+                      </span>
+                    </span>
+                  </li>
+                  <li className="flex  mx-[10px]">
+                    <span className="inline-block ml-auto text-base font-dana-regular text-[#7c7c7c]">
+                      امتیاز از خرید اشتراک
+                    </span>
+                    <span className="inline-block font-dana-regular">
+                      <span className="text-[10px] ml-1 text-black">
+                        امتیاز
+                      </span>
+                      <span className="text-sm text-black">
+                        {userScorsTable?.account_score}
+                      </span>
+                    </span>
+                  </li>
 
                 <li className="flex mx-[10px]">
                   <span className="inline-block ml-auto text-base font-dana-regular text-[#7c7c7c]">
