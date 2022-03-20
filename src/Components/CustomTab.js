@@ -202,7 +202,7 @@ export default function CustomTab() {
 
                           <img
                             className="w-full h-full object-cover"
-                            src={e?.avatar_code ? require(`images/common/avatars/${FindAvatarAdd(parseInt(e?.avatar_code))}`) : require(`images/common/avatars/${FindAvatarAdd(217)}`)}
+                            src={e.avatar_code ? require(`images/common/avatars/${FindAvatarAdd(parseInt(e.avatar_code))}`) : require(`images/common/avatars/${FindAvatarAdd(217)}`)}
 
                             alt="team-logo"
                           />
@@ -465,6 +465,7 @@ export default function CustomTab() {
           <Tab.Panel className={classNames("bg-white")}>
             <ul className="list-none flex flex-col gap-y-2 mt-4">
               {userReferralLeaderBoardData.map((e, i) => {
+              
                 if (i + 1 === user_referral_rank.current) {
                   return (
                     <li key={'ref'+i}>
@@ -484,7 +485,7 @@ export default function CustomTab() {
                           <div className="w-9 h-9 overflow-hidden rounded-full border-2 border-white">
                             <img
                               className="w-full h-full object-cover"
-                              src={e.avator_code ? require(`images/common/avatars/${FindAvatarAdd(parseInt(e.avatar_code))}`) : require(`images/common/avatars/${FindAvatarAdd(217)}`)}
+                              src={e.avatar_code ? require(`images/common/avatars/${FindAvatarAdd(parseInt(e.avatar_code))}`) : require(`images/common/avatars/${FindAvatarAdd(217)}`)}
 
                               alt="team-logo"
                             />
@@ -531,7 +532,7 @@ export default function CustomTab() {
 
                           <img
                             className="w-full h-full object-cover"
-                            src={e.avator_code ? require(`images/common/avatars/${FindAvatarAdd(parseInt(e.avatar_code))}`) : require(`images/common/avatars/${FindAvatarAdd(217)}`)}
+                            src={e.avatar_code ? require(`images/common/avatars/${FindAvatarAdd(parseInt(e.avatar_code))}`) : require(`images/common/avatars/${FindAvatarAdd(217)}`)}
 
                             alt="team-logo"
                           />
@@ -592,7 +593,7 @@ export default function CustomTab() {
                           <div className="w-9 h-9 overflow-hidden rounded-full border-2 border-white">
                             <img
                               className="w-full h-full object-cover"
-                              src={userinfo.current?.avator_code ? require(`images/common/avatars/${FindAvatarAdd(parseInt(userinfo.current?.avatar_code))}`) : require(`images/common/avatars/${FindAvatarAdd(217)}`)}
+                              src={userinfo.current?.avatar_code ? require(`images/common/avatars/${FindAvatarAdd(parseInt(userinfo.current?.avatar_code))}`) : require(`images/common/avatars/${FindAvatarAdd(217)}`)}
 
                               alt="team-logo"
                             />
