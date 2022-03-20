@@ -42,7 +42,7 @@ export default function Games() {
     const idGame = localStorage.getItem(`GameIdFilimoCam::${id}`);
 
     const sendScore = await Fetch({
-      url: process.env.REACT_APP_API_URL+`/play-game/${idGame}/`,
+      url: process.env.REACT_APP_API_URL + `/play-game/${idGame}/`,
       method: "POST",
       data: raw,
       redirect: "follow",
@@ -88,7 +88,8 @@ export default function Games() {
         setGameSource(`/games/jelly-island/index.html`);
         storageAddress.current = "jelly_island_score";
         break;
-      case 4:
+
+      case 7:
       case 12:
         localStorage.removeItem("lights_score");
 
@@ -109,7 +110,7 @@ export default function Games() {
         setGameSource(`/games/2048/index.html`);
         storageAddress.current = "2048_score";
         break;
-      case 7:
+
       case 15:
         localStorage.removeItem("box_tower_score");
 
@@ -117,6 +118,7 @@ export default function Games() {
         storageAddress.current = "box_tower_score";
         break;
       case 8:
+      case 4:
         localStorage.removeItem("maze_score");
 
         setGameSource(`/games/maze/index.html`);

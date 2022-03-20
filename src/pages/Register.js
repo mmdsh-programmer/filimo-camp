@@ -78,7 +78,7 @@ export default function Register() {
           filimo_id: FilimoId.current,
           hash: hashLogin.current,
         };
-        debugger
+        
         const loginUrl = await Fetch({
           url: process.env.REACT_APP_API_URL + "/login/",
           method: "POST",
