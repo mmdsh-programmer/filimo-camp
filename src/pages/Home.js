@@ -8,6 +8,7 @@ import FilimoMap from "images/home/filimo-map.svg";
 import StarIcon from "icons/home/star.svg";
 import Button from "Components/Button";
 import TransparentStarIcon from "icons/home/transparent-star.svg";
+import infoIcon from "icons/home/blue_info_icon.svg";
 import BlueStarIcon from "icons/home/blue-star.svg";
 import { useNavigate } from "react-router-dom";
 import Modal from "Components/Modal";
@@ -145,7 +146,7 @@ export default function Home() {
   const handleOtpChange = (code) => {
     setOtpState(code);
     if (code.length === 5) {
-    
+
     }
   };
   const getDataGame = async () => {
@@ -173,7 +174,7 @@ export default function Home() {
             today: false,
           };
           levelState.current[index] = obj;
-         
+
         } else {
           index++;
 
@@ -236,6 +237,23 @@ export default function Home() {
     } else {
     }
   };
+  const getScorelevel = (arr1, arr2, level) => {
+    let result = 0;
+    arr1.map((item, index) => {
+      if (item.level === level) {
+
+        arr2.map((e, i) => {
+
+          if (item.score_type === e.id) {
+            result = item.value
+          }
+        })
+
+      }
+
+    })
+    return result;
+  }
   const handleLevelClick = (level) => {
     if (
       casual_levels.current[level - 1] !== undefined &&
@@ -248,7 +266,7 @@ export default function Home() {
         toast.success(`به مرحله ${level} خوش امدید.`);
         challengeLevel.current = level;
         challengeLevelID.current = mission_levels.current[level - 1].id;
-       
+
         if (windowSize >= 1440) {
           handleOpenChallengeModal();
         } else {
@@ -2266,6 +2284,11 @@ export default function Home() {
               >
                 <span className="my-1 block">چالش</span>
               </Button>
+
+            </div>
+            <div className="bg-[#e7ebf6]  p-3 mt-4 rounded-lg" >
+              <h3 className="text-base text-[#5B7DE8] font-dana-medium mb-3"><img src={infoIcon} alt="" style={{ float: 'right', marginLeft: '6px' }} /> نکته مهم</h3>
+              <p className="font-dana-regular text-base">برای دسترسی به چالش روزهای قبل می‌توانید روی شماره‌ی آن، روی نقشه بزنید</p>
             </div>
           </div>
         </section>
@@ -2422,6 +2445,10 @@ export default function Home() {
                   <span className="my-1 block">چالش</span>
                 </Button>
               </div>
+              <div className="bg-[#e7ebf6]  p-3 mt-4 rounded-xl" >
+                <h3 className="text-base text-[#5B7DE8] font-dana-medium mb-3"><img src={infoIcon} alt="" style={{ float: 'right', marginLeft: '6px' }} /> نکته مهم</h3>
+                <p className="font-dana-regular text-base">برای دسترسی به چالش روزهای قبل می‌توانید روی شماره‌ی آن، روی نقشه بزنید</p>
+              </div>
             </div>
           </div>
         </aside>
@@ -2547,23 +2574,23 @@ export default function Home() {
             </div>
 
             <nav className="flex flex-col gap-y-2 mt-2">
-              <li className="flex rounded-[10px] bg-[#f8f8f8] p-2">
-                <Link
-                  className="text-base font-dana-regular text-[#1d1d1d] leading-[1.81] w-full"
-                  to="/leader-board/teams"
-                >
-                  جدول امتیازات
-                </Link>
+              <li className="flex rounded-[10px] bg-[#f8f8f8] p-2" onClick={() => { setIsProfileMenuOpen(false); handleOpenLeaderBoardMenu(); }}>
+
+
+                جدول امتیازات
+
+
+
               </li>
 
-              <li className="flex rounded-[10px] bg-[#f8f8f8] p-2">
+              {/* <li className="flex rounded-[10px] bg-[#f8f8f8] p-2">
                 <Link
                   className="text-base font-dana-regular text-[#1d1d1d] leading-[1.81] w-full"
                   to="/leader-board/invitees"
                 >
                   جدول دعوت از دوستان
                 </Link>
-              </li>
+              </li> */}
 
               <li className="flex rounded-[10px] bg-[#f8f8f8] p-2">
                 <Link
@@ -2637,7 +2664,7 @@ export default function Home() {
                     : "flex bg-[#f8f8f8] rounded-[10px] p-2 items-center"
                 }
               >
-               
+
                 <h4 className="leading-[1.81] text-base text-right ml-[39px] text-black font-dana-regular w-[81px]">
                   بازی
                 </h4>
@@ -2645,7 +2672,7 @@ export default function Home() {
                 <span className="text-sm text-black ml-auto mt-1 font-dana-regular flex items-center">
                   <span className="score-title ml-1">امتیاز</span>
                   <span>
-                    {casual_levels.current[challengeLevel.current - 1]?.value}
+                    {getScorelevel(user_played_levels.current, casual_levels.current, challengeLevel.current)}
                   </span>
                 </span>
 
@@ -2662,7 +2689,7 @@ export default function Home() {
                     ?.casual_levels_gaming_agian ? (
                     `  شروع بازی `
                   ) : !levelState.current[challengeLevel.current]
-                      ?.casual_levels_gaming ? (
+                    ?.casual_levels_gaming ? (
                     <button
                       onClick={() => {
                         setacceptOpenModal(true);
@@ -2703,7 +2730,8 @@ export default function Home() {
                 <span className="text-sm text-black ml-auto mt-1 font-dana-regular flex items-center">
                   <span className="score-title ml-1">امتیاز</span>
                   <span>
-                    {mission_levels.current[challengeLevel.current - 1]?.value}
+                    {getScorelevel(user_played_levels.current, mission_levels.current, challengeLevel.current)}
+                    {/* {mission_levels.current[challengeLevel.current - 1]?.value} */}
                   </span>
                 </span>
 
@@ -2899,7 +2927,7 @@ export default function Home() {
                     : "flex bg-[#f8f8f8] rounded-[10px] p-2 items-center"
                 }
               >
-             
+
 
                 <h4 className="leading-[1.81] text-base text-right ml-8 text-black font-dana-regular w-[81px]">
                   بازی
@@ -2908,7 +2936,8 @@ export default function Home() {
                 <span className="text-sm text-black ml-auto mt-1 font-dana-regular flex items-center">
                   <span className="score-title ml-1">امتیاز</span>
                   <span>
-                    {casual_levels.current[challengeLevel.current - 1]?.value}
+                    {getScorelevel(user_played_levels.current, casual_levels.current, challengeLevel.current)}
+
                   </span>
                 </span>
 
@@ -2926,7 +2955,7 @@ export default function Home() {
                     ?.casual_levels_gaming_agian ? (
                     `  شروع بازی `
                   ) : !levelState.current[challengeLevel.current]
-                      ?.casual_levels_gaming ? (
+                    ?.casual_levels_gaming ? (
                     <button
                       onClick={() => {
                         setacceptOpenModal(true);
@@ -2960,7 +2989,7 @@ export default function Home() {
                     : "flex bg-[#f8f8f8] rounded-[10px] p-2 items-center"
                 }
               >
-           
+
                 <h4 className="leading-[1.81] text-base text-right ml-8 text-black font-dana-regular w-[81px]">
                   ماموریت
                 </h4>
@@ -2968,7 +2997,7 @@ export default function Home() {
                 <span className="text-sm text-black ml-auto mt-1 font-dana-regular flex items-center">
                   <span className="score-title ml-1">امتیاز</span>
                   <span>
-                    {mission_levels.current[challengeLevel.current - 1]?.value}
+                    {getScorelevel(user_played_levels.current, mission_levels.current, challengeLevel.current)}
                   </span>
                 </span>
 
